@@ -20,7 +20,7 @@ security:
             pattern:  ^/admin/login$
             security: false
         main:
-            pattern:    ^/
+            pattern:    ^/login
             form_login:
                 provider: fos_userbundle
                 #success_handler: authentication_handler

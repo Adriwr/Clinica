@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js sidebar-large lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js sidebar-large lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js sidebar-large lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js sidebar-large"><!--<![endif]--><html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+            {% block title %}
+                Clinica
+            {% endblock %}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        {# Archivos CSS de terceros #}
+        <link href="{{ asset('css/vendor/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+
+        {# CSS principal #}
+
+        {# Bloque para el css #}
+        {% block css %}
+        {%  endblock %}
+    </head>
+    <body>
+        {# Contenido de la aplicación #}
+            {% block content %}
+            {% endblock %}
+
+    {# JS Necesarios #}
+    <script src="{{ asset('js/vendor/jquery-2.1.1.js') }}"></script>
+    <script src="{{ asset('js/vendor/bootstrap.js') }}"></script>
+
+
+    {% block javascript %}
+    {%  endblock %}
+
+
+    {% block angular %}
+    {%  endblock %}
+    </body>
+</html>

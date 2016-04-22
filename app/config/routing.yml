@@ -15,4 +15,4 @@ fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 _login:
     path:     /admin/login
-    defaults: { _controller: AppBundle:Login:login}
+    defaults: { _controller: AppBundle:Login/Login:login}
