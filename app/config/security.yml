@@ -1,0 +1,43 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_CAJERO, ROLE_PACIENTE]
+        ROLE_SUPER_ADMIN: [ROLE_ENFERMERA, ROLE_MEDICO]
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+            pattern:  ^/admin/login$
+            security: false
+        main:
+            pattern:    ^/
+            form_login:
+                provider: fos_userbundle
+                #success_handler: authentication_handler
+                always_use_default_target_path: true
+                login_path: /admin/login
+                default_target_path: /
+            logout:    true
+            anonymous: false
+            security: true
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        - { path: ^/api/[^/]+, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/, role: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_CAJERO, ROLE_PACIENTE, ROLE_ENFERMERA, ROLE_MEDICO ] }

@@ -1,0 +1,11 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+services:
+#Authentication Handler
+    #authentication_handler:
+    #    class:       AppBundle\Handler\AuthenticationHandler
+    #    arguments:  ["@router" , "@service_container" ]
+    #    tags:
+    #        - { name: 'monolog.logger', channel: 'security' }
+    fos_user.doctrine_registry:
+        alias: doctrine

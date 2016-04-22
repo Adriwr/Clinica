@@ -1,0 +1,5 @@
+#Agregar rutas para el api rest
+home:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+#Estructura
