@@ -1,13 +1,75 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js sidebar-large lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js sidebar-large lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js sidebar-large lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js sidebar-large"><!--<![endif]-->
+<html ng-app="{% block ngapp %}app{% endblock %}" lang="es">
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+                Clinica!
+            {% endblock %}
+        </title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" >
+
+        {# Archivos CSS de terceros #}
+        <link href="{{ asset('css/vendor/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/vendor/plugins/morris/morris-0.4.3.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('js/vendor/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/vendor/animate.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/vendor/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+
+        {# CSS principal #}
+        <link href="{{ asset('css/app/style.css') }}" rel="stylesheet">
+
+        {# Bloque para el css #}
+        {% block css %}
+        {%  endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <body data-page="dashboard">
+        {# Se invluye el template para mostar el menú superior #}
+        {{ include(':Layout:menutop.html.twig') }}
+        <div id="wrapper">
+            {# Se invluye el template para mostar el menú de navegación del lado izquierdo #}
+            {{ include(':Layout:menuleft.html.twig') }}
+            {# Contenido de la aplicación #}
+            <div id="main-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+        {# JS Necesarios #}
+        <script type="text/javascript" src="{{ asset('js/vendor/jquery-2.1.1.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/slimscroll/jquery.slimscroll.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/inspinia.js') }}"></script>
+
+        {# Plugins #}
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/toastr/toastr.min.js') }}"></script>
+
+
+        {# JS Para generar todas las rutas que expone la aplicacion #}
+        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+        {% block javascript %}
+        {%  endblock %}
+
+        {# Angular JS  1.5.2 #}
+        <script type="text/javascript" src="{{ asset('js/vendor/angular/angular.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/angular/angular-resource.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/angular/angular-route.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/angular/angular-sanitize.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/ui-bootstrap.js') }}"></script>
+        {# JS del archivo principal para usar angular #}
+        <script type="text/javascript" src="{{ asset('js/app/clinica.js') }}"></script>
+
+        {% block angular %}
+        {%  endblock %}
     </body>
 </html>

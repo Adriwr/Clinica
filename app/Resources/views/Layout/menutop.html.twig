@@ -1,0 +1,37 @@
+{# Template para generar el menu superior #}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <div class="navbar-center">
+            {% block titleNabar %}{% endblock %}
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right header-menu">
+                <li class="dropdown" id="user-header">
+                    <a href="#" class="dropdown-toggle c-dark" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-title="" title="">
+                        <span class="username">{{ app.user.username is defined ? app.user.username  : 'Alex G' }}</span>
+                        <i class="fa fa-angle-down p-r-10"></i>
+                    </a>
+                    <ul class="dropdown-menu" style="font-size: 10px;">
+                        <li>
+                            <a href="#" style="font-size: 10px;">
+                                <i class="glyph-icon flaticon-account"></i>
+                                Cambiar mi contraseña
+                            </a>
+                        </li>
+                        <li class="dropdown-footer clearfix">
+                            <a href="javascript:;" class="toggle_fullscreen" title="Fullscreen">
+                                <i class="glyph-icon flaticon-fullscreen3"></i>
+                            </a>
+                            <a href="{{ path('fos_user_security_logout') }}" title="Logout">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

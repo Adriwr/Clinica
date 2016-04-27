@@ -1,5 +1,6 @@
 #Agregar rutas para el api rest
-home:
-    path:     /
-    defaults: { _controller: AppBundle:Default:index }
-#Estructura
+
+medico:
+    type:     rest
+    resource: AppBundle\Controller\Api\Medico\MedicoController
+    name_prefix: api_

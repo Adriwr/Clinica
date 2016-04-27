@@ -1,3 +1,18 @@
 #Agregar servicios para formularios aquí
 services:
-
+    clinica.form.direccion:
+        class: AppBundle\Form\Type\DireccionType
+        tags:
+            - { name: form.type, alias: form_direccion }
+    clinica.form.medico:
+        class: AppBundle\Form\Type\MedicoType
+        tags:
+            - { name: form.type, alias: form_medico }
+    clinica.form.medico_telefono:
+        class: AppBundle\Form\Type\TelefonoType
+        tags:
+            - { name: form.type, alias: form_medico_telefono }
+    clinica.form.medico_email:
+        class: AppBundle\Form\Type\EmailType
+        tags:
+            - { name: form.type, alias: form_medico_email }

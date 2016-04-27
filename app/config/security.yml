@@ -11,6 +11,7 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -20,7 +21,7 @@ security:
             pattern:  ^/admin/login$
             security: false
         main:
-            pattern:    ^/login
+            pattern:    ^/
             form_login:
                 provider: fos_userbundle
                 #success_handler: authentication_handler

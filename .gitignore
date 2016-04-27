@@ -3,7 +3,6 @@ app/logs/
 web/bundles/
 app/cache/
 web/logos/
-src/Facto/POSBundle/Resources/public/tickets/
 web/pics/
 vendor/
 composer.lock
