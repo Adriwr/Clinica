@@ -10,7 +10,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -18,7 +18,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
-            pattern:  ^/admin/login$
+            pattern:  ^/clinica/login$
             security: false
         main:
             pattern:    ^/
@@ -26,7 +26,7 @@ security:
                 provider: fos_userbundle
                 #success_handler: authentication_handler
                 always_use_default_target_path: true
-                login_path: /admin/login
+                login_path: /clinica/login
                 default_target_path: /
             logout:    true
             anonymous: false
@@ -36,9 +36,9 @@ security:
 
     access_control:
         - { path: ^/api/[^/]+, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/clinica/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/clinica/, role: ROLE_ADMIN }
         - { path: ^/, role: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_CAJERO, ROLE_PACIENTE, ROLE_ENFERMERA, ROLE_MEDICO ] }

@@ -53,7 +53,7 @@ class MedicoType extends AbstractType{
                     'ng-model'=> 'medico.apellidos' ),
                 'label' => 'Apellidos',
                 'required' => true ) )
-            ->add('emails', new EmailType() )
+            ->add('emails', 'collection', array('type' => new EmailType()))
             ->add( 'password' ,   'password' , array(
                 'attr' => array(
                     'class' => 'form-control',
@@ -61,8 +61,8 @@ class MedicoType extends AbstractType{
                     'ng-model'=> 'medico.password' ),
                 'label' => 'Password',
                 'required' => true ) )
-            //->add('telefonos', new TelefonoType() )
-            //->add( 'direccion', new DireccionType())
+            ->add('telefonos', 'collection', array('type' => new TelefonoType()))
+            ->add( 'direccion', new DireccionType())
             ->add( 'Guardar', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',
@@ -79,7 +79,8 @@ class MedicoType extends AbstractType{
         $resolver->setDefaults(array(
             'data_class'        => 'AppBundle\Entity\Medico',
             'csrf_protection'   => false,
-            'cascade_validation' => true
+            'cascade_validation' => true,
+            'allow_add' => true
         ));
     }
 

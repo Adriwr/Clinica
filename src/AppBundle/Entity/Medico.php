@@ -58,6 +58,19 @@ class Medico {
      * @ORM\JoinColumn(name="direccion_id", referencedColumnName="id")
      */
     protected $direccion;
+    /**
+     * @ORM\OneToMany(targetEntity="EmailMedico", mappedBy="idMedico")
+     */
+    private $emails;
+    /**
+     * @ORM\OneToMany(targetEntity="TelefonoMedico", mappedBy="idMedico")
+     */
+    private $telefonos;
+
+    public function __construct() {
+        $this->emails = new ArrayCollection();
+        $this->telefonos = new ArrayCollection();
+    }
 
 
     /**
@@ -252,5 +265,71 @@ class Medico {
     public function getDireccion()
     {
         return $this->direccion;
+    }
+
+    /**
+     * Add emails
+     *
+     * @param \AppBundle\Entity\EmailMedico $emails
+     * @return Medico
+     */
+    public function addEmail(\AppBundle\Entity\EmailMedico $emails)
+    {
+        $this->emails[] = $emails;
+
+        return $this;
+    }
+
+    /**
+     * Remove emails
+     *
+     * @param \AppBundle\Entity\EmailMedico $emails
+     */
+    public function removeEmail(\AppBundle\Entity\EmailMedico $emails)
+    {
+        $this->emails->removeElement($emails);
+    }
+
+    /**
+     * Get emails
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
+     * Add telefonos
+     *
+     * @param \AppBundle\Entity\TelefonoMedico $telefonos
+     * @return Medico
+     */
+    public function addTelefono(\AppBundle\Entity\TelefonoMedico $telefonos)
+    {
+        $this->telefonos[] = $telefonos;
+
+        return $this;
+    }
+
+    /**
+     * Remove telefonos
+     *
+     * @param \AppBundle\Entity\TelefonoMedico $telefonos
+     */
+    public function removeTelefono(\AppBundle\Entity\TelefonoMedico $telefonos)
+    {
+        $this->telefonos->removeElement($telefonos);
+    }
+
+    /**
+     * Get telefonos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTelefonos()
+    {
+        return $this->telefonos;
     }
 }

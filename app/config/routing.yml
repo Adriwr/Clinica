@@ -13,6 +13,7 @@ fos_js_routing:
 #FOS USER BUNDLE
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 _login:
-    path:     /admin/login
+    path:     /clinica/login
     defaults: { _controller: AppBundle:Login/Login:login}

@@ -2,43 +2,38 @@
 <!--[if lt IE 7]>      <html class="no-js sidebar-large lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js sidebar-large lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js sidebar-large lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js sidebar-large"><!--<![endif]--><html>
+<!--[if gt IE 8]><!--> <html class="no-js sidebar-large"><!--<![endif]-->
 <html lang="es">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>
             {% block title %}
-                Clinica
+                Clinica!
             {% endblock %}
         </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" >
 
         {# Archivos CSS de terceros #}
         <link href="{{ asset('css/vendor/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/vendor/plugins/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
 
         {# CSS principal #}
+        <link href="{{ asset('css/app/style-2.css') }}" rel="stylesheet">
 
-        {# Bloque para el css #}
-        {% block css %}
-        {%  endblock %}
     </head>
     <body>
-        {# Contenido de la aplicación #}
+        <div id="container">
             {% block content %}
-            {% endblock %}
+            {%  endblock %}
+        </div>
 
-    {# JS Necesarios #}
-    <script src="{{ asset('js/vendor/jquery-2.1.1.js') }}"></script>
-    <script src="{{ asset('js/vendor/bootstrap.js') }}"></script>
+        {# JS Necesarios #}
+        <script type="text/javascript" src="{{ asset('js/vendor/jquery-2.1.1.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app/base.js') }}"></script>
 
-
-    {% block javascript %}
-    {%  endblock %}
-
-
-    {% block angular %}
-    {%  endblock %}
     </body>
 </html>

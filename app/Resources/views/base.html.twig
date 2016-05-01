@@ -17,28 +17,40 @@
         {# Archivos CSS de terceros #}
         <link href="{{ asset('css/vendor/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/vendor/plugins/morris/morris-0.4.3.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/vendor/plugins/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/vendor/plugins/morrisjs/morris.css') }}" rel="stylesheet">
         <link href="{{ asset('js/vendor/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
         <link href="{{ asset('css/vendor/animate.css') }}" rel="stylesheet">
         <link href="{{ asset('css/vendor/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
         {# CSS principal #}
-        <link href="{{ asset('css/app/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app/style-2.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app/timeline.css') }}" rel="stylesheet">
 
         {# Bloque para el css #}
         {% block css %}
         {%  endblock %}
     </head>
-    <body data-page="dashboard">
-        {# Se invluye el template para mostar el menú superior #}
-        {{ include(':Layout:menutop.html.twig') }}
+    <body>
         <div id="wrapper">
-            {# Se invluye el template para mostar el menú de navegación del lado izquierdo #}
-            {{ include(':Layout:menuleft.html.twig') }}
-            {# Contenido de la aplicación #}
-            <div id="main-content">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                {# Se incluye el template para mostar el menú superior #}
+                {{ include(':Layout:menutop.html.twig') }}
+                {# Se incluye el template para mostar el menú de navegación del lado izquierdo #}
+                {{ include(':Layout:menuleft.html.twig') }}
+            </nav>
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% block dashboard %}
+                            <h1 class="page-header">Dashboard</h1>
+                        {%  endblock %}
+                    </div>
+                </div>
+                <!-- /.row -->
                 {% block content %}
-                {% endblock %}
+                {%  endblock %}
+                <!-- /.row -->
             </div>
         </div>
 
@@ -47,11 +59,12 @@
         <script type="text/javascript" src="{{ asset('js/vendor/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/slimscroll/jquery.slimscroll.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/vendor/inspinia.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('css/vendor/plugins/morrisjs/morris.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('css/vendor/plugins/raphael/raphael-min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app/base.js') }}"></script>
 
         {# Plugins #}
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/toastr/toastr.min.js') }}"></script>
-
 
         {# JS Para generar todas las rutas que expone la aplicacion #}
         <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
