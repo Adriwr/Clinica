@@ -15,3 +15,9 @@ web/js/compiled/
 web/css/compiled/
 web/js/fos_js_routes.js
 .vagrant/
+documento_analisis/main.aux
+documento_analisis/main.log
+documento_analisis/main.pdf
+documento_analisis/main.synctex.gz
+documento_analisis/main.out
+documento_analisis/main.toc
