@@ -1,0 +1,96 @@
+%---------------------------------------------------------
+\section{Reglas de Negocio}
+
+\begin{BussinesRule}{RN1}{Agendar cita.} 
+	\BRitem[Descripción:] Un cliente requiere agendar una cita para una consulta médica, el cliente requiere estar registrado en el sistema.
+	\BRitem[Tipo:] Restricción de integridad.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN2}{Acceder al sistema.}
+	\BRitem[Descripción:] La persona que desea acceder al sistema debe estar registrada en el repositorio de datos de éste.
+	\BRitem[Tipo:] Restricción de integridad.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN3}{Venta de medicamentos}
+	\BRitem[Descripción:] La compra de medicamentos está restringida a los medicamentos prescritos por el médico.
+	\BRitem[Tipo:] Restricción de operación.
+	\BRitem[Nivel:] Obligatorio.
+    \BRitem[Observación:]  Aplica sólo para los medicamentos antibioticos. 
+
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN4}{Pasar sin cita a consulta.}
+	\BRitem[Descripción:] Está permitido dar consultas sin cita agendada previamente cuando la sala de espera se encuentra vacía y no hay consultas próximas. 
+	\BRitem[Tipo:] Operación.
+	\BRitem[Nivel:] Opcional.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN5}{Expediente nuevo.}
+	\BRitem[Descripción:] Se le registra un expediente al paciente recién agregado al sistema en su primera consulta. 
+	\BRitem[Tipo:] Restricción de integridad.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN6}{Cita única.}
+	\BRitem[Descripción:] Las citas agendadas no pueden ocupar el mismo consultorio a la misma hora, en el mismo día. 
+	\BRitem[Tipo:] Restricción de operación.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN7}{Cita de paciente adelantada.}
+	\BRitem[Descripción:] Una cita puede ser cancelada por una enfermera cuando el paciente propietario de la cita no ha llegado 10 minutos antes de la hora agendada. De esta manera se le da paso a otro paciente.
+	\BRitem[Tipo:] Operación alterna.
+	\BRitem[Nivel:] Opcional.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN8}{Consultar expediente.}
+	\BRitem[Descripción:] Un médico tiene permitido consultar el expediente de un paciente cuando el paciente está recibiendo su consulta.
+	\BRitem[Tipo:] Restricción de integridad.
+	\BRitem[Nivel:] Obligatorio.
+    \BRitem[Observaciones:] El paciente puede consultar su expediente en todo momento.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN9}{Modificar expediente.}
+	\BRitem[Descripción:] La modificación del expediente sólo la puede realizar un médico al momento de la consulta con dicho paciente dueño del expediente.
+	\BRitem[Tipo:] Restricción de integridad.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN10}{Pago cita.}
+	\BRitem[Descripción:] El pago de la cita se realiza antes de pasar a consulta y se realiza con el cajero.
+	\BRitem[Tipo:] Restricción de integridad.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+\begin{BussinesRule}{RN11}{Calcular salario de médico.}
+	\BRitem[Descripción:] El salario del médico se determina de la siguiente manera:\\
+    consultas*precio = salario
+    \begin{Citemize}
+    	\item{\em consultas:= Número de consultas dadas en el día. }
+        \item{\em Precio := Precio de la consulta.}
+        \item{\em Salario:= Salario recibido por el médico al día.}
+	\end{Citemize}
+    
+	\BRitem[Tipo:] Cálculo
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+
+\begin{BussinesRule}{RN12}{Precio por consulta.}
+	\BRitem[Descripción:] El precio por consulta es fijo a menos que sea con el especialista.
+	\BRitem[Tipo:] Asignación de precio.
+	\BRitem[Nivel:] Obligatorio.
+\end{BussinesRule}
+
+
+
+
+
+
+
+
+
+
+
