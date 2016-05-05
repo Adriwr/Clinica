@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MedicoType extends AbstractType{
+class PacienteType extends AbstractType{
 
     /**
      * Builder del formulario
@@ -18,42 +18,53 @@ class MedicoType extends AbstractType{
     {
         $builder
             ->add( 'id',         'hidden' )
-            ->add( 'curp' ,   'text' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Clave Única de Registro de Población',
-                    'ng-model'=> 'medico.curp' ),
-                'label' => 'CURP',
-                'required' => true ) )
-            ->add( 'rfc' ,     'text' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Registro Federal de Contribuyentes',
-                    'ng-model'=> 'medico.rfc' ),
-                'label' => 'RFC',
-                'required' => true ) )
-            ->add( 'cedulaProfesional' ,     'text' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Número de cedula',
-                    'ng-model'=> 'medico.cedulaProfesinal' ),
-                'label' => 'Cedula Profesional',
-                'required' => true ) )
             ->add( 'nombre' ,   'text' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => 'Nombre(s)',
-                    'ng-model'=> 'medico.nombre' ),
+                    'placeholder' => 'Nombre',
+                    'ng-model'=> 'paciente.nombre' ),
                 'label' => 'Nombre',
                 'required' => true ) )
-            ->add( 'apellidos' ,   'text' , array(
+            ->add( 'apellidos' ,     'money' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Apellidos',
-                    'ng-model'=> 'medico.apellidos' ),
+                    'ng-model'=> 'paciente.apellidos' ),
                 'label' => 'Apellidos',
                 'required' => true ) )
-            ->add( 'direccion', new DireccionType())
+            ->add( 'sexo' ,  'checkbox' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'ng-model'=> 'paciente.sexo' ),
+                'label' => 'Sexo',
+                'required' => true ) )
+            ->add( 'fechaNacimiento' ,  'date' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'ng-model'=> 'paciente.fecha' ),
+                'label' => 'Fecha de nacimiento',
+                'required' => true ) )
+            ->add( 'curp' ,  'text' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Curp',
+                    'ng-model'=> 'paciente.curp' ),
+                'label' => 'CURP',
+                'required' => true ) )
+            ->add( 'telefono' ,  'checkbox' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Telefono',
+                    'ng-model'=> 'paciente.telefono' ),
+                'label' => 'Stock',
+                'required' => true ) )
+            ->add( 'telefonoUrgencia' ,  'checkbox' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Telefono de urgencia',
+                    'ng-model'=> 'paciente.telefonoUrgencia' ),
+                'label' => 'Stock',
+                'required' => true ) )
             ->add( 'Guardar', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',
@@ -69,10 +80,9 @@ class MedicoType extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Entity\Medico',
+            'data_class'        => 'AppBundle\Entity\Paciente',
             'csrf_protection'   => false,
             'cascade_validation' => true,
-            'validation_groups' => false,
             'allow_add' => true
         ));
     }
@@ -83,7 +93,7 @@ class MedicoType extends AbstractType{
      */
     public function getName()
     {
-        return 'form_medico';
+        return 'form_paciente';
     }
 
 }

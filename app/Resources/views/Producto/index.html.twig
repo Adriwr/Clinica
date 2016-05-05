@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block dashboard %}
+    <h1 class="page-header">Productos</h1>
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="row" ng-controller="ProductosCtrl">
+        <div class="col-xs-12" id="full">
+            <div class="col-lg-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        Registrar producto
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form , {'attr': {'class': 'form-horizontal'} }) }}
+                        {{ form_widget(form ) }}
+                        {{ form_end(form) }}
+                    </div>
+                    <div class="panel-footer">
+                        Productos
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        Productos
+                    </div>
+                    <div class="panel-body">
+                        {{ include(':Producto/parts:productos_tabla.html.twig') }}
+
+                    </div>
+                    <div class="panel-footer">
+                        Productos
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {# Plugins requeridos por el modulo #}
+    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.responsive.js') }}"></script>
+
+{% endblock %}
+
+{% block angular %}
+    {# Directivas del modulo #}
+    <script type="text/javascript" src="{{ asset('js/directives/datatables.js') }}"></script>
+    {# Servicios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/productos/services/factories.js') }}"></script>
+    {# Controles primarios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/productos/controllers/productos.js') }}"></script>
+    {# Controles secundarios de AngularJS #}
+{% endblock %}

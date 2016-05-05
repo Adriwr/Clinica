@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MedicoType extends AbstractType{
+class ProductoType extends AbstractType{
 
     /**
      * Builder del formulario
@@ -18,42 +18,27 @@ class MedicoType extends AbstractType{
     {
         $builder
             ->add( 'id',         'hidden' )
-            ->add( 'curp' ,   'text' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Clave Única de Registro de Población',
-                    'ng-model'=> 'medico.curp' ),
-                'label' => 'CURP',
-                'required' => true ) )
-            ->add( 'rfc' ,     'text' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Registro Federal de Contribuyentes',
-                    'ng-model'=> 'medico.rfc' ),
-                'label' => 'RFC',
-                'required' => true ) )
-            ->add( 'cedulaProfesional' ,     'text' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Número de cedula',
-                    'ng-model'=> 'medico.cedulaProfesinal' ),
-                'label' => 'Cedula Profesional',
-                'required' => true ) )
             ->add( 'nombre' ,   'text' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => 'Nombre(s)',
-                    'ng-model'=> 'medico.nombre' ),
+                    'placeholder' => 'Nombre del producto',
+                    'ng-model'=> 'producto.nombre' ),
                 'label' => 'Nombre',
                 'required' => true ) )
-            ->add( 'apellidos' ,   'text' , array(
+            ->add( 'precio' ,     'money' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => 'Apellidos',
-                    'ng-model'=> 'medico.apellidos' ),
-                'label' => 'Apellidos',
+                    'placeholder' => 'Precio del producto',
+                    'ng-model'=> 'producto.precio' ),
+                'label' => 'Precio',
                 'required' => true ) )
-            ->add( 'direccion', new DireccionType())
+            ->add( 'stock' ,  'number' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Número de productos en existencia',
+                    'ng-model'=> 'producto.stock' ),
+                'label' => 'Stock',
+                'required' => true ) )
             ->add( 'Guardar', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',
@@ -69,10 +54,9 @@ class MedicoType extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Entity\Medico',
+            'data_class'        => 'AppBundle\Entity\Producto',
             'csrf_protection'   => false,
             'cascade_validation' => true,
-            'validation_groups' => false,
             'allow_add' => true
         ));
     }
@@ -83,7 +67,7 @@ class MedicoType extends AbstractType{
      */
     public function getName()
     {
-        return 'form_medico';
+        return 'form_producto';
     }
 
 }

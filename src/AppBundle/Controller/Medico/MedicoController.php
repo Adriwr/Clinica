@@ -3,7 +3,10 @@
 namespace AppBundle\Controller\Medico;
 
 use AppBundle\Entity\Medico;
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\MedicoType;
+use AppBundle\Form\Type\RegistrationType;
+use FOS\UserBundle\Form\Type\RegistrationFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,23 +18,39 @@ class MedicoController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $area = new Medico();
+        $medico = new Medico();
+        $usuario = new User();
 
 
-        $form = $this->createForm(new MedicoType(), $area);
-        $form->handleRequest($request);
+        $formMedico = $this->createForm(new MedicoType(), $medico);
+        $formMedico->handleRequest($request);
 
-        if ($form->isValid()) {
+        $formUsuario = $this->createForm(new RegistrationType(), $usuario);
+        $formUsuario->handleRequest($request);
+
+        if ($formUsuario->isValid()) {
+
             $dm = $this->getDoctrine()->getManager();
-            $dm->persist($area);
+            $usuario->setEnabled(true);
+            $usuario->addRole("ROLE_MEDICO");
+            $usuario->setUsername("-");
+            $dm->persist($usuario);
             $dm->flush();
 
-            $request->getSession()->getFlashBag()->add(
-                'exito',
-                'Medico creado'
-            );
+            if($formMedico->isValid()){
+                $dm = $this->getDoctrine()->getManager();
+                $medico->setIdUser($usuario);
 
-            return $this->redirect($this->generateUrl('medico'));
+                $dm->persist($medico);
+                $dm->flush();
+
+                $request->getSession()->getFlashBag()->add(
+                    'exito',
+                    'Medico creado'
+                );
+
+                return $this->redirect($this->generateUrl('medico'));
+            }
 
         }
         $request->getSession()->getFlashBag()->add(
@@ -41,7 +60,10 @@ class MedicoController extends Controller
 
         return $this->render(
             ':Medico:index.html.twig',
-            array('form' => $form->createView())
+            array(
+                'formMedico' => $formMedico->createView(),
+                'formUsuario' => $formUsuario->createView()
+                )
         );
     }
 }

@@ -16,7 +16,7 @@
 
         {# Archivos CSS de terceros #}
         <link href="{{ asset('css/vendor/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/vendor/plugins/metisMenu/dist/metisMenu.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/vendor/plugins/morrisjs/morris.css') }}" rel="stylesheet">
         <link href="{{ asset('js/vendor/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
@@ -48,9 +48,26 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                {% block content %}
-                {%  endblock %}
+                <div class="row" style="padding: 25px;">
+                    {% block content %}
+                    {%  endblock %}
+                </div>
                 <!-- /.row -->
+                <div class="footer">
+                    <div class="pull-right">
+                        <strong>Copyright</strong> Empresa &copy; 2016
+                    </div>
+                    <div>
+                        <span>
+                            <a href="#" class="blue bolder bxd-link"><span>Nombre</span></a>
+                        </span>
+                        <span class="action-buttons">
+                            <a href= target="_blank">
+                                <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 

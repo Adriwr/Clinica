@@ -1,22 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block dashboard %}
-    Medicos
+    <h1 class="page-header">Registrar Médico</h1>
 {% endblock %}
 
 {% block content %}
-    <div class="row"∫>
-        <div class="col-xs-12 drawer-height" id="full">
-            <div class="row drawer-height drawer-relative">
-                <div id="drawer-capture"  class="col-xs-6 col-sm-offset-3 drawer-content">
-                    <div class="col-xs-12">
-                        {{ form_start(form , {'attr': {'class': 'form-horizontal'} }) }}
-                        {{ form_widget(form ) }}
-                        {{ form_end(form) }}
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Registrar médico
                     </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#medico" data-toggle="tab">Datos del médico</a>
+                            </li>
+                            <li>
+                                <a href="#sistema" data-toggle="tab">Datos del sistema</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="medico">
+                                <h4>Datos del médico</h4>
+                                {{ form_start(formMedico , {'attr': {'class': 'form-horizontal'} }) }}
+                                {{ form_widget(formMedico ) }}
+                                {{ form_end(formMedico) }}
+                                <a href="#sistema" data-toggle="tab" class="btn btn-primary pull-right">Siguiente</a>
+                            </div>
+                            <div class="tab-pane fade " id="sistema">
+                                <h4>Datos del sistema</h4>
+                                {{ form_start(formUsuario , {'attr': {'class': 'form-horizontal'} }) }}
+                                {{ form_label(formUsuario.email) }}
+                                {{ form_widget(formUsuario.email) }}
+                                {{ form_errors(formUsuario.email) }}
+                                {{ form_label(formUsuario.plainPassword.first,'Password') }}
+                                {{ form_widget(formUsuario.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Contraseña' } }) }}
+                                {{ form_errors(formUsuario.plainPassword.first) }}
+                                {{ form_label(formUsuario.plainPassword.second,'Repetir password') }}
+                                {{ form_widget(formUsuario.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repetir contraseña' } }) }}
+                                {{ form_errors(formUsuario.plainPassword.second) }}
+                                {{ form_end(formUsuario) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
                 </div>
+                <!-- /.panel -->
             </div>
-        </div>
     </div>
 {% endblock %}
 
