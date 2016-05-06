@@ -1,0 +1,85 @@
+\begin{UseCase}{CU2}{Agendar Cita}{Cuando un paciente tenga la necesidad de ser atendido por uno de los médicos de la clínica y necesite agendar una consulta médica, se realizará una cita. El sistema guardará los datos de la cita.}
+	\UCitem{Version}{0.2}
+  \UCitem{Actor}{Paciente}
+  \UCitem{Proposito}{
+    Que el Paciente pueda agendar una cita en el día y horario que desee para realizar un chequeo general, obtener el diagnóstico de una enfermedad o un certificado médico, siempre y cuando el sistema no tenga registrada una cita en el mismo día y hora.
+  }
+  \UCitem{Entradas}{
+    \begin{itemize}
+      \item ID del paciente: entero positivo.
+      \item Fecha de cita: fecha con el formato dd/mm/aaaa.
+      \item Hora de cita: hora con el formato hh:mm:ss.
+      \item Consultorio: entero positivo entre 0 y 12.
+    \end{itemize}
+  }
+  \UCitem{Origen}{
+    \begin{itemize}
+      \item ID del paciente: de la sesión.
+      \item Fecha de cita: desde un calendario ordenado por mes.
+      \item Hora de cita: desde una lista que se despliega al seleccionar el día.
+      \item Consultorio: desde una lista.
+      \end{itemize}
+  }
+  \UCitem{Salidas}{
+    \begin{itemize}
+      \item Mensaje [[no. de mensaje]]: “Registro de cita exitoso”.
+      \item Correo electrónico de confirmación.
+    \end{itemize}
+  }
+  \UCitem{Destino}{
+    \begin{itemize}
+      \item Mensaje: Pantalla.
+      \item Correo electrónico: Servidor de correo electrónico.
+    \end{itemize}
+  }
+  \UCitem{Precondiciones}{
+    Que no haya una cita registrada en la misma fecha y hora, en el consultorio seleccionado.
+  }
+  \UCitem{Postcondiciones}{
+    \begin{itemize}
+      \item Se registra la cita en el sistema.
+      \item La cita registrada aparece en la lista de citas registradas del paciente.
+    \end{itemize}
+  }
+  \UCitem{Observaciones}{
+    Ninguna
+  }
+  \UCitem{Errores}{
+  	El actor introduce una fecha, hora y consultorio en los cuales ya existe una cita previamente registrada.
+	}
+  \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 Iniciar Sesión}
+	\UCitem{Volatilidad}{Baja}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Prioridad}{Alta}
+  \UCitem{Estado}{Terminado}
+	\UCitem{Autor}{Adrián Galindo García}
+	\UCitem{Revisor}{Rubén Murga Dionicio}
+\end{UseCase}
+
+\begin{UCtrayectoria}{Principal}
+  \UCpaso[\UCactor] solicita agendar cita haciendo clic en la opción del menú “Agendar cita”.
+  \UCpaso obtiene el total de citas disponibles para cada día del mes actual.
+  \UCpaso muestra el calendario de la UI2 Agendar Citas con la cantidad de citas disponibles por día.
+  \UCpaso deshabilita los días del calendario que hayan llegado al máximo de citas disponibles.
+  \UCpaso[\UCactor] indica la fecha de la cita deseada haciendo click sobre el día.
+  \UCpaso oculta el calendario y muestra un botón para regresar.
+  \UCpaso obtiene y muestra un listado de los consultorios con citas disponibles para el día seleccionado.
+  \UCpaso[\UCactor] indica el consultorio deseado seleccionandolo de la lista.
+  \UCpaso obtiene y despliega las horas disponibles para cada cita del día seleccionado y en el consultorio solicitado, 
+  \UCpaso deshabilita aquellas horas que ya tengan asignada una cita.
+  \UCpaso[\UCactor] indica la hora deseada haciendo click sobre ella.
+  \UCpaso obtiene el nombre del doctor asignado al consultorio en la fecha y hora seleccionadas.
+  \UCpaso muestra los datos seleccionados de la cita y el botón Agendar cita”.
+  \UCpaso[\UCactor] da click en el botón “Agendar cita”.
+  \UCpaso solicita la confirmación de la creación de la cita mostrando el mensaje {\bf MSG2a-} “¿Esta seguro de querer agendar una cita el día :Dia a las :Hora hrs en el consultorio :Consultorio con el médico :Médico?”.
+  \UCpaso[\UCactor] confirma la cita haciendo click sobre el botón “Confirmar”.
+  \UCpaso verifica que no se haya registrado una cita con los mismos datos [Trayectoria A].
+  \UCpaso notifica el resultado de la operación mostrando la información de la cita.
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{A}{Confirmación de la creación de la cita}
+  \UCpaso notifica que ya hay una cita registrada con los mismos datos, mostrando el mensaje {\bf MSG2c-} “Ya se ha agendado una cita con los mismos datos seleccionados”..
+  \UCpaso muestra la pantalla UI2 Agendar Citas.
+  \UCpaso continúa transacción desde el paso 9.
+\end{UCtrayectoriaA}
+%-------------------------------------- TERMINA descripción del caso de uso.
