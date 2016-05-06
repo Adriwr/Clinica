@@ -20,3 +20,4 @@ web/js/fos_js_routes.js
 /documento_analisis/main.toc
 /documento_analisis/main.aux
 /documento_analisis/main.log
+/documento_analisis/*.out
