@@ -53,7 +53,10 @@
         \item Lista de cirugias tenidas
         \begin{itemize}
             \item Nombre de cirugia: Cadena de caracteres
+            \item Tipo de cirugía: cadena de caracteres
+            \item Lugar de cirugía: cadena de caracteres
             \item Año de la cirugia : Año 
+            \item estado: cadena de caracteres
         \end{itemize}
         
         \item Lista de alergias
@@ -68,9 +71,8 @@
             \item nombre de familiar: Cadena extensa de caracteres consituido por nombre(s) y apellidos.
             \item Sexo del familiar: Caracter 'H' o 'M' (hombre,mujer)
             \item Edad de familiar: Número entero positivo.
-            \item Nombre de enfermedad data a un familiar:Cadena de caracteres.
             \item Parentesco del familiar:Cadena de caracteres.
-            \item Tratada: booleano 0 para 'No', 1 para 'Sí'.
+            \item Lista de enfermedades tenidas, siguiendo el formato y los datos de la entrada anterior
 
         \end{itemize}
        \end{itemize}
@@ -166,7 +168,7 @@
 		\UCpaso Verifica que el paciente no tenga expediente.[TA1] [RN5]
 		\UCpaso Solicita los datos listados en entradas mostrando la IU
 		\UCpaso [\UCactor] Proporciona los datos
-		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón "registrar paciente"
+		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón "Finalizar registro de expediente"
 		\UCpaso Verifica que todos los datos requeridos hayan sido completados
 		\UCpaso Verifica que los datos proporcionados tengan el formato requerido
 		\UCpaso Almacena los datos del expediente 
