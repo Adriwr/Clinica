@@ -133,7 +133,7 @@
     }
     \UCitem{Salidas}{
     	\begin{itemize}
-    		\item Mensaje de confirmación ``Expediente creado correctamente"
+    		\item Mensaje de confirmación ``Expediente creado correctamente''
     	\end{itemize}
     }
     
@@ -148,8 +148,8 @@
     \UCitem{Observaciones}{Ninguna}
     \UCitem{Errores}{
     	\begin{itemize}
-    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos" y se continúa desde el paso 2
-    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido" y se continúa desde el paso 2 
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos'' y se continúa desde el paso 2
+    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 2 
     	\end{itemize}
     }
 	\UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
@@ -163,13 +163,13 @@
 \end{UseCase}
 
 \begin{UCtrayectoria}{Médico}
-		\UCpaso[\UCactor] selecciona "Próximas citas" dando click en dicho apartado.
+		\UCpaso[\UCactor] selecciona ``Próximas citas'' dando click en dicho apartado.
 		\UCpaso Muestra un listado de todas las citas próximas que tiene agendadas. 
 		\UCpaso[\UCactor] Da click en el nombre del paciente que es uno de los elementos en la lista.[RN13][RN8]
 		\UCpaso Verifica que el paciente no tenga expediente.[TA1] [RN5]
 		\UCpaso Solicita los datos listados en entradas mostrando la IU
 		\UCpaso [\UCactor] Proporciona los datos
-		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón "Finalizar registro de expediente"
+		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón ``Finalizar registro de expediente''
 		\UCpaso Verifica que todos los datos requeridos hayan sido completados
 		\UCpaso Verifica que los datos proporcionados tengan el formato requerido
 		\UCpaso Almacena los datos del expediente 
@@ -177,7 +177,7 @@
 \end{UCtrayectoria}
 
 \begin{UCtrayectoriaA}{TA1}{El paciente tiene expediente}
-	\UCpaso Se ejecuta el caso de uso  "Consultar expediente"
+	\UCpaso Se ejecuta el caso de uso  ``Consultar expediente''
 	
 \end{UCtrayectoriaA}
 
