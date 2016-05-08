@@ -1,7 +1,7 @@
 %-------------------------------------- COMIENZA descripción del caso de uso.
 
 \begin{UseCase}{CU3}{Consultar Citas}{El paciente consultará el historial de citas cuando necesite observar la fecha, hora y consultorio de las citas que ha agendado. El sistema mostrará la información de las citas del paciente.}
-	\UCitem{Versión}{0.1}
+	\UCitem{Versión}{0.2}
     \UCitem{Actor}{Paciente}
     \UCitem{Propósito}{El paciente pueda observar las citas agendadas, así como la fecha, hora y consultorio de estas.}
     \UCitem{Entradas}{
@@ -28,9 +28,9 @@
 				\item Fecha: cadena de caracteres con el formato ``DD/MM/AAAA'', donde DD, MM y AAAA son número enteros que representan el día, mes y año de la cita, respectivamente.
 	            \item Hora: cadena de caracteres con el formato ``HH:MM'' donde HH y MM son números enteros que representan la hora y los minutos de la cita, respectivamente.
 				\item Consultorio: Número entero que representa el número de consultorio.
-				\item Doctor: Arreglo de dos cadenas de caracteres:
+				\item Doctor: Cadena de texto compuesta de dos partes, separadas por un espacio:
 				\begin{itemize}
-					\item Nombre(s) del doctor.
+					\item Nombre(s) del médico.
 					\item Apellido paterno del médico.
 		        \end{itemize}
 		        \item Identificador de la consulta: número entero.
@@ -55,7 +55,7 @@
     	\begin{itemize}
     	\item ERR1 - No hay citas agendadas:
 	    	\begin{itemize}
-				\item muestra el MSG 3a ``No hay citas agendadas.''.
+				\item muestra el MSG3a ``No hay citas agendadas''.
 				\item Fin del CU3.
 			\end{itemize}
 		\end{itemize}
@@ -72,6 +72,6 @@
 
 \begin{UCtrayectoria}{}
 		\UCpaso[\UCactor] selecciona mostrar las citas dando click en el botón ``Mostrar citas''.
-		\UCpaso muestra la pantalla UI3 - Mostrar citas del paciente. [ERR1].
+		\UCpaso muestra la pantalla UI3 Consultar citas del paciente. [ERR1].
 \end{UCtrayectoria}
 %-------------------------------------- TERMINA descripción del caso de uso.
