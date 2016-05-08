@@ -1,0 +1,110 @@
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+\begin{UseCase}{CU11}{Crear tratamiento}{El médico podrá proporcionar un tratamiento al paciente con base en los sintomas y su experiencia. El sistema guardará la información del tratamiento.}
+	\UCitem{Version}{0.2}
+  \UCitem{Actor}{Médico}
+  \UCitem{Proposito}{
+    Que el Médico pueda brindar un tratamiento que ayude al paciente a mejorar su estado de salúd y este sea registrado en el sistema junto a la consulta, con el fin de ser incorporado al expediente medico.
+  }
+  \UCitem{Entradas}{
+    \begin{itemize}
+      \item Id de consulta: número entero positivo que representa la consulta a la que esta asociada el tratamiento.
+      \item Lista de médicamentos: Arreglo de estructuras de datos que contienen lo siguiente:
+        \begin{itemize}
+          \item Nombre del médicamento: Cadena de caracteres que hacen referencia al nombre comercial del médicamento.
+          \item Frecuencia: cadena de carácteres compuesta por un número entero positivo; número de veces en las que se debe tomar el medicamento.
+          \item Duración: cadena de carácteres que puede estar compuesta por un número entero positivo que represente el tiempo que debe transcurrir desde que el paciente debe empezar a tomar el médicamento hasta que lo deje de consumir y una unidad de medida. 
+          \item Cantidad: cadena de carácteres que puede estar compuesta por número entero positivo y la unidad minima de la presentación del medicamento (Ej. pastilla, mililitros, etc); representa la dosis del médicamento que debe consumir el paciente.
+
+        \end{itemize}   
+      \item Lista de recomendaciones: Arreglo de estructuras de datos que contienen lo siguiente:
+        \begin{itemize}
+          \item Descripción: cadena larga de texto en la que se menciona una recomendación o sugerencia que el paciente debe seguir parar mejorar su estado de salúd.
+          \item Duración: cadena de carácteres que puede estar compuesta por un número entero positivo que represente el tiempo que debe transcurrir desde que el paciente debe empezar a seguir la recomendación hasta que sea necesario y una unidad de medida. 
+        \end{itemize}   
+    \end{itemize}
+  }
+  \UCitem{Origen}{
+    \begin{itemize}
+      \item Id de consulta: del registro de la consulta 
+      \item Del teclado:
+        \begin{itemize}
+          \item Lista de médicamentos: 
+          \begin{itemize}
+            \item Nombre del médicamento 
+            \item Frecuencia 
+            \item Duración 
+            \item Cantidad
+          \end{itemize}
+        \end{itemize}
+        \begin{itemize}
+          \item Lista de recomendaciones: 
+          \begin{itemize}
+            \item Descripción
+            \item Duración
+          \end{itemize}
+        \end{itemize}
+      \end{itemize}
+  }
+  \UCitem{Salidas}{
+    \begin{itemize}
+      \item {\bf MSG11a} ``Registro del tratamiento exitoso".
+      \item {\bf MSG11b} ``Complete todos los campos del medicamento".
+      \item {\bf MSG11c} ``Complete todos los campos de la recomendación".
+      \item {\bf MSG11d} ``Formato de campos inválido''
+    \end{itemize}
+  }
+  \UCitem{Destino}{
+    Pantalla
+  }
+  \UCitem{Precondiciones}{
+    \begin{itemize}
+      \item Que el médico esté atendiendo al paciente en una consulta
+    \end{itemize}
+  }
+  \UCitem{Postcondiciones}{
+    \begin{itemize}
+      \item Se registra el tratamiento en el sistema.
+      \item El tratamiento queda asociado a la consulta .
+    \end{itemize}
+  }
+  \UCitem{Observaciones}{
+  \begin{itemize}
+      \item Se puede agregar más de un medicamento o recomendación a sus respectivas listas.
+      \item No se puede guardar un tratamiento al que no haya agregado un medicamento ni una recomendación.
+      \item Se puede guardar un tratamiento con únicamente medicamentos y sin recomendaciones o al contrario, con únicamente recomendaciones y sin medicamentos.
+    \end{itemize}
+  }
+  \UCitem{Errores}{
+    \begin{itemize}
+      \item ERR1: Si no se completaron todos los datos requeridos de un medicamento, se informa al actor mostrando el mensaje ``Complete todos los campos del medicamento'' y se continúa desde el paso 5
+      \item ERR1: Si no se completaron todos los datos requeridos de una recomendación, se informa al actor mostrando el mensaje ``Complete todos los campos de la recomendación'' y se continúa desde el paso 5
+      \item ERR1: Si no se agregó al menos un medicamento o rec ``Complete todos los campos de la recomendación'' y se continúa desde el paso 5
+      \item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 5 
+    \end{itemize}
+	}
+  \UCitem{Tipo de ejecución}{Secundaria, se extiende de CU27 Dar consulta}
+	\UCitem{Volatilidad}{Media Alta}
+	\UCitem{Madurez}{Media}
+	\UCitem{Prioridad}{Alta}
+  \UCitem{Estado}{En revisión}
+	\UCitem{Autor}{Adrián Galindo García}
+	\UCitem{Revisor}{Rubén Murga Dionicio}
+\end{UseCase}
+
+\begin{UCtrayectoria}{Principal}
+  \UCpaso verifica que el actor este dando una consulta [Trayectoria A].
+  \UCpaso habilita el botón \IUbutton{Crear tratamiento} en la UI27 Dar consulta.
+  \UCpaso[\UCactor] solicita crear un tratamiento haciendo clic en el botón \IUbutton{Crear tratamiento}.
+  \UCpaso solicita los datos listados en entradas, mostrando la UI11 Crear tratamiento.
+  \UCpaso [\UCactor] Proporciona los datos que sean necesarios.
+  \UCpaso [\UCactor] Confirma los datos haciendo click en el botón \IUbutton{Guardar tratamiento}.
+  \UCpaso Almacena los datos del tratamiento.
+  \UCpaso Informa el resultado de la transacción.
+
+\begin{UCtrayectoriaA}{A}{Comprueba que se este dando una consulta}
+  \UCpaso comprueba que el status de la consulta sea 1.
+  \UCpaso muestra la pantalla UI27 Dar consulta.
+  \UCpaso continúa transacción desde el paso 2.
+\end{UCtrayectoriaA}
+%-------------------------------------- TERMINA descripción del caso de uso.

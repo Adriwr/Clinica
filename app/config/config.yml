@@ -72,11 +72,28 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: gmail
+    username:  clinica.blackSheep@gmail.com
+    password:  clinica.blackSheep!
     spool:     { type: memory }
+
+#DoctrineMongoDB Configuration
+doctrine_mongodb:
+    connections:
+        default:
+            server: %mongo_server%
+            options: %mongo_options%
+    default_database: %mongo_database%
+    document_managers:
+        default:
+            auto_mapping: true
+
+# DoctrineExtensions
+stof_doctrine_extensions:
+    default_locale: en_US
+    mongodb:
+        default:
+            timestampable: true
 #FOSRestBundle
 sensio_framework_extra:
     view:

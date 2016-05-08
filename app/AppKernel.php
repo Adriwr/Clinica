@@ -20,8 +20,12 @@ class AppKernel extends Kernel
             // Bundles para hacer a Symfony mas RESTFul
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            // Extenciones de Twig
+            // Enrutamiento desde js
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            // Bundle para conectar el proyecto con MongoDB
+            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            // Bundle para hacer uso de extension para Doctrine; como timestamp
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new AppBundle\AppBundle(),
         );
 

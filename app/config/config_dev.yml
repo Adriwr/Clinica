@@ -33,5 +33,18 @@ monolog:
 assetic:
     use_controller: true
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    transport: gmail
+    username:  clinica.blackSheep@gmail.com
+    password:  clinica.blackSheep!
+    spool:     { type: memory }
+doctrine_mongodb:
+    connections:
+        default:
+            server: %mongo_server%
+            options: %mongo_options%
+    default_database: %mongo_database%
+    document_managers:
+        default:
+            auto_mapping: true
+            logging:       true
