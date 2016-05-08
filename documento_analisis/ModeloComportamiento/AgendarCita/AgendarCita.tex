@@ -2,27 +2,33 @@
 	\UCitem{Version}{0.2}
   \UCitem{Actor}{Paciente}
   \UCitem{Proposito}{
-    Que el Paciente pueda agendar una cita en el día y horario que desee para realizar un chequeo general, obtener el diagnóstico de una enfermedad o un certificado médico, siempre y cuando el sistema no tenga registrada una cita en el mismo día y hora.
+    Que el actor pueda agendar una cita en el día, horario y consultorio que desee, por ejemplo, para realizar un chequeo general, obtener el diagnóstico de una enfermedad o un certificado médico.
   }
   \UCitem{Entradas}{
     \begin{itemize}
-      \item ID del paciente: entero positivo.
-      \item Fecha de cita: fecha con el formato dd/mm/aaaa.
-      \item Hora de cita: hora con el formato hh:mm:ss.
-      \item Consultorio: entero positivo entre 0 y 12.
+      \item Email del paciente: cadena de texto compuesta de 4 partes:  
+            \begin{itemize}
+                \item cadena de texto.
+                \item carácter ‘@’
+                \item cadena que identifica al servidor que brinda el servicio de correo electrónico
+                \item carácter ‘.’ y dominio
+            \end{itemize}
+      \item Fecha de cita: cadena de caracteres con el formato ``DD/MM/AAAA'', donde DD, MM y AAAA son número enteros que representan el día, mes y año de la fecha, respectivamente.
+      \item Hora de cita: cadena de caracteres con el formato ``HH:MM'' donde HH y MM son números enteros que representan la hora y los minutos de la cita, respectivamente.
+      \item Consultorio: Número entero positivo entre 0 y 12, representa el número de consultorio.
     \end{itemize}
   }
   \UCitem{Origen}{
     \begin{itemize}
-      \item ID del paciente: de la sesión.
-      \item Fecha de cita: desde un calendario ordenado por mes.
-      \item Hora de cita: desde una lista que se despliega al seleccionar el día.
-      \item Consultorio: desde una lista.
+      \item Email del paciente: Variable de sesión de la aplicación.
+      \item Fecha de cita: Desde un calendario ordenado por mes.
+      \item Hora de cita: Desde una lista que se despliega al seleccionar la fecha.
+      \item Consultorio: Desde una lista.
       \end{itemize}
   }
   \UCitem{Salidas}{
     \begin{itemize}
-      \item Mensaje [[no. de mensaje]]: “Registro de cita exitoso”.
+      \item Mensaje de notificación ``Registro de cita exitoso".
       \item Correo electrónico de confirmación.
     \end{itemize}
   }
@@ -33,11 +39,11 @@
     \end{itemize}
   }
   \UCitem{Precondiciones}{
-    Que no haya una cita registrada en la misma fecha y hora, en el consultorio seleccionado.
+    Que no haya una cita registrada en la misma fecha, hora y en el consultorio seleccionado.
   }
   \UCitem{Postcondiciones}{
     \begin{itemize}
-      \item Se registra la cita en el sistema.
+      \item Se registra la cita del actor en el sistema.
       \item La cita registrada aparece en la lista de citas registradas del paciente.
     \end{itemize}
   }
@@ -45,13 +51,13 @@
     Ninguna
   }
   \UCitem{Errores}{
-  	El actor introduce una fecha, hora y consultorio en los cuales ya existe una cita previamente registrada.
+  	El actor selecciona una fecha, hora y consultorio en los cuales ya existe una cita previamente registrada.
 	}
   \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 Iniciar Sesión}
-	\UCitem{Volatilidad}{Baja}
-	\UCitem{Madurez}{Baja}
+	\UCitem{Volatilidad}{Media}
+	\UCitem{Madurez}{Media}
 	\UCitem{Prioridad}{Alta}
-  \UCitem{Estado}{Terminado}
+  \UCitem{Estado}{En revisión}
 	\UCitem{Autor}{Adrián Galindo García}
 	\UCitem{Revisor}{Rubén Murga Dionicio}
 \end{UseCase}
@@ -59,20 +65,20 @@
 \begin{UCtrayectoria}{Principal}
   \UCpaso[\UCactor] solicita agendar cita haciendo clic en la opción del menú “Agendar cita”.
   \UCpaso obtiene el total de citas disponibles para cada día del mes actual.
-  \UCpaso muestra el calendario de la UI2 Agendar Citas con la cantidad de citas disponibles por día.
+  \UCpaso muestra el calendario de la UI2A Agendar Citas con la cantidad de citas disponibles por día.
   \UCpaso deshabilita los días del calendario que hayan llegado al máximo de citas disponibles.
   \UCpaso[\UCactor] indica la fecha de la cita deseada haciendo click sobre el día.
   \UCpaso oculta el calendario y muestra un botón para regresar.
-  \UCpaso obtiene y muestra un listado de los consultorios con citas disponibles para el día seleccionado.
+  \UCpaso obtiene y muestra un listado de los consultorios con citas disponibles para el día seleccionado. UI2B Agendar Citas
   \UCpaso[\UCactor] indica el consultorio deseado seleccionandolo de la lista.
   \UCpaso obtiene y despliega las horas disponibles para cada cita del día seleccionado y en el consultorio solicitado, 
   \UCpaso deshabilita aquellas horas que ya tengan asignada una cita.
   \UCpaso[\UCactor] indica la hora deseada haciendo click sobre ella.
   \UCpaso obtiene el nombre del doctor asignado al consultorio en la fecha y hora seleccionadas.
-  \UCpaso muestra los datos seleccionados de la cita y el botón Agendar cita”.
-  \UCpaso[\UCactor] da click en el botón “Agendar cita”.
-  \UCpaso solicita la confirmación de la creación de la cita mostrando el mensaje {\bf MSG2a-} “¿Esta seguro de querer agendar una cita el día :Dia a las :Hora hrs en el consultorio :Consultorio con el médico :Médico?”.
-  \UCpaso[\UCactor] confirma la cita haciendo click sobre el botón “Confirmar”.
+  \UCpaso muestra los datos seleccionados de la cita y el botón \IUbutton{Agendar cita}.
+  \UCpaso[\UCactor] da click en el botón \IUbutton{Agendar cita}.
+  \UCpaso solicita la confirmación de la creación de la cita mostrando el mensaje {\bf MSG2a-} “¿Esta seguro de querer agendar una cita el día :Dia a las :Hora hrs en el consultorio :Consultorio con el médico :Médico?”. El mensaje se muestra en la UI2C.
+  \UCpaso[\UCactor] confirma la cita haciendo click sobre el botón \IUbutton{Confirmar}.
   \UCpaso verifica que no se haya registrado una cita con los mismos datos [Trayectoria A].
   \UCpaso notifica el resultado de la operación mostrando la información de la cita.
 \end{UCtrayectoria}
