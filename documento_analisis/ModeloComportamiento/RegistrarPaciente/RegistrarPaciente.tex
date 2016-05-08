@@ -16,27 +16,27 @@
     \UCitem{Propósito}{El paciente podrá agendar citas y consultar su expediente.}
     \UCitem{Entradas}{
         \begin{itemize}
-            \item Email del paciente: cadena de texto compuesta de 4 partes:  
+            \item *Email del paciente: cadena de texto compuesta de 4 partes:  
             \begin{itemize}
                 \item cadena de texto.
                 \item carácter ‘@’
                 \item cadena que identifica al servidor que brinda el servicio de correo electrónico
                 \item carácter ‘.’ y dominio
             \end{itemize}
-            \item Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
-			\item Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
-            \item Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+            \item* Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
+			\item *Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
+            \item *Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
             \item Dirección
             \begin{itemize}
-                \item Calle: Cádena de caracteres.
+                \item *Calle: Cádena de caracteres.
                 \item Número: Cádena de caracteres.
-                \item Colonia: Cádena de caracteres.
-                \item Estado: Cádena de caracteres.
-                \item País : Cádena de caracteres.
+                \item *Colonia: Cádena de caracteres.
+                \item *Estado: Cádena de caracteres.
+                \item *País : Cádena de caracteres.
                 \item Teléfono particular: Cádena de 8 a 10 caracteres.
                 \item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
             \end{itemize}    
-            \item Contraseña:  Cadena de longitud mínima de 8 caracteres
+            \item *Contraseña:  Cadena de longitud mínima de 8 caracteres
         \end{itemize} 
     }
     \UCitem{Origen}{
@@ -55,7 +55,11 @@
 		\end{itemize}
     }
     \UCitem{Observaciones}{
-    	La Pantalla para registrar paciente nuevo de la enfermera y del paciente es la misma.
+    \begin{itemize}
+    \item La Pantalla para registrar paciente nuevo de la enfermera y del paciente es la misma.
+    \item Los elementos marcados con '*' son obligatorios de llenar.
+    \end{itemize}
+    	
     }
     \UCitem{Errores}{HOla
 	}
