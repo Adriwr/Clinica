@@ -1,0 +1,184 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{Cu6}{Crear expediente médico}{El actor desea consultar el expediente médico.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Médico,Paciente}
+    \UCitem{Propósito}{Conocer los antecedentes médicos del segundo actor.}
+    \UCitem{Entradas}{
+    	\begin{itemize}
+    		\item Email del paciente: cadena de texto compuesta de 4 partes [requerido]:  
+    		\begin{itemize}
+    			\item cadena de texto.
+    			\item carácter ‘@’
+    			\item cadena que identifica al servidor que brinda el servicio de correo electrónico
+    			\item carácter ‘.’ y dominio
+    		\end{itemize}
+			\item Lista de datos personales [todos requeridos]
+        \begin{itemize}
+            \item Nombre: Constituido por nombre(s) y apellidos.Cádena de caracteres
+            \item Sexo  Caracter 'H' o 'M' (hombre,mujer)
+            \item Fecha de nacimiento: Formato de fecha DD/MM/AAAA
+            \item Dirección
+            \begin{itemize}
+                \item Calle: Cádena de caracteres.
+                \item Número: Cádena de caracteres.
+                \item Colonia: Cádena de caracteres.
+                \item Estado: Cádena de caracteres.
+                \item País : Cádena de caracteres.
+                \item Teléfono particular: Cádena de 8 a 10 caracteres.
+                \item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
+            \end{itemize}    
+		
+		\end{itemize}
+         
+       \item Lista de enfermedades tenidas
+        \begin{itemize}
+            \item Código:código segun la cie10
+            \item Nombre de enfermedad: Cadena de caracteres. 
+            \item fecha diagnosticada: Formato DD/MM/AAAA
+            \item Observaciones de la enfermedad: Cadena extensa de caracteres.
+            \item Tratada: booleano 0 para 'No', 1 para 'Sí'.
+
+        \end{itemize}
+        
+        \item Lista de cirugias tenidas
+        \begin{itemize}
+            \item Nombre de cirugia: Cadena de caracteres
+            \item Tipo de cirugía: cadena de caracteres
+            \item Lugar de cirugía: cadena de caracteres
+            \item Año de la cirugia : Año 
+            \item estado: cadena de caracteres
+        \end{itemize}
+        
+        \item Lista de alergias
+        \begin{itemize}
+            \item Nombre de sustancia a la que es alergico:Cadena de caracteres.
+            \item Tratada: booleano 0 para 'No', 1 para 'Sí'.
+            \item Año de diagnóstico: año
+        \end{itemize}
+        
+  \item Lista de antecedentes familiares
+        
+        \begin{itemize}
+            \item nombre de familiar: Cadena extensa de caracteres consituido por nombre(s) y apellidos.
+            \item Sexo del familiar: Caracter 'H' o 'M' (hombre,mujer)
+            \item Edad de familiar: Número entero positivo.
+            \item Parentesco del familiar:Cadena de caracteres.
+            \item Lista de enfermedades tenidas, siguiendo el formato y los datos de la entrada anterior
+
+        \end{itemize}
+       \end{itemize}
+    }
+    \UCitem{Entradas}{
+    	\begin{itemize}
+        	 \item Lista de antecedentes personales [todos requeridos]
+        
+        \begin{itemize}
+            \item Frecuencia en la que toma baño: Número de días.
+            \item Frecuencia de cambio de ropa: Número de días.
+            \item Personas viviendo en la misma casa: Número entero positivo.
+            \item Servicios básicos: Lista de cadenas. 
+            \item Alimentación: Descripción de tipo de alimentación. Cádena extensa de caracteres
+            \item Fuma: Booleano
+            \item Alcohol: Booleano
+            \item Drogas: Booleano
+            
+        \end{itemize}
+        
+        \item Embarazos 
+        
+        \begin{itemize}
+            \item Descripción de embarazo:Cadena de caracteres.
+            \item Año del embarazo: Año
+        \end{itemize}
+        
+        \item Lista de métodos anticonceptivos usados
+        
+        \begin{itemize}
+             \item Anticonceptivo:Cadena de caracteres.
+            \item Notas sobre el anticonceptivo:Cadena extensa caracteres.
+        \end{itemize}
+            
+        \item Lista de mastografías
+        
+        \begin{itemize}
+            \item Mastografía:Cadena de caracteres.
+            \item Notas sobre la mastografía:Cadena extensa de caracteres.
+        \end{itemize}
+            
+        \item Lista de papanicolaus
+        
+        \begin{itemize}
+            \item Año de papanicolaou:Año
+            \item Notas sobre el papanicolau:Cadena extensa de caracteres.
+        \end{itemize}
+        
+		\end{itemize}
+	}
+    \UCitem{Origen}{
+    	\begin{itemize}
+    		\item Desde sesión: Correo electrónico de paciente.
+    		\item Desde un catálogo: Código y nombre de enfermedad.
+    		\item Desde teclado: todos los demás campos.
+    	\end{itemize}
+    }
+    \UCitem{Salidas}{
+    	\begin{itemize}
+    		\item Mensaje de confirmación ``Expediente creado correctamente"
+    	\end{itemize}
+    }
+    
+    \UCitem{Destino}{Pantalla}
+   	\UCitem{Precondiciones}{
+   	    \begin{itemize}
+	   	    \item Que el paciente no cuente con un expediente.
+	   	    \item Que el médico esté atendiendo al paciente
+   	    \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{Se crea un expediente para el médico}
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos" y se continúa desde el paso 2
+    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido" y se continúa desde el paso 2 
+    	\end{itemize}
+    }
+	\UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+	\UCitem{Prioridad}{Alta}
+	\UCitem{Volatilidad}{Media}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Estado}{Terminado}
+	\UCitem{Autor}{David Alberto Pacheco Soto}
+	\UCitem{Revisor}{Saúl Uriel Trujillo Gracía}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{Médico}
+		\UCpaso[\UCactor] selecciona "Próximas citas" dando click en dicho apartado.
+		\UCpaso Muestra un listado de todas las citas próximas que tiene agendadas. 
+		\UCpaso[\UCactor] Da click en el nombre del paciente que es uno de los elementos en la lista.[RN13][RN8]
+		\UCpaso Verifica que el paciente no tenga expediente.[TA1] [RN5]
+		\UCpaso Solicita los datos listados en entradas mostrando la IU
+		\UCpaso [\UCactor] Proporciona los datos
+		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón "Finalizar registro de expediente"
+		\UCpaso Verifica que todos los datos requeridos hayan sido completados
+		\UCpaso Verifica que los datos proporcionados tengan el formato requerido
+		\UCpaso Almacena los datos del expediente 
+		\UCpaso Informa el resultado de la transacción
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{El paciente tiene expediente}
+	\UCpaso Se ejecuta el caso de uso  "Consultar expediente"
+	
+\end{UCtrayectoriaA}
+
+%-------------------------------------- TERMINA descripción del caso de uso.

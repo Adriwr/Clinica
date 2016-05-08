@@ -21,3 +21,15 @@ documento_analisis/main.pdf
 documento_analisis/main.synctex.gz
 documento_analisis/main.out
 documento_analisis/main.toc
+/documento_analisis/main.pdf
+/documento_analisis/main.synctex.gz
+/documento_analisis/main.toc
+/documento_analisis/main.aux
+/documento_analisis/main.log
+/documento_analisis/*.out
+*.log
+*.out
+*.pdf
+*.gz
+*.toc
+*.aux

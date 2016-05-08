@@ -5,9 +5,8 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_SUPER_ADMIN: [ ROLE_GERENTE ]
-        ROLE_ADMIN:       [ ROLE_MEDICO, ROLE_ENFERMERA ]
-        ROLE_USER:        [ ROLE_CAJERO, ROLE_PACIENTE ]
+        ROLE_ADMIN:       [ROLE_CAJERO, ROLE_PACIENTE]
+        ROLE_SUPER_ADMIN: [ROLE_ENFERMERA, ROLE_MEDICO]
 
     providers:
         fos_userbundle:
@@ -42,4 +41,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/clinica/, role: ROLE_ADMIN }
-        - { path: ^/, role: [ ROLE_GERENTE, ROLE_ENFERMERA, ROLE_MEDICO, ROLE_CAJERO, ROLE_PACIENTE ] }
+        - { path: ^/, role: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_CAJERO, ROLE_PACIENTE, ROLE_ENFERMERA, ROLE_MEDICO ] }
