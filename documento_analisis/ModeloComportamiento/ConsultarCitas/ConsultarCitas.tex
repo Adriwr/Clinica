@@ -1,0 +1,77 @@
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+\begin{UseCase}{CU3}{Consultar Citas}{El paciente consultará el historial de citas cuando necesite observar la fecha, hora y consultorio de las citas que ha agendado. El sistema mostrará la información de las citas del paciente.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Paciente}
+    \UCitem{Propósito}{El paciente pueda observar las citas agendadas, así como la fecha, hora y consultorio de estas.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item Email del paciente: cadena de texto compuesta de 5 partes ordenadas: 
+            \begin{itemize}
+                \item cadena de caracteres.
+                \item carácter `@'.
+                \item cadena de caracteres que identifica al servidor que brinda el servicio de correo electrónico.
+                \item carácter `.'.
+				\item cadena de caracteres representan el dominio del servidor de correo (Por ejemplo com, mx, etc.).
+            \end{itemize}
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Email del paciente: Variable de sesión de la aplicación.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+        \item Lista de citas: Arreglo de estructuras de datos que contienen lo siguiente:
+	        \begin{itemize}
+				\item Fecha: cadena de caracteres con el formato ``DD/MM/AAAA'', donde DD, MM y AAAA son número enteros que representan el día, mes y año de la cita, respectivamente.
+	            \item Hora: cadena de caracteres con el formato ``HH:MM'' donde HH y MM son números enteros que representan la hora y los minutos de la cita, respectivamente.
+				\item Consultorio: Número entero que representa el número de consultorio.
+				\item Doctor: Arreglo de dos cadenas de caracteres:
+				\begin{itemize}
+					\item Nombre(s) del doctor.
+					\item Apellido paterno del médico.
+		        \end{itemize}
+		        \item Identificador de la consulta: número entero.
+		    \end{itemize}
+		\end{itemize}
+	}
+    \UCitem{Destino}{
+		\begin{itemize}
+			\item Fecha, Hora, Consultorio, Doctor: Pantalla UI3 Consultar Citas del paciente.
+			\item Identificador de la consulta: Variable oculta del lado de cliente.
+		\end{itemize}
+	}
+	
+   	\UCitem{Precondiciones}{
+   	    \begin{itemize}
+			\item El paciente ha agendado al menos una cita en el sistema.
+   	    \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{Ninguna}
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    	\item ERR1 - No hay citas agendadas:
+	    	\begin{itemize}
+				\item muestra el MSG 3a ``No hay citas agendadas.''.
+				\item Fin del CU3.
+			\end{itemize}
+		\end{itemize}
+	}
+	\UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+	\UCitem{Prioridad}{Media}
+	\UCitem{Volatilidad}{Baja}
+	\UCitem{Madurez}{Media Alta}
+	\UCitem{Estado}{En revisión}
+	\UCitem{Autor}{Demis Gómez Moncada}
+	\UCitem{Revisor}{}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{}
+		\UCpaso[\UCactor] selecciona mostrar las citas dando click en el botón ``Mostrar citas''.
+		\UCpaso muestra la pantalla UI3 - Mostrar citas del paciente. [ERR1].
+\end{UCtrayectoria}
+%-------------------------------------- TERMINA descripción del caso de uso.
