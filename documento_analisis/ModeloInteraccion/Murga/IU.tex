@@ -1,0 +1,99 @@
+\subsection{UIRegPaciente Registrar paciente}
+
+\subsubsection{Objetivo}
+    Realizar el registro del paciente con los datos requeridos para que dicho paciente pueda realizar una cita para consulta. 
+
+\subsubsection{Diseño}
+    Esta pantalla aparece al dar click en ``crear nueva cuenta''
+
+\begin{figure}[htbp!]
+        \centering
+            \includegraphics[width=0.8\textwidth]{images/UIRegPaciente}
+        \caption{UIRegPaciente Pantalla registrar paciente}
+    \end{figure}
+
+
+\subsubsection{Entradas}
+\begin{itemize}
+\item Email del paciente: cadena de texto compuesta de 4 partes:  
+            \begin{itemize}
+                \item cadena de texto.
+                \item carácter ‘@’
+                \item cadena que identifica al servidor que brinda el servicio de correo electrónico
+                \item carácter ‘.’ y dominio
+            \end{itemize}
+            \item Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
+            \item Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
+            \item Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+            \item Dirección
+            \begin{itemize}
+                \item Calle: Cádena de caracteres.
+                \item Número: Cádena de caracteres.
+                \item Colonia: Cádena de caracteres.
+                \item Estado: Cádena de caracteres.
+                \item País : Cádena de caracteres.
+                \item Teléfono particular: Cádena de 8 a 10 caracteres.
+                \item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
+            \end{itemize}    
+            \item Contraseña:  Cadena de longitud mínima de 8 caracteres
+
+\end{itemize}
+
+\subsubsection{Comandos}
+\begin{itemize}
+    \item \IUbutton{Registrar paciente}:  Verifica que los datos sean correctos. Si la verificación es correcta muestra \IUref{UI2}{Home}.  
+\end{itemize}
+
+\subsubsection{Mensajes}
+    \begin{Citemize}
+        \item {\bf MSG3a} “Datos incorrectos”.
+        \item {\bf MSG3b} “Correo electrónico ya existente en la base de datos”.
+    \end{Citemize}
+
+
+
+
+\subsection{UIConsultExp Consultar expediente}
+
+\subsubsection{Objetivo}
+    Realizar la visualizacíón del expediente médifo del paciente. 
+
+\subsubsection{Diseño}
+   Esta pantalla aparece cuando el paciente da click en ``Mi expediente'' o el médico durante una consulta da click 
+   en el nombre del paciente 
+
+\begin{figure}[htbp!]
+        \centering
+            \includegraphics[width=0.8\textwidth]{images/UIEXP1}
+            \includegraphics[width=0.8\textwidth]{images/UIEXP2}
+            
+    \end{figure}
+\begin{figure}[htbp!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/UIEXP3}
+            \includegraphics[width=0.8\textwidth]{images/UIEXP4}
+        \caption{UIConsultExp Consultar expediente}
+\end{figure}
+\newpage
+\subsubsection{Entradas}
+\begin{itemize}
+\item Ninguna
+\end{itemize}
+
+\subsubsection{Comandos}
+\begin{itemize}
+\item Ninguno
+\end{itemize}
+
+\subsubsection{Mensajes}
+    \begin{Citemize}
+        \item {\bf MSG3a} ``El paciente no cuenta con expediente médico''.
+    \end{Citemize}
+
+
+
+
+
+
+Status API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
