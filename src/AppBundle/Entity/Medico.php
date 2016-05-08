@@ -10,7 +10,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Entidad para mapear la tabla de medicos
  *
@@ -26,6 +27,11 @@ class Medico {
      */
     protected $id;
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="medico")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     */
+    protected $idUser;
+    /**
      * @ORM\Column(type="string", length=14)
      */
     protected $rfc;
@@ -35,16 +41,20 @@ class Medico {
     protected $cedulaProfesional;
     /**
      * @ORM\Column(type="string", length=75)
+     * @Assert\NotBlank(message="Por favor introduzca el nombre del médico.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=3,
+     *     max=75,
+     *     minMessage="El nombre es muy corto.",
+     *     maxMessage="El nombre es muy largo.",
+     *     groups={"Registration", "Profile"}
+     * )
      */
     protected $nombre;
     /**
      * @ORM\Column(type="string", length=75)
      */
     protected $apellidos;
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    protected $password;
     /**
      * @ORM\Column(type="string", length=14)
      */
@@ -54,7 +64,7 @@ class Medico {
      */
     protected $fechaIngreso;
     /**
-     * @ORM\OneToOne(targetEntity="Direccion")
+     * @ORM\OneToOne(targetEntity="Direccion" , cascade={"persist"})
      * @ORM\JoinColumn(name="direccion_id", referencedColumnName="id")
      */
     protected $direccion;
@@ -68,8 +78,12 @@ class Medico {
     private $telefonos;
 
     public function __construct() {
+        //parent::__construct();
         $this->emails = new ArrayCollection();
         $this->telefonos = new ArrayCollection();
+        //$this->username = "-";
+        //$this->enabled  = true;
+        //$this->roles = array('ROLE_MEDICO');
     }
 
 
@@ -174,30 +188,6 @@ class Medico {
     {
         return $this->apellidos;
     }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Medico
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
     /**
      * Set curp
      *
@@ -331,5 +321,28 @@ class Medico {
     public function getTelefonos()
     {
         return $this->telefonos;
+    }
+
+    /**
+     * Set idUser
+     *
+     * @param \AppBundle\Entity\User $idUser
+     * @return Medico
+     */
+    public function setIdUser(\AppBundle\Entity\User $idUser = null)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
     }
 }

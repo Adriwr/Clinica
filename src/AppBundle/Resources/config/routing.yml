@@ -4,4 +4,7 @@ home:
 medico:
     path:     /medico
     defaults: { _controller: AppBundle:Medico/Medico:index}
+productos:
+    path:     /productos
+    defaults: { _controller: AppBundle:Producto/Producto:index}
 #Estructura
