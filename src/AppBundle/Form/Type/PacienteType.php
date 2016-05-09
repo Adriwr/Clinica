@@ -38,27 +38,27 @@ class PacienteType extends AbstractType{
                     'ng-model'=> 'paciente.sexo' ),
                 'label' => 'Sexo',
                 'required' => true ) )
-            ->add( 'fechaNacimiento' ,  'date' , array(
+            ->add( 'fecha_nacimiento' ,  'date' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'ng-model'=> 'paciente.fecha' ),
                 'label' => 'Fecha de nacimiento',
                 'required' => true ) )
-            ->add( 'curp' ,  'text' , array(
+            /*->add( 'curp' ,  'text' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Curp',
                     'ng-model'=> 'paciente.curp' ),
                 'label' => 'CURP',
-                'required' => true ) )
-            ->add( 'telefono' ,  'checkbox' , array(
+                'required' => true ) )*/
+            ->add( 'telefono_particular' ,  'checkbox' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Telefono',
-                    'ng-model'=> 'paciente.telefono' ),
+                    'ng-model'=> 'paciente.telefonoParticular' ),
                 'label' => 'Stock',
                 'required' => true ) )
-            ->add( 'telefonoUrgencia' ,  'checkbox' , array(
+            ->add( 'telefono_emergencia' ,  'checkbox' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Telefono de urgencia',
@@ -80,7 +80,7 @@ class PacienteType extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Entity\Paciente',
+            'data_class'        => 'AppBundle\Document\Paciente\Paciente',
             'csrf_protection'   => false,
             'cascade_validation' => true,
             'allow_add' => true

@@ -3,10 +3,6 @@
 namespace AppBundle\Controller\Producto;
 
 
-use AppBundle\Entity\Area;
-use AppBundle\Entity\Producto;
-use AppBundle\Form\Type\AreaType;
-use AppBundle\Form\Type\ProductoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +14,7 @@ class ProductoController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $producto = new Producto();
+        /*$producto = new Producto();
 
 
         $form = $this->createForm(new ProductoType(), $producto);
@@ -47,7 +43,7 @@ class ProductoController extends Controller
         return $this->render(
             ':Producto:index.html.twig',
             array('form' => $form->createView())
-        );
+        );*/
     }
 
 }
