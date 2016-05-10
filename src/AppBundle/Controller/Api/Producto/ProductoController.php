@@ -22,8 +22,8 @@ class ProductoController extends FOSRestController implements ClassResourceInter
      * @Rest\View()
      */
     public function cgetAction(){
-        $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('AppBundle:Producto')->findAll();
+        //$em = $this->getDoctrine()->getManager();
+        //return $em->getRepository('AppBundle:Producto')->findAll();
     }
 
 }

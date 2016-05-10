@@ -1,5 +1,4 @@
 <?php
-// src/Facto/UserBundle/Document/User.php
 
 namespace AppBundle\Document\User;
 
@@ -23,4 +22,48 @@ class User extends BaseUser
      * @ODM\String
      */
     protected $masterAccount;
+
+    /**
+     * Set masterAccountId
+     *
+     * @param string $masterAccountId
+     * @return self
+     */
+    public function setMasterAccountId($masterAccountId)
+    {
+        $this->masterAccountId = $masterAccountId;
+        return $this;
+    }
+
+    /**
+     * Get masterAccountId
+     *
+     * @return string $masterAccountId
+     */
+    public function getMasterAccountId()
+    {
+        return $this->masterAccountId;
+    }
+
+    /**
+     * Set masterAccount
+     *
+     * @param string $masterAccount
+     * @return self
+     */
+    public function setMasterAccount($masterAccount)
+    {
+        $this->masterAccount = $masterAccount;
+        return $this;
+    }
+
+    /**
+     * Get masterAccount
+     *
+     * @return string $masterAccount
+     */
+    public function getMasterAccount()
+    {
+        return $this->masterAccount;
+    }
 }

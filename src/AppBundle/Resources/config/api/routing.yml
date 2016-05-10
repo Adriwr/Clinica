@@ -1,9 +1,9 @@
 #Agregar rutas para el api rest
 
-medico:
-    type:     rest
-    resource: AppBundle\Controller\Api\Medico\MedicoController
-    name_prefix: api_
+#medico:
+#    type:     rest
+#    resource: AppBundle\Controller\Api\Medico\MedicoController
+#    name_prefix: api_
 producto:
     type:     rest
     resource: AppBundle\Controller\Api\Producto\ProductoController
