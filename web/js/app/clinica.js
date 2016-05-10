@@ -5,7 +5,8 @@ var app = angular.module('app',
         [
             'ngResource',
             'ui.bootstrap',
-            'ngSanitize'
+            'ngSanitize',
+            'ui.bootstrap.datetimepicker',
         ])
         .factory('httpInterceptor', function ($q, $rootScope, $log) {
             var loadingCount = 0;

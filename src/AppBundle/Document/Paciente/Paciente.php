@@ -59,6 +59,15 @@ class Paciente {
      * @ODM\String
      */
     protected $telefonoEmergencia;
+    /**
+     * @ODM\EmbedMany(targetDocument="PacienteCitas")
+     */
+    protected $citas;
+
+    public function __construct()
+    {
+        $this->citas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -310,5 +319,35 @@ class Paciente {
     public function getApellidos()
     {
         return $this->apellidos;
+    }
+
+    /**
+     * Add cita
+     *
+     * @param AppBundle\Document\Paciente\PacienteCitas $cita
+     */
+    public function addCita(\AppBundle\Document\Paciente\PacienteCitas $cita)
+    {
+        $this->citas[] = $cita;
+    }
+
+    /**
+     * Remove cita
+     *
+     * @param AppBundle\Document\Paciente\PacienteCitas $cita
+     */
+    public function removeCita(\AppBundle\Document\Paciente\PacienteCitas $cita)
+    {
+        $this->citas->removeElement($cita);
+    }
+
+    /**
+     * Get citas
+     *
+     * @return \Doctrine\Common\Collections\Collection $citas
+     */
+    public function getCitas()
+    {
+        return $this->citas;
     }
 }

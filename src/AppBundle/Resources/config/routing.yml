@@ -1,10 +1,16 @@
 home:
     path:     /
     defaults: { _controller: AppBundle:Index/Index:index }
+#Medico
 #medico:
 #    path:     /medico
 #    defaults: { _controller: AppBundle:Medico/Medico:index}
+#Cajero
 productos:
     path:     /productos
     defaults: { _controller: AppBundle:Producto/Producto:index}
-#Estructura
+
+#Paciente
+agendar_cita_paciente:
+    path:     /agendar-cita/paciente
+    defaults: { _controller: AppBundle:Paciente/Cita:agendar}

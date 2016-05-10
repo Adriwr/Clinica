@@ -28,3 +28,7 @@ services:
         class: AppBundle\Form\Type\PacienteType
         tags:
             - { name: form.type, alias: form_paciente }
+    clinica.form.paciente_cita:
+        class: AppBundle\Form\Type\Paciente\CitaType
+        tags:
+            - { name: form.type, alias: form_paciente_cita }
