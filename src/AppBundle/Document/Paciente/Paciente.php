@@ -18,6 +18,10 @@ class Paciente {
     /**
      * @ODM\String
      */
+    protected $idEmail;
+    /**
+     * @ODM\String
+     */
     protected $nombre;
     /**
      * @ODM\String

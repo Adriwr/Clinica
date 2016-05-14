@@ -14,3 +14,7 @@ productos:
 agendar_cita_paciente:
     path:     /agendar-cita/paciente
     defaults: { _controller: AppBundle:Paciente/Cita:agendar}
+
+registrar_paciente:
+  path: /registrar-paciente/
+  defaults: {_controller: AppBundle:Paciente/Paciente:registrarPaciente}
