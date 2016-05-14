@@ -41,7 +41,7 @@ class ProductoController extends Controller
         );
 
         return $this->render(
-            ':Producto:index.html.twig',
+            ':Producto:registrarMedico.html.twig',
             array('form' => $form->createView())
         );*/
     }

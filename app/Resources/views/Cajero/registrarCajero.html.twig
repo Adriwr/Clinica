@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block dashboard %}
+    <h1 class="page-header">Registrar cajero nuevo</h1>
+
+{%  endblock %}
+{% block content %}
+    <div class="row" style="margin:10px;">
+        <div class="col-xs-6">
+            {{ form_start(form , {'attr': {'class': 'form-horizontal'} }) }}
+            {{ form_widget(form ) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
