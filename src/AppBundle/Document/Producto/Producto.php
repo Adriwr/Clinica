@@ -1,41 +1,40 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\Document\Producto;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * Entidad para mapear la tabla de productos
+ * Documento para mapear los pacientes
  *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductoRepository")
- * @ORM\Table(name="producto")
+ * @ODM\Document(repositoryClass="AppBundle\Repository\Producto\ProductoRepository")
  */
 class Producto {
     /**
-     * @ORM\Column(type="bigint")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Id
      */
     protected $id;
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ODM\String
      */
     protected $nombre;
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ODM\Float
      */
     protected $precio;
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ODM\Int
      */
     protected $stock;
+
+
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return id $id
      */
     public function getId()
     {
@@ -46,19 +45,18 @@ class Producto {
      * Set nombre
      *
      * @param string $nombre
-     * @return Producto
+     * @return self
      */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
-
         return $this;
     }
 
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string $nombre
      */
     public function getNombre()
     {
@@ -68,20 +66,19 @@ class Producto {
     /**
      * Set precio
      *
-     * @param string $precio
-     * @return Producto
+     * @param float $precio
+     * @return self
      */
     public function setPrecio($precio)
     {
         $this->precio = $precio;
-
         return $this;
     }
 
     /**
      * Get precio
      *
-     * @return string 
+     * @return float $precio
      */
     public function getPrecio()
     {
@@ -91,20 +88,19 @@ class Producto {
     /**
      * Set stock
      *
-     * @param string $stock
-     * @return Producto
+     * @param int $stock
+     * @return self
      */
     public function setStock($stock)
     {
         $this->stock = $stock;
-
         return $this;
     }
 
     /**
      * Get stock
      *
-     * @return string 
+     * @return int $stock
      */
     public function getStock()
     {

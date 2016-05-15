@@ -8,7 +8,8 @@ home:
 #Cajero
 productos:
     path:     /productos
-    defaults: { _controller: AppBundle:Producto/Producto:index}
+    defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
+
 
 #Paciente
 agendar_cita_paciente:

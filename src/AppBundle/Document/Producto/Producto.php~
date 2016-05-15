@@ -1,0 +1,33 @@
+<?php
+
+namespace AppBundle\Document\Producto;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+
+/**
+ * Documento para mapear los pacientes
+ *
+ * @ODM\Document(repositoryClass="AppBundle\Repository\Producto\ProductoRepository")
+ */
+class Producto {
+    /**
+     * @ODM\Id
+     */
+    protected $id;
+    /**
+     * @ODM\String
+     */
+    protected $nombre;
+    /**
+     * @ODM\Float
+     */
+    protected $precio;
+    /**
+     * @ODM\Int
+     */
+    protected $stock;
+
+
+
+}

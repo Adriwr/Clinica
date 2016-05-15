@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form\Type;
+namespace AppBundle\Form\Type\Producto;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -54,7 +54,7 @@ class ProductoType extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Entity\Producto',
+            'data_class'        => 'AppBundle\Document\Producto\Producto',
             'csrf_protection'   => false,
             'cascade_validation' => true,
             'allow_add' => true
