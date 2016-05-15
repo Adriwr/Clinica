@@ -32,3 +32,6 @@ registrar_gerente:
   path: /registrar-gerente/
   defaults: {_controller: AppBundle:Gerente/Gerente:registrarGerente}
 
+registrar_enfermera:
+  path: /registrar-enfermera/
+  defaults: {_controller: AppBundle:Enfermera/Enfermera:registrarEnfermera}
