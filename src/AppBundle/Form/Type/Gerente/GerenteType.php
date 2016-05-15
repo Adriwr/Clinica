@@ -16,7 +16,7 @@ class GerenteType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'Nombre(s)',
                     'ng-model'=> 'gerente.nombre' ),
-                'label' => 'Nombre del paciente',
+                'label' => 'Nombre del gerente',
                 'required' => true ))
             ->add('apellidos', 'text' , array(
                 'attr' => array(

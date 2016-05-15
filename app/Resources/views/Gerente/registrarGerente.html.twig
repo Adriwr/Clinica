@@ -16,7 +16,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#medico" data-toggle="tab">Datos del médico</a>
+                            <a href="#medico" data-toggle="tab">Datos del gerente</a>
                         </li>
                         <li>
                             <a href="#sistema" data-toggle="tab">Datos del sistema</a>
@@ -25,10 +25,10 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="medico">
-                            <h4>Datos del médico</h4>
-                            {{ form_start(formMedico , {'attr': {'class': 'form-horizontal'} }) }}
-                            {{ form_widget(formMedico ) }}
-                            {{ form_end(formMedico) }}
+                            <h4>Datos del gerente</h4>
+                            {{ form_start(formGerente , {'attr': {'class': 'form-horizontal'} }) }}
+                            {{ form_widget(formGerente ) }}
+                            {{ form_end(formGerente) }}
                             <a href="#sistema" data-toggle="tab" class="btn btn-primary pull-right">Siguiente</a>
                         </div>
                         <div class="tab-pane fade " id="sistema">

@@ -3,6 +3,8 @@
 namespace AppBundle\Controller\Gerente;
 
 
+use AppBundle\Document\Gerente\Gerente;
+use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Gerente\GerenteType;
 use AppBundle\Form\Type\User\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,7 +15,7 @@ class GerenteController extends Controller
 {
     public function registrarGerenteAction(Request $request)
     {
-        //$gerente = new \AppBundle\Document\Gerente\Gerente();
+        $gerente = new Gerente();
         $usuario = new User();
 
         $formGerente = $this->createForm(new GerenteType(), $gerente);
@@ -26,7 +28,7 @@ class GerenteController extends Controller
 
             $dm = $this->getDoctrine()->getManager();
             $usuario->setEnabled(true);
-            $usuario->addRole("ROLE_MEDICO");
+            $usuario->addRole("ROLE_GERENTE");
             $usuario->setUsername("-");
             $dm->persist($usuario);
             $dm->flush();
@@ -39,9 +41,9 @@ class GerenteController extends Controller
             return $this->redirect($this->generateUrl('home'));
         }
         return $this->render(
-            ':Medico:registrarGerente.html.twig',
+            ':Gerente:registrarGerente.html.twig',
             array(
-                'formMedico' => $formGerente->createView(),
+                'formGerente' => $formGerente->createView(),
                 'formUsuario' => $formUsuario->createView()
             )
         );
