@@ -28,12 +28,6 @@ class Gerente {
      */
     protected $apellidos;
     /**
-     * @ODM\String
-     */
-
-
-
-    /**
      * Get id
      *
      * @return id $id

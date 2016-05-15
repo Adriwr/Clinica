@@ -170,4 +170,26 @@ class Medico {
     {
         return $this->telefonoEmergencia;
     }
+
+    /**
+     * Set sexo
+     *
+     * @param string $sexo
+     * @return self
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+        return $this;
+    }
+
+    /**
+     * Get sexo
+     *
+     * @return string $sexo
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
 }

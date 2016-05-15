@@ -27,3 +27,7 @@ registrar_medico:
   path: /registrar-medico/
   defaults: {_controller: AppBundle:Medico/Medico:registrarMedico}
 
+registrar_gerente:
+  path: /registrar-gerente/
+  defaults: {_controller: AppBundle:Gerente/Gerente:registrarGerente}
+
