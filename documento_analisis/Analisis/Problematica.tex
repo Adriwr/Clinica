@@ -25,7 +25,52 @@ También la clínica cuenta con una farmacia encargada de surtir los medicamento
 
 % - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection{Procesos}
-
+	\subsubsection{Consultas}
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=\textwidth]{images/procesos/consultas_old}
+		\caption{Diagrama del proceso actual para las consultas.}
+	\end{figure}
+	\paragraph{Paciente}
+	Cuando el paciente necesita una consulta médica, asiste a la clínica. Si quiere agendar una cita, lo solicita a la enfermera, confirma la cita. De otra manera espera el siguiente horario de cita. Posteriormente paga la cita en la caja, después asiste al consultorio, le indica sus síntomas al médico y en caso de que no tenga un expediente en la clínica, proporciona sus antecedentes médicos. Por último, recibe su tratamiento.
+	\paragraph{Enfermera}
+	Al iniciar su turno, revisa las citas agendadas para el día y obtiene los expedientes de los pacientes que asistirán a la clínica. Posteriormente entrega los expedientes de los pacientes que atenderán los médicos de la clínica. Durante el día se encargará de esperar a que lleguen los pacientes con citas agendadas. En caso de que llegue un paciente a agendar una cita revisa los horarios disponibles y agenda la cita. Finalmente, cuando termina su turno, recibe de los médicos los expedientes utilizados durante el día.
+	\paragraph{Médico}
+	Cuando inicia su turno, el médico recibe los expedientes de los pacientes que atenderá durante el día. En el transcurso del día, espera a que lleguen los pacientes con cita, cuando llega un paciente lo revisa. En caso de que el paciente no cuente con un expediente en la clínica, solicita sus antecedentes médicos y crea su expediente, después lo revisa. Al termina de revisar al paciente mide sus signos vitales y los anota en el expediente, posteriormente realiza su diagnóstico y proporciona un tratamiento al paciente, el cual anota en el expediente. Finalmente, cuando termina su turno, entrega a la enfermera los expedientes utilizados ese día.
+\subsubsection{Cancelar cita}
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=\textwidth]{images/procesos/cancelar_cita_old}
+		\caption{Diagrama del proceso actual para cancelar una cita.}
+	\end{figure}
+	\paragraph{Paciente}
+	Se dirige a la clínica, solicita cancelar su cita a la enfermera, después proporciona la fecha y hora de la cita que desea cancelar. Por último recibe una confirmación por parte de la enfermera.
+	\paragraph{Enfermera}
+	Durante su turno espera a que un paciente o un médico solicite cancelar una cita, una vez que llega el paciente busca la cita en el cuaderno. Cuando encuentra la cita borra al paciente del cuaderno de citas y le notifica la cancelación.
+	\paragraph{Médico}
+	Solicita cancelar una cita, después proporciona a la enfermera la fecha y hora de la cita que va a cancelar. Posteriormente recibe la confirmación de la cita cancelada.
+	
+\subsubsection{Pagar cita}
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=\textwidth]{images/procesos/pago_consulta_old}
+		\caption{Diagrama del proceso actual para cancelar una cita.}
+	\end{figure}
+	\paragraph{Paciente}
+	Se dirige a la caja, después solicita pagar una consulta. Posteriormente paga el monto de la consulta y el cajero le proporciona su comprobante de pago.
+	\paragraph{Cajero}
+	Mientras está en turno, espera a que llegue algún cliente, cuando esto pasa, recibe el dinero por el pago de la consulta y le proporciona el comprobante de pago al cliente.
+\subsubsection{Comprar medicamentos}
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics[width=\textwidth]{images/procesos/medicamentos_old}
+		\caption{Diagrama del proceso actual para cancelar una cita.}
+	\end{figure}
+	\paragraph{Cliente}
+	Al comprar medicamentos en la farmacia, solicita los medicamentos requeridos, si estos se ecuentran disponibles en inventario paga el monto requerido. Finalmente recibe los medicamentos comprados y el comprobante de pago.
+	\paragraph{Cajero}
+	En el transcurso de su turno espera a que llegue un cliente a comprar medicamentos, cuando este llega, recibe la lista de los medicamentos; posteriormente valida si están todos los medicamentos de la lista disponibles en bodega, en caso de que no exista algún medicamento en bodega, le notifica al cliente. En caso afirmativo, recibe el dinero del costo de los medicamentos. Finalmente proporciona los medicamentos al cliente y el comprobante de pago.
+\iffalse
 \begin{figure}[htbp!]
 		\centering
 			\includegraphics[width=0.8\textwidth]{images/Proceso_actual}
@@ -39,6 +84,7 @@ Hecho esto, el paciente regresa a su domicilio para esperar a que llegue el dia 
 Después de eso al paciente se le realiza una receta médica que contiene los medicamentos y/o tratamientos que debe de tomar dependiendo del diagnóstico del médico, el cual se almacena una copia en el expediente médico del paciente.\\ 
 
 Finalmente, el paciente opcionalmente se presenta con el cajero para poder ser surtido de sus medicamentos recetados por el médico. En caso de no desear adquirir los medicamentos dentro de la clínica, el paciente los obtiene de lugares externos a la clínica.
+\fi
 
 %--------------------------------------------------
 \section{Problemas identificados}
