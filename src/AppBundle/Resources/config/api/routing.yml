@@ -16,3 +16,11 @@ medico:
     type:     rest
     resource: AppBundle\Controller\Api\Medico\MedicoController
     name_prefix: api_
+enfermera:
+    type:     rest
+    resource: AppBundle\Controller\Api\Enfermera\EnfermeraController
+    name_prefix: api_
+cajero:
+    type:     rest
+    resource: AppBundle\Controller\Api\Cajero\CajeroController
+    name_prefix: api_

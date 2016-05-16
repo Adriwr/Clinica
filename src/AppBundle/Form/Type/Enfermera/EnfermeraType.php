@@ -8,6 +8,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EnfermeraType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -15,28 +19,29 @@ class EnfermeraType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Nombre(s)',
-                    'ng-model'=> 'cajero.nombre' ),
-                'label' => 'Nombre del cajero',
+                    'ng-model'=> 'enfermera.nombre' ),
+                'label' => 'Nombre',
                 'required' => true ))
             ->add('apellidos', 'text' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Apellidos',
-                    'ng-model'=> 'cajero.apellidos' ),
+                    'ng-model'=> 'enfermera.apellidos' ),
                 'label' => 'Apellidos',
                 'required' => true ) )
             ->add('sexo', 'choice' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'ng-model'=> 'paciente.sexo' ),
+                    'ng-model'=> 'enfermera.sexo' ),
                 'label' => 'Sexo',
                 'required' => true ,
-                'choices'  => array('m' => 'Masculino', 'f' => 'Femenino')))
-            ->add( 'Agregar', 'submit', array(
-                'attr' => array(
-                    'class' => 'btn btn-primary pull-right',
-                    'ng-click'=> 'crear()')) );
+                'choices'  => array('m' => 'Masculino', 'f' => 'Femenino'))
+            );
     }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
@@ -44,6 +49,9 @@ class EnfermeraType extends AbstractType
         ));
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'form_agregar_enfermera';

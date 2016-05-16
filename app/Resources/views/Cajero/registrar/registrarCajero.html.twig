@@ -5,15 +5,15 @@
 {%  endblock %}
 
 {% block dashboard %}
-    <h3 class="page-header">Registrar Enfermera</h3>
+    <h3 class="page-header">Registrar Cajero</h3>
 {% endblock %}
 
 {% block content %}
-    <div class="row" ng-controller="EnfermeraCtrl">
+    <div class="row" ng-controller="CajeroCtrl">
         <div class="col-xs-5">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Registrar enfermera
+                    Registrar Cajero
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -37,11 +37,11 @@
         <div class="col-xs-7">
             <div class="panel panel-green">
                 <div class="panel-heading">
-                    Enfermeras
+                    Medicos
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    {{ include(':Enfermera/registrar/parts:enfermera_tabla.html.twig') }}
+                    {{ include(':Cajero/registrar/parts:cajero_tabla.html.twig') }}
                 </div>
             </div>
         </div>
@@ -55,8 +55,8 @@
 
 {% block angular %}
     {# Servicios de AngularJS #}
-    <script type="text/javascript" src="{{ asset('js/app/enfermera/registrar/services/factories.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/cajero/registrar/services/factories.js') }}"></script>
     {# Controles primarios de AngularJS #}
-    <script type="text/javascript" src="{{ asset('js/app/enfermera/registrar/controllers/enfermera.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/cajero/registrar/controllers/cajero.js') }}"></script>
     {# Controles secundarios de AngularJS #}
 {% endblock %}

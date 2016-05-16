@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Enfermera;
 
 use AppBundle\Document\Enfermera\Enfermera;
 use AppBundle\Document\User\User;
+use AppBundle\Form\Type\Enfermera\EnfermeraRegistrationType;
 use AppBundle\Form\Type\Enfermera\EnfermeraType;
 use AppBundle\Form\Type\User\RegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,35 +20,27 @@ class EnfermeraController extends Controller
      */
     public function registrarEnfermeraAction(Request $request)
     {
-        $enfermera = new Enfermera();
         $usuario = new User();
         
-        $formEnfermera = $this->createForm(new EnfermeraType(), $enfermera);
-        $formUsuario = $this->createForm(new RegistrationType(),$usuario);
+        $formUsuario = $this->createForm(new EnfermeraRegistrationType(),$usuario);
 
-        $formEnfermera->handleRequest($request);
         $formUsuario->handleRequest($request);
         // Se registra datos del usuario
         if($formUsuario->isValid()){
+
             $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_ENFERMERA");
-            $usuario->setUsername("-");
+            $usuario->setUsername($usuario->getEnfermera()->getNombre() . " " . $usuario->getEnfermera()->getApellidos());
             $dm->persist($usuario);
             $dm->flush();
-            // Se registra datos de enfermera
-            if($formEnfermera->isValid()){
-                $enfermera->setEmail($usuario->getEmail());
-                $dm->persist($enfermera);
-                $dm->flush();
-                return $this->redirect($this->generateUrl('home'));
-            }
-            
+
+            return $this->redirect($this->generateUrl('registrar_enfermera'));
+
         }
         return $this->render(
             ':Enfermera:registrarEnfermera.html.twig',
             array(
-                'formEnfermera' => $formEnfermera->createView(),
                 'formUsuario' => $formUsuario->createView()
             )
         );

@@ -25,10 +25,7 @@ class CajeroType extends  AbstractType
                 'ng-model'=> 'cajero.apellidos' ),
             'label' => 'Apellidos',
             'required' => true ) )
-        ->add( 'Agregar', 'submit', array(
-            'attr' => array(
-                'class' => 'btn btn-primary pull-right',
-                'ng-click'=> 'crear()')) );
+        ;
 
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
