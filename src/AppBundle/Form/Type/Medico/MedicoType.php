@@ -60,10 +60,6 @@ class MedicoType extends AbstractType{
                     'label' => 'Télefono de emergencia',
                     'required' => true )
             )
-            ->add( 'Guardar', 'submit', array(
-                'attr' => array(
-                    'class' => 'btn btn-primary pull-right',
-                    'ng-click'=> 'crear()')) )
 
         ;
     }

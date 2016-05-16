@@ -7,9 +7,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 /**
  * Documento para mapear al gerente
  *
- * @ODM\Document(repositoryClass="AppBundle\Repository\Gerente\GerenteRepository")
+ * @ODM\EmbeddedDocument
  */
-
 class Gerente {
     /**
      * @ODM\Id
@@ -18,7 +17,7 @@ class Gerente {
     /**
      * @ODM\String
      */
-    protected $idEmail;
+    protected $email;
     /**
      * @ODM\String
      */
@@ -38,25 +37,25 @@ class Gerente {
     }
 
     /**
-     * Set idEmail
+     * Set email
      *
-     * @param string $idEmail
+     * @param string $email
      * @return self
      */
-    public function setIdEmail($idEmail)
+    public function setEmail($email)
     {
-        $this->idEmail = $idEmail;
+        $this->email = $email;
         return $this;
     }
 
     /**
-     * Get idEmail
+     * Get email
      *
-     * @return string $idEmail
+     * @return string $email
      */
-    public function getIdEmail()
+    public function getEmail()
     {
-        return $this->idEmail;
+        return $this->email;
     }
 
     /**

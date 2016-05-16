@@ -9,7 +9,7 @@
 {%  endblock %}
 
 {% block dashboard %}
-    <h1 class="page-header">Agendar Cita</h1>
+    <h2 class="page-header">Agendar Cita</h2>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    {{ include(':Paciente/cita:agendar_calendario.html.twig') }}
+                    {{ include(':Paciente/cita:agendarCalendario.html.twig') }}
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -33,17 +33,13 @@
 
 {% block javascript %}
     {# Plugins requeridos por el modulo #}
-    <script type="text/javascript" src="{{ asset('js/vendor/plugins/chartJs/Chart.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor/plugins/fullcalendar/moment.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor/plugins/fullcalendar/dist/fullcalendar.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor/plugins/fullcalendar/dist/gcal.js') }}"></script>
 {% endblock %}
 
 {% block angular %}
     {# Directivas del modulo #}
-    <script type="text/javascript" src="{{ asset('js/directives/datatables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/directives/es.js') }}"></script>
+
     {# Servicios de AngularJS #}
     <script type="text/javascript" src="{{ asset('js/app/paciente/cita/services/factories.js') }}"></script>
     {# Controles primarios de AngularJS #}

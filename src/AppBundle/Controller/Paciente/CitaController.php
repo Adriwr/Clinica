@@ -32,14 +32,12 @@ class CitaController extends Controller
             $dm->persist($cita);
             $dm->flush();
 
-
             $request->getSession()->getFlashBag()->add(
                 'exito',
                 'Cita guardada'
             );
 
             return $this->redirect($this->generateUrl('agendar_cita_paciente'));
-
 
         }
         $request->getSession()->getFlashBag()->add(

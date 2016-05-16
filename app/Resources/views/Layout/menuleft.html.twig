@@ -38,6 +38,27 @@
             {% if is_granted('ROLE_GERENTE')  %}
                 <li>
                     <a href="#">
+                        <i class="fa fa-users"></i>
+                        Control de personal
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('registrar_gerente') }}">Gerentes</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('registrar_medico') }}">Medicos</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('registrar_enfermera') }}">Enfermeras</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('registrar_cajero') }}">Cajeros</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
                         <i class="fa fa-clock-o"></i>
                         Modificar horarios
                         <span class="fa arrow"></span>
@@ -142,6 +163,7 @@
                     </a>
                 </li>
             {% endif %}
+
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

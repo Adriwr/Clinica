@@ -1,34 +1,31 @@
 #Agregar servicios para formularios aquí
 services:
-    #clinica.form.direccion:
-    #    class: AppBundle\Form\Type\DireccionType
-    #    tags:
-    #        - { name: form.type, alias: form_direccion }
-    #clinica.form.registration:
-    #        class: AppBundle\Form\Type\RegistrationType
-    #        tags:
-    #            - { name: form.type, alias: form_registration }
-    #clinica.form.medico:
-    #    class: AppBundle\Form\Type\MedicoType
-    #    tags:
-    #        - { name: form.type, alias: form_medico }
-    #clinica.form.medico_telefono:
-    #    class: AppBundle\Form\Type\TelefonoType
-    #    tags:
-    #        - { name: form.type, alias: form_medico_telefono }
-    #clinica.form.medico_email:
-    #    class: AppBundle\Form\Type\EmailType
-    #    tags:
-    #        - { name: form.type, alias: form_medico_email }
-    #clinica.form.producto:
-    #    class: AppBundle\Form\Type\ProductoType
-    #    tags:
-    #        - { name: form.type, alias: form_producto }
+    clinica.form.registration:
+        class: AppBundle\Form\Type\User\RegistrationType
+        tags:
+            - { name: form.type, alias: form_registration }
+    clinica.form.medico:
+        class: AppBundle\Form\Type\Medico\MedicoType
+        tags:
+            - { name: form.type, alias: form_medico }
+    clinica.form.gerente:
+        class: AppBundle\Form\Type\Gerente\GerenteType
+        tags:
+            - { name: form.type, alias: form_paciente }
+    clinica.form.enfermera:
+        class: AppBundle\Form\Type\Enfermera\EnfermeraType
+        tags:
+            - { name: form.type, alias: form_paciente }
+    clinica.form.cajero:
+        class: AppBundle\Form\Type\Cajero\CajeroType
+        tags:
+            - { name: form.type, alias: form_producto }
     clinica.form.paciente:
-        class: AppBundle\Form\Type\PacienteType
+        class: AppBundle\Form\Type\Paciente\PacienteType
         tags:
             - { name: form.type, alias: form_paciente }
     clinica.form.paciente_cita:
         class: AppBundle\Form\Type\Paciente\CitaType
         tags:
             - { name: form.type, alias: form_paciente_cita }
+

@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Gerente;
 
 use AppBundle\Document\Gerente\Gerente;
 use AppBundle\Document\User\User;
+use AppBundle\Form\Type\Gerente\GerenteRegistrationType;
 use AppBundle\Form\Type\Gerente\GerenteType;
 use AppBundle\Form\Type\User\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,37 +14,33 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GerenteController extends Controller
 {
+    /**
+     * Acción para mostrar el formulario de registro de gerente
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function registrarGerenteAction(Request $request)
     {
-        $gerente = new Gerente();
         $usuario = new User();
 
-        $formGerente = $this->createForm(new GerenteType(), $gerente);
-        $formGerente->handleRequest($request);
+        $formUsuario = $this->createForm(new GerenteRegistrationType(), $usuario);
 
-        $formUsuario = $this->createForm(new RegistrationType(),$usuario);
         $formUsuario->handleRequest($request);
 
         if ($formUsuario->isValid()) {
 
-            $dm = $this->getDoctrine()->getManager();
+            $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_GERENTE");
-            $usuario->setUsername("-");
+            $usuario->setUsername($usuario->getGerente()->getNombre() . " " . $usuario->getGerente()->getApellidos());
             $dm->persist($usuario);
             $dm->flush();
-            if ($formGerente->isValid()) {
-                $dm = $this->get('doctrine_mongodb')->getManager();
-                $dm->persist($gerente);
-                $dm->flush();
 
-            }
-            return $this->redirect($this->generateUrl('home'));
+            return $this->redirect($this->generateUrl('registrar_gerente'));
         }
         return $this->render(
-            ':Gerente:registrarGerente.html.twig',
+            ':Gerente/registrar:registrarGerente.html.twig',
             array(
-                'formGerente' => $formGerente->createView(),
                 'formUsuario' => $formUsuario->createView()
             )
         );

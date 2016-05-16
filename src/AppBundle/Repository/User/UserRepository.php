@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository\User;
 
+use AppBundle\Document\User\User;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
@@ -13,4 +14,25 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class UserRepository extends DocumentRepository
 {
 
+    /**
+     * @return array
+     */
+    public function getAllUsers($userType)
+    {
+        $gerentes = array();
+        $gerentesGross = $this->createQueryBuilder()
+            ->field($userType)->exists(true)
+            ->getQuery()
+            ->execute();
+
+        foreach($gerentesGross as $gerente) {
+            $gerentes[] = array(
+                'id'            => $gerente->getId(),
+                'nombre'        => $gerente->getUserName(),
+                'email'         => $gerente->getEmail(),
+            );
+        }
+
+        return $gerentes;
+    }
 }

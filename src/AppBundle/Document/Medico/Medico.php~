@@ -41,6 +41,7 @@ class Medico {
     /**
      * @ODM\String
      */
+    protected $email;
     /**
      * @ODM\String
      */
@@ -191,5 +192,27 @@ class Medico {
     public function getSexo()
     {
         return $this->sexo;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string $email
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

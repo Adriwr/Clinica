@@ -15,55 +15,133 @@ class User extends BaseUser
      */
     protected $id;
     /**
-     * @ODM\String
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Gerente\Gerente")
      */
-    protected $masterAccountId;
+    protected $gerente;
     /**
-     * @ODM\String
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Medico\Medico")
      */
-    protected $masterAccount;
+    protected $medico;
+    /**
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Enfermera\Enfermera")
+     */
+    protected $enfermera;
+    /**
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Paciente\Paciente")
+     */
+    protected $paciente;
+    /**
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Cajero\Cajero")
+     */
+    protected $cajero;
 
     /**
-     * Set masterAccountId
+     * Set gerente
      *
-     * @param string $masterAccountId
+     * @param AppBundle\Document\Gerente\Gerente $gerente
      * @return self
      */
-    public function setMasterAccountId($masterAccountId)
+    public function setGerente(\AppBundle\Document\Gerente\Gerente $gerente)
     {
-        $this->masterAccountId = $masterAccountId;
+        $this->gerente = $gerente;
         return $this;
     }
 
     /**
-     * Get masterAccountId
+     * Get gerente
      *
-     * @return string $masterAccountId
+     * @return AppBundle\Document\Gerente\Gerente $gerente
      */
-    public function getMasterAccountId()
+    public function getGerente()
     {
-        return $this->masterAccountId;
+        return $this->gerente;
     }
 
     /**
-     * Set masterAccount
+     * Set medico
      *
-     * @param string $masterAccount
+     * @param AppBundle\Document\Medico\Medico $medico
      * @return self
      */
-    public function setMasterAccount($masterAccount)
+    public function setMedico(\AppBundle\Document\Medico\Medico $medico)
     {
-        $this->masterAccount = $masterAccount;
+        $this->medico = $medico;
         return $this;
     }
 
     /**
-     * Get masterAccount
+     * Get medico
      *
-     * @return string $masterAccount
+     * @return AppBundle\Document\Medico\Medico $medico
      */
-    public function getMasterAccount()
+    public function getMedico()
     {
-        return $this->masterAccount;
+        return $this->medico;
+    }
+
+    /**
+     * Set enfermera
+     *
+     * @param AppBundle\Document\Enfermera\Enfermera $enfermera
+     * @return self
+     */
+    public function setEnfermera(\AppBundle\Document\Enfermera\Enfermera $enfermera)
+    {
+        $this->enfermera = $enfermera;
+        return $this;
+    }
+
+    /**
+     * Get enfermera
+     *
+     * @return AppBundle\Document\Enfermera\Enfermera $enfermera
+     */
+    public function getEnfermera()
+    {
+        return $this->enfermera;
+    }
+
+    /**
+     * Set paciente
+     *
+     * @param AppBundle\Document\Paciente\Paciente $paciente
+     * @return self
+     */
+    public function setPaciente(\AppBundle\Document\Paciente\Paciente $paciente)
+    {
+        $this->paciente = $paciente;
+        return $this;
+    }
+
+    /**
+     * Get paciente
+     *
+     * @return AppBundle\Document\Paciente\Paciente $paciente
+     */
+    public function getPaciente()
+    {
+        return $this->paciente;
+    }
+
+    /**
+     * Set cajero
+     *
+     * @param AppBundle\Document\Cajero\Cajero $cajero
+     * @return self
+     */
+    public function setCajero(\AppBundle\Document\Cajero\Cajero $cajero)
+    {
+        $this->cajero = $cajero;
+        return $this;
+    }
+
+    /**
+     * Get cajero
+     *
+     * @return AppBundle\Document\Cajero\Cajero $cajero
+     */
+    public function getCajero()
+    {
+        return $this->cajero;
     }
 }

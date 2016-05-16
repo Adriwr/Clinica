@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Medico;
 
 use AppBundle\Document\Medico\Medico;
 use AppBundle\Document\User\User;
+use AppBundle\Form\Type\Medico\MedicoRegistrationType;
 use AppBundle\Form\Type\Medico\MedicoType;
 use AppBundle\Form\Type\User\RegistrationType;
 use FOS\UserBundle\Form\Type\RegistrationFormType;
@@ -14,42 +15,30 @@ use Symfony\Component\HttpFoundation\Request;
 class MedicoController extends Controller
 {
     /**
+     * Acción para mostrar el formulario de registrar médico
      * @Route("/", name="medico")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function registrarMedicoAction(Request $request)
     {
-        $medico = new Medico();
         $usuario = new User();
 
+        $formUsuario = $this->createForm(new MedicoRegistrationType(), $usuario);
 
-        $formMedico = $this->createForm(new MedicoType(), $medico);
-        $formMedico->handleRequest($request);
-
-        $formUsuario = $this->createForm(new RegistrationType(), $usuario);
         $formUsuario->handleRequest($request);
 
         if ($formUsuario->isValid()) {
 
-            $dm = $this->getDoctrine()->getManager();
+            $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_MEDICO");
-            $usuario->setUsername("-");
+            $usuario->setUsername($usuario->getMedico()->getNombre() . " " . $usuario->getMedico()->getApellidos());
             $dm->persist($usuario);
             $dm->flush();
 
-            if($formMedico->isValid()){
-                $dm = $this->getDoctrine()->getManager();
 
-                $dm->persist($medico);
-                $dm->flush();
-
-                $request->getSession()->getFlashBag()->add(
-                    'exito',
-                    'Medico creado'
-                );
-
-                return $this->redirect($this->generateUrl('medico'));
-            }
+            return $this->redirect($this->generateUrl('registrar_medico'));
 
         }
         $request->getSession()->getFlashBag()->add(
@@ -58,9 +47,8 @@ class MedicoController extends Controller
         );
 
         return $this->render(
-            ':Medico:registrarMedico.html.twig',
+            ':Medico/registrar:registrarMedico.html.twig',
             array(
-                'formMedico' => $formMedico->createView(),
                 'formUsuario' => $formUsuario->createView()
                 )
         );

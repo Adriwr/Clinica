@@ -31,8 +31,9 @@ class PacienteType extends AbstractType
                    'ng-model'=> 'paciente.sexo' ),
                'label' => 'Sexo',
                'required' => true ,
-               'choices'  => array('m' => 'Masculino', 'f' => 'Femenino')))
-
+               'choices'  => array('m' => 'Masculino', 'f' => 'Femenino')
+               )
+           )
            ->add('fecha_nacimiento', 'date' , array(
                    'attr' => array(
                        'class' => 'form-control',

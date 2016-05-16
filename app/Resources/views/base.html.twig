@@ -56,14 +56,14 @@
                 <!-- /.row -->
                 <div class="footer">
                     <div class="pull-right">
-                        <strong>Copyright</strong> Empresa &copy; 2016
+                        <strong>Copyright</strong> Black::Sheep! &copy; 2016
                     </div>
                     <div>
                         <span>
-                            <a href="#" class="blue bolder bxd-link"><span>Nombre</span></a>
+                            <a href="#" class="blue bolder"><span>Black::Sheep!</span></a>
                         </span>
                         <span class="action-buttons">
-                            <a href= target="_blank">
+                            <a href="https://www.facebook.com/blacksheepEnterprise/?fref=ts" target="_blank">
                                 <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
                             </a>
                         </span>
@@ -75,7 +75,9 @@
         {# JS Necesarios #}
         <script type="text/javascript" src="{{ asset('js/vendor/jquery-2.1.1.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/vendor/bootstrap.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/vendor/plugins/toastr/toastr.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/jquery.dataTables.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.responsive.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/slimscroll/jquery.slimscroll.js') }}"></script>
@@ -85,6 +87,8 @@
 
         {# Plugins #}
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/toastr/toastr.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/fullcalendar/moment.min.js')}}"></script>
+
 
         {# JS Para generar todas las rutas que expone la aplicacion #}
         <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -105,6 +109,9 @@
 
         {# JS del archivo principal para usar angular #}
         <script type="text/javascript" src="{{ asset('js/app/clinica.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/directives/datatables.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/directives/es.js') }}"></script>
+
 
         {% block angular %}
         {%  endblock %}

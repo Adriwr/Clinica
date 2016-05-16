@@ -25,8 +25,8 @@ class ProductoController extends Controller
             $dm->flush();
             return $this->redirect($this->generateUrl('productos'));
 
-
         }
+
         return $this->render(
             ':Producto:Index.html.twig',
             array('form' => $formProducto->createView())

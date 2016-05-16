@@ -11,25 +11,32 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CajeroController extends Controller
 {
+    /**
+     * Acción para mostrar el formulario de registro de cajero
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function registrarCajeroAction(request $request)
     {
         $cajero = new Cajero();
+        $usuario = new User();
 
         $formCajero  = $this->createForm(new CajeroType(),$cajero);
-        $formCajero->handleRequest($request);
-
-        $usuario = new User();
         $formUsuario = $this->createForm(new RegistrationType(),$usuario);
 
+        $formCajero->handleRequest($request);
+        $formUsuario->handleRequest($request);
+
         if($formUsuario->isValid()){
-            $dm = $this->getDoctrine()->getManager();
+            $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
-            $usuario->addRole("ROLE_MEDICO");
+            $usuario->addRole("ROLE_CAJERO");
             $usuario->setUsername("-");
             $dm->persist($usuario);
             $dm->flush();
+
             if($formCajero->isValid()){
-                $dm = $this->get('doctrine_mongodb')->getManager();
+                $cajero->setEmail($usuario->getEmail());
                 $dm->persist($cajero);
                 $dm->flush();
                 return $this->redirect($this->generateUrl('home'));
@@ -38,9 +45,9 @@ class CajeroController extends Controller
 
         return $this->render(
             ':Cajero:registrarCajero.html.twig',
-            array('formCajero' => $formCajero->createView(),
+            array(
+                'formCajero' => $formCajero->createView(),
                 'formUsuario' => $formUsuario->createView()
-
             )
         );
     }

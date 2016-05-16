@@ -10,7 +10,6 @@ productos:
     path:     /productos
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
-
 #Paciente
 agendar_cita_paciente:
     path:     /agendar-cita/paciente

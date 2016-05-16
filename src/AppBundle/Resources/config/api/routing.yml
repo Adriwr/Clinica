@@ -8,3 +8,11 @@ producto:
     type:     rest
     resource: AppBundle\Controller\Api\Producto\ProductoController
     name_prefix: api_
+gerente:
+    type:     rest
+    resource: AppBundle\Controller\Api\Gerente\GerenteController
+    name_prefix: api_
+medico:
+    type:     rest
+    resource: AppBundle\Controller\Api\Medico\MedicoController
+    name_prefix: api_

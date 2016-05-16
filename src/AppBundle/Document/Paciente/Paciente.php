@@ -18,7 +18,7 @@ class Paciente {
     /**
      * @ODM\String
      */
-    protected $idEmail;
+    protected $email;
     /**
      * @ODM\String
      */
@@ -356,24 +356,24 @@ class Paciente {
     }
 
     /**
-     * Set idEmail
+     * Set email
      *
-     * @param string $idEmail
+     * @param string $email
      * @return self
      */
-    public function setIdEmail($idEmail)
+    public function setEmail($email)
     {
-        $this->idEmail = $idEmail;
+        $this->email = $email;
         return $this;
     }
 
     /**
-     * Get idEmail
+     * Get email
      *
-     * @return string $idEmail
+     * @return string $email
      */
-    public function getIdEmail()
+    public function getEmail()
     {
-        return $this->idEmail;
+        return $this->email;
     }
 }

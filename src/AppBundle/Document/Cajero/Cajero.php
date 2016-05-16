@@ -23,6 +23,10 @@ class Cajero
      * @ODM\String
      */
     protected $apellidos;
+    /**
+     * @ODM\String
+     */
+    protected $email;
 
 
     /**
@@ -77,5 +81,27 @@ class Cajero
     public function getApellidos()
     {
         return $this->apellidos;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string $email
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

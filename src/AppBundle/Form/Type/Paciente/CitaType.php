@@ -16,21 +16,34 @@ class CitaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('consultorio', 'text' , array(
-            'attr' => array(
-                'class' => 'form-control',
-                'placeholder' => 'Consultorio',
-                'ng-model'=> 'cita.consultorio' ),
-            'label' => 'Consultorio',
-            'required' => true ) )
-             ->add('medico', 'text' , array(
-                 'attr' => array(
-                     'class' => 'form-control',
-                     'placeholder' => 'Médico',
-                     'ng-model'=> 'cita.medico' ),
-                 'label' => 'Médico',
-                 'required' => true ) )
-             ->add('fecha', 'text' , array(
+            ->add('consultorio', 'choice' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'ng-model'=> 'cita.consultorio' ),
+                'label' => 'Consultorio',
+                'choices'  => array(
+                    'Consultorio 1' => 'Consultorio #1',
+                    'Consultorio 2' => 'Consultorio #2',
+                    'Consultorio 3' => 'Consultorio #3',
+                    'Consultorio 4' => 'Consultorio #4',
+                    'Consultorio 5' => 'Consultorio #5',
+                    'Consultorio 6' => 'Consultorio #6',
+                    'Consultorio 7' => 'Consultorio #7',
+                    'Consultorio 8' => 'Consultorio #8',
+                    'Consultorio 9' => 'Consultorio #9',
+                    'Consultorio 10' => 'Consultorio #10',
+                    'Consultorio 11' => 'Consultorio #11',
+                    'Consultorio 12' => 'Consultorio #12'
+                ),
+                'required' => true ) )
+            ->add('medico', 'text' , array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Médico',
+                    'ng-model'=> 'cita.medico' ),
+                'label' => 'Médico',
+                'required' => true ) )
+            ->add('fecha', 'text' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Fecha',
