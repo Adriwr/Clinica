@@ -1,0 +1,75 @@
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+\begin{UseCase}{CU22}{Modificar Inventario}{El cajero cambiará las cantidades de los medicamentos disponibles para la venta. El sistema modificará las cantidades registradas.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Cajero}
+    \UCitem{Propósito}{Actualizar las cantidades disponibles registradas en el sistema cuando se compren medicamentos en la farmacia.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item ID del producto: Cadena de dígitos. Requerido.
+            \item Cantidad: Número entero no negativo. Requerido.
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item ID del producto: Petición HTTP.
+	        \item Cantidad: Teclado.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+	        \item Mensaje MSG22a ``Cantidad registrada correctamente''.
+		\end{itemize}
+	}
+    \UCitem{Destino}{
+		\begin{itemize}
+			\item IU23 Consultar Inventario.
+		\end{itemize}
+	}
+	
+   	\UCitem{Precondiciones}{
+   	    \begin{itemize}
+			\item Existen medicamentos registrados en el sistema.
+   	    \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{Ninguna}
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    	\item ERR1 - Producto no encontrado:
+    		\begin{itemize}
+    			\item El sistema mestra el mensaje MSG22d ``Producto no encontrado''.
+    			\item Regresa al punto 2.
+    		\end{itemize}
+    	\item ERR2 - Cantidad ingresada no válida:
+	    	\begin{itemize}
+				\item El sistema muestra el mensaje MSG22b ``Ingrese una cantidad válida''.
+				\item Regresa a punto 4.
+			\end{itemize}
+		\item ERR3 - Cantidad no ingresada:
+			\begin{itemize}
+				\item El sistema muestra el mensaje MSG22c ``Ingrese la cantidad''.
+				\item Regresa al punto 4.
+			\end{itemize}
+		\end{itemize}
+	}
+	\UCitem{Tipo de ejecución}{Secundaria, viene de CU23 Consultar Inventario}
+	\UCitem{Prioridad}{Media}
+	\UCitem{Volatilidad}{Media}
+	\UCitem{Madurez}{Alta}
+	\UCitem{Estado}{En revisión}
+	\UCitem{Autor}{Demis Gómez Moncada}
+	\UCitem{Revisor}{}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{}
+		\UCpaso[\UCactor] selecciona el medicamento que va a modificar dando click en el botón ``Modificar''.
+		\UCpaso solicita los datos del medicamento al repositorio de datos. [ERR1].
+		\UCpaso muestra la pantalla IU22 Modificar inventario.
+		\UCpaso solicita la nueva cantidad del medicamento.
+		\UCpaso [\UCactor] ingresa la nueva cantidad en el campo `cantidad' del formulario.[ERR2] [ERR3].
+		\UCpaso actualiza la cantidad en inventario del medicamento.
+		\UCpaso registra la nueva cantidad en el repositorio de datos.
+\end{UCtrayectoria}
+%-------------------------------------- TERMINA descripción del caso de uso.
