@@ -10,9 +10,9 @@ namespace AppBundle\Document\Medico;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 /**
- * Documento para mapear los pacientes
+ * Documento para mapear los medicos
  *
  * @ODM\Document(repositoryClass="AppBundle\Repository\Medico\MedicoRepository")
  */
@@ -50,6 +50,15 @@ class Medico {
      * @ODM\String
      */
     protected $telefonoEmergencia;
+    /**
+     * @ODM\EmbedMany(targetDocument="Horario")
+     */
+    protected $horarios;
+
+    public function __construct()
+    {
+        $this->horarios = new ArrayCollection();
+    }
     
 
     /**
@@ -214,5 +223,35 @@ class Medico {
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Add horario
+     *
+     * @param AppBundle\Document\Medico\Horario $horario
+     */
+    public function addHorario(\AppBundle\Document\Medico\Horario $horario)
+    {
+        $this->horarios[] = $horario;
+    }
+
+    /**
+     * Remove horario
+     *
+     * @param AppBundle\Document\Medico\Horario $horario
+     */
+    public function removeHorario(\AppBundle\Document\Medico\Horario $horario)
+    {
+        $this->horarios->removeElement($horario);
+    }
+
+    /**
+     * Get horarios
+     *
+     * @return \Doctrine\Common\Collections\Collection $horarios
+     */
+    public function getHorarios()
+    {
+        return $this->horarios;
     }
 }

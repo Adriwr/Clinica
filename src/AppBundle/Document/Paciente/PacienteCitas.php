@@ -20,7 +20,7 @@ class PacienteCitas {
      */
     protected $medico;
     /**
-     * @ODM\Timestamp
+     * @ODM\Date
      */
     protected $fecha;
 
@@ -71,7 +71,7 @@ class PacienteCitas {
     /**
      * Set fecha
      *
-     * @param timestamp $fecha
+     * @param date $fecha
      * @return self
      */
     public function setFecha($fecha)
@@ -83,7 +83,7 @@ class PacienteCitas {
     /**
      * Get fecha
      *
-     * @return timestamp $fecha
+     * @return date $fecha
      */
     public function getFecha()
     {

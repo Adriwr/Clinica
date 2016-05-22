@@ -4,6 +4,7 @@ namespace AppBundle\Document\Paciente;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 
 /**
  * Documento para mapear los pacientes
@@ -67,10 +68,14 @@ class Paciente {
      * @ODM\EmbedMany(targetDocument="PacienteCitas")
      */
     protected $citas;
+    /**
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Expediente\Expediente")
+     */
+    protected $expediente;
 
     public function __construct()
     {
-        $this->citas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->citas = new ArrayCollection();
     }
 
     /**
@@ -375,5 +380,27 @@ class Paciente {
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set expediente
+     *
+     * @param AppBundle\Document\Expediente\Expediente $expediente
+     * @return self
+     */
+    public function setExpediente(\AppBundle\Document\Expediente\Expediente $expediente)
+    {
+        $this->expediente = $expediente;
+        return $this;
+    }
+
+    /**
+     * Get expediente
+     *
+     * @return AppBundle\Document\Expediente\Expediente $expediente
+     */
+    public function getExpediente()
+    {
+        return $this->expediente;
     }
 }

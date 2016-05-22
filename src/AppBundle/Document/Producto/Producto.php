@@ -6,7 +6,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * Documento para mapear los pacientes
+ * Documento para mapear los productos
  *
  * @ODM\Document(repositoryClass="AppBundle\Repository\Producto\ProductoRepository")
  */
@@ -24,12 +24,17 @@ class Producto {
      */
     protected $precio;
     /**
+     * @ODM\String
+     */
+    protected $laboratorio;
+    /**
      * @ODM\Int
      */
-    protected $stock;
-
-
-
+    protected $existencias;
+    /**
+     * @ODM\String
+     */
+    protected $cantidad;
 
     /**
      * Get id
@@ -86,24 +91,68 @@ class Producto {
     }
 
     /**
-     * Set stock
+     * Set laboratorio
      *
-     * @param int $stock
+     * @param string $laboratorio
      * @return self
      */
-    public function setStock($stock)
+    public function setLaboratorio($laboratorio)
     {
-        $this->stock = $stock;
+        $this->laboratorio = $laboratorio;
         return $this;
     }
 
     /**
-     * Get stock
+     * Get laboratorio
      *
-     * @return int $stock
+     * @return string $laboratorio
      */
-    public function getStock()
+    public function getLaboratorio()
     {
-        return $this->stock;
+        return $this->laboratorio;
+    }
+
+    /**
+     * Set existencias
+     *
+     * @param int $existencias
+     * @return self
+     */
+    public function setExistencias($existencias)
+    {
+        $this->existencias = $existencias;
+        return $this;
+    }
+
+    /**
+     * Get existencias
+     *
+     * @return int $existencias
+     */
+    public function getExistencias()
+    {
+        return $this->existencias;
+    }
+
+    /**
+     * Set cantidad
+     *
+     * @param string $cantidad
+     * @return self
+     */
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+        return $this;
+    }
+
+    /**
+     * Get cantidad
+     *
+     * @return string $cantidad
+     */
+    public function getCantidad()
+    {
+        return $this->cantidad;
     }
 }

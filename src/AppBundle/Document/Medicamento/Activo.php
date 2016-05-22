@@ -1,15 +1,23 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Adriwr
+ * Date: 31/03/16
+ * Time: 2:24 AM
+ */
 
-namespace AppBundle\Document\Gerente;
+namespace AppBundle\Document\Medicamento;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+
 /**
- * Documento para mapear al gerente
+ * Documento embebido para mapear los activos de un medicamento
  *
  * @ODM\EmbeddedDocument
  */
-class Gerente {
+class Activo {
+
     /**
      * @ODM\Id
      */
@@ -17,15 +25,13 @@ class Gerente {
     /**
      * @ODM\String
      */
-    protected $email;
-    /**
-     * @ODM\String
-     */
     protected $nombre;
     /**
      * @ODM\String
      */
-    protected $apellidos;
+    protected $cantidad;
+
+
     /**
      * Get id
      *
@@ -34,28 +40,6 @@ class Gerente {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string $email
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -81,24 +65,24 @@ class Gerente {
     }
 
     /**
-     * Set apellidos
+     * Set cantidad
      *
-     * @param string $apellidos
+     * @param string $cantidad
      * @return self
      */
-    public function setApellidos($apellidos)
+    public function setCantidad($cantidad)
     {
-        $this->apellidos = $apellidos;
+        $this->cantidad = $cantidad;
         return $this;
     }
 
     /**
-     * Get apellidos
+     * Get cantidad
      *
-     * @return string $apellidos
+     * @return string $cantidad
      */
-    public function getApellidos()
+    public function getCantidad()
     {
-        return $this->apellidos;
+        return $this->cantidad;
     }
 }
