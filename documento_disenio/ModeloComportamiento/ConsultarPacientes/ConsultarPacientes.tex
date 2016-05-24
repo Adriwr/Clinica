@@ -1,0 +1,96 @@
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+\begin{UseCase}{CU21}{Consultar Paciente}{El gerente visualizará la información de todos los pacientes registrados en el sistema cuando lo necesite. El sistema mostrará la información de los pacientes.}
+	\UCitem{Versión}{0.2}
+    \UCitem{Actor}{Gerente}
+    \UCitem{Propósito}{El gerente pueda observar los datos de los pacientes registrados en el sistema.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item Email del gerente: cadena de texto compuesta de 5 partes ordenadas: 
+            \begin{itemize}
+	            \item cadena de caracteres.
+	            \item carácter `@'.
+                \item cadena de caracteres que identifica al servidor que brinda el servicio de correo electrónico.
+                \item carácter `.'.
+				\item cadena de caracteres representan el dominio del servidor de correo (Por ejemplo com, mx, etc.).
+            \end{itemize}
+            \item Tipo de usuario: cadena de caracteres.Para el CU21 el tipo de usuario debe tener ``ROLE$\_$GERENTE'' como valor.
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Email del gerente: Variable de sesión de la aplicación.
+            \item Tipo de usuario: Variable de sesión en el servidor.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+        \item Lista de pacientes: Arreglo de estructuras de datos que contienen lo siguiente:
+	        \begin{itemize}
+	        	\item Identificador del paciente: número entero.
+				\item Nombre del paciente: tres cadenas de caracteres:
+				\begin{itemize}
+					\item Nombre(s) del paciente.
+					\item Apellido paterno.
+					\item Apellido materno.
+		        \end{itemize}
+		        \item Sexo: caracter 'H' o 'M'. 'H' si es Hombre, 'M' si es mujer.
+		        \item Fecha de nacimiento: cadena de caracteres con el formato ``DD/MM/AAAA'', donde DD, MM y AAAA son número enteros que representan el día, mes y año de la fecha, respectivamente.
+		        \item Dirección: Cadena de caracteres conformada por:
+		        \begin{itemize}
+		        	\item Calle.
+		        	\item Numero.
+		        	\item Colonia.
+		        	\item Estado.
+		        	\item País.
+		        \end{itemize}
+		        \item Teléfono particular: Cadena de 8 o 10 dígitos.
+		        \item Teléfono para emergencias: Cadena de 8 o 10 dígitos.
+		    \end{itemize}   
+		\end{itemize}
+	}
+    \UCitem{Destino}{
+		\begin{itemize}
+			\item Nombre del paciente, Sexo, Fecha de nacimiento, Dirección, Teléfono particular, Teléfono para emergencias: Pantalla IU21 Consultar Pacientes.
+			\item Identificador del paciente: Variable oculta del lado de cliente.
+		\end{itemize}
+	}
+	
+   	\UCitem{Precondiciones}{
+   	    \begin{itemize}
+			\item Existe al menos un paciente registrado en el sistema.
+   	    \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{Ninguna}
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+	    	\item ERR1 - La entrada ``tipo de usuario'' es diferente de ``ROLE GERENTE'':
+	    	\begin{itemize}
+	    		\item El sistema muestra la pantalla UI0 Home.
+	    		\item El sistema muestra el mensaje MSG0X ``Usuario no autorizado para realizar esta acción.''
+	    		\item Fin del CU21.
+	    	\end{itemize}
+	    	\item ERR2 - No hay pacientes registrados:
+	    	\begin{itemize}
+				\item El sistema muestra el MSG21a ``No hay pacientes registrados.''.
+				\item Fin del CU21.
+			\end{itemize}
+		
+		\end{itemize}
+	}
+	\UCitem{Tipo de ejecución}{Secundaria, viene de CU1 Iniciar sesión}
+	\UCitem{Prioridad}{Media}
+	\UCitem{Volatilidad}{Media}
+	\UCitem{Madurez}{Media}
+	\UCitem{Estado}{Terminado}
+	\UCitem{Autor}{Demis Gómez Moncada}
+	\UCitem{Revisor}{Adrián Eduardo Galindo García}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{}
+		\UCpaso[\UCactor] selecciona mostrar los pacientes registrados dando click en el botón ``Mostrar Pacientes''. [ERR1]
+		\UCpaso muestra la pantalla UI21 Consultar con la lista de los pacientes registrados. [ERR2].
+\end{UCtrayectoria}
+%-------------------------------------- TERMINA descripción del caso de uso.

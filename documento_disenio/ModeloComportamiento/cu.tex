@@ -1,0 +1,549 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{CU1}{Iniciar sesión}{
+		Cuando el actor tenga la necesidad de utilizar el sistema, este último verificará que esté autorizado para su uso. El sistema habilitará las opciones disponibles dependiendo del usuario.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Todo usuario del sistema}
+    \UCitem{Propósito}{Acceder a las funcionalidades del sistema.}
+    \UCitem{Entradas}{
+      \begin{itemize}
+      \item E-mail : cadena de texto compuesta de 4 partes : 
+      \begin{itemize}
+          \item cadena de texto que el actor proporciona.
+          \item carácter ‘@’
+          \item cadena que identifica al servidor que brinda el servicio de correo electrónico
+      \item carácter ‘.’ y dominio
+      \end{itemize}
+      \item Password : cadena de texto brindada por el actor.
+      \end{itemize}
+    }
+    \UCitem{Origen}{Teclado: E-mail, password.}
+    \UCitem{Salidas}{Pantalla principal.}
+    \UCitem{Destino}{Pantalla.}
+   	\UCitem{Precondiciones}{ Estar registrado en el sistema.  }
+    \UCitem{Postcondiciones}{El actor se encuentra identificado en el sistema. }
+    \UCitem{Observaciones}{El sistema debe mostrar diferentes opciones dependiendo del tipo de usuario que inicio sesión.
+    \begin{itemize}
+		\item Opciones de menú para tipo de usuario Paciente:
+			\begin{itemize}
+				\item Agendar nueva cita
+                \item Consultar expediente
+				\item Consultar citas
+			\end{itemize}
+       	\item Opciones de menú para tipo de usuario Enfermera:
+			\begin{itemize}
+				\item Consultar citas
+                \item Consultar médico
+				\item Registrar paciente
+                \item Agendar nueva cita
+			\end{itemize}
+        \item Opciones de menú para tipo de usuario Gerente:
+			\begin{itemize}
+				\item Modificar horarios de médicos
+                \item Consultar actividad de hoy
+                \item Consultar actividad Mensual
+                \item Consultar ventas de hoy
+                \item Consultar ventas mensuales
+			\end{itemize}
+       \item Opciones de menú para tipo de usuario Médico:
+			\begin{itemize}
+				\item Crear expediente nuevo
+                \item Modificar expediente del paciente
+				\item Consultar expediente del paciente
+			\end{itemize}
+       \item Opciones de menú para tipo de usuario Cajero:
+			\begin{itemize}
+                \item Registrar pago cita
+				\item Registrar pago medicamentos
+			\end{itemize}   
+	\end{itemize}
+    }
+    \UCitem{Errores}{
+	\begin{itemize}
+		\item Err2:Si el dato “e-mail” proporcionado no se encuentra registrado en el repositorio de datos del sistema, se muestra mensaje “Usuario no registrado en el sistema” y continúa con paso 2. 
+        \item Err3: Si la entrada “password” no corresponde con la entrada “e-mail” dentro del repositorio de datos, se muestra el mensaje “Usuario y/o contraseña incorrecto y continúa con paso 2.
+	\end{itemize}
+	}
+\end{UseCase}
+
+\begin{UCtrayectoria}{Principal}
+		\UCpaso[\UCactor] se comunica con el sistema escribiendo la URL del sistema en el navegador de su preferencia.
+		\UCpaso muestra \IUref{UI1}{Iniciar sesión}.
+		\UCpaso[\UCactor] proprociona los datos requeridos.
+		\UCpaso obtiene los datos y verifica la existencia del dato email en el repositorio de datos. [ERR2].
+		\UCpaso verifica que el dato password corresponde al registro del usuario. [ERR3].
+		\UCpaso otorga acceso.
+		\UCpaso muestra \IUref{UI2}{Home}.
+		\UCpaso[\UCactor] usa el sistema
+\end{UCtrayectoria}
+%-------------------------------------- TERMINA descripción del caso de uso.
+
+%------------ empieza otro caso
+\begin{UseCase}{CU2}{Agendar Cita
+}{Cuando un paciente tenga la necesidad de ser atendido por uno de los médicos de la clínica y necesite agendar una consulta médica, se realizará una cita. El sistema guardará los datos de la cita.
+}
+	\UCitem{Versión}{0.2}
+    \UCitem{Actor}{Paciente}
+    \UCitem{Propósito}{Que el Paciente pueda agendar una cita en el día y horario que desee, siempre y cuando el sistema no tenga registrada otra cita.}
+    \UCitem{Entradas}{
+    \begin{itemize}
+		\item ID del paciente: entero positivo. 
+    	\item Fecha de cita: fecha (dd/mm/aaaa)
+		\item Hora de cita: hora (hh:mm)
+		\item Consultorio: entero positivo entre 0 y 12
+	\end{itemize}
+    }
+    \UCitem{Origen}{
+    	\begin{itemize}
+			\item ID del paciente:Desde una lista
+            \item Fecha de cita: Desde un calendario
+            \item Hora de cita: Desde una lista
+            \item Consultorio: Desde una lista
+		\end{itemize}
+    }
+    \UCitem{Salidas}{
+    	\begin{itemize}
+			\item Mensaje [[no. de mensaje]]: “Registro de consulta exitoso”.
+            \item Correo electrónico de confirmación.
+		\end{itemize}
+    }
+    \UCitem{Destino}{
+    \begin{itemize}
+		\item Mensaje: Pantalla.
+		\item Correo: Servidor de correo electrónico.
+	\end{itemize}
+    }
+   	\UCitem{Precondiciones}{Que no haya una cita registrada en la misma fecha y hora, con el mismo doctor.}
+    \UCitem{Postcondiciones}{ 
+    	\begin{itemize}
+			\item Se registra en el sistema la cita.
+			\item No se puede agendar una cita en la misma fecha y hora, con el mismo doctor que la cita registrada.
+			\item La cita registrada aparece en la lista de citas registradas.
+		\end{itemize}
+    }
+    \UCitem{Observaciones}{ Ninguna
+}
+	    \UCitem{Errores}{El actor introduce una fecha, hora y doctor ya 			ocupados.
+		}
+
+	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+
+\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] solicita agendar cita haciendo clic en el botón "Agendar cita".
+	\UCpaso calcula el número de citas disponibles para cada día.
+	\UCpaso informa la cantidad de citas disponibles por día mostrándolas en un calendario.
+	\UCpaso[\UCactor] indica el día de la cita deseado haciendo click sobre el día.
+	\UCpaso obtiene el consultorio, nombre del doctor y la hora para cada cita disponible.
+	\UCpaso informa al usuario la información de las consultas disponibles para ese día mostrándola en una lista.
+	\UCpaso[\UCactor] indica la cita deseada haciendo click sobre un elemento de la lista.
+	\UCpaso solicita confirmar el registro de la cita mostrando la alerta "Confirmar cita".
+	\UCpaso[\UCactor] confirma la cita haciendo click sobre el botón "Confirmar".
+	\UCpaso guarda la cita registrándola en la base de datos.
+	\UCpaso notifica el resultado de la operación mostrando la información de la cita.
+\end{UCtrayectoria}
+	%------------ empieza otro caso
+	\begin{UseCase}{CU3}{Consultar citas}{El paciente desea saber la fecha, consultorio y médico de la cita que agendó previamente. El sistema mostrará la información de las citas agendadas.}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Paciente}
+	    \UCitem{Propósito}{Conocer la fecha, consultorio y médico por el cual el actor será atendido.}
+	    \UCitem{Entradas}{
+	    -
+	    }
+	    \UCitem{Origen}{-}
+	    \UCitem{Salidas}{
+        	\begin{itemize}
+				\item Fecha: cadena de caracteres que representan una fecha con formato DD/MM/AAAA.
+				\item Número de consultorio: Número entero.
+				\item Nombre del médico: Cadena de caracteres (Nombre(s), Apellido Paterno, Apellido Materno).
+
+			\end{itemize}
+        }
+	    \UCitem{Destino}{Pantalla}
+	   	\UCitem{Precondiciones}{Haber agendado una cita previamente.}
+	    \UCitem{Postcondiciones}{Ninguna}
+	    \UCitem{Observaciones}{Ninguna}
+	    \UCitem{Errores}{
+        \begin{itemize}
+			\item ER1. 
+            \item ER2. No hay citas registradas:
+			\begin{itemize}
+				\item El sistema muestra la pantalla “No hay citas registradas”.
+				\item FIN.
+
+			\end{itemize}
+		\end{itemize}
+        }
+        	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] selecciona consultar las citas dando click en el botón "Consultar mis citas".
+	\UCpaso muestra una lista de todas las citas que tiene agendadas el actor a partir del día de hoy. [ERR2].
+\end{UCtrayectoria}
+
+	%------------ empieza otro caso
+	\begin{UseCase}{CU4}{ Registrar paciente
+}{Cuando un paciente requiera una consulta por primera vez se registrarán sus datos personales en el sistema. El sistema almacenará los datos personales del paciente.
+}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Enfermera}
+	    \UCitem{Propósito}{El paciente podrá agendar citas y consultar su expediente.}
+	    \UCitem{Entradas}{
+	    \begin{itemize}
+			\item 
+		    \item Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
+	    	\item Fecha de nacimiento del paciente: Fecha
+			\item Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+			\item Dirección del paciente: Cadena de caracteres.
+			\item Teléfono del paciente: Cadena de dígitos de longitud mínima de 8 a 10 caracteres
+			\item Correo electrónico del paciente: Correo electrónico válido.
+			\item Contraseña del paciente: Cadena de longitud mínima de 8 caracteres
+
+		\end{itemize}
+	    }
+	    \UCitem{Origen}{Teclado}
+	    \UCitem{Salidas}{Mensaje “Paciente Registrado correctamente”.}
+	    \UCitem{Destino}{Pantalla}
+	   	\UCitem{Precondiciones}{No debe existir un paciente registrado con el correo electrónico ingresado.}
+	    \UCitem{Postcondiciones}{ El paciente queda registrado en el sistema
+}
+	    \UCitem{Observaciones}{Ninguna}
+	    \UCitem{Errores}{
+        \begin{itemize}
+			\item ERR1
+		\end{itemize}
+        }
+        	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] solicita registrar un nuevo paciente haciendo click sobre el botón ``Registrar paciente''.
+	\UCpaso solicita al actor los datos del paciente mostrando la UI3 Registrar paciente.
+	\UCpaso[\UCactor] proporciona los datos al sistema ingresándolos en el formulario.
+	\UCpaso[\UCactor] confirma la operación haciendo click en el botón “Registrar paciente”.
+	\UCpaso verifica que el nombre sea una cadena de caracteres con longitud mayor o igual a 10 caracteres. [Trayectoria A].
+	\UCpaso verifica que la fecha de nacimiento sea una fecha válida. [Trayectoria A].
+	\UCpaso verifica que  el sexo del paciente sea el caracter 'H' o ‘M’. [Trayectoria A].
+	\UCpaso verifica que el teléfono sea numérico y de longitud de 8 o más caracteres. [Trayectoria A].
+	\UCpaso verifica que el correo electrónico sea válido. [Trayectoria A].
+	\UCpaso verifica que el correo electrónico no pertenezca a un paciente ya registrado. [Trayectoria B].
+	\UCpaso verifica que la contraseña tenga longitud de 8 o más caracteres. [Trayectoria A].
+	\UCpaso confirma la operación mostrando un mensaje en pantalla
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{A}{Un campo del formulario contiene datos incorrectos}
+	\UCpaso notifica el campo incorrecto al actor mostrando el mensaje {\bf MSG3a-} ``Datos incorrectos''.
+	\UCpaso muestra la pantalla UI3 Registrar paciente.
+	\UCpaso continúa transacción desde el paso 5.
+\end{UCtrayectoriaA}
+		
+\begin{UCtrayectoriaA}{B}{Ya existe un paciente registrado con el correo electrónico ingresado}
+	\UCpaso notifica el campo de correo electrónico mostrando el mensaje {\bf MSG3b-}  ``Correo electrónico ya existente en la base de datos''.
+	\UCpaso solicita ingresar un correo electrónico diferente en el formulario de UI3 Registrar paciente.
+	\UCpaso[\UCactor] ingresa otro correo electrónico en el campo ``Correo electrónico'' del formulario.
+	\UCpaso continúa la transacción desde el paso 9.
+\end{UCtrayectoriaA}
+	%------------ empieza otro caso
+	\begin{UseCase}{CU6}{ Consultar citas dadas por médico  
+}{Se consulta el número de citas que el médico ha dado en el día y el mes. 
+propósito: Conocer el número de citas que el médico ha dado en el día y en el mes para calcular su salario y tener un registro de éstas.}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Gerente}
+	    \UCitem{Propósito}{Conocer el número de citas que el médico ha dado en el día y en el mes para calcular su salario y tener un registro de éstas.}
+	    \UCitem{Entradas}{-}
+	    \UCitem{Origen}{-}
+	    \UCitem{Salidas}{Número de citas por día y en el mes dadas por cada médico.
+}
+	    \UCitem{Destino}{Pantalla del actor}
+	   	\UCitem{Precondiciones}{Haber iniciado sesión y haber sido identificado por el sistema como tipo de usuario Gerente
+}
+	    \UCitem{Postcondiciones}{Ninguna}
+	    \UCitem{Observaciones}{Ninguna}
+	    \UCitem{Errores}{
+	    	\begin{itemize}
+				\item ER1
+	    	\end{itemize}
+
+	    }
+        	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] selecciona Consultar el número de citas haciendo click en el botón ``Consultar citas''.
+	\UCpaso obtiene la lista de médicos y el número de citas que ha tenido ese día y ese mes.
+	\UCpaso informa la información al usuario desplegándose en una tabla.
+\end{UCtrayectoria}
+
+	%------------ empieza otro caso
+	\begin{UseCase}{CU7}{Consultar ventas realizadas}{El actor obtiene la lista de las medicinas vendidas en el mes.}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Gerente}
+	    \UCitem{Propósito}{Conocer las medicinas que fueron vendidas por los cajeros.}
+	    \UCitem{Entradas}{
+	    \begin{itemize}
+			\item Mes
+         \end{itemize}
+	    }
+	    \UCitem{Origen}{Input tipo select:Mes}
+	    \UCitem{Salidas}{Lista de productos vendidos}
+	    \UCitem{Destino}{Pantalla}
+	   	\UCitem{Precondiciones}{Haber iniciado sesión y haber sido identificado como usuario tipo gerente. 
+}
+	    \UCitem{Postcondiciones}{Ninguna}
+	    \UCitem{Observaciones}{El año el sistema lo determinara automáticamente}
+	    \UCitem{Errores}{
+	    	\begin{itemize}
+				\item ER1
+	    	\end{itemize}
+
+	    }
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] selecciona visualizar el Reporte de ventas dando click en el botón ``Reporte de ventas''.
+	\UCpaso despliega una pantalla con un campo de formulario para seleccionar el mes que el actor desea consultar. [Trayectoria A].
+	\UCpaso[\UCactor] selecciona el mes que desea consultar. [Trayectoria A].
+	\UCpaso despliega una lista de los productos vendidos con sus respectivas unidades vendidas.
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{A}{No hay ventas registradas}
+	\UCpaso muestra el mensaje ``No hay ventas registradas''.
+\end{UCtrayectoriaA}   
+	%------------ empieza otro caso
+	\begin{UseCase}{CU11}{Crear tratamiento}{El actor le asigna un tratamiento a seguir al paciente que está siendo atendido por él.}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Médico}
+	    \UCitem{Propósito}{Proporcionar al paciente una descripción de actividades a realizar y una lista de medicamentos para mejorar su malestar.
+}
+	    \UCitem{Entradas}{
+		\begin{itemize}
+        \item E-mail : cadena de texto compuesta de 4 partes : 
+        \begin{itemize}
+            \item cadena de texto que el actor proporciona.
+            \item carácter ‘@’
+            \item cadena que identifica al servidor que brinda el servicio de correo electrónico
+        	\item carácter ‘.’ y dominio
+		\end{itemize}
+        \item descripción del tratamiento: Cadena extensa de caracteres. 
+		\item Nombre completo: Cadena de caracteres compuesto por: Nombre(s) Apellido paterno y apellido Materno
+		\item edad:Número entero
+    \end{itemize}
+	    }
+	    \UCitem{Origen}{
+        	\begin{itemize}
+				\item Teclado: correo electrónico, descripción del tratamiento.
+				\item repositorio de datos: Nombre, apellido Paterno y Materno, edad.
+
+			\end{itemize}
+        }
+	    \UCitem{Salidas}{Mensaje “Se ha vinculado la receta a la cuenta del paciente”}
+	    \UCitem{Destino}{
+        	\begin{itemize}
+				\item Mensaje en pantalla
+                \item Tratamiento al repositorio de datos asignado al paciente.
+			\end{itemize}
+        }
+	   	\UCitem{Precondiciones}{El paciente debe estar registrado, el paciente debe tener un expediente médico. 
+}
+	    \UCitem{Postcondiciones}{ El paciente podrá realizar compra de medicamentos en la farmacia, el paciente podrá consultar un nuevo tratamiento en la lista de sus tratamientos. }
+	    \UCitem{Observaciones}{En caso de que el paciente no tenga un expediente el médico podrá crear uno nuevo.
+}
+	    \UCitem{Errores}{
+	    	\begin{itemize}
+				\item ER1
+	    	\end{itemize}
+
+	    }
+        	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+
+\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] selecciona crear una nueva receta dando click en el botón ``Nueva receta''.
+	\UCpaso muestra un formulario y solicita los datos corresponientes.
+	\UCpaso[\UCactor] proporciona el correo del paciente al sistema. [CU4].
+	\UCpaso completa el nombre, apellido Paterno, apellido Materno, edad del paciente y los muestra en pantalla.
+	\UCpaso[\UCactor] proporciona el tratamiento al paciente.
+	\UCpaso[\UCactor] presiona el botón ``Enviar tratamiento''.
+	\UCpaso guarda el tratamiento en el repositorio de datos y muestra el mensaje especificado en las salidas de este caso de uso.
+\end{UCtrayectoria}
+	%------------ empieza otro caso
+	\begin{UseCase}{CU12}{Cancelar Cita
+}{El paciente desea cancelar una cita agendada previamente por x razón. 
+}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Paciente}
+	    \UCitem{Propósito}{ Cancelar una cita agendada y disponibilizar fecha de dicha cita. 
+}
+	    \UCitem{Entradas}{
+	    -
+	    }
+	    \UCitem{Origen}{-}
+	    \UCitem{Salidas}{Mensaje de estatus de operación.
+}
+	    \UCitem{Destino}{
+        \begin{itemize}
+			\item Mensaje en pantalla
+            \item Operación al repositorio de datos
+		\end{itemize}
+        }
+	   	\UCitem{Precondiciones}{estar registrado en el sistema, haber iniciado sesión, haber agendado una cita, haber seleccionado la opción de “consultar mis citas”}
+	    \UCitem{Postcondiciones}{
+        \begin{itemize}
+			\item El paciente tiene una cita menos.
+            \item Nueva fecha disponible.
+		\end{itemize}
+        }
+	    \UCitem{Observaciones}{ Una vez hecha la cancelación no se puede deshacer la operación.
+}
+	    \UCitem{Errores}{
+	    	\begin{itemize}
+				\item ER1
+	    	\end{itemize}
+
+	    }
+     \UCitem{Tipo de ejecución}{Secundaria viene de CU4}
+
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] selecciona cancelar una cita dando click en el botón ``Cancelar cita''.
+	\UCpaso pide una confirmación al actor de dicho acto.
+	\UCpaso[\UCactor] presiona el botón ``Estoy seguro''. [Trayectoria A].
+	\UCpaso informa la cita cancelada.
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{A}{Se presiona el botón ``No estoy seguro''}
+	\UCpaso regresa al paso 1 de la trayectoria principal.
+\end{UCtrayectoriaA}
+	%------------ empieza otro caso
+	\begin{UseCase}{CU13}{Registrar pago cita
+}{Se almacena el pago de una cita}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Cajero}
+	    \UCitem{Propósito}{El paciente puede ingresar a su cita y a su vez poder consultar el pago posteriormente}
+	    \UCitem{Entradas}{
+	    \begin{itemize}
+			\item Fecha y hora de pago: Fecha
+	    	\item Monto de pago: Número positivo con dos decimales
+			\item ID de consulta: Entero positivo
+		\end{itemize}
+	    }
+	    \UCitem{Origen}{
+        \begin{itemize}
+			\item Fecha y hora de pago: Se obtienen automáticamente del sistema
+            \item Monto de pago: Desde el teclado
+            \item ID de consulta: Desde el teclado
+		\end{itemize}
+        }
+	    \UCitem{Salidas}{
+        	\begin{itemize}
+				\item Mensaje de status de la operación
+                \item Operación de tipo actualizar en repositorio de datos
+			\end{itemize}
+        }
+	    \UCitem{Destino}{
+        	\begin{itemize}
+				\item Mensaje en pantalla
+                \item Operación a repositorio de datos
+			\end{itemize}
+        }
+	   	\UCitem{Precondiciones}{ El paciente debe tener una cita agendada
+}
+	    \UCitem{Postcondiciones}{El sistema registra el pago y la consulta se registra como “pagada”}
+	    \UCitem{Observaciones}{}
+	    \UCitem{Errores}{
+	    	\begin{itemize}
+				\item ER1: Si un campo del formulario contiene datos incorrectos se muestra un mensaje para notificar al usuario y después se continúa con el flujo desde el paso 5
+                \item ER2: Si un campo requerido está vacío, se muestra un mensaje para notificar al usuario y se continúa el flujo desde el paso 4
+				\item ER3: Si la consulta ingresada no existe, se muestra un mensaje para notificar al usuario y se continúa el flujo desde el paso 4
+	    	\end{itemize}
+
+	    }
+	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión.}
+        	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] solicita modificar el estatus de las citas agendadas  haciendo click sobre el botón ``Agregar pago de cita''.
+	\UCpaso solicita al actor el monto del pago y el ID de la consulta mostrando un formulario.
+	\UCpaso[\UCactor] informa al sistema el monto del pago y el ID de la consulta escribiendolos en el formulario.
+	\UCpaso[\UCactor] confirma la operación haciendo click en el botón ``Registrar pago''.
+	\UCpaso verifica que los datos requeridos hayan sido proporcionados.
+	\UCpaso verifica que los datos proporcionados tengan un formato correcto.
+	\UCpaso verifica que el ID de consulta exista.
+	\UCpaso almacena el pago guardándolo en la base de datos.
+	\UCpaso obtiene la consulta haciendo una solicitud al repositorio de datos.
+	\UCpaso cambia el estado de la consulta a “pagada”.
+	\UCpaso almacena el estatus de la consulta en el repositorio de datos.
+	\UCpaso notifica el resultado de la operación mostrando la información del pago.
+\end{UCtrayectoria}    
+	%------------ empieza otro caso
+	\begin{UseCase}{CU14}{Registrar venta de medicina. 
+}{ Se hace la venta de medicamentos.}
+		\UCitem{Versión}{0.1}
+	    \UCitem{Actor}{Cajero}
+	    \UCitem{Propósito}{Tener un registro de los medicamentos vendidos para poder consultar las ventas hechas en la farmacia. 
+}
+	    \UCitem{Entradas}{
+	    \begin{itemize}
+			\item Código de barras del medicamento.
+		\end{itemize}
+	    }
+	    \UCitem{Origen}{
+        	\begin{itemize}
+				\item Lector de código de barras: Código de barras del medicamento 
+			
+			\end{itemize}
+        }
+	    \UCitem{Salidas}{
+        	\begin{itemize}
+				\item  Mensaje de estatus de transacción
+           		\item Operación en repositorio de datos
+				\end{itemize}
+        }
+	    \UCitem{Destino}{
+        	\begin{itemize}
+				\item Mensaje en pantalla
+                \item Operación a repositorio de datos
+			\end{itemize}
+        }
+	   	\UCitem{Precondiciones}{Haber iniciado sesión como cajero.}
+	    \UCitem{Postcondiciones}{ El sistema restará una unidad a la cantidad disponible de productos.}
+	    \UCitem{Observaciones}{Los productos deben estar registrados en el repositorio de datos.}
+	    \UCitem{Errores}{
+	    	\begin{itemize}
+				\item ER1
+				\item ERR2: se ha terminado el producto
+				\begin{itemize}
+					\item Mostrar mensaje : ”Lo siento ese producto no está disponible, favor de registrarlo.”
+
+				\end{itemize}
+	    	\end{itemize}
+
+	    }
+	    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+	\end{UseCase}
+\begin{UCtrayectoria}{Principal}
+	\UCpaso[\UCactor] da click en en botón ``Caja registradora Farmacia''.
+	\UCpaso muestra la pantalla donde se harán las ventas de la farmacia.
+	\UCpaso espera por un código de barras.
+	\UCpaso[\UCactor] introduce el código de barras ya sea por teclado o por lector de código de barras. [ERR2]
+	\UCpaso actualiza la lista de productos para la venta.
+	\UCpaso[\UCactor] termina de ingresar productos. 
+	\UCpaso[\UCactor] da click en el botón ``Realizar venta''.
+\end{UCtrayectoria}
+
+
+
+
+
+
+

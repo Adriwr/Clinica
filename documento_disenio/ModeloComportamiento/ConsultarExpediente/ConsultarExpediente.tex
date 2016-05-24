@@ -1,0 +1,215 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{Cu10}{Consultar expediente médico}{El actor desea consultar el expediente médico.}
+    \UCitem{Versión}{0.1}
+    \UCitem{Actor}{Médico,Paciente}
+    \UCitem{Propósito}{Conocer los antecedentes médicos del segundo actor.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item Email del paciente: cadena de texto compuesta de 4 partes:  
+            \begin{itemize}
+                \item cadena de texto.
+                \item carácter ‘@’
+                \item cadena que identifica al servidor que brinda el servicio de correo electrónico
+                \item carácter ‘.’ y dominio
+            \end{itemize}
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Desde actor paciente: Variable de sesión.
+            \item Desde actor Médico: Repositorio de datos.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+            \item Lista de datos personales
+        \begin{itemize}
+            \item *Nombre: Constituido por nombre(s) y apellidos.Cádena de caracteres
+            \item *Sexo  Caracter 'H' o 'M' (hombre,mujer)
+            \item *Fecha de nacimiento: Formato de fecha DD/MM/AAAA
+            \item Dirección
+            \begin{itemize}
+                \item *Calle: Cádena de caracteres.
+                \item Número: Cádena de caracteres.
+                \item *Colonia: Cádena de caracteres.
+                \item *Estado: Cádena de caracteres.
+                \item *País : Cádena de caracteres.
+                \item *Teléfono particular: Cadena de 8 a 10 caracteres.
+                \item *Teléfono de emergencia: Cadena de 8 a 10 caracteres.
+            \end{itemize}    
+        
+        \end{itemize}
+        
+       \item Lista de enfermedades tenidas
+        \begin{itemize}
+            \item Código: código segun la cie10
+            \item Nombre de enfermedad: Cadena de caracteres. 
+            \item Fecha diagnosticada: fecha con formato  DD/MM/AAAA.
+            \item Tratada:  booleano 0 para 'No', 1 para 'Sí'.
+            \item Observaciones de la enfermedad: Cadena extensa de caracteres.
+        \end{itemize}
+        \item Lista de cirugias tenidas
+        \begin{itemize}
+            \item Nombre de cirugia: Cadena de caracteres
+            \item Año de la cirugia : Año. Número entero de 4 dígitos.
+            \item Lugar de cirugía: Lugar donde fue realizada la cirugia. Cadena de caracteres.
+            \item Estado: Estado de la republica. Cadena de caracteres.
+        \end{itemize}
+        
+        \item Lista de alergias
+        \begin{itemize}
+            \item Nombre de sustancia a la que es alergico:Cadena de caracteres.
+            \item Controlada: Booleano 0 para 'No', 1 para 'Sí'.
+            \item Año diagnosticada: Año. Número entero de 4 dígitos. 
+        \end{itemize}
+        
+  \item Lista de antecedentes familiares
+        
+        \begin{itemize}
+            \item nombre de familiar: Cadena extensa de caracteres consituido por nombre(s) y apellidos.
+            \item Sexo del familiar: Caracter 'H' o 'M' (hombre,mujer)
+            \item Edad de familiar: Número entero positivo.
+            \item Nombre de enfermedad data a un familiar:Cadena de caracteres.
+            \item Parentesco del familiar:Cadena de caracteres.
+            \item Telefono: Cadena de 8 a 10 caracteres.
+
+        \end{itemize}
+       \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+             \item Lista de antecedentes personales
+        
+        \begin{itemize}
+            \item Frecuencia en la que toma baño: Número de días.
+            \item Frecuencia de cambio de ropa: Número de días.
+            \item Personas viviendo en la misma casa: Número entero positivo.
+            \item Servicios básicos: Lista de cadenas. 
+            \item Alimentación: Descripción de tipo de alimentación. Cádena extensa de caracteres
+            \item Fuma: Booleano 0 para 'No', 1 para 'Sí'.
+            \item Alcohol: Booleano 0 para 'No', 1 para 'Sí'.
+            \item Drogas: Booleano 0 para 'No', 1 para 'Sí'.
+            
+        \end{itemize}
+        
+        \item Embarazos 
+        
+        \begin{itemize}
+            \item Descripción de embarazo:Cadena de caracteres.
+            \item Año del embarazo: Año. Número de 4 dígitos.
+        \end{itemize}
+        
+        \item Lista de métodos anticonceptivos usados
+        
+        \begin{itemize}
+             \item Anticonceptivo:Cadena de caracteres.
+            \item Notas sobre el anticonceptivo:Cadena extensa caracteres.
+        \end{itemize}
+            
+        \item Lista de mastografías
+        
+        \begin{itemize}
+            \item Mastografía:Cadena de caracteres.
+            \item Año de realización de  mastografía: Año. Número de 4 dígitos.
+            \item Notas sobre la mastografía:Cadena extensa de caracteres.
+        \end{itemize}
+            
+        \item Lista de papanicolaus
+        
+        \begin{itemize}
+            \item Año de papanicolaou:Año. Número de 4 dígitos.
+            \item Notas sobre el papanicolau:Cadena extensa de caracteres.
+        \end{itemize}
+        
+        \end{itemize}
+}
+    \UCitem{Salida}{
+        \begin{itemize}
+            \item Lista de consultas
+        
+        \begin{itemize}
+            \item Fecha de consulta: Fecha, formato:DD/MM/AAAA
+            \item Nombre del médico que atendió: Nombre(s) apellido paterno y apellido materno
+            \item Sintomas:Cadena extensa de caracteres.
+            \item Peso: Número flotante médido en KG.
+            \item Talla: Número entero médido en talla de México
+            \item Temperatura: Número flotante médido en grados centigrados
+            \item Frecuencia cardiaca:Médido en número entero por minúto.
+            \item Presión mínima: número flotante medido en"mm de Hg" (milímetros de mercurio)
+            \item Presión máxima número flotante: medido en "mm de Hg" (milímetros de mercurio) 
+            \item Diagnostico:Cadena extensa de caracteres.
+            \item Observaciones del diagnostico:Cadena extensa de caracteres.
+            \item Recomendación:Cadena extensa de caracteres.
+            \item Duración de tratamiento: Medido en días.
+            \item Nombre comercial del medicamento recetado:Cadena de caracteres.
+            \item Cantidad: Unidades que se debe tomar. Número entero.
+            \item Frecuencia de uso: cadena de carácteres compuesta por un número entero positivo que representa el tiempo que debe transcurrir entre cada dosis de medicamento una unidad de medida.
+            \item Duración: cadena de carácteres compuesta por un número entero positivo que representa el tiempo que debe transcurrir desde que el paciente debe empezar a tomar el médicamento hasta que lo deje de consumir y una unidad de medida.
+            
+        \end{itemize}
+        \end{itemize}
+    }
+    \UCitem{Destino}{Pantalla}
+    \UCitem{Precondiciones}{
+        \begin{itemize}
+            \item Para actor paciente:
+            \begin{itemize}
+                \item Haber tenido su primera consulta.
+            \end{itemize}
+            \item para actor médico:
+            \begin{itemize}
+                \item Que el paciente cuente con un expediente.
+            \end{itemize}
+        \end{itemize}
+    }
+    \UCitem{Postcondiciones}{Ninguna}
+    \UCitem{Observaciones}{
+    	\begin{itemize}
+    	\item Si el paciente no cuenta con un expediente el médico debe crearle uno.
+    	\item Los elementos marcados con un '*' son obligatorios de mostrar.
+    	\end{itemize}
+
+       
+        
+    }
+    \UCitem{Errores}{
+    ERR1:
+    }
+    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+    \UCitem{Prioridad}{Alta}
+    \UCitem{Volatilidad}{Baja}
+    \UCitem{Madurez}{Baja}
+    \UCitem{Estado}{En edición}
+    \UCitem{Autor}{Rubén Murga Dionicio}
+    \UCitem{Revisor}{David Pacheco Soto}
+    
+\end{UseCase}
+
+\begin{UCtrayectoria}{Médico}
+        \UCpaso[\UCactor] selecciona "Próximas citas" dando click en dicho apartado.
+        
+        \UCpaso Muestra un listado de todas las citas próximas que tiene agendadas. 
+        \UCpaso[\UCactor] Da click en el nombre del paciente que es uno de los elementos en la lista.[RN13][RN8]
+        \UCpaso Muestra todos los datos de salida especificados en el apartado de salias.[TA1]
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Datos sin valor}
+    \UCpaso El sistema muestra los datos que no tienen valor como ``Sin valor''
+    
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoria}{Paciente}
+        \UCpaso[\UCactor] Selecciona ``Mi expediente'' dando click en dicho apartado.[TA2][RN8]
+        \UCpaso Muestra todos los datos de salida especificados en el apartado de salidas.[ERR1]
+\end{UCtrayectoria}
+%-------------------------------------- TERMINA descripción del caso de uso.

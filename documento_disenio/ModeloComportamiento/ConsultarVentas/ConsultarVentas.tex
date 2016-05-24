@@ -1,0 +1,85 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{Cu7}{Consultar Ventas}{El actor desea consultar las ventas realizadas en la farmacia.}
+    \UCitem{Versión}{0.2}
+    \UCitem{Actor}{Gerente}
+    \UCitem{Propósito}{Conocer el número de productos vendidos en el mes o en el día.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item Fecha: Formato dd/mm/aaaa 
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Desde el sistema.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+            \item Lista de productos vendidos
+        \begin{itemize}
+            \item *Nombre: Constituido por nombre del producto
+            \item Precio del producto: tipo de dato con decimales.
+            \item Número de productos vendidos: Número entero
+           
+        \end{itemize}
+        \end{itemize}
+        
+           }
+
+    \UCitem{Destino}{Pantalla}
+    \UCitem{Precondiciones}{
+        \begin{itemize}
+            \item Haber sido identificado por el sistema como tipo de actor gerente. 
+        \end{itemize}
+    }
+    \UCitem{Postcondiciones}{Ninguna}
+    \UCitem{Observaciones}{
+    	\begin{itemize}
+    		\item Si no ha habido ventas del producto el sistema debe poner un '0'.
+    		\item El sistema requerirá partes de la fecha dependiendo si es por día o por mes; por mes ocupará el mes y el año. Por día ocupará el día,mes,año.
+    	\end{itemize}
+ 
+    }
+    \UCitem{Errores}{
+    Ninguno
+    }
+    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+    \UCitem{Prioridad}{Mediana}
+    \UCitem{Volatilidad}{Baja}
+    \UCitem{Madurez}{Baja}
+    \UCitem{Estado}{En edición}
+    \UCitem{Autor}{Rubén Murga Dionicio}
+    \UCitem{Revisor}{David Pacheco Soto}
+    
+\end{UseCase}
+
+\begin{UCtrayectoria}{Gerente  [ventas diarias]}
+        \UCpaso[\UCactor] selecciona "Ventas de hoy" dando click en dicho apartado.
+        
+        \UCpaso Muestra una lista de los productos vendidos en el día con los datos de salida especificados en dicho apartado [TA1]
+
+\end{UCtrayectoria}
+
+
+\begin{UCtrayectoria}{Gerente  [ventas mensuales]}
+        \UCpaso[\UCactor] selecciona "Ventas mensuales" dando click en dicho apartado.
+        
+        \UCpaso informa al actor un listado  de los productos vendidos en el mes mostrando la lista con los datos de salida especificados en dicho apartado [TA1]
+
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Producto sin ventas}
+    \UCpaso El sistema muestra los datos que no tienen ventas con valor de '0' en el campo de número de ventas
+    \end{UCtrayectoriaA}
+    
+%-------------------------------------- TERMINA descripción del caso de uso.

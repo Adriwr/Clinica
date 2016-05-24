@@ -1,0 +1,125 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{CU4}{Registrar paciente
+}{Cuando un paciente requiera una consulta por primera vez se registrarán sus datos personales en el sistema. El sistema almacenará los datos personales del paciente.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Enfermera,Paciente}
+    \UCitem{Propósito}{El paciente podrá agendar citas y consultar su expediente.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item *Email del paciente: cadena de texto compuesta de 4 partes:  
+            \begin{itemize}
+                \item cadena de texto.
+                \item carácter ‘@’
+                \item cadena que identifica al servidor que brinda el servicio de correo electrónico
+                \item carácter ‘.’ y dominio
+            \end{itemize}
+            \item* Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
+			\item *Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
+            \item *Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+            \item Dirección
+            \begin{itemize}
+                \item *Calle: Cádena de caracteres.
+                \item Número: Cádena de caracteres.
+                \item *Colonia: Cádena de caracteres.
+                \item *Estado: Cádena de caracteres.
+                \item *País : Cádena de caracteres.
+                \item Teléfono particular: Cádena de 8 a 10 caracteres.
+                \item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
+            \end{itemize}    
+            \item *Contraseña:  Cadena de longitud mínima de 8 caracteres
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Desde actor paciente: Variable de sesión.
+            \item Desde actor Médico: Repositorio de datos.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{Mensaje:``Paciente registrado correctamente''}
+    \UCitem{Destino}{Pantalla}
+   	\UCitem{Precondiciones}{
+    No debe existir un paciente registrado con el correo electrónico ingresado.}
+    \UCitem{Postcondiciones}{
+    	\begin{itemize}
+			\item El paciente queda registrado en el repositorio de datos.
+		\end{itemize}
+    }
+    \UCitem{Observaciones}{
+    \begin{itemize}
+    \item La Pantalla para registrar paciente nuevo de la enfermera y del paciente es la misma.
+    \item Los elementos marcados con '*' son obligatorios de llenar.
+    \end{itemize}
+    	
+    }
+    \UCitem{Errores}{HOla
+	}
+	\UCitem{Tipo de ejecución}{
+    \begin{itemize}
+		\item Para la enfermara: Secundaria, viene de CU1 iniciar sesión
+        \item Para el paciente: Primaria
+	\end{itemize}
+    }
+	\UCitem{Prioridad}{Alta}
+	\UCitem{Volatilidad}{Intermedia}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Estado}{Terminado}
+	\UCitem{Autor}{Rubén Murga Dionicio}
+	\UCitem{Revisor}{David Pacheco Soto}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{Enfermera}
+		\UCpaso[\UCactor] selecciona "Registrar nuevo paciente" dando click en dicho apartado.
+		\UCpaso solicita al actor los datos del paciente mostrando un formulari
+        \UCpaso [\UCactor] Proporciona los datos al sistema ingresandolos en el formulario.
+         \UCpaso [\UCactor] Confirma la operación haciendo click en el botón ``Registrar paciente"
+         \UCpaso Verifica que el nombre sea una cadena de caracteres con longitud mayor o igual a 10 caracteres[TAValida]
+         \UCpaso Verifica que la fecha de nacimiento sea una fecha válida [TAValida]
+         \UCpaso Verifica que el teléfono sea numérico y de longitud de 8 o más caracteres [TAValida]
+         \UCpaso El sistema verifica que el correo electrónico sea válido [TAValida]
+         \UCpaso Verifica que el correo electrónico no pertenezca a un paciente ya registrado [TACorreo].
+		\UCpaso Verifica que la contraseña tenga longitud de 8 o más caracteres [TAValida]
+        \UCpaso Muestra mensaje.
+        
+
+         
+         
+
+
+
+        
+
+        
+        
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TAValida}{Un campo del formulario contiene datos incorrectos}
+\UCpaso notifica el campo incorrecto al usuario mostrando un mensaje en pantalla.
+\UCpaso notifica el campo incorrecto al usuario mostrando un mensaje en pantalla.
+\UCpaso El sistema muestra el formulario.
+\UCpaso Continúa transacción desde paso 5.
+	
+	
+\end{UCtrayectoriaA}
+
+
+\begin{UCtrayectoriaA}{TACorreo}{Ya existe un paciente registrado con el correo electrónico ingresado.}
+\UCpaso Notifica el campo de correo electrónico mostrando un mensaje en pantalla.
+\UCpaso Solicita ingresar un correo electrónico diferente en el formulario.
+
+\UCpaso [\UCactor] El actor ingresa otro correo electrónico en el campo “Correo electrónico” del formulario.
+
+\UCpaso Continúa transacción desde paso 9.
+\end{UCtrayectoriaA}
+
+%-------------------------------------- TERMINA descripción del caso de uso.

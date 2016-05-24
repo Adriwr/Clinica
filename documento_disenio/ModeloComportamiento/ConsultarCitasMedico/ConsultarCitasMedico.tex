@@ -1,0 +1,84 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{Cu7}{Consultar consultas dadas}{El actor desea consultar las consultas dadas por cada médico.}
+    \UCitem{Versión}{0.2}
+    \UCitem{Actor}{Gerente}
+    \UCitem{Propósito}{Conocer el número de consultas dadas en el mes o en el día por cada médico.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+            \item Fecha: Formato dd/mm/aaaa 
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Desde el sistema.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+            \item Lista médicos
+        \begin{itemize}
+            \item *Nombre: Constituido por nombre del producto
+            \item Número de consultas dadas: Número entero.
+           
+        \end{itemize}
+        \end{itemize}
+        
+           }
+
+    \UCitem{Destino}{Pantalla}
+    \UCitem{Precondiciones}{
+        \begin{itemize}
+            \item Haber sido identificado por el sistema como tipo de actor gerente. 
+        \end{itemize}
+    }
+    \UCitem{Postcondiciones}{Ninguna}
+    \UCitem{Observaciones}{
+    	\begin{itemize}
+    		\item Si el médico no ha dado ninguna consulta el sistema debe poner un '0' en el campo de número de citas dadas.
+    		\item El sistema requerirá partes de la fecha dependiendo si es por día o por mes; por mes ocupará el mes y el año. Por día ocupará el día,mes,año.
+    	\end{itemize}
+ 
+    }
+    \UCitem{Errores}{
+    Ninguno
+    }
+    \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 iniciar sesión}
+    \UCitem{Prioridad}{Alta}
+    \UCitem{Volatilidad}{Baja}
+    \UCitem{Madurez}{Baja}
+    \UCitem{Estado}{En edición}
+    \UCitem{Autor}{Rubén Murga Dionicio}
+    \UCitem{Revisor}{David Pacheco Soto}
+    
+\end{UseCase}
+
+\begin{UCtrayectoria}{Gerente  [consultas diarias]}
+        \UCpaso[\UCactor] selecciona "Consultar actividad de hoy" dando click en dicho apartado.
+        
+        \UCpaso Muestra una lista de los medicos con el número de consultas dadas en el día, además los datos de salida especificados en dicho apartado [TA1]
+
+\end{UCtrayectoria}
+
+\begin{UCtrayectoria}{Gerente  [consultas mensuales]}
+        \UCpaso[\UCactor] selecciona "Consultar actividad mensual" dando click en dicho apartado.
+        
+        \UCpaso Muestra una lista de los medicos con el número de consultas dadas en el mes, además de los datos de salida especificados en dicho apartado [TA1]
+
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Médico sin consultas dadas}
+    \UCpaso El sistema muestra un '0' en el campo de número de consultas dadas por dicho médico.
+    
+   \end{UCtrayectoriaA}
+ 
+%-------------------------------------- TERMINA descripción del caso de uso.

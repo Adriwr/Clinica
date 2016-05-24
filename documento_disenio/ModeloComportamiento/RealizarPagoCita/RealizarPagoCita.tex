@@ -1,0 +1,119 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+	\begin{UseCase}{Cu9}{Realizar pago de cita}{El actor registra el pago de una cita.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Cajero}
+    \UCitem{Propósito}{Que el paciente pueda ingresar a su cita.}
+    \UCitem{Entradas}{
+        \begin{itemize}
+        	\item ID de la cita: Número entero positivo [Requerido]
+        	\item Fecha de pago: Fecha con formato yyyy/mm/dd [Requerido]
+        	\item Hora de pago: Hora con formato hh:mm, 24 horas [Requerido]
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Desde teclado: ID de cita.
+            \item Desde sistema: Fecha y hora de pago.
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+	        \item Comprobante de pago: Archivo PDF que contiene:
+	        \begin{itemize}
+	        	\item Información de cita:
+	        	\begin{itemize}
+	        		\item Fecha de cita: Fecha en formato dd/mm/yyyy
+	        		\item Hora de cita: Hora con formato hh:mm
+	        		\item Consultorio de cita: Número entero entre 1 y 12
+	        	\end{itemize}
+	        	\item Monto del pago realizado: número flotante con dos decimales
+	        	\item Fecha de pago: Fecha con formato yyyy/mm/dd
+	        	\item Hora de pago: Hora con formato hh:mm
+	        \end{itemize}
+	        \item Mensaje de confirmación: Cadena ''Pago registrado correctamente''
+	        \item Información de cita:
+	        \begin{itemize}
+	        	\item Fecha de cita: Fecha en formato dd/mm/yyyy
+	        	\item Hora de cita: Hora con formato hh:mm
+	        	\item Consultorio de cita: Número entero entre 1 y 12
+	        \end{itemize}
+	    \end{itemize}
+    }
+    \UCitem{Destino}{
+	    \begin{itemize}
+	    	\item Pantalla: Mensaje de confirmación e información de la cita
+	    	\item Correo electrónico de paciente: Comprobante de pago
+	    \end{itemize}
+    }
+   	\UCitem{Precondiciones}{
+        \begin{itemize}
+            \item Que el paciente tenga una cita agendada
+            \item Que la cita no haya sido pagada
+            \item Que el paciente haya dado el dinero físicamente
+        \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{
+	    	\begin{itemize}
+	    		\item La cita cambia a estado Pagada
+	    	\end{itemize}
+    }
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos'' y se continúa desde el paso 2
+    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 2 
+    	\end{itemize}
+	}
+	\UCitem{Tipo de ejecución}{Primaria}
+	\UCitem{Prioridad}{Alta}
+	\UCitem{Volatilidad}{Baja}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Estado}{Terminado}
+	\UCitem{Autor}{David Alberto Pacheco Soto}
+	\UCitem{Revisor}{Saúl Uriel Trujillo García}
+	
+\end{UseCase} 
+
+\begin{UCtrayectoria}{Cajero}
+		\UCpaso[\UCactor] Solicita realizar pago de cita haciendo click sobre el botón \IUbutton{Realizar pago de cita}
+		\UCpaso Solicita el ID de la cita mostrando \IUref{1}{Realizar pago de cita}
+		\UCpaso[\UCactor] Proporciona el ID de la cita ingresándolo en el campo de texto correspondiente.[RN13][RN8]
+		\UCpaso[\UCactor] Confirma operación haciendo click sobre el botón \IUbutton{Registrar pago}
+		\UCpaso Verifica que se hayan completado datos requeridos
+		\UCpaso Verifica que los datos completados tengan el formato correcto
+		\UCpaso Obtiene la cita mediante el ID de cita ingresado [TA1]
+		\UCpaso Verifica que la fecha y la hora de la cita no sean posteriores a la hora y fecha actuales [TA2]
+		\UCpaso Verifica que la cita no tenga el estado de ``pagada'' [TA3]
+		\UCpaso Modifica el estado de la cita a ``pagada''
+		\UCpaso Obtiene al paciente que agendó la cita 
+		\UCpaso Confirma operación mostrando mensaje de confirmación, datos de cita y enviándo archivo PDF del comprobante  al correo electrónico del paciente
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Cita no existe}
+	\UCpaso Informa al acto mostrando el mensaje ``Cita no existe''
+	\UCpaso Continúa trayectoria desde paso 2
+	
+\end{UCtrayectoriaA}
+	
+\begin{UCtrayectoriaA}{TA2}{La fecha o la hora son posteriores a la fecha y hora actual}
+	\UCpaso Informa al acto mostrando el mensaje ``La cita expiró''
+	\UCpaso Continúa trayectoria desde paso 2
+	
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{TA3}{Cita tiene estado de pagada}
+	\UCpaso Informa al acto mostrando el mensaje ``Cita ya está pagada''
+	\UCpaso Continúa trayectoria desde paso 2
+	
+\end{UCtrayectoriaA}
+%-------------------------------------- TERMINA descripción del caso de uso.
