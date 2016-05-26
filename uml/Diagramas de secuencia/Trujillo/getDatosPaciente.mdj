@@ -1735,19 +1735,19 @@
 													"showShadow": true,
 													"containerChangeable": false,
 													"containerExtending": false,
-													"left": 207,
-													"top": 160,
-													"width": 188.25244140625,
+													"left": 319,
+													"top": 135,
+													"width": 44.7890625,
 													"height": 13,
 													"autoResize": false,
-													"alpha": -2.8198420277645644,
-													"distance": 44.27188724235731,
+													"alpha": -4.514994382073455,
+													"distance": 10.198039027185569,
 													"hostEdge": {
 														"$ref": "AAAAAAFUu2nq1WAMNpU="
 													},
 													"edgePosition": 1,
 													"underline": false,
-													"text": "2 : GET?idPaciente = idPaciente",
+													"text": "2 : GET",
 													"horizontalAlignment": 2,
 													"verticalAlignment": 5
 												},
@@ -3472,7 +3472,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFUu1+Evl7GcQw="
 									},
-									"name": "idPaciente",
+									"name": "GET",
 									"source": {
 										"$ref": "AAAAAAFUu2Phw177cRY="
 									},
@@ -3481,7 +3481,6 @@
 									},
 									"visibility": "public",
 									"messageSort": "synchCall",
-									"assignmentTarget": "GET?idPaciente",
 									"isConcurrentIteration": false
 								},
 								{
