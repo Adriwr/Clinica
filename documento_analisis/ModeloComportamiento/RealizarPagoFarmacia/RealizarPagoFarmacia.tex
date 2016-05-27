@@ -1,0 +1,100 @@
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+	\begin{UseCase}{Cu10}{Realizar pago de farmacia}{El actor registra el pago de un medicamento en la farmacia.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Cajero}
+    \UCitem{Propósito}{Que el medicamento que se sale del inventario sea actualizado tanto en la cantidad del inventario como el ingreso de éste para la clínica.}
+    \UCitem{Entradas}{
+        \begin{itemize}        	
+        	\item Nombre de medicamento: Cadena de texto con el nombre del medicamento. [Requerido]        	
+        \end{itemize} 
+    }
+    \UCitem{Origen}{
+        \begin{itemize}
+            \item Desde teclado: Nombre del medicamento            
+        \end{itemize}
+    }
+    \UCitem{Salidas}{
+        \begin{itemize}
+	        \item Comprobante de compra: Archivo PDF que contiene:
+	        \begin{itemize}
+	        	\item Información de compra:
+	        	\begin{itemize}
+	        		\item Fecha de compra: Fecha en formato dd/mm/yyyy
+	        		\item Hora de cmpra: Hora con formato hh:mm	        		
+	        	\end{itemize}
+	        	\item Información de compra:
+            \begin{itemize}
+              \item Nombre de los productos adquiridos.
+              \item Precio unitario de cada producto.
+              \item Cantidad adquirida.           
+            \end{itemize}
+	        \end{itemize}
+	        \item Mensaje de confirmación: Cadena ''Pago registrado correctamente''
+	        
+	    \end{itemize}
+    }
+    \UCitem{Destino}{
+	    \begin{itemize}
+	    	\item Pantalla: Mensaje de confirmación y comprobante de compra	    	
+	    \end{itemize}
+    }
+   	\UCitem{Precondiciones}{
+        \begin{itemize}            
+            \item Que el actor tenga iniciada su sesión            
+        \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{
+	    	\begin{itemize}
+	    		\item El producto se actualiza en el repositorio de datos tanto en su cantidad como en el valor de ingreso de dicho medicamento para la clínica. 
+	    	\end{itemize}
+    }
+    \UCitem{Observaciones}{El actor podrá realizar la búsqueda de la cantidad de medicamentos que se necesiten.}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos'' y se continúa desde el paso 2
+    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 2 
+    	\end{itemize}
+	}
+	\UCitem{Tipo de ejecución}{Primaria}
+	\UCitem{Prioridad}{Alta}
+	\UCitem{Volatilidad}{Baja}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Estado}{Terminado}
+	\UCitem{Autor}{David Alberto Pacheco Soto}
+	\UCitem{Revisor}{Saúl Uriel Trujillo García}
+	
+\end{UseCase} 
+
+\begin{UCtrayectoria}{Cajero}
+		\UCpaso[\UCactor] Solicita realizar pago de cita haciendo click sobre el botón \IUbutton{Realizar pago de cita}
+		\UCpaso Solicita el ID de la cita mostrando \IUref{1}{Realizar pago de cita}
+		\UCpaso[\UCactor] Proporciona el ID de la cita ingresándolo en el campo de texto correspondiente.[RN13][RN8]
+		\UCpaso[\UCactor] Confirma operación haciendo click sobre el botón \IUbutton{Registrar pago}
+		\UCpaso Verifica que se hayan completado datos requeridos
+		\UCpaso Verifica que los datos completados tengan el formato correcto
+		\UCpaso Obtiene la cita mediante el ID de cita ingresado [TA1]
+		\UCpaso Verifica que la fecha y la hora de la cita no sean posteriores a la hora y fecha actuales [TA2]
+		\UCpaso Verifica que la cita no tenga el estado de ``pagada'' [TA3]
+		\UCpaso Modifica el estado de la cita a ``pagada''
+		\UCpaso Obtiene al paciente que agendó la cita 
+		\UCpaso Confirma operación mostrando mensaje de confirmación, datos de cita y enviándo archivo PDF del comprobante  al correo electrónico del paciente
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Cita no existe}
+	\UCpaso Informa al acto mostrando el mensaje ``Cita no existe''
+	\UCpaso Continúa trayectoria desde paso 2
+	
+\end{UCtrayectoriaA}
+	
+\begin{UCtrayectoriaA}{TA2}{La fecha o la hora son posteriores a la fecha y hora actual}
+	\UCpaso Informa al acto mostrando el mensaje ``La cita expiró''
+	\UCpaso Continúa trayectoria desde paso 2
+	
+\end{UCtrayectoriaA}
+
+\begin{UCtrayectoriaA}{TA3}{Cita tiene estado de pagada}
+	\UCpaso Informa al acto mostrando el mensaje ``Cita ya está pagada''
+	\UCpaso Continúa trayectoria desde paso 2
+	
+\end{UCtrayectoriaA}
+%-------------------------------------- TERMINA descripción del caso de uso.
