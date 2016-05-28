@@ -41,6 +41,7 @@ security:
         - { path: ^/api/[^/]+, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/clinica/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/registrar-paciente/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/clinica/, role: ROLE_SUPER_ADMIN }

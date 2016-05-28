@@ -1,0 +1,43 @@
+{% extends '::loginBase.html.twig' %}
+
+{% block css %}
+
+{%  endblock %}
+
+{% block dashboard %}
+    <h3 class="page-header">Registrar Paciente</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="row" >
+        <div class="col-xs-offset-4 col-xs-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Registrar Paciente
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    {{ form_start(formUsuario , {'attr': {'class': 'form-horizontal'} }) }}
+                    {{ form_label(formUsuario.email) }}
+                    {{ form_widget(formUsuario.email) }}
+                    {{ form_errors(formUsuario.email) }}
+                    {{ form_label(formUsuario.plainPassword.first,'Password') }}
+                    {{ form_widget(formUsuario.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Contraseña' } }) }}
+                    {{ form_errors(formUsuario.plainPassword.first) }}
+                    {{ form_label(formUsuario.plainPassword.second,'Repetir password') }}
+                    {{ form_widget(formUsuario.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repetir contraseña' } }) }}
+                    {{ form_errors(formUsuario.plainPassword.second) }}
+                    {{ form_rest(formUsuario) }}
+                    {{ form_end(formUsuario) }}
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {# Plugins requeridos por el modulo #}
+
+{% endblock %}
