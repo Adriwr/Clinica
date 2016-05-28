@@ -122,7 +122,7 @@ class PacienteType extends AbstractType
                    'attr' => array(
                        'class' => 'form-control',
                        'placeholder' => 'telefonoParticular',
-                       'ng-model'=> 'paciente.telefono Particular' ),
+                       'ng-model'=> 'paciente.telefonoParticular' ),
                    'label' => 'Télefono particular',
                    'required' => true )
            )

@@ -14,5 +14,15 @@ app.
                 url     : url
             }
         });
-    })
-;
+    });
+app.factory('PacienteFactory', function($resource){
+        var url = Routing.generate('api_get_pacientes');
+
+    return $resource(url, null, {
+        getPacientes : {
+            method  : 'GET',
+            isArray : true,
+            url     : url
+        }
+    });
+});

@@ -17,7 +17,98 @@
 			\includegraphics[width=1\textwidth]{images/logico33}
 		\caption{Estructura de las vistas}
 	\end{figure}
+	
+	\begin{figure}[htbp!]
+		\centering
+			\includegraphics[width=1\textwidth]{images/logico34}
+		\caption{Estructura angular app}
+	\end{figure}
 	\newpage
+	\section{web::js::app}
+	\subsection{cajero}
+	\begin{itemize}
+		\item registrar
+		\begin{itemize}
+			\item controllers
+			\begin{itemize}
+				\item cajero.js
+			\end{itemize}
+			\item services
+			\begin{itemize}
+				\item factories.js
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsection{enfermera}
+		\begin{itemize}
+		\item registrar
+		\begin{itemize}
+			\item controllers
+			\begin{itemize}
+				\item enfermera.js
+			\end{itemize}
+			\item services
+			\begin{itemize}
+				\item factories.js
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsection{gerente}
+		\begin{itemize}
+		\item registrar
+		\begin{itemize}
+			\item controllers
+			\begin{itemize}
+				\item gerente.js
+			\end{itemize}
+			\item services
+			\begin{itemize}
+				\item factories.js
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsection{paciente}
+		\begin{itemize}
+		\item cita
+		\begin{itemize}
+			\item controllers
+			\begin{itemize}
+				\item agendar.js
+			\end{itemize}
+			\item services
+			\begin{itemize}
+				\item factories.js
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsection{medico}
+		\begin{itemize}
+		\item registrar
+		\begin{itemize}
+			\item controllers
+			\begin{itemize}
+				\item
+			\end{itemize}
+			\item services
+			\begin{itemize}
+				\item
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	\subsection{productos}
+		\begin{itemize}
+			\item controllers
+			\begin{itemize}
+				\item productos.js
+			\end{itemize}
+			\item services
+			\begin{itemize}
+				\item factories.js
+			\end{itemize}
+		\end{itemize}
+	
+	
+	
 	\section{app::Resourses::views}
 		\subsection{Cajero}
 		\begin{itemize}
@@ -40,6 +131,7 @@
 				\item pagoCita.html.twig
 			\end{itemize}
 		\end{itemize}
+		
 		\subsection{Enfernera}
 		\begin{itemize}
 		\item Registrar
@@ -49,6 +141,7 @@
 		\item parts
 			\begin{itemize}
 				\item enfermeraTabla.html.twig
+				\item pacienteTabla.html.twig
 			\end{itemize}
 		\end{itemize}
 		\item citas 
@@ -197,6 +290,10 @@
 		\subsection{Producto}
 		\begin{itemize}
 		\item ProductoController.php
+		\end{itemize}
+		\subsection{Paciente}
+		\begin{itemize}
+		\item PacienteController.php
 		\end{itemize}
 	\section{src::AppBundle::Form::Type}
 		\subsection{Paciente}
