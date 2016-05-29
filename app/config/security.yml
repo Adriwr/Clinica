@@ -23,6 +23,9 @@ security:
         login:
             pattern:  ^/clinica/login$
             security: false
+        registrar_paciente:
+            pattern:  ^/registrar-paciente/$
+            security: false
         main:
             pattern:    ^/
             form_login:

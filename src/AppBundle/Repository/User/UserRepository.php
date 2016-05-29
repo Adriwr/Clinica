@@ -29,10 +29,32 @@ class UserRepository extends DocumentRepository
             $gerentes[] = array(
                 'id'            => $gerente->getId(),
                 'nombre'        => $gerente->getUserName(),
-                'email'         => $gerente->getEmail(),
+                'email'         => $gerente->getEmail()
             );
         }
 
         return $gerentes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllAppointments($month)
+    {
+        $appoints = array();
+        $appointGross = $this->createQueryBuilder()
+            //->select('paciente')
+            ->field('paciente')->exists(true)
+            //->field('paciente.citas')->exists(true)
+            ->getQuery()
+            ->execute();
+
+        foreach($appointGross as $appoint) {
+            foreach($appoint->getPaciente()->getCitas() as $fecha){
+                $appoints[] = $fecha->getFecha() ;
+            }
+        }
+
+        return $appoints;
     }
 }

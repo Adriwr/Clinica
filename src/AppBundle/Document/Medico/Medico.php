@@ -51,15 +51,10 @@ class Medico {
      */
     protected $telefonoEmergencia;
     /**
-     * @ODM\EmbedMany(targetDocument="Horario")
+     * @ODM\EmbedOne(targetDocument="Horario")
      */
-    protected $horarios;
+    protected $horario;
 
-    public function __construct()
-    {
-        $this->horarios = new ArrayCollection();
-    }
-    
 
     /**
      * Get id
@@ -224,34 +219,27 @@ class Medico {
     {
         return $this->email;
     }
+    
 
     /**
-     * Add horario
+     * Set horario
      *
      * @param AppBundle\Document\Medico\Horario $horario
+     * @return self
      */
-    public function addHorario(\AppBundle\Document\Medico\Horario $horario)
+    public function setHorario(\AppBundle\Document\Medico\Horario $horario)
     {
-        $this->horarios[] = $horario;
+        $this->horario = $horario;
+        return $this;
     }
 
     /**
-     * Remove horario
+     * Get horario
      *
-     * @param AppBundle\Document\Medico\Horario $horario
+     * @return AppBundle\Document\Medico\Horario $horario
      */
-    public function removeHorario(\AppBundle\Document\Medico\Horario $horario)
+    public function getHorario()
     {
-        $this->horarios->removeElement($horario);
-    }
-
-    /**
-     * Get horarios
-     *
-     * @return \Doctrine\Common\Collections\Collection $horarios
-     */
-    public function getHorarios()
-    {
-        return $this->horarios;
+        return $this->horario;
     }
 }

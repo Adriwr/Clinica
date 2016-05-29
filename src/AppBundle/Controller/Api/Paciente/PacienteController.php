@@ -15,7 +15,7 @@ class PacienteController extends FOSRestController implements ClassResourceInter
 
     /**
      * Acción para generar los datos de productos
-     * El arreglo generado alimenta la tabla "Productos"
+     * El arreglo generado alimenta la tabla "Pacientes"
      *
      * @return array
      * @Rest\View()
@@ -24,6 +24,19 @@ class PacienteController extends FOSRestController implements ClassResourceInter
         return  $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:User\User' )
             ->getAllUsers('paciente');
+    }
+
+    /**
+     * Acción para generar los datos de productos
+     * El arreglo generado sirve para deshabilitar las citas que ya esten ocupadas
+     *
+     * @return array
+     * @Rest\View()
+     */
+    public function getCitasAction($month){
+        return  $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllAppointments($month);
     }
 
 }

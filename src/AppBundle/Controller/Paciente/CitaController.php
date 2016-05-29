@@ -29,6 +29,8 @@ class CitaController extends Controller
 
         if ($form->isValid()) {
             $dm = $this->get( 'doctrine_mongodb' )->getManager();
+            $paciente = $this->getUser()->getPaciente();
+            $paciente->addCita($cita);
             $dm->persist($cita);
             $dm->flush();
 

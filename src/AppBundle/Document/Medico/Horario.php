@@ -27,6 +27,14 @@ class Horario {
      */
     protected $fecha;
     /**
+     * @ODM\Date
+     */
+    protected $horarioInicio;
+    /**
+     * @ODM\Date
+     */
+    protected $horarioFin;
+    /**
      * @ODM\String
      */
     protected $estado;
@@ -34,7 +42,6 @@ class Horario {
      * @ODM\String
      */
     protected $consultorio;
-
 
     /**
      * Get id
@@ -110,5 +117,49 @@ class Horario {
     public function getConsultorio()
     {
         return $this->consultorio;
+    }
+
+    /**
+     * Set horarioInicio
+     *
+     * @param date $horarioInicio
+     * @return self
+     */
+    public function setHorarioInicio($horarioInicio)
+    {
+        $this->horarioInicio = $horarioInicio;
+        return $this;
+    }
+
+    /**
+     * Get horarioInicio
+     *
+     * @return date $horarioInicio
+     */
+    public function getHorarioInicio()
+    {
+        return $this->horarioInicio;
+    }
+
+    /**
+     * Set horarioFin
+     *
+     * @param date $horarioFin
+     * @return self
+     */
+    public function setHorarioFin($horarioFin)
+    {
+        $this->horarioFin = $horarioFin;
+        return $this;
+    }
+
+    /**
+     * Get horarioFin
+     *
+     * @return date $horarioFin
+     */
+    public function getHorarioFin()
+    {
+        return $this->horarioFin;
     }
 }

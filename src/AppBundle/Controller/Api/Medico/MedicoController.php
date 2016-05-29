@@ -26,5 +26,18 @@ class MedicoController extends FOSRestController implements ClassResourceInterfa
             ->getAllUsers('medico');
     }
 
+    /**
+     * Acción para generar los datos de productos
+     * El arreglo generado sirve para obtener el nombre de un medico en un horario y consultorio
+     *
+     * @return array
+     * @Rest\View()
+     */
+    public function getNombreAction($fecha, $consultorio){
+        return  $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Medico\Medico' )
+            ->getDoctorName($fecha, $consultorio);
+    }
+
 }
 

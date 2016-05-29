@@ -30,7 +30,7 @@ class PacienteController extends Controller
             $dm->flush();
 
 
-            return $this->redirect($this->generateUrl('registrar_paciente'));
+            return $this->redirect($this->generateUrl('login'));
 
         }
         $request->getSession()->getFlashBag()->add(
