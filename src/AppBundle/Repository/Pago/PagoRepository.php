@@ -12,4 +12,34 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class PagoRepository extends DocumentRepository
 {
+    public function getAllConsultasMedicoD($medico)
+    {
+
+        $consultas = $this->createQueryBuilder()
+            ->field('medico')->equals($medico)
+            ->field('fecha')->equals(new \MongoRegex(date('Y-m-d').'.*/i'))
+            ->field('estatus')->equals('1')
+            ->getQuery()
+            ->execute();
+
+        if(!$consultas)
+            return 0;
+
+        return count($consultas);
+    }
+    public function getAllConsultasMedicoM($medico)
+    {
+
+        $consultas = $this->createQueryBuilder()
+            ->field('medico')->equals($medico)
+            ->field('fecha')->equals(new \MongoRegex(date('Y-m-').'.*/i'))
+            ->field('estatus')->equals('1')
+            ->getQuery()
+            ->execute();
+
+        if(!$consultas)
+            return 0;
+
+        return count($consultas);
+    }
 }

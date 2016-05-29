@@ -45,5 +45,37 @@ class GerenteController extends Controller
             )
         );
     }
+
+    public function getConsultasDiaAction(Request $request){
+          $medicos =$this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllUsers('medico');
+
+            $regreso = array();
+        foreach ($medicos as $medico ) {
+            $numConsultas = $this->get( 'doctrine_mongodb' )->getManager()
+                ->getRepository( 'AppBundle:Pago\Pago' )
+                ->getAllConsultasMedicoD($medico["id"]);
+
+            array_push($regreso,array('nombre' => $medico['nombre'], 'consultas' => $numConsultas));
+        }
+        return $this->render(':Gerente/actividad:consultarCitasRealizadas.html.twig', array('medicos' => $regreso));
+    }
+    
+    public function getConsultasMesAction(Request $request){
+        $medicos =$this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllUsers('medico');
+
+        $regreso = array();
+        foreach ($medicos as $medico ) {
+            $numConsultas = $this->get( 'doctrine_mongodb' )->getManager()
+                ->getRepository( 'AppBundle:Pago\Pago' )
+                ->getAllConsultasMedicoM($medico["id"]);
+
+            array_push($regreso,array('nombre' => $medico['nombre'], 'consultas' => $numConsultas));
+        }
+        return $this->render(':Gerente/actividad:consultarCitasRealizadas.html.twig', array('medicos' => $regreso));
+    }
     
 }

@@ -38,3 +38,10 @@ registrar_enfermera:
 registrar_paciente_enfermera:
   path: /enfermera/registrar-paciente/
   defaults: {_controller:AppBundle:Enfermera/Enfermera:registrarPaciente}
+
+consultar_actividad_diaria:
+  path: /gerente/actividad-diaria/
+  defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasDia}
+consultar_actividad_mensual:
+  path: /gerente/actividad-mensual/
+  defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasMes}
