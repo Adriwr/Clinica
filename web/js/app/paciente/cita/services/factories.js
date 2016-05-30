@@ -5,14 +5,23 @@ app.
      * @returns {undefined}
      */
         factory('AgendarPacienteFactory', function($resource){
-        var urlProductos = Routing.generate('api_get_productos');
+        var urlCitas  = decodeURIComponent(Routing.generate('api_get_paciente_citas', { month : ":month"}));
+        var urlDoc  = decodeURIComponent(Routing.generate('api_get_medico_nombre', { fecha : ":fecha" , consultorio : ":consultorio"}));
 
-        return $resource(urlProductos, null, {
-            getProductos  : {
+        return $resource(urlCitas, null, {
+            getCitas  : {
                 method  : 'GET',
                 isArray : true,
-                url     : urlProductos
+                params  : { month : '@month' },
+                url     : urlCitas
+            },
+            getDoctor  : {
+                method  : 'GET',
+                isArray : true,
+                params  : { fecha : '@fecha', consultorio : '@consultorio' },
+                url     : urlDoc
             }
+
         });
     })
 ;

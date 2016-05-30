@@ -12,4 +12,26 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class MedicoRepository extends DocumentRepository
 {
+    /**
+     * @return array
+     */
+    public function getDoctorName($fecha, $consultorio)
+    {
+        $name = "";
+        $doctorsGross = $this->createQueryBuilder()
+            ->field('horario.consultorio')->equals($consultorio)
+            ->getQuery()
+            ->execute();
+
+        foreach($doctorsGross as $doctor) {
+            $date =  new \DateTime($fecha);
+            $hora = strtotime($date->format('H:m:s'));
+            if(strtotime($doctor->getHorario()->getHorarioInicio()->format('H:m:s')) <= $hora && strtotime($doctor->getHorario()->getHorarioFin()->format('H:m:s')) >= $hora ){
+                $name = $doctor->getNombre() . ' ' . $doctor->getApellidos();
+                break;
+            }
+        }
+
+        return array($name);
+    }
 }

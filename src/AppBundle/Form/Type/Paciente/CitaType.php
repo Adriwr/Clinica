@@ -19,21 +19,23 @@ class CitaType extends AbstractType
             ->add('consultorio', 'choice' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'ng-model'=> 'cita.consultorio' ),
+                    'ng-model'=> 'cita.consultorio',
+                    'ng-click' => 'getDoctor()'
+                ),
                 'label' => 'Consultorio',
                 'choices'  => array(
-                    'Consultorio 1' => 'Consultorio #1',
-                    'Consultorio 2' => 'Consultorio #2',
-                    'Consultorio 3' => 'Consultorio #3',
-                    'Consultorio 4' => 'Consultorio #4',
-                    'Consultorio 5' => 'Consultorio #5',
-                    'Consultorio 6' => 'Consultorio #6',
-                    'Consultorio 7' => 'Consultorio #7',
-                    'Consultorio 8' => 'Consultorio #8',
-                    'Consultorio 9' => 'Consultorio #9',
-                    'Consultorio 10' => 'Consultorio #10',
-                    'Consultorio 11' => 'Consultorio #11',
-                    'Consultorio 12' => 'Consultorio #12'
+                    '1' => 'Consultorio #1',
+                    '2' => 'Consultorio #2',
+                    '3' => 'Consultorio #3',
+                    '4' => 'Consultorio #4',
+                    '5' => 'Consultorio #5',
+                    '6' => 'Consultorio #6',
+                    '7' => 'Consultorio #7',
+                    '8' => 'Consultorio #8',
+                    '9' => 'Consultorio #9',
+                    '10' => 'Consultorio #10',
+                    '11' => 'Consultorio #11',
+                    '12' => 'Consultorio #12'
                 ),
                 'required' => true ) )
             ->add('medico', 'text' , array(
@@ -42,6 +44,7 @@ class CitaType extends AbstractType
                     'placeholder' => 'Médico',
                     'ng-model'=> 'cita.medico' ),
                 'label' => 'Médico',
+                'read_only' => true,
                 'required' => true ) )
             ->add('fecha', 'text' , array(
                 'attr' => array(
@@ -49,12 +52,13 @@ class CitaType extends AbstractType
                     'placeholder' => 'Fecha',
                     'ng-model'=> 'cita.fecha'),
                 'label' => 'Fecha',
-                 'disabled' => true,
+                'read_only' => true,
                 'required' => true ) )
             ->add( 'Guardar', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',
-                    'ng-click'=> 'crear()')) );
+                    'ng-disabled' => '!cita.fecha || !cita.consultorio || !cita.medico',
+                    'ng-click'=> 'guardarCita()')) );
     }
     /**
      * Opciones default del formulario

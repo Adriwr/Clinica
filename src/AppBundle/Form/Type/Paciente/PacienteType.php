@@ -106,11 +106,9 @@ class PacienteType extends AbstractType
                        'Zacatecas' => 'Zacatecas',
 
                    )
-
-
                )
            )
-           ->add('pais', 'text' , array(
+           ->add('pais', 'country' , array(
                    'attr' => array(
                        'class' => 'form-control',
                        'placeholder' => 'País',
@@ -133,12 +131,7 @@ class PacienteType extends AbstractType
                        'ng-model'=> 'paciente.telefonoEmergencia' ),
                    'label' => 'Télefono de emergencia',
                    'required' => true )
-           )
-
-           ->add( 'Agregar', 'submit', array(
-               'attr' => array(
-                   'class' => 'btn btn-primary pull-right',
-                   'ng-click'=> 'crear()')) );
+           );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

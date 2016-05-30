@@ -60,6 +60,7 @@ class MedicoType extends AbstractType{
                     'label' => 'Télefono de emergencia',
                     'required' => true )
             )
+            ->add('horario', new HorarioType())
 
         ;
     }

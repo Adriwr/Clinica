@@ -10,6 +10,35 @@ app.
     controller('AgendarPacienteCtrl', function($scope,$log, $http, $modal, $filter, $rootScope, AgendarPacienteFactory) {
         var validViews = ['year', 'month', 'day', 'hour', 'minute'];
         var selectable = true;
+        $scope.dateRangeStart = new Date();
+
+        $scope.disableDates = AgendarPacienteFactory.getCitas( { month : $scope.dateRangeStart.getMonth() }, function(datesAppoints){
+
+            console.log(datesAppoints);
+            for(var k = 0; k < datesAppoints.length ; k++){
+                datesAppoints[k] = new Date(datesAppoints[k]);
+            }
+            console.log(datesAppoints);
+
+            $scope.beforeRender = function ($view, $dates, $leftDate, $upDate, $rightDate) {
+                if ($scope.dateRangeStart) {
+                    var activeDate = moment($scope.dateRangeStart).subtract(1, $view).add(1, 'minute');
+                    var auxlen = datesAppoints.length;
+                    var fechas = [], k = 0;
+                    for (var i = 0; i < $dates.length; i++) {
+                        if ($dates[i].localDateValue() <= activeDate.valueOf()) {
+                            $dates[i].selectable = false;
+                        }
+                        for(k = 0; k < datesAppoints.length ; k++){
+                            if ($dates[i].localDateValue() === datesAppoints[k].valueOf()) {
+                                $dates[i].selectable = false;
+                            }
+                        }
+                    }
+                }
+            };
+
+        } );
 
         /* Bindable functions
          -----------------------------------------------*/
@@ -25,12 +54,15 @@ app.
         $scope.setLocale = setLocale;
 
         moment.locale('es');
-        $scope.dateRangeStart = new Date();
+
         $scope.cita = {
             fecha: ""
         };
-        $scope.$watch('cita.fecha', function() {
-            $scope.cita.fecha = $filter('date')($scope.cita.fecha, 'dd-MM-yyyy h:mm a');
+        $scope.$watch('cita.fechaAux', function() {
+            $scope.cita.fecha = $filter('date')($scope.cita.fechaAux, 'dd-MM-yyyy h:mm a');
+            if($scope.cita.consultorio){
+                $scope.getDoctor();
+            }
         });
 
         $scope.config = {
@@ -104,11 +136,59 @@ app.
             if ($scope.dateRangeStart) {
                 var activeDate = moment($scope.dateRangeStart).subtract(1, $view).add(1, 'minute');
                 for (var i = 0; i < $dates.length; i++) {
+
                     if ($dates[i].localDateValue() <= activeDate.valueOf()) {
                         $dates[i].selectable = false;
                     }
+
+
                 }
+
             }
         };
+
+        $scope.getDoctor = function () {
+            if ($scope.cita.fecha) {
+                console.log($scope.cita.fechaAux);
+                $scope.doctor = AgendarPacienteFactory.getDoctor( { fecha : $scope.cita.fechaAux, consultorio: $scope.cita.consultorio }, function(nombre){
+                    $scope.cita.medico = nombre[0];
+                    if($scope.cita.medico == ""){
+                        $scope.notificacion('error','Lo sentimos, el consultorio deseado no tiene médico asignado en ese horario', 'Medico no asignado');
+                        alert("Lo sentimos, el consultorio deseado no tiene médico asignado en ese horario")
+                    }
+                });
+            }else{
+                alert("Seleccione un horario");
+            }
+        };
+
+        /**
+         * Función para guardar la cita
+         *
+         */
+        $scope.guardarCita = function(tipo, mensaje, titulo){
+            AgendarPacienteFactory.saveAppoint( { cita : $scope.cita }, function(data){
+
+            });
+        };
+
+        /**
+         * Función para notificar de un cambio y recargar los datos
+         * @param tipo
+         * @param mensaje
+         * @param titulo
+         */
+        $scope.notificacion = function(tipo, mensaje, titulo){
+            // Se envia un mensaje al usuario de éxito
+            $rootScope.$emit('addToastr', [{
+                type  : tipo,
+                css   : 'toast-top-right',
+                msg   : mensaje,
+                title : titulo
+            }]);
+            //$scope.datosTabla = ComunidadesAdmin.getPendientes();
+        };
+
+
     })
 ;

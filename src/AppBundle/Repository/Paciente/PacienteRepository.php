@@ -12,4 +12,22 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class PacienteRepository extends DocumentRepository
 {
+    /**
+     * @return array
+     */
+    public function getAllAppointments($month)
+    {
+        $appoints = array();
+        $appointGross = $this->createQueryBuilder()
+            ->field('citas')->exists(true)
+            ->select('citas')
+            ->getQuery()
+            ->execute();
+
+        foreach($appointGross as $appoint) {
+            $appoints[] = $appoint->getFecha();
+        }
+
+        return $appoints;
+    }
 }
