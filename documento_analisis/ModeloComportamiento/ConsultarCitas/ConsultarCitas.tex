@@ -1,7 +1,7 @@
 %-------------------------------------- COMIENZA descripción del caso de uso.
 
-\begin{UseCase}{CU3}{Consultar Citas}{El paciente consultará el historial de citas cuando necesite observar la fecha, hora y consultorio de las citas que ha agendado. El sistema mostrará la información de las citas del paciente.}
-	\UCitem{Versión}{0.2}
+\begin{UseCase}{CU3}{Consultar Citas}{El paciente consultará el historial de sus próximas citas agendadas cuando necesite observar la fecha, hora y consultorio de las citas que ha agendado. El sistema mostrará la información de las próximas citas del paciente.}
+	\UCitem{Versión}{0.3}
     \UCitem{Actor}{Paciente}
     \UCitem{Propósito}{El paciente pueda observar las citas agendadas, así como la fecha, hora y consultorio de estas.}
     \UCitem{Entradas}{
@@ -72,6 +72,7 @@
 
 \begin{UCtrayectoria}{}
 		\UCpaso[\UCactor] selecciona mostrar las citas dando click en el botón ``Mostrar citas''.
-		\UCpaso muestra la pantalla UI3 Consultar citas del paciente. [ERR1].
+		\UCpaso solicita al repositorio de datos los datos de las próximas citas del paciente. [ERR1].
+		\UCpaso muestra la pantalla UI3 Consultar citas del paciente.
 \end{UCtrayectoria}
 %-------------------------------------- TERMINA descripción del caso de uso.

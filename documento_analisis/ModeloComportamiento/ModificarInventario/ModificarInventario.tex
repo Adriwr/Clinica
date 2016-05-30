@@ -38,17 +38,17 @@
     	\begin{itemize}
     	\item ERR1 - Producto no encontrado:
     		\begin{itemize}
-    			\item El sistema mestra el mensaje MSG22d ``Producto no encontrado''.
+    			\item El sistema mestra el mensaje MSG22b ``Producto no encontrado''.
     			\item Regresa al punto 2.
     		\end{itemize}
     	\item ERR2 - Cantidad ingresada no válida:
 	    	\begin{itemize}
-				\item El sistema muestra el mensaje MSG22b ``Ingrese una cantidad válida''.
+				\item El sistema muestra el mensaje MSG22c ``Ingrese una cantidad válida''.
 				\item Regresa a punto 4.
 			\end{itemize}
 		\item ERR3 - Cantidad no ingresada:
 			\begin{itemize}
-				\item El sistema muestra el mensaje MSG22c ``Ingrese la cantidad''.
+				\item El sistema muestra el mensaje MSG22d ``Ingrese la cantidad''.
 				\item Regresa al punto 4.
 			\end{itemize}
 		\end{itemize}
@@ -71,5 +71,6 @@
 		\UCpaso [\UCactor] ingresa la nueva cantidad en el campo `cantidad' del formulario.[ERR2] [ERR3].
 		\UCpaso actualiza la cantidad en inventario del medicamento.
 		\UCpaso registra la nueva cantidad en el repositorio de datos.
+		\UCpaso muestra la pantalla IU23 Consultar Inventario.
 \end{UCtrayectoria}
 %-------------------------------------- TERMINA descripción del caso de uso.

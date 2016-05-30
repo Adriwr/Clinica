@@ -1,6 +1,6 @@
 %-------------------------------------- COMIENZA descripción del caso de uso.
 
-\begin{UseCase}{CU21}{Consultar Paciente}{El gerente visualizará la información de todos los pacientes registrados en el sistema cuando lo necesite. El sistema mostrará la información de los pacientes.}
+\begin{UseCase}{CU21}{Consultar Pacientes}{El gerente visualizará la información de todos los pacientes registrados en el sistema cuando lo necesite. El sistema mostrará la información de los pacientes.}
 	\UCitem{Versión}{0.2}
     \UCitem{Actor}{Gerente}
     \UCitem{Propósito}{El gerente pueda observar los datos de los pacientes registrados en el sistema.}
@@ -90,7 +90,8 @@
 \end{UseCase}
 
 \begin{UCtrayectoria}{}
-		\UCpaso[\UCactor] selecciona mostrar los pacientes registrados dando click en el botón ``Mostrar Pacientes''. [ERR1]
-		\UCpaso muestra la pantalla UI21 Consultar con la lista de los pacientes registrados. [ERR2].
+		\UCpaso[\UCactor] selecciona mostrar los pacientes registrados dando click en el botón ``Mostrar Pacientes''. [ERR1].
+		\UCpaso solicita los datos de los pacientes registrados al repositorio de datos. [ERR2].
+		\UCpaso muestra la pantalla UI21 Consultar Pacientes, con la lista de los pacientes registrados.
 \end{UCtrayectoria}
 %-------------------------------------- TERMINA descripción del caso de uso.
