@@ -49,7 +49,6 @@ class ExpedienteController extends Controller
                 'required' => true ))
             ->add('fechaDiagnostico', 'date', array(
                 'attr' => array(
-                    'class' => 'form-control',
                     'placeholder' => '',
                     'ng-model'=> 'alergia.fecha_diagnostico' ),
                 'label' => 'Fecha diagnosticada',
@@ -226,7 +225,6 @@ class ExpedienteController extends Controller
         $form_embarazos= $this->get('form.factory')->createNamedBuilder('embarazos', 'form',$embarazo)
             ->add('fecha', 'date', array(
                 'attr' => array(
-                    'class' => 'form-control',
                     'ng-model'=> 'embarazo.fecha'
                 ),
                 'label' => 'Fecha',
@@ -254,7 +252,6 @@ class ExpedienteController extends Controller
                 'required' => true ))
             ->add('fecha', 'date', array(
                 'attr' => array(
-                    'class' => 'form-control',
                     'ng-model'=> 'enfermedad.fecha'
                 ),
                 'label' => 'Fecha diagnosticada',
@@ -480,5 +477,9 @@ class ExpedienteController extends Controller
         $yearsBefore = date('Y', mktime(0, 0, 0, date("m"), date("d"), date("Y") - $distance));
         $yearsAfter = date('Y', mktime(0, 0, 0, date("m"), date("d"), date("Y") + $distance));
         return array_combine(range($yearsBefore, $yearsAfter), range($yearsBefore, $yearsAfter));
+    }
+
+    public static function getEnfermedades(){
+
     }
 }

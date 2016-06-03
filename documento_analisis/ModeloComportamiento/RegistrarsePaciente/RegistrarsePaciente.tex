@@ -1,0 +1,94 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{Cu26}{Registrar paciente}{El actor desea registrarse.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Paciente}
+    \UCitem{Propósito}{Poder agendar citas y ser atendido por un médico.}
+    \UCitem{Entradas}{
+    	\begin{itemize}
+    		\item *Email del paciente: cadena de texto compuesta de 4 partes:  
+    		\begin{itemize}
+    			\item cadena de texto.
+    			\item carácter ‘@’
+    			\item cadena que identifica al servidor que brinda el servicio de correo electrónico
+    			\item carácter ‘.’ y dominio
+    		\end{itemize}
+    		\item* Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
+    		\item *Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
+    		\item *Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+    		\item Dirección
+    		\begin{itemize}
+    			\item *Calle: Cádena de caracteres.
+    			\item Número: Cádena de caracteres.
+    			\item *Colonia: Cádena de caracteres.
+    			\item *Estado: Cádena de caracteres.
+    			\item *País : Cádena de caracteres.
+    			\item Teléfono particular: Cádena de 8 a 10 caracteres.
+    			\item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
+    		\end{itemize}    
+    		\item *Contraseña:  Cadena de longitud mínima de 8 caracteres
+    	\end{itemize} 
+    }
+    \UCitem{Origen}{
+    	\begin{itemize}
+    		\item Desde teclado: todos los campos.
+    	\end{itemize}
+    }
+    \UCitem{Salidas}{
+    	\begin{itemize}
+    		\item Mensaje de confirmación ``Paciente registrado correctamente''
+    	\end{itemize}
+    }
+    
+    \UCitem{Destino}{Pantalla}
+   	\UCitem{Precondiciones}{
+   	    \begin{itemize}
+	   	    \item Que no exista un paciente registrado con el mismo email.
+   	    \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{Se guardan los datos del médico en el sistema}
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos'' y se continúa desde el paso 2
+    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 2 
+    	\end{itemize}
+    }
+	\UCitem{Tipo de ejecución}{Primaria}
+	\UCitem{Prioridad}{Alta}
+	\UCitem{Volatilidad}{Baja}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Estado}{En edición}
+	\UCitem{Autor}{David Alberto Pacheco Soto}
+	\UCitem{Revisor}{}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{Paciente}
+		\UCpaso[\UCactor] solicita registrar un paciente dando click en \IUbutton{Registrarse como paciente}.
+		\UCpaso Solicita los datos listados en entradas mostrando la IU
+		\UCpaso [\UCactor] Proporciona los datos
+		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón \IUbutton{Finalizar registro}
+		\UCpaso Verifica que todos los datos requeridos hayan sido completados
+		\UCpaso Verifica que los datos proporcionados tengan el formato requerido
+		\UCpaso Verifica que el correo electrónico ingresado no esté registrado [TA1]
+		\UCpaso Almacena los datos del paciente 
+		\UCpaso Informa el resultado de la transacción
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Ya existe un paciente registrado con ese correo electrónico}
+	\UCpaso Muestra mensaje de error ``El correo electrónico proporcionado ya está registrado''
+	\UCpaso Continúa la ejecución desde paso 2
+	
+\end{UCtrayectoriaA}
+
+%-------------------------------------- TERMINA descripción del caso de uso.
