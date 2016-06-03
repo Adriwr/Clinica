@@ -4,7 +4,7 @@
 Registrar el pago de una cita para que el paciente pueda acceder a ésta.
 
 \subsubsection{Diseño}
-Esta pantalla aparece al hacer click sobre "Realizar pago de cita" al haber iniciado sesión como cajero.
+Esta pantalla aparece al hacer click sobre \IUbutton{Realizar pago de cita} al haber iniciado sesión como cajero.
 
 \begin{figure}[htbp!]
 	\centering
@@ -15,7 +15,7 @@ Esta pantalla aparece al hacer click sobre "Realizar pago de cita" al haber inic
 
 \subsubsection{Salidas}
 \begin{itemize} 
-	\item Mensaje de confirmación: Cadena "Pago registrado correctamente"
+	\item Mensaje de confirmación: Cadena ``Pago registrado correctamente"
 	\item Información de cita:
 	\begin{itemize}
 		\item Fecha de cita: Fecha en formato dd/mm/yyyy
@@ -48,7 +48,7 @@ Esta pantalla aparece al hacer click sobre "Realizar pago de cita" al haber inic
 Registrar los datos y antecedentes médicos de un paciente.
 
 \subsubsection{Diseño}
-Esta pantalla aparece al hacer click sobre "Atender paciente" y es la primera consulta del paciente, al haber iniciado sesión como médico.
+Esta pantalla aparece al hacer click sobre \IUbutton{Atender paciente} y es la primera consulta del paciente, al haber iniciado sesión como médico.
 
 \begin{figure}[htbp!]
 	\centering
@@ -59,11 +59,11 @@ Esta pantalla aparece al hacer click sobre "Atender paciente" y es la primera co
 
 \subsubsection{Salidas}
 \begin{itemize} 
-	\item Listadas en el caso de uso CU6 "Crear expediente"
+	\item Listadas en el caso de uso CU6 ``Crear expediente"
 \end{itemize}
 \subsubsection{Entradas}
 \begin{itemize}
-	\item Listadas en el caso de uso CU6 "Crear expediente"
+	\item Listadas en el caso de uso CU6 ``Crear expediente"
 \end{itemize}
 
 \subsubsection{Comandos}
@@ -86,3 +86,112 @@ Esta pantalla aparece al hacer click sobre "Atender paciente" y es la primera co
 	\item {\bf MSGc} Formato de campos inválido
 \end{Citemize}
 
+
+\subsection{IU registrar médico}
+
+\subsubsection{Objetivo}
+Registrar un médico para que pueda atender citas.
+
+\subsubsection{Diseño}
+Esta pantalla aparece al hacer click sobre \IUbutton{Registrar médico} al haber iniciado sesión como gerente.
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/IU_registrar_medico}
+	\caption{IU Registrar médico}
+\end{figure}
+
+
+\subsubsection{Salidas}
+\begin{itemize} 
+	\item Mensaje de confirmación: Cadena ``Médico registrado correctamente"
+\end{itemize}
+\subsubsection{Entradas}
+\begin{itemize}
+	\item Email del médico: cadena de texto compuesta de 4 partes [requerido]:  
+	\begin{itemize}
+		\item cadena de texto.
+		\item carácter ‘@’
+		\item cadena que identifica al servidor que brinda el servicio de correo electrónico
+		\item carácter ‘.’ y dominio
+	\end{itemize}
+	\item *Contraseña:  Cadena de longitud mínima de 8 caracteres
+	\item Lista de datos personales [todos requeridos]
+	\begin{itemize}
+		\item Nombre: Constituido por nombre(s) y apellidos.Cádena de caracteres
+		\item Sexo  Caracter 'H' o 'M' (hombre,mujer)
+		\item Fecha de nacimiento: Formato de fecha DD/MM/AAAA
+		\item Teléfono: Cadena de 8 a 20 dígitos
+		\item Teléfono de emergencia: Cadena de 8 a 20 dígitos
+		
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Comandos}
+\begin{itemize}
+	\item \IUbutton{Finalizar registro de médico}:  Verifica que los datos requeridos hayan sido ingresados, que los datos ingresados tengan un formato correcto y que no exista un médico registrado con el mismo correo elctrónico. En tal caso se guarda la información del médico.  \IUref{UI2}{Home}.	
+\end{itemize}
+
+\subsubsection{Mensajes}
+\begin{Citemize}
+	\item {\bf MSGa} El correo electrónico proporcionado ya está registrado
+	\item {\bf MSGb} Complete todos los campos
+	\item {\bf MSGc} Formato de campos inválido
+\end{Citemize}
+
+
+\subsection{IU registrarse paciente}
+
+\subsubsection{Objetivo}
+Que un paciente se registre para poder agendar citas.
+
+\subsubsection{Diseño}
+Esta pantalla aparece al hacer click sobre \IUbutton{Registrarse como paciente}.
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/IU_registrarse_paciente}
+	\caption{IU Registrarse paciente}
+\end{figure}
+
+
+\subsubsection{Salidas}
+\begin{itemize} 
+	\item Mensaje de confirmación: Cadena ``Paciente registrado correctamente"
+\end{itemize}
+\subsubsection{Entradas}
+\begin{itemize}
+	\item *Email del paciente: cadena de texto compuesta de 4 partes:  
+	\begin{itemize}
+		\item cadena de texto.
+		\item carácter ‘@’
+		\item cadena que identifica al servidor que brinda el servicio de correo electrónico
+		\item carácter ‘.’ y dominio
+	\end{itemize}
+	\item* Nombre completo del paciente:  3 cadenas de caracteres (Nombre(s), apellido paterno, apellido materno).
+	\item *Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
+	\item *Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+	\item Dirección
+	\begin{itemize}
+		\item *Calle: Cádena de caracteres.
+		\item Número: Cádena de caracteres.
+		\item *Colonia: Cádena de caracteres.
+		\item *Estado: Cádena de caracteres.
+		\item *País : Cádena de caracteres.
+		\item Teléfono particular: Cádena de 8 a 10 caracteres.
+		\item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
+	\end{itemize}    
+	\item *Contraseña:  Cadena de longitud mínima de 8 caracteres
+\end{itemize}
+
+\subsubsection{Comandos}
+\begin{itemize}
+	\item \IUbutton{Finalizar registro de paciente}:  Verifica que los datos requeridos hayan sido ingresados, que los datos ingresados tengan un formato correcto y que no exista un paciente registrado con el mismo correo elctrónico. En tal caso se guarda la información del paciente.  \IUref{UI2}{Home}.	
+\end{itemize}
+
+\subsubsection{Mensajes}
+\begin{Citemize}
+	\item {\bf MSGa} El correo electrónico proporcionado ya está registrado
+	\item {\bf MSGb} Complete todos los campos
+	\item {\bf MSGc} Formato de campos inválido
+\end{Citemize}
