@@ -60,7 +60,7 @@
                 <li>
                 	<a href="{{ path('consultar_pacientes') }}">
                 		<i class="fa fa-users"></i>
-                		Mostrar Pacientes
+                		Control de pacientes
                 	</a>
                 </li>
                 <li>

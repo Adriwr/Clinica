@@ -21,7 +21,7 @@ registrar_paciente:
   
 consultar_pacientes:
   path: /consultar-paciente/
-  defaults: {_controller: AppBundle:Gerente/Gerente:getPacientes}
+  defaults: {_controller: AppBundle:Paciente/Paciente:consultarPacientes}
 
 registrar_cajero:
   path: /registrar-cajero/
@@ -49,6 +49,3 @@ consultar_actividad_diaria:
 consultar_actividad_mensual:
   path: /gerente/actividad-mensual/
   defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasMes}
-crear_expediente:
-    path:     /expediente/crear/{id}
-    defaults: { _controller: AppBundle:Expediente/Expediente:crear }

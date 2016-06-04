@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  #Version de Ubuntu que va a descargar inicialmente:
+  config.vm.box = "ubuntu/trusty64"
+
+  #Script de aprovisionamiento, se recomienda comentarlo una vez que se ha instalado lo requerido.
+  config.vm.provision :shell, :path => "bootstrap.sh"
+
+  config.vm.network :private_network, ip: "192.168.80.10"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  #Mis rutas de workspaces
+  config.vm.synced_folder "/Users/demis/Proyecto ADOO/Clinica", "/var/www/clinica", nfs: true
+  #Nombre del host que aparece en el shell
+  config.vm.hostname = "clinica"
+
+  # Tamaño de la memoria en virtualbox y el nombre de la virtual
+  config.vm.provider "virtualbox" do |vb|
+  	vb.name = "clinica"
+	#vb.gui = true
+    vb.customize ["modifyvm", :id, "--memory", "2024"]
+  end
+end
+
