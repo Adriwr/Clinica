@@ -3,9 +3,11 @@
 namespace AppBundle\Controller\Cajero;
 use AppBundle\Document\Cajero\Cajero;
 use AppBundle\Document\User\User;
+use AppBundle\Form\Type\Cajero\CajeroPagoCitaType;
 use AppBundle\Form\Type\Cajero\CajeroRegistrationType;
 use AppBundle\Form\Type\Cajero\CajeroType;
 use AppBundle\Form\Type\User\RegistrationType;
+use MongoDBODMProxies\__CG__\AppBundle\Document\Paciente\PacienteCitas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,6 +48,37 @@ class CajeroController extends Controller
             ':Cajero/registrar:registrarCajero.html.twig',
             array(
                 'formUsuario' => $formUsuario->createView()
+            )
+        );
+    }
+
+    /**
+     * Acción para mostrar el formulario de registro de cajero
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function registrarPagoCitaAction(request $request)
+    {
+        $cita = new PacienteCitas();
+
+        $formPagoCita = $this->createForm(new CajeroPagoCitaType(),$cita);
+
+        $formPagoCita->handleRequest($request);
+
+        if($formPagoCita->isValid()){
+
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($cita);
+            $dm->flush();
+
+            return $this->redirect($this->generateUrl('registrar_cajero'));
+
+        }
+
+        return $this->render(
+            ':Cajero/pago:registrarPagoCita.html.twig',
+            array(
+                'formPagoCita' => $formPagoCita->createView()
             )
         );
     }
