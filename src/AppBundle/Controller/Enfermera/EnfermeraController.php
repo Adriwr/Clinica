@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller\Enfermera;
 
+
+use AppBundle\Document\Paciente\PacienteCitas;
 use AppBundle\Document\Enfermera\Enfermera;
 use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Enfermera\EnfermeraRegistrationType;
@@ -11,6 +13,8 @@ use AppBundle\Form\Type\User\RegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\Type\Paciente\CitaType;
+
 
 class EnfermeraController extends Controller
 {
@@ -46,6 +50,11 @@ class EnfermeraController extends Controller
             )
         );
     }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function registrarPacienteAction(Request $request)
     {
         $usuario = new User();
@@ -78,4 +87,52 @@ class EnfermeraController extends Controller
             )
         );
     }
+    public function mostrarPacientesAction(Request $request)
+    {
+        $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->getAll();
+        return $this->render(':Enfermera:mostrarPacientes.html.twig', array('pacientes' => $pacientes));
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function agendarCitaPacienteAction(Request $request)
+    {
+        $cita = new PacienteCitas();
+
+
+        $form = $this->createForm(new CitaType(), $cita);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $dm = $this->get( 'doctrine_mongodb' )->getManager();
+            $paciente = $dm->getRepository('AppBundle:Paciente\Paciente')->findOneById($request->get('id'));
+            // aqui va vincular a usuario
+            $paciente->addCita($cita);
+            $dm->persist($cita);
+            $dm->flush();
+
+            $request->getSession()->getFlashBag()->add(
+                'exito',
+                'Cita guardada'
+            );
+
+            return $this->redirect($this->generateUrl('mostrar_paceintes_enfermera'));
+
+        }
+        $request->getSession()->getFlashBag()->add(
+            'error',
+            'Datos incorrectos, por favor intenta nuevamente'
+        );
+
+        return $this->render(
+            ':Enfermera/citas:agendar.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
 }

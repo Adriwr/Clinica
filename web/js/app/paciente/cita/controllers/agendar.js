@@ -13,8 +13,6 @@ app.
         $scope.dateRangeStart = new Date();
 
         $scope.disableDates = AgendarPacienteFactory.getCitas( { month : $scope.dateRangeStart.getMonth() }, function(datesAppoints){
-
-            console.log(datesAppoints);
             for(var k = 0; k < datesAppoints.length ; k++){
                 datesAppoints[k] = new Date(datesAppoints[k]);
             }
@@ -150,6 +148,7 @@ app.
         $scope.getDoctor = function () {
             if ($scope.cita.fecha) {
                 console.log($scope.cita.fechaAux);
+                alert($scope.cita.fechaAux +  $scope.cita.consultorio);
                 $scope.doctor = AgendarPacienteFactory.getDoctor( { fecha : $scope.cita.fechaAux, consultorio: $scope.cita.consultorio }, function(nombre){
                     $scope.cita.medico = nombre[0];
                     if($scope.cita.medico == ""){

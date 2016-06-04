@@ -1,0 +1,9 @@
+<div class="col-xs-6 well">
+    <datetimepicker data-ng-model="cita.fechaAux" style="width: 100%; height: 100%" data-before-render="beforeRender($view, $dates, $leftDate, $upDate, $rightDate)" data-datetimepicker-config="config"></datetimepicker>
+</div>
+
+<div class="col-xs-6">
+    {{ form_start(form , {'attr': {'class': 'form-horizontal'} }) }}
+    {{ form_widget(form ) }}
+    {{ form_end(form) }}
+</div>

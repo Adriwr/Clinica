@@ -20,7 +20,7 @@ class CitaType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'ng-model'=> 'cita.consultorio',
-                    'ng-click' => 'getDoctor()'
+                    'ng-change' => 'getDoctor()'
                 ),
                 'label' => 'Consultorio',
                 'choices'  => array(

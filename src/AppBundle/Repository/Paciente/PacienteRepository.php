@@ -15,7 +15,7 @@ class PacienteRepository extends DocumentRepository
     /**
      * @return array
      */
-    public function getAllAppointments($month)
+    public function getAllAppointments()
     {
         $appoints = array();
         $appointGross = $this->createQueryBuilder()
@@ -57,4 +57,5 @@ class PacienteRepository extends DocumentRepository
 
         return $pacientes;
     }
+    
 }
