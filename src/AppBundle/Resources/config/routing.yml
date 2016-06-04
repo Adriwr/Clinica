@@ -62,8 +62,8 @@ crear_expediente:
     path:     /expediente/crear/{id}
     defaults: { _controller: AppBundle:Expediente/Expediente:crear }
 registrar_pago_cita:
-    path:     /expediente/cajero}
-    defaults: { _controller: AppBundle:Expediente/Expediente:crear }
+    path:     /cajero/cita
+    defaults: { _controller: AppBundle:Cajero/Cajero:registrarPagoCita }
 consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
