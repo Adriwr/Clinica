@@ -8,7 +8,34 @@
     <h3 class="page-header">Crear Expediente</h3>
 {% endblock %}
 
+
 {% block content %}
+    <script>
+        function addEnfermedad( ){
+
+            /*
+             * Get all form values
+             */
+            var values = {};
+            var $form = $('form[name=alergia]');
+            $.each( $form.serializeArray(), function(i, field) {
+                values[field.name] = field.value;
+            });
+
+            /*
+             * Throw the form values to the server!
+             */
+            $.ajax({
+                type        : $form.attr( 'method' ),
+                url         : $form.attr( 'action' ),
+                data        : values,
+                success     : function(data) {
+                    alert( data );
+                }
+            });
+
+        }
+    </script>
     <div class="row" ng-controller="MedicoCtrl">
         <div class="col-xs-5">
             <div class="panel panel-primary">
@@ -19,7 +46,6 @@
                 <div class="panel-body">
                     {{ form_start(form_enfermedades) }}
                     {{ form_widget(form_enfermedades) }}
-                    <button onclick="addEnfermedad();"></button>
                     {{ form_end(form_enfermedades) }}
                 </div>
                 <!-- /.panel-body -->

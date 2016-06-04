@@ -19,7 +19,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "twig/extensions": "1.0.*",
-        "friendsofsymfony/jsrouting-bundle": "~1.1",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
         "jms/serializer-bundle" : "*",
         "friendsofsymfony/rest-bundle" : "1.0.*",
         "friendsofsymfony/user-bundle": "~2.0@dev",
