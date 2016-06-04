@@ -83,9 +83,7 @@ class GerenteController extends Controller
     	$pacientes = $this->get( 'doctrine_mongodb' )->getManager()
     		->getRepository( 'AppBundle:User\User' )
     		->getAllUsers('paciente');
-     	return $this->render(':Paciente/consultar:mostrarPacientes.html.twig', array('pacientes' => $pacientes));
-    	
-    	
+     	return $this->render(':Gerente/actividad:mostrarPacientes.html.twig', array('pacientes' => $pacientes));
     }
    
 }
