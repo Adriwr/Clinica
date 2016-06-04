@@ -28,14 +28,14 @@ class EnfermedadRegistrationType extends AbstractType
                     'ng-model'=> 'enfermedad.tratada'
                 ),
                 'label' => 'Tratada',
-                'required' => true ))
+                'required' => false ))
             ->add('observaciones', 'text', array(
                 'attr' => array(
                     'class' => 'form-control',
                     'ng-model'=> 'enfermedad.observaciones'
                 ),
                 'label' => 'Observaciones',
-                'required' => true ))
+                'required' => false ))
             ->add('save', 'submit', array('label' => 'Añadir enfermedad'));
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
