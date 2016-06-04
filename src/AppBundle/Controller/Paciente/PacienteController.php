@@ -27,9 +27,6 @@ class PacienteController extends Controller
             $usuario->addRole("ROLE_PACIENTE");
             $usuario->setUsername($usuario->getPaciente()->getNombre() . " " . $usuario->getPaciente()->getApellidos());
             $dm->persist($usuario);
-            $dm->flush();
-
-
             return $this->redirect($this->generateUrl('login'));
 
         }
