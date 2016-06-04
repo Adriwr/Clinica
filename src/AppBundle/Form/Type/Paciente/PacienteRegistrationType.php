@@ -43,7 +43,7 @@ class PacienteRegistrationType extends AbstractType
     }
     public function getParent()
     {
-        return ChoiceType::class;
+       return 'fos_user_registration';
     }
 
     public function getName()
