@@ -12,6 +12,10 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  */
 class PacienteCitas {
     /**
+     * @ODM\Id
+     */
+    protected $id;
+    /**
      * @ODM\String
      */
     protected $consultorio;

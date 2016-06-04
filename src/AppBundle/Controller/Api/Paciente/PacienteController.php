@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PacienteController extends FOSRestController implements ClassResourceInterface{
 
     /**
-     * Acción para generar los datos de productos
+     * Acción para generar los datos de los pacientes
      * El arreglo generado alimenta la tabla "Pacientes"
      *
      * @return array
@@ -27,16 +27,16 @@ class PacienteController extends FOSRestController implements ClassResourceInter
     }
 
     /**
-     * Acción para generar los datos de productos
+     * Acción para generar los datos de las citas
      * El arreglo generado sirve para deshabilitar las citas que ya esten ocupadas
      *
      * @return array
      * @Rest\View()
      */
-    public function getCitasAction($month){
+    public function getCitasAction(){
         return  $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:User\User' )
-            ->getAllAppointments($month);
+            ->getAllAppointments();
     }
 
 }

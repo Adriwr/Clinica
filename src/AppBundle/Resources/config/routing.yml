@@ -52,3 +52,6 @@ consultar_actividad_mensual:
 crear_expediente:
     path:     /expediente/crear/{id}
     defaults: { _controller: AppBundle:Expediente/Expediente:crear }
+consultar_cita_medico:
+    path:     /medico/consultar-citas
+    defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }

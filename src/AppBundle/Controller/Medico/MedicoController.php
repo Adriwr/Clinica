@@ -53,4 +53,14 @@ class MedicoController extends Controller
                 )
         );
     }
+
+    /**
+     * Acción para mostrar las citas pagadas y que el medico pueda dar consulta
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function consultarCitas(Request $request)
+    {
+
+    }
 }

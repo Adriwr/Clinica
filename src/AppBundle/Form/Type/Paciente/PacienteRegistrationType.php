@@ -38,12 +38,13 @@ class PacienteRegistrationType extends AbstractType
             'data_class'        => 'AppBundle\Document\User\User',
             'csrf_protection'   => false,
             'cascade_validation' => true,
+
             'allow_add' => true
         ));
     }
     public function getParent()
     {
-        return ChoiceType::class;
+        return 'fos_user_registration';
     }
 
     public function getName()

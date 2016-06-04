@@ -138,6 +138,7 @@ class PacienteType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Document\Paciente\Paciente',
+            'validation_groups' => true
         ));
     }
     public function getName()
