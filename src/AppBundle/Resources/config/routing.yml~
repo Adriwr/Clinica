@@ -21,7 +21,7 @@ registrar_paciente:
   
 consultar_pacientes:
   path: /consultar-paciente/
-  defaults: {_controller: AppBundle:Gerente/Gerente:getPacientes}
+  defaults: {_controller: AppBundle:Paciente/Paciente:consultarPacientes}
 
 registrar_cajero:
   path: /registrar-cajero/
