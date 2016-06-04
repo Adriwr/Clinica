@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type\Paciente;
 use AppBundle\Form\Type\Paciente\PacienteType;
 use AppBundle\Form\Type\User\RegistrationType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -42,7 +43,7 @@ class PacienteRegistrationType extends AbstractType
     }
     public function getParent()
     {
-        return 'fos_user_registration';
+        return ChoiceType::class;
     }
 
     public function getName()

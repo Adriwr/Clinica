@@ -1,0 +1,90 @@
+% \IUref{IUAdmPS}{Administrar Planta de Selección}
+% \IUref{IUModPS}{Modificar Planta de Selección}
+% \IUref{IUEliPS}{Eliminar Planta de Selección}
+
+% 
+
+
+% Copie este bloque por cada caso de uso:
+%-------------------------------------- COMIENZA descripción del caso de uso.
+
+%\begin{UseCase}[archivo de imágen]{UCX}{Nombre del Caso de uso}{
+\begin{UseCase}{Cu19}{Registrar médico}{El actor desea registrar un nuevo médico.}
+	\UCitem{Versión}{0.1}
+    \UCitem{Actor}{Gerente}
+    \UCitem{Propósito}{Que el médico pueda atender pacientes y que pueda utilizar las funcionalidades del sistema para médico.}
+    \UCitem{Entradas}{
+    	\begin{itemize}
+    		\item Email del médico: cadena de texto compuesta de 4 partes [requerido]:  
+    		\begin{itemize}
+    			\item cadena de texto.
+    			\item carácter ‘@’
+    			\item cadena que identifica al servidor que brinda el servicio de correo electrónico
+    			\item carácter ‘.’ y dominio
+    		\end{itemize}
+    		\item *Contraseña:  Cadena de longitud mínima de 8 caracteres
+			\item Lista de datos personales [todos requeridos]
+        \begin{itemize}
+            \item Nombre: Constituido por nombre(s) y apellidos.Cádena de caracteres
+            \item Sexo  Caracter 'H' o 'M' (hombre,mujer)
+            \item Fecha de nacimiento: Formato de fecha DD/MM/AAAA
+            \item Teléfono: Cadena de 8 a 20 dígitos
+            \item Teléfono de emergencia: Cadena de 8 a 20 dígitos
+		
+		\end{itemize}
+		\end{itemize}
+    }
+    \UCitem{Origen}{
+    	\begin{itemize}
+    		\item Desde teclado: todos los campos.
+    	\end{itemize}
+    }
+    \UCitem{Salidas}{
+    	\begin{itemize}
+    		\item Mensaje de confirmación ``Médico registrado correctamente''
+    	\end{itemize}
+    }
+    
+    \UCitem{Destino}{Pantalla}
+   	\UCitem{Precondiciones}{
+   	    \begin{itemize}
+	   	    \item Que no exista un médico registrado con el mismo email.
+   	    \end{itemize}
+   	}
+    \UCitem{Postcondiciones}{Se guardan los datos del médico en el sistema}
+    \UCitem{Observaciones}{Ninguna}
+    \UCitem{Errores}{
+    	\begin{itemize}
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos'' y se continúa desde el paso 2
+    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 2 
+    	\end{itemize}
+    }
+	\UCitem{Tipo de ejecución}{Primaria}
+	\UCitem{Prioridad}{Media}
+	\UCitem{Volatilidad}{Baja}
+	\UCitem{Madurez}{Baja}
+	\UCitem{Estado}{En edición}
+	\UCitem{Autor}{David Alberto Pacheco Soto}
+	\UCitem{Revisor}{}
+	
+\end{UseCase}
+
+\begin{UCtrayectoria}{Gerente}
+		\UCpaso[\UCactor] solicita registrar un médico dando click en \IUbutton{Registrar médico}.
+		\UCpaso Solicita los datos listados en entradas mostrando la IU
+		\UCpaso [\UCactor] Proporciona los datos
+		\UCpaso [\UCactor] Confirma los datos haciendo click en el botón \IUbutton{Finalizar registro de médico}
+		\UCpaso Verifica que todos los datos requeridos hayan sido completados
+		\UCpaso Verifica que los datos proporcionados tengan el formato requerido
+		\UCpaso Verifica que el correo electrónico ingresado no esté registrado [TA1]
+		\UCpaso Almacena los datos del médico 
+		\UCpaso Informa el resultado de la transacción
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{TA1}{Ya existe un médico registrado con ese correo electrónico}
+	\UCpaso Muestra mensaje de error ``El correo electrónico proporcionado ya está registrado''
+	\UCpaso Continúa la ejecución desde paso 2
+	
+\end{UCtrayectoriaA}
+
+%-------------------------------------- TERMINA descripción del caso de uso.

@@ -49,3 +49,6 @@ consultar_actividad_diaria:
 consultar_actividad_mensual:
   path: /gerente/actividad-mensual/
   defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasMes}
+crear_expediente:
+    path:     /expediente/crear/{id}
+    defaults: { _controller: AppBundle:Expediente/Expediente:crear }
