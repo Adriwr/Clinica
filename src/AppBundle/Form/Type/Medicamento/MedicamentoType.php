@@ -60,6 +60,10 @@ class MedicamentoType extends AbstractType{
                     'ng-model'=> 'medicamento.existencias' ),
                 'label' => 'Existencias',
                 'required' => true ) )
+            ->add( 'Agregar ingrediente activo', 'button', array(
+                'attr' => array(
+                    'class' => 'btn btn-success',
+                    'onClick'=> 'addActivo();')) )
             ->add( 'Guardar', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',

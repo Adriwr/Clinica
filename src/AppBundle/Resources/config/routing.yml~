@@ -22,7 +22,7 @@ agendar_cita_paciente:
 
 registrar_paciente:
   path: /registrar-paciente/
-  defaults: {_controller: AppBundle:Paciente/Paciente:registrarPaciente}
+  defaults: {_controller: AppBundle:Cita/Paciente:registrarPaciente}
   
 consultar_pacientes:
   path: /consultar-paciente/
@@ -86,7 +86,9 @@ consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
 
+<<<<<<< HEAD
 medico_consultar_citas:
   path: /medico/consultar-citas/
   defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
-
+=======
+>>>>>>> 04cb5289d2f865993b850264fd40ec38abad9465

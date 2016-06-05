@@ -15,6 +15,8 @@
                     <div class="panel-body">
                         {{ form_start(form , {'attr': {'class': 'form-horizontal'} }) }}
                         {{ form_widget(form ) }}
+                        <div id='activo'>
+                        </div>
                         {{ form_end(form) }}
                     </div>
                     <div class="panel-footer">
@@ -29,6 +31,13 @@
     <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.responsive.js') }}"></script>
+    <script>
+        function addActivo(){
+            document.getElementById("activo").innerHTML += "<input type='hidden' name='id' />"
+            +"<input class='form-control' type='text' name='nombre[]' placeholder='Nombre' required='true'/>"
+            +"<input class='form-control' type='number' name='cantidadActivo[]' placeholder='Cantidad' required='true'/>";
+        }
+    </script>
 
 {% endblock %}
 
