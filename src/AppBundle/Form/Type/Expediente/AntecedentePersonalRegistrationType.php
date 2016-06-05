@@ -14,14 +14,14 @@ class AntecedentePersonalRegistrationType extends AbstractType
             'attr' => array(
                 'class' => 'form-control',
                 'placeholder' => '',
-                'ng-model'=> 'antecedente_familiar.frecuencia_bano' ),
+                'ng-model'=> 'expediente.antecedentesPer.frecuenciaBano' ),
             'label' => '¿Cuántas veces se baña a la semana?',
             'required' => true ))
             ->add('cambiosRopa', 'number', array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.cambios_ropa'
+                    'ng-model'=> 'expediente.antecedentesPer.cambiosRopa'
                 ),
                 'label' => '¿Cuántas veces cambia de ropa por semana?',
                 'required' => true ))
@@ -29,7 +29,7 @@ class AntecedentePersonalRegistrationType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.personas_casa'
+                    'ng-model'=> 'expediente.antecedentesPer.personasCasa'
                 ),
                 'label' => '¿Cuántas personas viven con usted?',
                 'required' => true ))
@@ -37,7 +37,7 @@ class AntecedentePersonalRegistrationType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.servicios_casa'
+                    'ng-model'=> 'expediente.antecedentesPer.serviciosCasa'
                 ),
                 'label' => '¿Con qué servicios básicos cuenta?',
                 'required' => true ))
@@ -46,25 +46,25 @@ class AntecedentePersonalRegistrationType extends AbstractType
                 'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'form-control',
-                    'ng-model'=> 'antecedente_familiar.alimentacion'
+                    'ng-model'=> 'expediente.antecedentesPer.alimentacion'
                 ),
                 'label' => '¿Cómo considera su alimentación?',
                 'required' => true ))
             ->add('fuma', 'checkbox', array(
                 'attr' => array(
-                    'ng-model'=> 'antecedente_familiar.fuma'
+                    'ng-model'=> 'expediente.antecedentesPer.fuma'
                 ),
                 'label' => '¿Fuma?',
                 'required' => false ))
             ->add('alcohol', 'checkbox', array(
                 'attr' => array(
-                    'ng-model'=> 'antecedente_familiar.alcohol'
+                    'ng-model'=> 'expediente.antecedentesPer.alcohol'
                 ),
                 'label' => '¿Toma?',
                 'required' => false ))
             ->add('drogas', 'checkbox', array(
                 'attr' => array(
-                    'ng-model'=> 'antecedente_familiar.drogas'
+                    'ng-model'=> 'expediente.antecedentesPer.drogas'
                 ),
                 'label' => '¿Consume drogas?',
                 'required' => false ));

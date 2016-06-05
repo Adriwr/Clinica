@@ -23,7 +23,14 @@ class EmbarazoRegistrationType extends AbstractType
                 ),
                 'label' => 'Descripción',
                 'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir descripción'));
+            ->add('save', 'button', array(
+                    'label' => 'Añadir embarazo',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addEmbarazo()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

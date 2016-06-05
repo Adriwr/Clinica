@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form\Type\Expediente;
 
+use AppBundle\Form\Type\Enfermera\EnfermeraRegistrationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,7 +15,7 @@ class AntecedenteFamiliarRegistrationType extends AbstractType
             'attr' => array(
                 'class' => 'form-control',
                 'placeholder' => '',
-                'ng-model'=> 'antecedente_familiar.nombre' ),
+                'ng-model'=> 'antecedenteFamiliar.nombre' ),
             'label' => 'Nombre',
             'required' => true ))
             ->add('sexo', 'choice', array(
@@ -23,7 +24,7 @@ class AntecedenteFamiliarRegistrationType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.sexo'
+                    'ng-model'=> 'antecedenteFamiliar.sexo'
                 ),
                 'label' => 'Sexo',
                 'required' => true ))
@@ -31,24 +32,32 @@ class AntecedenteFamiliarRegistrationType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.edad' ),
+                    'ng-model'=> 'antecedenteFamiliar.edad' ),
                 'label' => 'Edad',
                 'required' => true ))
             ->add('parentesco', 'text', array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.parentesco' ),
+                    'ng-model'=> 'antecedenteFamiliar.parentesco' ),
                 'label' => 'Teléfono',
                 'required' => true ))
             ->add('telefono', 'number', array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.telefono' ),
+                    'ng-model'=> 'antecedenteFamiliar.telefono' ),
                 'label' => 'Parentesco',
                 'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir familiar'));
+           // ->add('enfermedadesCronicas', new EnfermeraRegistrationType())
+            ->add('save', 'button', array(
+                    'label' => 'Añadir familiar',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addFamiliar()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

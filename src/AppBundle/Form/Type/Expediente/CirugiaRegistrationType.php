@@ -39,7 +39,14 @@ class CirugiaRegistrationType extends AbstractType
                 ),
                 'label' => 'Estado',
                 'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir cirugía'));
+            ->add('save', 'button', array(
+                    'label' => 'Añadir cirugía',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addCirugia()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

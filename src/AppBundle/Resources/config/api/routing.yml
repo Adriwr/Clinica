@@ -28,3 +28,7 @@ paciente:
     type:     rest
     resource: AppBundle\Controller\Api\Paciente\PacienteController
     name_prefix: api_
+expediente:
+    type:     rest
+    resource: AppBundle\Controller\Api\Expediente\ExpedienteController
+    name_prefix: api_

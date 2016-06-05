@@ -7,6 +7,7 @@ var app = angular.module('app',
             'ui.bootstrap',
             'ngSanitize',
             'ui.bootstrap.datetimepicker',
+            'mgo-angular-wizard'
         ])
         .factory('httpInterceptor', function ($q, $rootScope, $log) {
             var loadingCount = 0;

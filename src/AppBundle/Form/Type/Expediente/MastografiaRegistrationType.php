@@ -25,7 +25,14 @@ class MastografiaRegistrationType extends AbstractType
                 ),
                 'label' => 'Notas',
                 'required' => true))
-            ->add('save', 'submit', array('label' => 'Añadir mastografía'));
+            ->add('save', 'button', array(
+                    'label' => 'Añadir mastografía',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addMastografia()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

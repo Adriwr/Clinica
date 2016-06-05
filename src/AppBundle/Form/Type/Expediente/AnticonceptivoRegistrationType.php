@@ -18,7 +18,14 @@ class AnticonceptivoRegistrationType extends AbstractType
             ),
             'label' => 'Nombre',
             'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir anticonceptivo'));
+            ->add('save', 'button', array(
+                    'label' => 'Añadir anticonceptivo',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addAnticonceptivo()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

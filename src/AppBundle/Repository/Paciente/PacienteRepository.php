@@ -57,5 +57,23 @@ class PacienteRepository extends DocumentRepository
 
         return $pacientes;
     }
+    /**
+     * @return array
+     */
+    public function getOne($id)
+    {
+        $pacientes = array();
+       //return array("no" => "mames");
+        $pacientesGross = $this->createQueryBuilder()
+            ->field('id')->equals($id)
+            ->getQuery()
+            ->execute();
+
+        foreach($pacientesGross as $paciente) {
+            return $paciente;
+        }
+
+        return $pacientes;
+    }
     
 }
