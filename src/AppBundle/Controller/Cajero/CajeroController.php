@@ -70,9 +70,8 @@ class CajeroController extends Controller
             echo 'lel';
             print_r($cita);
             echo 'lel';
-
-            $cita = $this->get( 'doctrine_mongodb' )->getManager()
-                ->getRepository('AppBundle:Paciente\PacienteCitas')
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $cita = $dm->getRepository('AppBundle:Paciente\PacienteCitas')
                 ->findOneBy(array(
                     'fecha'=>$cita->getFecha(),
                     'consultorio'=>$cita->getConsultorio()
@@ -89,7 +88,6 @@ class CajeroController extends Controller
                     'Pago registrado correctamente'
                 );
                 $cita->setEstatus(1);
-                $dm = $this->get('doctrine_mongodb')->getManager();
                 $dm->persist($cita);
                 $dm->flush();
                 return $this->redirect($this->generateUrl('home'));
