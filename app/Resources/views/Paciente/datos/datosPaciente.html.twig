@@ -11,7 +11,7 @@
 {% block content %}
         <div class="panel panel-green">
             <div class="panel-heading">
-                Pacientes
+                {{ paciente.nombre }}
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -32,8 +32,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{ dump(paciente) }}
+                       <tr>
+                           <td>
+                               {{ paciente.nombre }} {{ paciente.apellidos }}
+                           </td>
 
+                        <td>
+                            {{ paciente.sexo }}
+                        </td>
+                           <td>
+                               {{ paciente.fechaNacimiento|date('Y-M-d') }}
+                           </td>
+                           <td>
+                               {{ paciente.calle }} {{ paciente.numero }} {{ paciente.colonia }} {{ paciente.estado }} {{ paciente.estado }} {{ paciente.pais}}
+                           </td>
+                           <td>
+                               {{ paciente.telefonoParticular }}
+                           </td>
+                           <td>
+                               {{ paciente.telefonoEmergencia }}
+                           </td>
+                       </tr>
                     </tbody>
                 </table>
             </div>

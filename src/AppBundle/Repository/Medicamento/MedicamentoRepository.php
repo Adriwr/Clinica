@@ -12,11 +12,33 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class MedicamentoRepository extends DocumentRepository
 {
+	/**
+     * @return array
+     */
+    public function getAll()
+    {
+        $medicamentos = array();
+        $medicamentosGross = $this->createQueryBuilder()
+            ->getQuery()
+            ->execute();
+
+        foreach($medicamentosGross as $medicamento) {
+            $medicamentos[] = array(
+                'id'                => $medicamento->getId(),
+                'nombreComercial'   => $medicamento->getNombreComercial(),
+                'precio'        	=> $medicamento->getPrecio(),
+                'laboratorio'    	=> $medicamento->getLaboratorio(),
+                'presentacion'    	=> $medicamento->getPresentacion(),
+                'cantidad'    		=> $medicamento->getLaboratorio(),
+                'existencias'    	=> $medicamento->getExistencias(),
+                'activos'    		=> $medicamento->getActivos()
+            );
+        }
+
+        return $productos;
 
     public function getMedicamentoByName($nombre)
     {
         $result = $this->createQueryBuilder()->field('nombre')->equals($nombre)->getQuery()->execute();
-        
-
     }
 }
