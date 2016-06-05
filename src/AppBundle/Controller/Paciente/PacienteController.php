@@ -46,7 +46,7 @@ class PacienteController extends Controller
     public function getPacientesAction(Request $request)
     {
         $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Consulta\Consulta' )
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
             ->getAll();
         return $this->render(':Gerente/actividad:mostrarPacientes.html.twig', array('pacientes' => $pacientes));
     }

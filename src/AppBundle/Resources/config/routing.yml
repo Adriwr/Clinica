@@ -62,6 +62,10 @@ crear_expediente:
     path:     /expediente/crear/{id}
     defaults: { _controller: AppBundle:Expediente/Expediente:crear }
 
+registrar_medicamento:
+    path:     /registrar-medicamento/
+    defaults: { _controller: AppBundle:Medicamento/Medicamento:registrarMedicamento}
+
 consultar_inventario:
   path: /consultar-inventario/
   defaults: { _controller: AppBundle:Producto/Producto:getInventario}
