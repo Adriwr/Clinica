@@ -7,24 +7,27 @@ app.
  * @param $rootScope        - Root Scope para comunicar con otros controles
  * @param CajeroFactory     - Factory de para obtener los cajeros
  */
-controller('buscarMedicamentoCtrl', function($scope, $modal, $filter, $rootScope, BuscarFactory) {
-
-    $scope.buscarMedicamento = function(){
-        $scope.result = BuscarFactory.getMedicamento(function(result){
-            $scope.datosTabla = result;
-        });
+controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, BuscarFactory) {
 
 
-    }
+      
+    $scope.datosTabla = BuscarFactory.getMedicamentos();
+
 
     $scope.datosProductosTabla = [];
 
 
 
     // Arreglo con los datos de las columnas que espera datatables
-    $scope.aoCols2 =[
+    $scope.aoColsProductos =[
         {
             "mData"     : "nombre"
+        },
+
+        {
+            "mData"     : function(data, typeCall, dataCall){
+                return '<input min="1" value="1" type="number" class="text-success"/>';
+            },
         }
 
 
@@ -39,13 +42,14 @@ controller('buscarMedicamentoCtrl', function($scope, $modal, $filter, $rootScope
 
     ];
 
+
     $scope.aoCols =[
         {
             "mData"     : "nombre"
         },
         {
             "mData"     : function(data, typeCall, dataCall){
-                return '<span class="text-info"><i class="fa fa fa-pencil-square-o" ng-click="agregar('+data.nombre+')"></i></span>';
+                return '<span class="text-info"><i class="fa fa fa-pencil-square-o" ng-click="agregar('+data.posicion+')"></i></span>';
             },
             "sClass"    : "table-icon-button",
             "bSortable" : false
@@ -60,20 +64,22 @@ controller('buscarMedicamentoCtrl', function($scope, $modal, $filter, $rootScope
 
     ];
 
+    $scope.events = [
+        {
+            name    : 'agregar',
+            event   : function(posicion){
+                $scope.datosProductosTabla.push(
+                    $scope.datosTabla[posicion]
+                );
+            }
+        }
+    ];
+
     $scope.events2 = [
 
     ];
 
-    $scope.events = [
-        {
-            name    : 'agregar',
-            event   : function(nombre){
-                $scope.datosProductosTabla.push({
-                    'nombre':nombre
-                });
-            }
-        }
-    ];
+
 
 
 

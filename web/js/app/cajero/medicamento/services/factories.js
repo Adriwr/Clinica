@@ -8,7 +8,7 @@ app.
         var url = Routing.generate('api_get_medicamentos');
 
         return $resource(url, null, {
-            getMedicamento  : {
+            getMedicamentos  : {
                 method  : 'GET',
                 isArray : true,
                 url     : url

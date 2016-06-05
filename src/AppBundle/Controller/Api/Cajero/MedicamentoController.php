@@ -21,10 +21,26 @@ class MedicamentoController extends FOSRestController implements ClassResourceIn
      * @Rest\View()
      */
     public function cgetAction(){
-        return  $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Medicamento\Medicamento' )
-            ->findAll();
+        $users =  $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllUsers('cajero');
+        $array = array();
+        $counter = 0;
+        foreach ($users as $user){
+            $array[] = array(
+                'posicion' => $counter,
+                'nombre'                => $user["nombre"],
+                //'nombre'   => $user->getNombre(),
+                );
+               /* 'precio'        	=> $user->getPrecio(),
+                'laboratorio'    	=> $user->getLaboratorio(),
+                'presentacion'    	=> $user->getPresentacion(),
+                'cantidad'    		=> $user->getLaboratorio(),
+                'existencias'    	=> $user->getExistencias(),
+                'activos'    		=> $user->getActivos()*/
+            $counter++;
+        }
+        return $array;
     }
-
 }
 
