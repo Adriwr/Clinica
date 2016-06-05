@@ -64,3 +64,7 @@ crear_expediente:
 consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
+
+medico_consultar_citas:
+  path: /medico/consultar-citas/
+  defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}

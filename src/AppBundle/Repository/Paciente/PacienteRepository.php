@@ -51,7 +51,8 @@ class PacienteRepository extends DocumentRepository
                 'fechaNacimiento'    => $paciente->getFechaNacimiento()->format('d-m-Y'),
                 'direccion'         => $paciente->getCalle()." ".$paciente->getNumero().", ".$paciente->getColonia().", ".$paciente->getEstado().", ".$paciente->getPais(),
                 'telefonoParticular'=> $paciente->getTelefonoParticular(),
-                'telefonoEmergencia'=> $paciente->getTelefonoEmergencia()
+                'telefonoEmergencia'=> $paciente->getTelefonoEmergencia(),
+                'citas' => $paciente->getCitas()
             );
         }
 

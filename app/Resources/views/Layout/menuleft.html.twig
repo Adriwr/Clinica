@@ -112,6 +112,12 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{ path('medico_consultar_citas') }}">
+                        <i class="fa fa-calendar"></i>
+                        Consultar citas proximas
+                    </a>
+                </li>
             {% endif %}
 
             {% if is_granted('ROLE_ENFERMERA')  %}

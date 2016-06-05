@@ -7,10 +7,12 @@ use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Medico\MedicoRegistrationType;
 use AppBundle\Form\Type\Medico\MedicoType;
 use AppBundle\Form\Type\User\RegistrationType;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\Date;
 use FOS\UserBundle\Form\Type\RegistrationFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class MedicoController extends Controller
 {
@@ -59,8 +61,15 @@ class MedicoController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function consultarCitas(Request $request)
+    public function consultarCitasAction(Request $request)
     {
-
+        $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->getAll();
+        $medico = $this->getUser()->getMedico();
+        
+        return $this->render(
+            ':Medico:consultarCitas.html.twig', array('pacientes'=>$pacientes, 'medico'=>$medico->getNombre()." ".$medico->getApellidos())
+        );
     }
 }
