@@ -20,13 +20,13 @@ class PacienteController extends Controller
         $formUsuario = $this->createForm(new PacienteRegistrationType(), $usuario);
 
         $formUsuario->handleRequest($request);
-
         if($formUsuario->isValid()){
             $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_PACIENTE");
             $usuario->setUsername($usuario->getPaciente()->getNombre() . " " . $usuario->getPaciente()->getApellidos());
             $dm->persist($usuario);
+            $dm->flush();
             return $this->redirect($this->generateUrl('login'));
 
         }
