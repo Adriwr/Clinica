@@ -157,6 +157,21 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-bank"></i>
+                        Inventario
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('registrar_producto') }}">Registrar Producto</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('consultar_inventario') }}">Mostrar Inventario</a>
+                        </li>
+                    </ul>
+                </li>
             {% endif %}
 
             {% if is_granted('ROLE_PACIENTE')  %}
@@ -169,6 +184,8 @@
                 <li>
                     <a href="#">
                         <i class="fa fa-calendar"></i>
+                    <a href="{{ path('consultar_citas_paciente') }}">
+                        <i class="fa fa-calendar-o"></i>
                         Consultar citas
                     </a>
                 </li>

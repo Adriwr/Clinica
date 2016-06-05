@@ -32,11 +32,11 @@ class ProductoType extends AbstractType{
                     'ng-model'=> 'producto.precio' ),
                 'label' => 'Precio',
                 'required' => true ) )
-            ->add( 'stock' ,  'number' , array(
+            ->add( 'existencias' ,  'number' , array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Número de productos en existencia',
-                    'ng-model'=> 'producto.stock' ),
+                    'ng-model'=> 'producto.existencias' ),
                 'label' => 'Stock',
                 'required' => true ) )
             ->add( 'Guardar', 'submit', array(

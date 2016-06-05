@@ -51,6 +51,14 @@ class PacienteController extends Controller
         return $this->render(':Gerente/actividad:mostrarPacientes.html.twig', array('pacientes' => $pacientes));
     }
 
+    public function getCitasAction(Request $request)
+    {
+        $citas = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAppointments('paciente');
+        return $this->render(':Paciente/consulta:consultarCitasPaciente.html.twig', array('citas' => $citas));
+    }
+
     public function getDatosAction(Request $request)
     {
         $user = "574b59f5586a1cc6628b4567";

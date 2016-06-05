@@ -21,7 +21,32 @@ class CajeroPagoCitaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id','text');
+        $builder
+            ->add('fecha','datetime', array(
+                'label' => 'Fecha y hora de cita',
+                'required' => true ))
+            ->add('consultorio','choice', array(
+                'attr' =>array(
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 12),
+                'label' => 'Consultorio',
+                'choices' => array(
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                    '6' => 6,
+                    '7' => 7,
+                    '8' => 8,
+                    '9' => 9,
+                    '10' => 10,
+                    '11' => 11,
+                    '12' => 12
+                ),
+                'required' => true))
+            ->add('save', 'submit', array('label' => 'Registrar pago'));
     }
 
     /**
