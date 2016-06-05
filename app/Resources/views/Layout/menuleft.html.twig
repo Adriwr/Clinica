@@ -91,6 +91,22 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="#">
+                        <i class="fa fa-clock-o"></i>
+                        Consultar ventas
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('gerente_consultar_ventas_diarias') }}">Consultar ventas diaria</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gerente_consultar_ventas_mes') }}">Consultar ventas mensuales</a>
+                        </li>
+                    </ul>
+                </li>
+
             {% endif %}
 
             {% if is_granted('ROLE_MEDICO')  %}
