@@ -86,9 +86,10 @@ consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
 
-<<<<<<< HEAD
 medico_consultar_citas:
   path: /medico/consultar-citas/
   defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
-=======
->>>>>>> 04cb5289d2f865993b850264fd40ec38abad9465
+
+consultar_citas_enfermera:
+  path: /enfermera/consultar-citas/
+  defaults: {_controller: AppBundle:Enfermera/Enfermera:consultarCitasEnfermera}
