@@ -72,4 +72,16 @@ class MedicoController extends Controller
             ':Medico:consultarCitas.html.twig', array('pacientes'=>$pacientes, 'medico'=>$medico->getNombre()." ".$medico->getApellidos())
         );
     }
+    public function darConsultaAction(Request $request)
+    {
+        echo $request->get('fecha');
+        $this->getUser()->getMedico();
+        $consultas = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Consulta\Consulta' )
+            ->findAll();
+        return $this->render(
+            ':Medico:pasoPrincipalConsulta.html.twig',
+            array('consultas' => $consultas)
+        );
+    }
 }

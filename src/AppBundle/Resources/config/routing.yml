@@ -10,6 +10,9 @@ registrar_producto:
     path:     /registrar-producto/
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
+buscar_medicamento:
+    path:     /buscar-medicamento/
+    defaults: { _controller: AppBundle:Producto/Producto:buscarProducto}
 #Paciente
 
 consultar_datos:
@@ -93,6 +96,10 @@ consultar_cita_medico:
 medico_consultar_citas:
   path: /medico/consultar-citas/
   defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
+
+medico_dar_consulta:
+  path: /medico/dar-consulta/{fecha}
+  defaults: {_controller: AppBundle:Medico/Medico:darConsulta}
 
 consultar_citas_enfermera:
   path: /enfermera/consultar-citas/

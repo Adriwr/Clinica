@@ -72,7 +72,7 @@ class EnfermeraController extends Controller
             $dm->flush();
 
 
-            return $this->redirect($this->generateUrl('registrar_paciente'));
+            return $this->redirect($this->generateUrl('registrar_paciente_enfermera'));
 
         }
         $request->getSession()->getFlashBag()->add(
