@@ -12,4 +12,11 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class MedicamentoRepository extends DocumentRepository
 {
+
+    public function getMedicamentoByName($nombre)
+    {
+        $result = $this->createQueryBuilder()->field('nombre')->equals($nombre)->getQuery()->execute();
+        
+
+    }
 }

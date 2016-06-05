@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+
+{%  endblock %}
+
+{% block dashboard %}
+    <h3 class="page-header">Buscar medicamento</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="row" ng-controller="buscarMedicamentoCtrl">
+
+        <div class="col-xs-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    Productos
+                </div>
+                <div class="panel-body">
+                    {{ include(':Producto/parts:buscar_productos_tabla.html.twig') }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    Productos agregados
+                </div>
+                <div class="panel-body">
+                    {{ include(':Producto/parts:productos_agregados.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {# Plugins requeridos por el modulo #}
+
+{% endblock %}
+
+{% block angular %}
+    {# Servicios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/cajero/buscarMedicamento/controller/buscarMedicamento.js') }}"></script>
+    {# Controles primarios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/cajero/buscarMedicamento/services/factories.js') }}"></script>
+    {# Controles secundarios de AngularJS #}
+{% endblock %}

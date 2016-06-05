@@ -10,6 +10,9 @@ registrar_producto:
     path:     /registrar-producto/
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
+buscar_medicamento:
+    path:     /buscar-medicamento/
+    defaults: { _controller: AppBundle:Producto/Producto:buscarProducto}
 #Paciente
 
 consultar_datos:
