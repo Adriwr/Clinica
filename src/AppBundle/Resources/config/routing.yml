@@ -11,6 +11,11 @@ productos:
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
 #Paciente
+
+consultar_datos:
+    path:     /mis-datos/
+    defaults: { _controller: AppBundle:Paciente/Paciente:getDatos}
+
 agendar_cita_paciente:
     path:     /agendar-cita/paciente
     defaults: { _controller: AppBundle:Paciente/Cita:agendar}
