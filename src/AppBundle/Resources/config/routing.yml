@@ -6,7 +6,7 @@ home:
 #    path:     /medico
 #    defaults: { _controller: AppBundle:Medico/Medico:index}
 #Cajero
-registrar_producto:
+productos:
     path:     /registrar-producto/
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 

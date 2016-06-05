@@ -50,7 +50,7 @@ class MedicamentoController extends Controller
         $medicamentos = $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:Medicamento\Medicamento' )
             ->getAll();
-        return $this->render(':Cajero/actividad:consultarMedicamentos.html.twig', array('medicamentos' => $medicamentos));
+        return $this->render(':Cajero/consultarMedicamentos:consultarMedicamentos.html.twig', array('medicamentos' => $medicamentos));
     }
 
 }

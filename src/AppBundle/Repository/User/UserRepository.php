@@ -59,12 +59,12 @@ class UserRepository extends DocumentRepository
     /**
      * @return array
      */
-    public function getAppointments($month)
+    public function getAppointments($userType)
     {
         $appoints = array();
         $appointGross = $this->createQueryBuilder()
             //->select('paciente')
-            ->field('paciente')->exists(true)
+            ->field($userType)->exists(true)
             //->field('paciente.citas')->exists(true)
             ->getQuery()
             ->execute();

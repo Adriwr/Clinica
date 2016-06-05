@@ -35,7 +35,8 @@ class MedicamentoRepository extends DocumentRepository
             );
         }
 
-        return $productos;
+        return $medicamentos;
+    }
 
     public function getMedicamentoByName($nombre)
     {
