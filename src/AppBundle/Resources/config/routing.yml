@@ -104,3 +104,13 @@ medico_dar_consulta:
 consultar_citas_enfermera:
   path: /enfermera/consultar-citas/
   defaults: {_controller: AppBundle:Enfermera/Enfermera:consultarCitasEnfermera}
+
+gerente_consultar_ventas_diarias:
+  path: /gerente/consultar-ventas-hoy/
+  defaults: {_controller: AppBundle:Gerente/Gerente:getArticulosVendidosDia}
+
+gerente_consultar_ventas_mes:
+  path: /gerente/consultar-ventas-mes/
+  defaults: {_controller: AppBundle:Gerente/Gerente:getArticulosVendidosMes}
+
+

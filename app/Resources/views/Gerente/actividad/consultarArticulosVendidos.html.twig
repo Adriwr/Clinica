@@ -5,13 +5,13 @@
 {%  endblock %}
 
 {% block dashboard %}
-    <h3 class="page-header">Consulta de citas {{ mensaje }}</h3>
+    <h3 class="page-header">Consulta de articulos vendidos en {{ mensaje }}</h3>
 {% endblock %}
 
 {% block content %}
-    {% for medico in medicos %}
-        {{ medico.nombre }}
-        {{ medico.consultas }}
+    {% for articulo in articulos %}
+        {{ articulo.nombre }}
+        {{ articulo.numero }}
     {% endfor %}
 {% endblock %}
 

@@ -20,13 +20,13 @@ class PacienteController extends Controller
         $formUsuario = $this->createForm(new PacienteRegistrationType(), $usuario);
 
         $formUsuario->handleRequest($request);
-
         if($formUsuario->isValid()){
             $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_PACIENTE");
             $usuario->setUsername($usuario->getPaciente()->getNombre() . " " . $usuario->getPaciente()->getApellidos());
             $dm->persist($usuario);
+            $dm->flush();
             return $this->redirect($this->generateUrl('login'));
 
         }
@@ -61,8 +61,7 @@ class PacienteController extends Controller
 
     public function getDatosAction(Request $request)
     {
-        $user = "574b59f5586a1cc6628b4567";
-        //$user = $this->getUser()->getPaciente()->getId();
+        $user = $this->getUser()->getPaciente()->getId();
         $paciente = $this ->get('doctrine_mongodb')->getManager()->getRepository('AppBundle:Paciente\Paciente')->getPacienteById($user);
         return $this->render(':Paciente/datos:datosPaciente.html.twig' , array('paciente'=>$paciente));
     }
