@@ -43,6 +43,15 @@ registrar_paciente_enfermera:
   path: /enfermera/registrar-paciente/
   defaults: {_controller:AppBundle:Enfermera/Enfermera:registrarPaciente}
 
+mostrar_paceintes_enfermera:
+  path: /enfermera/mostrar-pacientes/
+  defaults: {_controller:AppBundle:Enfermera/Enfermera:mostrarPacientes}
+
+enfermera_agendar_cita:
+  path: /enfermera/agendar-cita/{id}
+  defaults: {_controller:AppBundle:Enfermera/Enfermera:agendarCitaPaciente}
+
+
 consultar_actividad_diaria:
   path: /gerente/actividad-diaria/
   defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasDia}
@@ -60,3 +69,11 @@ consultar_inventario:
 consultar_citas_paciente:
   path: /consultar-citas-paciente/
   defaults: { _controller: AppBundle:Paciente/Paciente:getCitas }
+
+registrar_pago_cita:
+    path:     /cajero/cita
+    defaults: { _controller: AppBundle:Cajero/Cajero:registrarPagoCita }
+consultar_cita_medico:
+    path:     /medico/consultar-citas
+    defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
+

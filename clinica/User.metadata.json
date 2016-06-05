@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "clinica.User" }, { "v" : 1, "unique" : true, "key" : { "usernameCanonical" : { "$numberLong" : "1" } }, "name" : "usernameCanonical_1", "ns" : "clinica.User" }, { "v" : 1, "unique" : true, "key" : { "emailCanonical" : { "$numberLong" : "1" } }, "name" : "emailCanonical_1", "ns" : "clinica.User" } ] }

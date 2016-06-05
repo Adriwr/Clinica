@@ -12,6 +12,14 @@ use AppBundle\Document\Expediente\Enfermedad;
 use AppBundle\Document\Expediente\Mastografia;
 use AppBundle\Document\Expediente\Papanicolaou;
 use AppBundle\Form\Type\Expediente\AlergiaRegistrationType;
+use AppBundle\Form\Type\Expediente\AntecedenteFamiliarRegistrationType;
+use AppBundle\Form\Type\Expediente\AntecedentePersonalRegistrationType;
+use AppBundle\Form\Type\Expediente\AnticonceptivoRegistrationType;
+use AppBundle\Form\Type\Expediente\CirugiaRegistrationType;
+use AppBundle\Form\Type\Expediente\EmbarazoRegistrationType;
+use AppBundle\Form\Type\Expediente\EnfermedadRegistrationType;
+use AppBundle\Form\Type\Expediente\PapanicolaouRegistrationType;
+use AppBundle\Form\Type\Expediente\MastografiaRegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,9 +32,9 @@ class ExpedienteController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function crearAction(Request $request,$id)
+    public function crearAction(Request $request)
     {
-
+        $id = $request->get('id');
         /*
          * , array(
                 'attr' => array(
@@ -38,281 +46,46 @@ class ExpedienteController extends Controller
          * */
 
         $alergia = new Alergia();
+        $paciente = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository('AppBundle:Paciente\Paciente')
+            ->find($id);
 
-        $form_alergias = $this->get('form.factory')->createNamedBuilder('alergias', 'form',$alergia)
-            ->add('sustancia', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'alergia.sustancia' ),
-                'label' => 'Sustancia',
-                'required' => true ))
-            ->add('fechaDiagnostico', 'date', array(
-                'attr' => array(
-                    'placeholder' => '',
-                    'ng-model'=> 'alergia.fecha_diagnostico' ),
-                'label' => 'Fecha diagnosticada',
-                'required' => true ))
-            ->add('controlada', 'checkbox', array(
-                'attr' => array(
-                    'ng-model'=> 'alergia.controlada' ),
-                'label' => 'Controlada',
-                'required' => false ))
-            ->add('save', 'submit', array('label' => 'Añadir alergia'))
-            ->getForm();
+        $form_alergias = $this->createForm(new AlergiaRegistrationType(),$alergia)  ;
 
         $antecedenteF = new AntecedenteFamiliar();
 
-        $form_a_f= $this->get('form.factory')->createNamedBuilder('a_f', 'form',$antecedenteF)
-            ->add('nombre', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.nombre' ),
-                'label' => 'Nombre',
-                'required' => true ))
-            ->add('sexo', 'choice', array(
-                'choices'  =>  array('H' => 'H', 'M' => 'M'),
-                'choices_as_values' => true,
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.sexo'
-                ),
-                'label' => 'Sexo',
-                'required' => true ))
-            ->add('edad', 'number', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.edad' ),
-                'label' => 'Edad',
-                'required' => true ))
-            ->add('parentesco', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.parentesco' ),
-                'label' => 'Teléfono',
-                'required' => true ))
-            ->add('telefono', 'number', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.telefono' ),
-                'label' => 'Parentesco',
-                'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir familiar'))
-            ->getForm();
-
+        $form_a_f= $this->createForm(new AntecedenteFamiliarRegistrationType(),$antecedenteF);
 
         $anticonceptivo = new Anticonceptivo();
 
-        $form_antic= $this->get('form.factory')->createNamedBuilder('antic', 'form',$anticonceptivo)
-            ->add('nombre', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'anticonceptivo.nombre'
-                ),
-                'label' => 'Nombre',
-                'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir anticonceptivo'))
-            ->getForm();
+        $form_antic= $this->createForm(new AnticonceptivoRegistrationType(),$anticonceptivo);
 
         $antecedenteP = new AntecedentePersonal();
 
-        $form_a_p = $this->get('form.factory')->createNamedBuilder('a_p', 'form',$antecedenteP)
-            ->add('frecuenciaBano', 'number', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.frecuencia_bano' ),
-                'label' => '¿Cuántas veces se baña a la semana?',
-                'required' => true ))
-            ->add('cambiosRopa', 'number', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.cambios_ropa'
-                ),
-                'label' => '¿Cuántas veces cambia de ropa por semana?',
-                'required' => true ))
-            ->add('personasCasa', 'number', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.personas_casa'
-                ),
-                'label' => '¿Cuántas personas viven con usted?',
-                'required' => true ))
-            ->add('serviciosCasa', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '',
-                    'ng-model'=> 'antecedente_familiar.servicios_casa'
-                ),
-                'label' => '¿Con qué servicios básicos cuenta?',
-                'required' => true ))
-            ->add('alimentacion', 'choice', array(
-                'choices'  => array('Buena' => 'b', 'Regular' => 'r', 'Mala' => 'm'),
-                'choices_as_values' => true,
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'antecedente_familiar.alimentacion'
-                ),
-                'label' => '¿Cómo considera su alimentación?',
-                'required' => true ))
-            ->add('fuma', 'checkbox', array(
-                'attr' => array(
-                    'ng-model'=> 'antecedente_familiar.fuma'
-                ),
-                'label' => '¿Fuma?',
-                'required' => false ))
-            ->add('alcohol', 'checkbox', array(
-                'attr' => array(
-                    'ng-model'=> 'antecedente_familiar.alcohol'
-                ),
-                'label' => '¿Toma?',
-                'required' => false ))
-            ->add('drogas', 'checkbox', array(
-                'attr' => array(
-                    'ng-model'=> 'antecedente_familiar.drogas'
-                ),
-                'label' => '¿Consume drogas?',
-                'required' => false ))
-            ->getForm();
+        $form_a_p = $this->createForm(new AntecedentePersonalRegistrationType(),$antecedenteP);
 
 
         $cirugia = new Cirugia();
 
-        $form_cirugias= $this->get('form.factory')->createNamedBuilder('cirugias', 'form',$cirugia)
-            ->add('tipo', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'cirugia.tipo'
-                ),
-                'label' => 'Tipo de cirugía',
-                'required' => true ))
-            ->add('fecha', 'choice', array(
-                'choices' => $this->buildYearChoices(),
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'cirugia.year'
-                ),
-                'label' => 'Año',
-                'required' => true ))
-            ->add('lugar', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'cirugia.lugar'
-                ),
-                'label' => 'Lugar de cirugía',
-                'required' => true ))
-            ->add('estado', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'cirugia.estado'
-                ),
-                'label' => 'Estado',
-                'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir cirugía'))
-            ->getForm();
+        $form_cirugias= $this->createForm(new CirugiaRegistrationType(),$cirugia);
 
 
         $embarazo = new Embarazo();
 
-        $form_embarazos= $this->get('form.factory')->createNamedBuilder('embarazos', 'form',$embarazo)
-            ->add('fecha', 'date', array(
-                'attr' => array(
-                    'ng-model'=> 'embarazo.fecha'
-                ),
-                'label' => 'Fecha',
-                'required' => true ))
-            ->add('descripcion', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'embarazo.descripcion'
-                ),
-                'label' => 'Descripción',
-                'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir descripción'))
-            ->getForm();
+        $form_embarazos= $this->createForm(new EmbarazoRegistrationType(),$embarazo);
 
 
         $enfermedad = new Enfermedad();
 
-        $form_enfermedades= $this->get('form.factory')->createNamedBuilder('enfermedades', 'form',$enfermedad)
-            ->add('codigoCie', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'enfermedad.'
-                ),
-                'label' => 'Enfermedad',
-                'required' => true ))
-            ->add('fecha', 'date', array(
-                'attr' => array(
-                    'ng-model'=> 'enfermedad.fecha'
-                ),
-                'label' => 'Fecha diagnosticada',
-                'required' => true ))
-            ->add('tratada', 'checkbox', array(
-                'attr' => array(
-                    'ng-model'=> 'enfermedad.tratada'
-                ),
-                'label' => 'Tratada',
-                'required' => true ))
-            ->add('observaciones', 'text', array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'enfermedad.observaciones'
-                ),
-                'label' => 'Observaciones',
-                'required' => true ))
-            ->add('save', 'submit', array('label' => 'Añadir enfermedad'))
-            ->getForm();
+        $form_enfermedades= $this->createForm(new EnfermedadRegistrationType(),$enfermedad);
 
         $mastografia = new Mastografia();
 
-        $form_mastografias= $this->get('form.factory')->createNamedBuilder('mastografias', 'form',$mastografia)
-            ->add('fecha', 'choice',array(
-                'choices' => $this->buildYearChoices(),
-                'attr'=>array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'mastografia.year'
-                ),
-                'label' => 'Año',
-                'required' => true))
-            ->add('notas', 'text',array(
-                'attr'=>array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'mastografia.notas'
-                ),
-                'label' => 'Notas',
-                'required' => true))
-            ->add('save', 'submit', array('label' => 'Añadir mastografía'))
-            ->getForm();
+        $form_mastografias= $this->createForm(new MastografiaRegistrationType(),$mastografia);
 
         $papanicolaou= new Papanicolaou();
 
-        $form_papa= $this->get('form.factory')->createNamedBuilder('papa', 'form',$papanicolaou)
-            ->add('fecha', 'choice',array(
-                'choices' => $this->buildYearChoices(),
-                'attr'=>array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'papanicolaou.year'
-                ),
-                'label' => 'Año',
-                'required' => true))
-            ->add('notas', 'text',array(
-                'attr'=>array(
-                    'class' => 'form-control',
-                    'ng-model'=> 'papanicolaou.notas'
-                ),
-                'label' => 'Notas',
-                'required' => true))
-            ->add('save', 'submit', array('label' => 'Añadir papanicolaou'))
-            ->getForm();
+        $form_papa= $this->createForm(new PapanicolaouRegistrationType(),$papanicolaou);
         /*
 
         $ = new ();
@@ -331,10 +104,9 @@ class ExpedienteController extends Controller
                 if ($form_alergias->isSubmitted() && $form_alergias->isValid()) {
                     // ... perform some action, such as saving the task to the database
                     $dm = $this->get('doctrine_mongodb')->getManager();
+                    dump($alergia);
                     $dm->persist($alergia);
                     $dm->flush();
-
-                    return $this->redirectToRoute('home');
                 }
             }
 
@@ -346,7 +118,7 @@ class ExpedienteController extends Controller
                     $dm->persist($antecedenteF);
                     $dm->flush();
 
-                    return $this->redirectToRoute('home');
+
                 }
             }
 
@@ -358,7 +130,7 @@ class ExpedienteController extends Controller
                     $dm->persist($antecedenteP);
                     $dm->flush();
 
-                    return $this->redirectToRoute('home');
+
                 }
             }
 
@@ -369,7 +141,7 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($cirugia);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
+
                 }
             }
             if ($request->request->has('antic')) {
@@ -379,7 +151,7 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($anticonceptivo);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
+
                 }
             }
             if ($request->request->has('embarazos')) {
@@ -389,7 +161,6 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($embarazo);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
                 }
             }
             if ($request->request->has('enfermedades')) {
@@ -399,7 +170,9 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($enfermedad);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
+                    echo 'hola';
+                    print_r($enfermedad);
+                    echo 'hola';
                 }
             }
             if ($request->request->has('mastografias')) {
@@ -409,7 +182,6 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($mastografia);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
                 }
             }
             if ($request->request->has('papa')) {
@@ -419,7 +191,6 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($papanicolaou);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
                 }
             }
             /*
@@ -430,7 +201,7 @@ class ExpedienteController extends Controller
                     $dm = $this->get('doctrine_mongodb')->getManager();
                     $dm->persist($);
                     $dm->flush();
-                    return $this->redirectToRoute('crear_expediente');
+
                 }
             }
              * */
@@ -466,7 +237,7 @@ class ExpedienteController extends Controller
                 $dm = $this->get('doctrine_mongodb')->getManager();
                 $dm->persist($);
                 $dm->flush();
-                return $this->redirectToRoute('crear_expediente');
+
             }
         }
 

@@ -24,7 +24,6 @@ class UserRepository extends DocumentRepository
             ->field($userType)->exists(true)
             ->getQuery()
             ->execute();
-
         foreach($gerentesGross as $gerente) {
             $gerentes[] = array(
                 'id'            => $gerente->getId(),
@@ -39,7 +38,7 @@ class UserRepository extends DocumentRepository
     /**
      * @return array
      */
-    public function getAllAppointments($month)
+    public function getAllAppointments()
     {
         $appoints = array();
         $appointGross = $this->createQueryBuilder()
@@ -54,7 +53,6 @@ class UserRepository extends DocumentRepository
                 $appoints[] = $fecha->getFecha() ;
             }
         }
-
         return $appoints;
     }
 

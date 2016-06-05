@@ -12,6 +12,10 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  */
 class PacienteCitas {
     /**
+     * @ODM\Id
+     */
+    protected $id;
+    /**
      * @ODM\String
      */
     protected $consultorio;
@@ -89,4 +93,21 @@ class PacienteCitas {
     {
         return $this->fecha;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    
 }

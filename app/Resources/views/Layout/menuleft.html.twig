@@ -77,10 +77,20 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-eye"></i>
+                        <i class="fa fa-clock-o"></i>
                         Consultar actividad
+                        <span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('consultar_actividad_diaria') }}">Consultar actividad diaria</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('consultar_actividad_mensual') }}">Consultar actividad mensual</a>
+                        </li>
+                    </ul>
                 </li>
+
             {% endif %}
 
             {% if is_granted('ROLE_MEDICO')  %}
@@ -106,7 +116,7 @@
 
             {% if is_granted('ROLE_ENFERMERA')  %}
                 <li>
-                    <a href="#">
+                    <a href="{{ path('registrar_paciente_enfermera') }}">
                         <i class="fa fa-user"></i>
                         Registrar paciente
                     </a>
@@ -118,7 +128,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ path('mostrar_paceintes_enfermera') }}">
                         <i class="fa fa-calendar-o"></i>
                         Agendar nueva cita
                     </a>
