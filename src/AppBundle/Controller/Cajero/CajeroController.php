@@ -3,11 +3,13 @@
 namespace AppBundle\Controller\Cajero;
 use AppBundle\Document\Cajero\Cajero;
 use AppBundle\Document\Consulta\Consulta;
+use AppBundle\Document\Expediente\Expediente;
 use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Cajero\CajeroPagoCitaType;
 use AppBundle\Form\Type\Cajero\CajeroRegistrationType;
 use AppBundle\Form\Type\Cajero\CajeroType;
 use AppBundle\Form\Type\User\RegistrationType;
+use MongoDBODMProxies\__CG__\AppBundle\Document\Paciente\Paciente;
 use MongoDBODMProxies\__CG__\AppBundle\Document\Paciente\PacienteCitas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -67,31 +69,35 @@ class CajeroController extends Controller
         $formPagoCita->handleRequest($request);
 
         if($formPagoCita->isValid()){
-            echo 'lel';
-            print_r($cita);
-            echo 'lel';
             $dm = $this->get('doctrine_mongodb')->getManager();
-            $cita = $dm->getRepository('AppBundle:Paciente\PacienteCitas')
-                ->findOneBy(array(
-                    'fecha'=>$cita->getFecha(),
-                    'consultorio'=>$cita->getConsultorio()
-                ));
-            if(!isset($cita)){
-                $this->addFlash(
-                    'notice',
-                    'No existe la cita especificada'
-                );
+            $pacientes = $dm->getRepository('AppBundle:Paciente\Paciente')
+                ->findAll();
+            foreach ($pacientes as $paciente){
+                foreach ($pacientes->getCitas() as $cita1){
+                    if($cita1->getFecha()==$cita->getFecha()&&$cita1->getConsultorio()==$cita->getConsultorio()){
+                        $this->addFlash(
+                            'notice',
+                            'Pago registrado correctamente'
+                        );
+                        $consulta = new Consulta();
+                        $consulta->setEstatus(1);
+                        $consulta->setMedico($cita->getMedico());
+                        $consulta->setFecha($cita->getFecha());
+                        $exp = $paciente->getExpediente();
+                        $exp->addConsulta($consulta);
+                        $paciente->setExpediente($exp);
+                        $dm->persist($paciente);
+                        $dm->flush();
+                        return $this->redirect($this->generateUrl('home'));
+
+                    }
+
+                }
             }
-            else {
-                $this->addFlash(
-                    'notice',
-                    'Pago registrado correctamente'
-                );
-                $cita->setEstatus(1);
-                $dm->persist($cita);
-                $dm->flush();
-                return $this->redirect($this->generateUrl('home'));
-            }
+            $this->addFlash(
+                'notice',
+                'No existe la cita especificada'
+            );
 
 
         }

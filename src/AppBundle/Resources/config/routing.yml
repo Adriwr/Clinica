@@ -87,8 +87,9 @@ consultar_citas_paciente:
   defaults: { _controller: AppBundle:Paciente/Paciente:getCitas }
 
 registrar_pago_cita:
-    path:     /pagar-cita
+    path:     /pagar-cita/
     defaults: { _controller: AppBundle:Cajero/Cajero:registrarPagoCita }
+
 consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
