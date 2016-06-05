@@ -25,10 +25,18 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
         },
 
         {
-            "mData"     : function(data, typeCall, dataCall){
-                return '<input min="1" value="1" type="number" class="text-success"/>';
+            "mData"     : function(data){
+                return '<input min="1" value="1" name="Cantidad'+data.posicion+'" type="number" class="text-success"/>';
             },
-        }
+        },
+
+        {
+            "mData"     : function(data, typeCall, dataCall){
+                return '<span class="text-info"><i class="fa fa-check-circle-o" ng-click="eliminar('+data.posicion+')"></i></span>';
+            },
+            "sClass"    : "table-icon-button",
+            "bSortable" : false
+        },
 
 
 
@@ -53,7 +61,7 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             },
             "sClass"    : "table-icon-button",
             "bSortable" : false
-        },
+        }
         /*{
          "mData"     : function(data, typeCall, dataCall){
          return '<span class="text-success"><i class="fa fa-check-circle-o" ng-click="eliminar('+data.posicion+')"></i></span>';
@@ -68,15 +76,25 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
         {
             name    : 'agregar',
             event   : function(posicion){
-                $scope.datosProductosTabla.push(
-                    $scope.datosTabla[posicion]
-                );
+                if($scope.datosProductosTabla.indexOf($scope.datosTabla[posicion]) ==-1){
+                    $scope.datosProductosTabla.push(
+                        $scope.datosTabla[posicion]
+                    );
+                }else{
+                    alert("Ya está seleccionado este producto");
+                }
             }
         }
     ];
 
     $scope.events2 = [
-
+        {
+            name    : 'eliminar',
+            event   : function(posicion){
+            var index = $scope.datosProductosTabla.indexOf($scope.datosTabla[posicion]);
+                $scope.datosProductosTabla.splice(index,1);
+            }
+        }
     ];
 
 
