@@ -35,7 +35,7 @@ class EnfermedadRegistrationType extends AbstractType
                     'ng-model'=> 'enfermedad.tratada'
                 ),
                 'label' => 'Tratada',
-                'required' => true ))
+                'required' => false ))
             ->add('observaciones', 'text', array(
                 'attr' => array(
                     'class' => 'form-control',

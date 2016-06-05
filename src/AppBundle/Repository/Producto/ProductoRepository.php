@@ -12,4 +12,25 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class ProductoRepository extends DocumentRepository
 {
+	/**
+     * @return array
+     */
+    public function getAll()
+    {
+        $productos = array();
+        $productosGross = $this->createQueryBuilder()
+            ->getQuery()
+            ->execute();
+
+        foreach($productosGross as $producto) {
+            $productos[] = array(
+                'id'                => $producto->getId(),
+                'nombre'            => $producto->getNombre(),
+                'precio'        	=> $producto->getPrecio(),
+                'existencias'    	=> $producto->getExistencias()
+            );
+        }
+
+        return $productos;
+    }
 }

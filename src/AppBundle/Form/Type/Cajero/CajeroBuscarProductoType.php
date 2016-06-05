@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class CajeraRegistrationType
  * @package AppBundle\Form\Type\Cajero
  */
-class CajeroPagoCitaType extends AbstractType
+class CajeroBuscarProductoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,31 +22,20 @@ class CajeroPagoCitaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fecha','datetime', array(
-                'label' => 'Fecha y hora de cita',
-                'required' => true ))
-            ->add('consultorio','choice', array(
-                'attr' =>array(
+            ->add( 'nombre' ,   'text' , array(
+                'attr' => array(
                     'class' => 'form-control',
-                    'min' => 1,
-                    'max' => 12),
-                'label' => 'Consultorio',
-                'choices' => array(
-                    '1' => 1,
-                    '2' => 2,
-                    '3' => 3,
-                    '4' => 4,
-                    '5' => 5,
-                    '6' => 6,
-                    '7' => 7,
-                    '8' => 8,
-                    '9' => 9,
-                    '10' => 10,
-                    '11' => 11,
-                    '12' => 12
-                ),
-                'required' => true))
-            ->add('save', 'submit', array('label' => 'Registrar pago'));
+                    'placeholder' => 'Nombre del medicamento',
+                    'ng-model' => 'nombre'
+                    ),
+                'label' => 'Nombre del medicamento',
+
+                'required' => true ) )
+        ->add( 'Buscar', 'button', array(
+            'attr' => array(
+                'style'     =>'margin:5px',
+                'class'     => 'btn btn-primary pull-right',
+                'ng-click'  => 'buscarMedicamento()')) );
     }
 
     /**
@@ -55,7 +44,7 @@ class CajeroPagoCitaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Document\Paciente\PacienteCitas',
+            'data_class'        => 'AppBundle\Document\Producto\Producto',
             'csrf_protection'   => false,
             'cascade_validation' => true,
             'allow_add' => true
@@ -66,6 +55,6 @@ class CajeroPagoCitaType extends AbstractType
      */
     public function getName()
     {
-        return 'form_pago_cita';
+        return 'form_buscar_producto';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Cajero;
 use AppBundle\Document\Cajero\Cajero;
+use AppBundle\Document\Consulta\Consulta;
 use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Cajero\CajeroPagoCitaType;
 use AppBundle\Form\Type\Cajero\CajeroRegistrationType;
@@ -66,12 +67,32 @@ class CajeroController extends Controller
         $formPagoCita->handleRequest($request);
 
         if($formPagoCita->isValid()){
-
+            echo 'lel';
+            print_r($cita);
+            echo 'lel';
             $dm = $this->get('doctrine_mongodb')->getManager();
-            $dm->persist($cita);
-            $dm->flush();
+            $cita = $dm->getRepository('AppBundle:Paciente\PacienteCitas')
+                ->findOneBy(array(
+                    'fecha'=>$cita->getFecha(),
+                    'consultorio'=>$cita->getConsultorio()
+                ));
+            if(!isset($cita)){
+                $this->addFlash(
+                    'notice',
+                    'No existe la cita especificada'
+                );
+            }
+            else {
+                $this->addFlash(
+                    'notice',
+                    'Pago registrado correctamente'
+                );
+                $cita->setEstatus(1);
+                $dm->persist($cita);
+                $dm->flush();
+                return $this->redirect($this->generateUrl('home'));
+            }
 
-            return $this->redirect($this->generateUrl('registrar_cajero'));
 
         }
 

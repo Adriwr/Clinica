@@ -31,4 +31,9 @@ paciente:
 expediente:
     type:     rest
     resource: AppBundle\Controller\Api\Expediente\ExpedienteController
+    name_prefix: api_    name_prefix: api_
+medicamento:
+    type:     rest
+    resource: AppBundle\Controller\Api\Cajero\MedicamentoController
     name_prefix: api_
+

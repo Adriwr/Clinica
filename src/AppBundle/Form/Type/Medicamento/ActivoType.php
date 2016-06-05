@@ -1,13 +1,13 @@
 <?php
 
-namespace AppBundle\Form\Type\Producto;
+namespace AppBundle\Form\Type\Activo;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProductoType extends AbstractType{
+class ActivoType extends AbstractType{
 
     /**
      * Builder del formulario
@@ -21,23 +21,16 @@ class ProductoType extends AbstractType{
             ->add( 'nombre' ,   'text' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => 'Nombre del producto',
-                    'ng-model'=> 'producto.nombre' ),
+                    'placeholder' => 'Nombre',
+                    'ng-model'=> 'activo.nombre' ),
                 'label' => 'Nombre',
                 'required' => true ) )
-            ->add( 'precio' ,     'money' , array(
+            ->add( 'cantidad' ,     'number' , array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => 'Precio del producto',
-                    'ng-model'=> 'producto.precio' ),
-                'label' => 'Precio',
-                'required' => true ) )
-            ->add( 'existencias' ,  'number' , array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Número de productos en existencia',
-                    'ng-model'=> 'producto.existencias' ),
-                'label' => 'Stock',
+                    'placeholder' => 'Cantidad del ingrediente activo',
+                    'ng-model'=> 'activo.cantidad' ),
+                'label' => 'Cantidad',
                 'required' => true ) )
             ->add( 'Guardar', 'submit', array(
                 'attr' => array(
@@ -54,7 +47,7 @@ class ProductoType extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Document\Producto\Producto',
+            'data_class'        => 'AppBundle\Document\Activo\Activo',
             'csrf_protection'   => false,
             'cascade_validation' => true,
             'allow_add' => true
@@ -67,7 +60,7 @@ class ProductoType extends AbstractType{
      */
     public function getName()
     {
-        return 'form_producto';
+        return 'form_activo';
     }
 
 }

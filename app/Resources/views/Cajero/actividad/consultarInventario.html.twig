@@ -5,14 +5,15 @@
 {%  endblock %}
 
 {% block dashboard %}
-    <h3 class="page-header">Consultar Pacientes</h3>
+    <h3 class="page-header">Mostrar Inventario</h3>
 {% endblock %}
 
 {% block content %}
-	{% if pacientes %}
+    {{ dump(productos) }}
+	{% if productos %}
 		<div class="panel panel-green">
 			<div class="panel-heading">
-                Pacientes
+                Productos
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -24,23 +25,17 @@
         				>
     			<thead>
     				<tr>
-	        			<th>Nombre Completo</th>
-    	    			<th>Sexo</th>
-    	    			<th>Fecha de Nacimiento</th>
-    	    			<th>Dirección</th>
-    	    			<th>Tel. Particular</th>
-    	    			<th>Tel. Para emergencias</th>
+	        			<th>Nombre</th>
+    	    			<th>Precio</th>
+    	    			<th>Existencias</th>
     				</tr>
     			</thead>
     			<tbody>
-					{% for paciente in pacientes %}
+					{% for producto in productos %}
 						<tr>
-    		    			<td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
-    		    			<td>{{ paciente.sexo }}</td>
-    		    			<td>{{ paciente.fechaNacimiento	 }}</td>
-    		    			<td>{{ paciente.direccion }}</td>
-    		    			<td>{{ paciente.telefonoParticular }}</td>
-    		    			<td>{{ paciente.telefonoEmergencia }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.existencias }}</td>
     		    		</tr>
 	    			{% endfor %}
     			</tbody>
@@ -49,7 +44,7 @@
         </div>
 		
 	{% else %}
-		<p class='text-danger'> No hay pacientes registrados </p>
+		<p class='text-danger'>No existen medicamentos registrados</p>
 	{% endif %}	
 	
 {% endblock %}

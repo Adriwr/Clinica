@@ -5,14 +5,15 @@
 {%  endblock %}
 
 {% block dashboard %}
-    <h3 class="page-header">Consultar Pacientes</h3>
+    <h3 class="page-header">Consultar Citas</h3>
 {% endblock %}
 
 {% block content %}
-	{% if pacientes %}
+    {{ dump(citas) }}
+	{% if citas %}
 		<div class="panel panel-green">
 			<div class="panel-heading">
-                Pacientes
+                Citas agendadas
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -24,23 +25,17 @@
         				>
     			<thead>
     				<tr>
-	        			<th>Nombre Completo</th>
-    	    			<th>Sexo</th>
-    	    			<th>Fecha de Nacimiento</th>
-    	    			<th>Dirección</th>
-    	    			<th>Tel. Particular</th>
-    	    			<th>Tel. Para emergencias</th>
+	        			<th>Consultorio</th>
+    	    			<th>Fecha y Hora</th>
+    	    			<th>Doctor</th>
     				</tr>
     			</thead>
     			<tbody>
-					{% for paciente in pacientes %}
+					{% for cita in citas %}
 						<tr>
-    		    			<td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
-    		    			<td>{{ paciente.sexo }}</td>
-    		    			<td>{{ paciente.fechaNacimiento	 }}</td>
-    		    			<td>{{ paciente.direccion }}</td>
-    		    			<td>{{ paciente.telefonoParticular }}</td>
-    		    			<td>{{ paciente.telefonoEmergencia }}</td>
+    		    			<td>{{ cita.consultorio }}</td>
+    		    			<td>{{ cita.fecha }}</td>
+    		    			<td>{{ cita.medico	 }}</td>
     		    		</tr>
 	    			{% endfor %}
     			</tbody>
@@ -49,7 +44,7 @@
         </div>
 		
 	{% else %}
-		<p class='text-danger'> No hay pacientes registrados </p>
+		<p class='text-danger'> No hay citas agendadas </p>
 	{% endif %}	
 	
 {% endblock %}

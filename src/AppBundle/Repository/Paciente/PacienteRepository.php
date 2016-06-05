@@ -51,29 +51,27 @@ class PacienteRepository extends DocumentRepository
                 'fechaNacimiento'    => $paciente->getFechaNacimiento()->format('d-m-Y'),
                 'direccion'         => $paciente->getCalle()." ".$paciente->getNumero().", ".$paciente->getColonia().", ".$paciente->getEstado().", ".$paciente->getPais(),
                 'telefonoParticular'=> $paciente->getTelefonoParticular(),
-                'telefonoEmergencia'=> $paciente->getTelefonoEmergencia()
+                'telefonoEmergencia'=> $paciente->getTelefonoEmergencia(),
+                'citas' => $paciente->getCitas()
             );
         }
 
         return $pacientes;
     }
-    /**
-     * @return array
-     */
-    public function getOne($id)
+
+    public function getPacienteById($id)
     {
-        $pacientes = array();
-       //return array("no" => "mames");
-        $pacientesGross = $this->createQueryBuilder()
-            ->field('id')->equals($id)
+        $result = $this->createQueryBuilder()
+            ->field('id')
+            ->equals($id)
             ->getQuery()
             ->execute();
-
-        foreach($pacientesGross as $paciente) {
-            return $paciente;
+        $arreglo = array();
+        foreach($result as $appoint) {
+            $arreglo = $appoint;
         }
+        return $arreglo;
 
-        return $pacientes;
     }
     
 }

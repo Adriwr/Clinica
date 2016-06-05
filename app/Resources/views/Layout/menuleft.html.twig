@@ -91,6 +91,22 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="#">
+                        <i class="fa fa-clock-o"></i>
+                        Consultar ventas
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('gerente_consultar_ventas_diarias') }}">Consultar ventas diaria</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gerente_consultar_ventas_mes') }}">Consultar ventas mensuales</a>
+                        </li>
+                    </ul>
+                </li>
+
             {% endif %}
 
             {% if is_granted('ROLE_MEDICO')  %}
@@ -112,6 +128,12 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{ path('medico_consultar_citas') }}">
+                        <i class="fa fa-calendar"></i>
+                        Consultar citas proximas
+                    </a>
+                </li>
             {% endif %}
 
             {% if is_granted('ROLE_ENFERMERA')  %}
@@ -122,7 +144,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ path('consultar_citas_enfermera') }}">
                         <i class="fa fa-calendar"></i>
                         Consultar citas
                     </a>
@@ -150,10 +172,40 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Citas</a>
+                            <a href="/pagar-cita">Citas</a>
                         </li>
                         <li>
-                            <a href="#">Medicamentos</a>
+                            <a href="{{ path('buscar_medicamento') }}">Medicamentos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-medkit"></i>
+                        Medicamentos
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('registrar_medicamento') }}">Registrar Medicamento</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('consultar_medicamentos') }}">Mostrar Medicamentos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-cubes"></i>
+                        Inventario
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('productos') }}">Registrar Producto</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('consultar_inventario') }}">Mostrar Inventario</a>
                         </li>
                     </ul>
                 </li>
@@ -161,8 +213,14 @@
 
             {% if is_granted('ROLE_PACIENTE')  %}
                 <li>
-                    <a href="#">
-                        <i class="fa fa-calendar"></i>
+                    <a href="{{ path('consultar_datos') }}">
+                        <i class="fa fa-info-circle"></i>
+                        Mis datos
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('consultar_citas_paciente') }}">
+                        <i class="fa fa-calendar-o"></i>
                         Consultar citas
                     </a>
                 </li>

@@ -72,7 +72,7 @@ class EnfermeraController extends Controller
             $dm->flush();
 
 
-            return $this->redirect($this->generateUrl('registrar_paciente'));
+            return $this->redirect($this->generateUrl('registrar_paciente_enfermera'));
 
         }
         $request->getSession()->getFlashBag()->add(
@@ -132,6 +132,17 @@ class EnfermeraController extends Controller
         return $this->render(
             ':Enfermera/citas:agendar.html.twig',
             array('form' => $form->createView())
+        );
+    }
+
+    public function consultarCitasEnfermeraAction(Request $request)
+    {
+        $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->getAll();
+
+        return $this->render(
+            ':Enfermera/citas:consultarCitas.html.twig', array('pacientes'=>$pacientes)
         );
     }
 

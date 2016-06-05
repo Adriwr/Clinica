@@ -7,10 +7,18 @@ home:
 #    defaults: { _controller: AppBundle:Medico/Medico:index}
 #Cajero
 productos:
-    path:     /productos
+    path:     /registrar-producto/
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
+buscar_medicamento:
+    path:     /buscar-medicamento/
+    defaults: { _controller: AppBundle:Producto/Producto:buscarProducto}
 #Paciente
+
+consultar_datos:
+    path:     /mis-datos/
+    defaults: { _controller: AppBundle:Paciente/Paciente:getDatos}
+
 agendar_cita_paciente:
     path:     /agendar-cita/paciente
     defaults: { _controller: AppBundle:Paciente/Cita:agendar}
@@ -61,6 +69,48 @@ consultar_actividad_mensual:
 crear_expediente:
     path:     /expediente/crear/{id}
     defaults: { _controller: AppBundle:Expediente/Expediente:crear }
+
+registrar_medicamento:
+    path:     /registrar-medicamento/
+    defaults: { _controller: AppBundle:Medicamento/Medicamento:registrarMedicamento}
+
+consultar_medicamentos:
+  path: /consultar-medicamentos/
+  defaults: { _controller: AppBundle:Medicamento/Medicamento:getMedicamentos}
+
+consultar_inventario:
+  path: /consultar-inventario/
+  defaults: { _controller: AppBundle:Producto/Producto:getInventario}
+
+consultar_citas_paciente:
+  path: /consultar-citas-paciente/
+  defaults: { _controller: AppBundle:Paciente/Paciente:getCitas }
+
+registrar_pago_cita:
+    path:     /pagar-cita
+    defaults: { _controller: AppBundle:Cajero/Cajero:registrarPagoCita }
 consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
+
+medico_consultar_citas:
+  path: /medico/consultar-citas/
+  defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
+
+medico_dar_consulta:
+  path: /medico/dar-consulta/{fecha}
+  defaults: {_controller: AppBundle:Medico/Medico:darConsulta}
+
+consultar_citas_enfermera:
+  path: /enfermera/consultar-citas/
+  defaults: {_controller: AppBundle:Enfermera/Enfermera:consultarCitasEnfermera}
+
+gerente_consultar_ventas_diarias:
+  path: /gerente/consultar-ventas-hoy/
+  defaults: {_controller: AppBundle:Gerente/Gerente:getArticulosVendidosDia}
+
+gerente_consultar_ventas_mes:
+  path: /gerente/consultar-ventas-mes/
+  defaults: {_controller: AppBundle:Gerente/Gerente:getArticulosVendidosMes}
+
+

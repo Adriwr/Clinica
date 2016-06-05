@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block dashboard %}
+    <h1 class="page-header">Registrar Medicamento</h1>
+
+
+{% endblock %}
+
+{% block content %}
+    <div ng-controller="MedicamentosCtrl">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        Registrar medicamento
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form , {'attr': {'class': 'form-horizontal'} }) }}
+                        {{ form_widget(form ) }}
+                        <div id='activo'>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                    <div class="panel-footer">
+                        Medicamentos
+                    </div>
+                </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {# Plugins requeridos por el modulo #}
+    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/vendor/plugins/dataTables/dataTables.responsive.js') }}"></script>
+    <script>
+        function addActivo(){
+            document.getElementById("activo").innerHTML += "<input type='hidden' name='id' />"
+            +"<input class='form-control' type='text' name='nombre[]' placeholder='Nombre' required='true'/>"
+            +"<input class='form-control' type='number' name='cantidadActivo[]' placeholder='Cantidad' required='true'/>";
+        }
+    </script>
+
+{% endblock %}
+
+{% block angular %}
+    {# Directivas del modulo #}
+    <script type="text/javascript" src="{{ asset('js/directives/datatables.js') }}"></script>
+    {# Servicios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/productos/services/factories.js') }}"></script>
+    {# Controles primarios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/productos/controllers/productos.js') }}"></script>
+    {# Controles secundarios de AngularJS #}
+{% endblock %}
