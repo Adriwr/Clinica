@@ -28,6 +28,7 @@ class MedicamentoController extends FOSRestController implements ClassResourceIn
         $counter = 0;
         foreach ($users as $user){
             $array[] = array(
+                'id'        => $user["id"],
                 'posicion' => $counter,
                 'nombre'                => $user["nombre"],
                 //'nombre'   => $user->getNombre(),

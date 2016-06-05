@@ -21,18 +21,23 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
     // Arreglo con los datos de las columnas que espera datatables
     $scope.aoColsProductos =[
         {
+            "mData"     : "posicion",
+            "bVisible"  : false
+
+        },
+        {
             "mData"     : "nombre"
         },
 
-        {
-            "mData"     : function(data){
-                return '<input min="1" value="1" name="Cantidad'+data.posicion+'" type="number" class="text-success"/>';
-            },
-        },
 
         {
-            "mData"     : function(data, typeCall, dataCall){
-                return '<span class="text-info"><i class="fa fa-check-circle-o" ng-click="eliminar('+data.posicion+')"></i></span>';
+            "mData": "cantidad"
+        },
+        {
+
+            "mData": function(data, typeCall, dataCall){
+                return '<span class="text-success"><i class="fa fa-check-circle-o" ng-click="inc('+data.posicion+')"></i></span>' +
+                    ' <span class="text-error"><i class="fa fa-check-circle-o" ng-click="dec('+data.posicion+')"></i></span>';
             },
             "sClass"    : "table-icon-button",
             "bSortable" : false
@@ -40,20 +45,20 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
 
 
 
-        /*{
+        {
             "mData"     : function(data, typeCall, dataCall){
                 return '<span class="text-success"><i class="fa fa-check-circle-o" ng-click="eliminar('+data.posicion+')"></i></span>';
             },
             "sClass"    : "table-icon-button",
             "bSortable" : false
-        }*/
+        }
 
     ];
 
 
     $scope.aoCols =[
         {
-            "mData"     : "nombre"
+            "mData"     : "nombre",
         },
         {
             "mData"     : function(data, typeCall, dataCall){
@@ -76,12 +81,24 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
         {
             name    : 'agregar',
             event   : function(posicion){
-                if($scope.datosProductosTabla.indexOf($scope.datosTabla[posicion]) ==-1){
+                var rowToAdd = $scope.datosTabla[posicion];
+                var size = $scope.datosProductosTabla.length;
+                var exists = false;
+                for(var i = 0;i<size;i++){
+                    if(posicion == $scope.datosProductosTabla[i]['posicion']){
+                        exists = true;
+                    }
+                }
+
+                if(!exists){
+                    var element = {
+                        nombre: rowToAdd['nombre'],
+                        cantidad: 1,
+                        posicion: posicion
+                    };
                     $scope.datosProductosTabla.push(
-                        $scope.datosTabla[posicion]
+                        element
                     );
-                }else{
-                    alert("Ya está seleccionado este producto");
                 }
             }
         }
@@ -91,8 +108,65 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
         {
             name    : 'eliminar',
             event   : function(posicion){
-            var index = $scope.datosProductosTabla.indexOf($scope.datosTabla[posicion]);
+                var size = $scope.datosProductosTabla.length;
+                var index = 0;
+                for(var i = 0;i<size;i++){
+                    if(posicion == $scope.datosProductosTabla[i]['posicion']){
+                        break;
+                    }
+                    index++;
+                }
                 $scope.datosProductosTabla.splice(index,1);
+            }
+        },
+        {
+            name    : 'inc',
+            event   : function(posicion){
+                    var size = $scope.datosProductosTabla.length;
+                    var index = 0;
+                    for(var i = 0;i<size;i++){
+                        if(posicion == $scope.datosProductosTabla[i]['posicion']){
+                            break;
+                        }
+                        index++;
+                    }
+                var rowToReplace = $scope.datosProductosTabla[index];
+                var newRow = $scope.datosProductosTabla[index];
+                //checar la cantidad maxima del producto
+                newRow["cantidad"]++;
+                var newRow = {
+                    "nombre":rowToReplace['nombre'],
+                    "posicion":rowToReplace['posicion'],
+                    "cantidad":rowToReplace['cantidad'],
+                }
+                $scope.datosProductosTabla.splice(index,1,newRow);
+            }
+        },
+        {
+            name    : 'dec',
+            event   : function(posicion) {
+                var size = $scope.datosProductosTabla.length;
+                var index = 0;
+                for (var i = 0; i < size; i++) {
+                    if (posicion == $scope.datosProductosTabla[i]['posicion']) {
+                        break;
+                    }
+                    index++;
+                }
+
+                var rowToReplace = $scope.datosProductosTabla[index];
+                var newRow = $scope.datosProductosTabla[index];
+                //checar la cantidad maxima del producto
+
+                if (newRow["cantidad"] > 1) {
+                    newRow["cantidad"]--;
+                    var newRow = {
+                        "nombre": rowToReplace['nombre'],
+                        "posicion": rowToReplace['posicion'],
+                        "cantidad": rowToReplace['cantidad'],
+                    }
+                    $scope.datosProductosTabla.splice(index, 1, newRow);
+                }
             }
         }
     ];
