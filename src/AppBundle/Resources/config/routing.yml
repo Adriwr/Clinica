@@ -6,8 +6,8 @@ home:
 #    path:     /medico
 #    defaults: { _controller: AppBundle:Medico/Medico:index}
 #Cajero
-productos:
-    path:     /productos
+registrar_producto:
+    path:     /registrar-producto/
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
 #Paciente
@@ -17,7 +17,7 @@ agendar_cita_paciente:
 
 registrar_paciente:
   path: /registrar-paciente/
-  defaults: {_controller: AppBundle:Paciente/Paciente:registrarPaciente}
+  defaults: {_controller: AppBundle:Cita/Paciente:registrarPaciente}
   
 consultar_pacientes:
   path: /consultar-paciente/
@@ -52,3 +52,11 @@ consultar_actividad_mensual:
 crear_expediente:
     path:     /expediente/crear/{id}
     defaults: { _controller: AppBundle:Expediente/Expediente:crear }
+
+consultar_inventario:
+  path: /consultar-inventario/
+  defaults: { _controller: AppBundle:Producto/Producto:getInventario}
+
+consultar_citas_paciente:
+  path: /consultar-citas-paciente/
+  defaults: { _controller: AppBundle:Paciente/Paciente:getCitas }
