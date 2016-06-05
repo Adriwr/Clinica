@@ -11,10 +11,9 @@
 {% block content %}
     {{ dump(productos) }}
 	{% if productos %}
-		{{ dump(productos) }}
 		<div class="panel panel-green">
 			<div class="panel-heading">
-                Pacientes
+                Productos
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -27,17 +26,16 @@
     			<thead>
     				<tr>
 	        			<th>Nombre</th>
-    	    			<th>Sexo</th>
-    	    			<th>Fecha de Nacimiento</th>
-    	    			<th>Dirección</th>
-    	    			<th>Tel. Particular</th>
-    	    			<th>Tel. Para emergencias</th>
+    	    			<th>Precio</th>
+    	    			<th>Existencias</th>
     				</tr>
     			</thead>
     			<tbody>
 					{% for producto in productos %}
 						<tr>
-    		    			<td>{{ producto.nombre }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.existencias }}</td>
     		    		</tr>
 	    			{% endfor %}
     			</tbody>

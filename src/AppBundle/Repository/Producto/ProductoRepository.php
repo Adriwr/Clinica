@@ -27,9 +27,7 @@ class ProductoRepository extends DocumentRepository
                 'id'                => $producto->getId(),
                 'nombre'            => $producto->getNombre(),
                 'precio'        	=> $producto->getPrecio(),
-                'laboratorio'       => $producto->getLaboratorio(),
-                'existencias'    	=> $producto->getExistencias(),
-                'cantidad'         	=> $producto->getCantidad()
+                'existencias'    	=> $producto->getExistencias()
             );
         }
 

@@ -6,22 +6,27 @@ home:
 #    path:     /medico
 #    defaults: { _controller: AppBundle:Medico/Medico:index}
 #Cajero
-productos:
-    path:     /productos
+registrar_producto:
+    path:     /registrar-producto/
     defaults: { _controller: AppBundle:Producto/Producto:registrarProducto}
 
 #Paciente
+
+consultar_datos:
+    path:     /mis-datos/
+    defaults: { _controller: AppBundle:Paciente/Paciente:getDatos}
+
 agendar_cita_paciente:
     path:     /agendar-cita/paciente
     defaults: { _controller: AppBundle:Paciente/Cita:agendar}
 
 registrar_paciente:
   path: /registrar-paciente/
-  defaults: {_controller: AppBundle:Paciente/Paciente:registrarPaciente}
+  defaults: {_controller: AppBundle:Cita/Paciente:registrarPaciente}
   
 consultar_pacientes:
   path: /consultar-paciente/
-  defaults: {_controller: AppBundle:Gerente/Gerente:getPacientes}
+  defaults: {_controller: AppBundle:Paciente/Paciente:getPacientes}
 
 registrar_cajero:
   path: /registrar-cajero/
@@ -43,16 +48,47 @@ registrar_paciente_enfermera:
   path: /enfermera/registrar-paciente/
   defaults: {_controller:AppBundle:Enfermera/Enfermera:registrarPaciente}
 
+mostrar_paceintes_enfermera:
+  path: /enfermera/mostrar-pacientes/
+  defaults: {_controller:AppBundle:Enfermera/Enfermera:mostrarPacientes}
+
+enfermera_agendar_cita:
+  path: /enfermera/agendar-cita/{id}
+  defaults: {_controller:AppBundle:Enfermera/Enfermera:agendarCitaPaciente}
+
+
 consultar_actividad_diaria:
   path: /gerente/actividad-diaria/
   defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasDia}
 consultar_actividad_mensual:
   path: /gerente/actividad-mensual/
   defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasMes}
-<<<<<<< HEAD
-=======
-
 crear_expediente:
     path:     /expediente/crear/{id}
     defaults: { _controller: AppBundle:Expediente/Expediente:crear }
->>>>>>> be22eb3c1e8c977f71f453aaaf00fd5e9fc54ba2
+
+registrar_medicamento:
+    path:     /registrar-medicamento/
+    defaults: { _controller: AppBundle:Medicamento/Medicamento:registrarMedicamento}
+
+consultar_inventario:
+  path: /consultar-inventario/
+  defaults: { _controller: AppBundle:Producto/Producto:getInventario}
+
+consultar_citas_paciente:
+  path: /consultar-citas-paciente/
+  defaults: { _controller: AppBundle:Paciente/Paciente:getCitas }
+
+registrar_pago_cita:
+    path:     /cajero/cita
+    defaults: { _controller: AppBundle:Cajero/Cajero:registrarPagoCita }
+consultar_cita_medico:
+    path:     /medico/consultar-citas
+    defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
+
+<<<<<<< HEAD
+medico_consultar_citas:
+  path: /medico/consultar-citas/
+  defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
+=======
+>>>>>>> 04cb5289d2f865993b850264fd40ec38abad9465
