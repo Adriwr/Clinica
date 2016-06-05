@@ -44,13 +44,13 @@ class MedicamentoController extends Controller
             array('form' => $formProducto->createView())
         );*/
     }
-    /*
-    public function getInventarioAction(Request $request)
+    
+    public function getMedicamentosAction(Request $request)
     {
-        $productos = $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Producto\Producto' )
+        $medicamentos = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Medicamento\Medicamento' )
             ->getAll();
-        return $this->render(':Cajero/actividad:consultarInventario.html.twig', array('productos' => $productos));
-    }*/
+        return $this->render(':Cajero/actividad:consultarMedicamentos.html.twig', array('medicamentos' => $medicamentos));
+    }
 
 }

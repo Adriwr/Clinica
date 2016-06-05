@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+
+{%  endblock %}
+
+{% block dashboard %}
+    <h1 class="page-header">Consultar Medicamentos</h1>
+{% endblock %}
+
+{% block content %}
+    {{ dump(medicamentos) }}
+	{% if productos %}
+		<div class="panel panel-green">
+			<div class="panel-heading">
+                Medicamentos
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+            	<table class="table table-striped table-responsive"
+       					datatables="datatables"
+       					content="datosTabla"
+       					columns="aoCols"
+       					events="events"
+        				>
+    			<thead>
+    				<tr>
+                        <th>Nombre comercial</th>
+                        <th>Precio</th>
+                        <th>Laboratorio</th>
+                        <th>Presentacion</th>
+                        <th>Cantidad</th>
+                        <th>Existencias</th>
+                        <th>Ingredientes activos</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+					{% for producto in productos %}
+						<tr>
+                            <td>{{ producto.nombreComercial }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.laboratorio }}</td>
+                            <td>{{ producto.presentacion }}</td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>{{ producto.existencias }}</td>
+                            <td>
+                                <ul>
+                                {% for ingrediente in activos%}
+                                    <li>{{ producto.activos.nombre }} {{ producto.activos.cantidad }}</li>
+                                {% endfor %}
+                                </ul>
+                            </td>
+    		    		</tr>
+	    			{% endfor %}
+    			</tbody>
+	    		</table>
+            </div>
+        </div>
+		
+	{% else %}
+		<p class='text-danger'>No existen medicamentos registrados</p>
+	{% endif %}	
+	
+{% endblock %}
+
+{% block javascript %}
+    {# Plugins requeridos por el modulo #}
+
+{% endblock %}

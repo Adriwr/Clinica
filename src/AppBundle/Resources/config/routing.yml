@@ -71,6 +71,10 @@ registrar_medicamento:
     path:     /registrar-medicamento/
     defaults: { _controller: AppBundle:Medicamento/Medicamento:registrarMedicamento}
 
+consultar_medicamentos:
+  path: /consultar-medicamentos/
+  defaults: { _controller: AppBundle:Medicamento/Medicamento:getMedicamentos}
+
 consultar_inventario:
   path: /consultar-inventario/
   defaults: { _controller: AppBundle:Producto/Producto:getInventario}
