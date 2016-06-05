@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Producto;
 
 
 use AppBundle\Document\Producto\Producto;
+use AppBundle\Form\Type\Cajero\CajeroBuscarProductoType;
 use AppBundle\Form\Type\Producto\ProductoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -39,6 +40,35 @@ class ProductoController extends Controller
             ->getRepository( 'AppBundle:Producto\Producto' )
             ->getAll();
         return $this->render(':Cajero/actividad:consultarInventario.html.twig', array('productos' => $productos));
+    }
+
+
+    public function buscarProductoAction(Request $request)
+    {
+
+        $producto = new Producto();
+
+        $formBuscarProducto = $this->createForm(new CajeroBuscarProductoType(), $producto);
+        $formBuscarProducto->handleRequest($request);
+
+        /*if ($formProducto->isValid()) {
+
+            $dm = $productos = $this->get( 'doctrine_mongodb' )->getManager()
+                ->getRepository( 'AppBundle:Producto\Producto' )
+                ->getProductoByName();
+            return $this->redirect($this->generateUrl('productos'));
+
+        }*/
+
+        return $this->render(
+            ':Producto:buscarProducto.html.twig',
+            array('formBuscarProducto' => $formBuscarProducto->createView())
+        );
+
+       /* $productos = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Producto\Producto' )
+            ->getAll();
+        return $this->render(':Cajero/actividad:consultarInventario.html.twig', array('productos' => $productos));*/
     }
 
 }

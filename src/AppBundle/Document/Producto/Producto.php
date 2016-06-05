@@ -18,7 +18,7 @@ class Producto {
     /**
      * @ODM\String
      */
-    protected $nombre;
+        protected $nombre;
     /**
      * @ODM\Float
      */
