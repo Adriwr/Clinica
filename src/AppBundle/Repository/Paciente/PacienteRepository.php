@@ -58,5 +58,20 @@ class PacienteRepository extends DocumentRepository
 
         return $pacientes;
     }
+
+    public function getPacienteById($id)
+    {
+        $result = $this->createQueryBuilder()
+            ->field('id')
+            ->equals($id)
+            ->getQuery()
+            ->execute();
+        $arreglo = array();
+        foreach($result as $appoint) {
+            $arreglo = $appoint;
+        }
+        return $arreglo;
+
+    }
     
 }

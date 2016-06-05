@@ -17,6 +17,11 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
                     {{ form_start(formPagoCita , {'attr': {'class': 'form-horizontal'} }) }}
                     {{ form_widget(formPagoCita) }}
                     {{ form_end(formPagoCita) }}

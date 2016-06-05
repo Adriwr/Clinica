@@ -28,9 +28,17 @@ class ProductoController extends Controller
         }
 
         return $this->render(
-            ':Producto:Index.html.twig',
+            ':Producto:index.html.twig',
             array('form' => $formProducto->createView())
         );
+    }
+
+    public function getInventarioAction(Request $request)
+    {
+        $productos = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Producto\Producto' )
+            ->getAll();
+        return $this->render(':Cajero/actividad:consultarInventario.html.twig', array('productos' => $productos));
     }
 
 }
