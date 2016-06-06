@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller\Api\Enfermera;
 
+use AppBundle\Document\User\User;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -28,18 +29,23 @@ class EnfermeraController extends FOSRestController implements ClassResourceInte
 
     public function cgetCitasAction()
     {
-       $users =   $this->get( 'doctrine_mongodb' )->getManager()
+       $usuarios =   $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:User\User' )
             ->findAll();
-        $citas = array('array'=>'array');
-        foreach ($users as $usuario) {
-            if(($paciente = $usuario->getPaciente())!=null){
-                return $paciente;
-            }
-            $pacienteReal = $paciente->getPaciente();
-            foreach ($pacienteReal->getCitas() as $cita) {
-                $citas[] = $cita;
-                return $cita;
+        $citas = array();
+
+        foreach ($usuarios as $usuario) {
+            if(($paciente = $usuario->getPaciente()) !=null){
+                foreach ($paciente->getCitas() as $cita) {
+                    $citaAux = array(
+                        "id" => $cita->getId(),
+                        "nombre" => $paciente->getNombre()." ".$paciente->getApellidos(),
+                        "consultorio" => $cita->getConsultorio(),
+                        "medico" => $cita->getMedico(),
+                        "fecha" => $cita->getFecha()
+                    );
+                    $citas[] = $citaAux;
+                }
             }
         }
         return $citas;
