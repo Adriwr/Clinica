@@ -16,7 +16,7 @@ class Medicamento {
     /**
      * @ODM\Id
      */
-    protected $id;
+        protected $id;
     /**
      * @ODM\String
      */

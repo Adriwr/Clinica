@@ -24,6 +24,8 @@ class CajeroPagoCitaType extends AbstractType
         $builder
             ->add('fecha','datetime', array(
                 'label' => 'Fecha y hora de cita',
+                'years'=>range(date("Y"),date("Y")+2),
+                'minutes'=>array(0,30),
                 'required' => true ))
             ->add('consultorio','choice', array(
                 'attr' =>array(

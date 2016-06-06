@@ -1,10 +1,10 @@
 app.
     /**
-     * Factory para tener el resource de las enfermeras
+     * Factory para tener el resource de los cajeros
      * @param {type} $resource
      * @returns {undefined}
      */
-        factory('EnfermeraCitasFactory', function($resource){
+        factory('BuscarFactory', function($resource){
         var url = Routing.generate('api_get_enfermeras_citas');
 
         return $resource(url, null, {
@@ -14,4 +14,5 @@ app.
                 url     : url
             }
         });
-    });
+    })
+;

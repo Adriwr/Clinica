@@ -47,9 +47,9 @@ class ActivoType extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'AppBundle\Document\Activo\Activo',
+            'data_class'        => null,
             'csrf_protection'   => false,
-            'cascade_validation' => true,
+            'cascade_validation' => false,
             'allow_add' => true
         ));
     }

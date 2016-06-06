@@ -55,7 +55,7 @@ class Expediente {
      */
     protected $papanicolaous;
     /**
-     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Consulta\Consulta")
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Consulta\Consulta", cascade = {"persist"})
      */
     protected $consultas;
 

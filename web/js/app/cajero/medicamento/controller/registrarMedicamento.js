@@ -15,11 +15,19 @@ controller('RegistrarMedicamentoCtrl', function($scope, $modal, $filter, $rootSc
 
         $scope.addActivo = function(){
             $scope.medicamento.activos.push($scope.activo);
+            $scope.activo = {};
+            console.log($scope.medicamento);
         };
 
 
         $scope.saveMedicamento = function(){
-            MedicamentoFactory.saveMedicamento({ medicamento : $scope.medicamento });
+            MedicamentoFactory.saveMedicamento({ medicamento : $scope.medicamento },function(respuesta){
+                alert(respuesta.mensaje);
+                $scope.medicamento = {
+                    activos : []
+                };
+            });
+
         }
 
 

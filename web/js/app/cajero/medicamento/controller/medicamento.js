@@ -10,6 +10,7 @@ app.
 controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, BuscarFactory) {
     $scope.datosTabla = BuscarFactory.getMedicamentos();
     $scope.datosProductosTabla = [];
+    $scope.Prueba = "0";
 
     // Arreglo con los datos de las columnas que espera datatables
     $scope.aoColsProductos =[
@@ -18,10 +19,16 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             "bVisible"  : false
         },
         {
-            "mData"     : "nombre"
+            "mData"     : "nombreComercial"
         },
         {
             "mData": "cantidad"
+        },
+        {
+            "mData": "precio"
+        },
+        {
+            "mData": "existencias"
         },
         {
             "mData": function(data, typeCall, dataCall){
@@ -42,7 +49,13 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
 
     $scope.aoCols =[
         {
-            "mData"     : "nombre",
+            "mData"     : "nombreComercial",
+        },
+        {
+            "mData"     : "precio",
+        },
+        {
+            "mData"     : "existencias",
         },
         {
             "mData"     : function(data, typeCall, dataCall){
@@ -67,10 +80,20 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                 }
                 if(!exists){
                     var element = {
-                        nombre: rowToAdd['nombre'],
+                        nombreComercial: rowToAdd['nombreComercial'],
                         cantidad: 1,
+                        precio: rowToAdd['precio'],
+                        existencias: rowToAdd['existencias'],
                         posicion: posicion
-                    };
+                    }
+                    var currentTotal = 0;
+                    currentTotal += element.cantidad * element.precio.substr(1  );
+                    for(var i = 0;i<$scope.datosProductosTabla.length;i++){
+                        var precio = $scope.datosProductosTabla[i]['precio'];
+                        precio=precio.substring(1);
+                        currentTotal += $scope.datosProductosTabla[i]['cantidad'] * parseFloat(precio);
+                    }
+                    $scope.Prueba = currentTotal.toFixed(2);;
                     $scope.datosProductosTabla.push(
                         element
                     );
@@ -91,6 +114,11 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                     }
                     index++;
                 }
+                var currentTotal = parseFloat($scope.Prueba);
+                var precio =$scope.datosProductosTabla[i]['precio'];
+                precio=precio.substring(1);
+                currentTotal  = currentTotal - precio * $scope.datosProductosTabla[i]['cantidad'];
+                $scope.Prueba = currentTotal.toFixed(2);;
                 $scope.datosProductosTabla.splice(index,1);
             }
         },
@@ -106,22 +134,25 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                         index++;
                     }
                 var rowToReplace = $scope.datosProductosTabla[index];
-                var newRow = $scope.datosProductosTabla[index];
                 //checar la cantidad maxima del producto
-                /*
-                * if(newRow["cantidad"] < Stock){
-                *
-                * */
-                newRow["cantidad"]++;
-                var newRow = {
-                    "nombre":rowToReplace['nombre'],
-                    "posicion":rowToReplace['posicion'],
-                    "cantidad":rowToReplace['cantidad'],
+
+                if(rowToReplace["cantidad"] < rowToReplace["existencias"]){
+                    var newRow = {
+                        "nombreComercial": rowToReplace['nombreComercial'],
+                        "posicion": rowToReplace['posicion'],
+                        "cantidad": rowToReplace['cantidad']+1,
+                        "precio": rowToReplace['precio'],
+                        "existencias": rowToReplace['existencias']
+                    }
+                    var currentTotal = parseFloat($scope.Prueba);
+                    var precio =newRow.precio;
+                    precio=precio.substring(1);
+                    currentTotal  = currentTotal + parseFloat(precio);
+                    $scope.Prueba = currentTotal.toFixed(2);;
+                    $scope.datosProductosTabla.splice(index,1,newRow);
+                 }else{
+                    alert("Ha llegado a la máxima cantidad de medicamentos disponibles en almacén...");
                 }
-                $scope.datosProductosTabla.splice(index,1,newRow);
-                /*
-                * }
-                * */
             }
         },
         {
@@ -129,24 +160,40 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             event   : function(posicion) {
                 var size = $scope.datosProductosTabla.length;
                 var index = 0;
-                for (var i = 0; i < size; i++) {
-                    if (posicion == $scope.datosProductosTabla[i]['posicion']) {
+                for(var i = 0;i<size;i++){
+                    if(posicion == $scope.datosProductosTabla[i]['posicion']){
                         break;
                     }
                     index++;
                 }
                 var rowToReplace = $scope.datosProductosTabla[index];
-                var newRow = $scope.datosProductosTabla[index];
-                if (newRow["cantidad"] > 1) {
-                    newRow["cantidad"]--;
+                //checar la cantidad maxima del producto
+
+                if(rowToReplace["cantidad"] > 1){
                     var newRow = {
-                        "nombre": rowToReplace['nombre'],
+                        "nombreComercial": rowToReplace['nombreComercial'],
                         "posicion": rowToReplace['posicion'],
-                        "cantidad": rowToReplace['cantidad'],
+                        "cantidad": rowToReplace['cantidad']-1,
+                        "precio": rowToReplace['precio'],
+                        "existencias": rowToReplace['existencias']
                     }
-                    $scope.datosProductosTabla.splice(index, 1, newRow);
+                    var currentTotal = parseFloat($scope.Prueba);
+                    var precio =newRow.precio;
+                    precio=precio.substring(1);
+                    currentTotal  = currentTotal - parseFloat(precio);
+                    $scope.Prueba = currentTotal.toFixed(2);
+                    $scope.datosProductosTabla.splice(index,1,newRow);
+
                 }
             }
         }
     ];
+
+    $scope.realizarCompra = function(){
+        var monto = $scope.Prueba;
+        BuscarFactory.saveMedicamento({ medicamentos: $scope.datosProductosTabla, monto: parseFloat(monto)}, function(response){
+            alert(response.mensaje);
+            location.reload();
+        });
+    };
 });
