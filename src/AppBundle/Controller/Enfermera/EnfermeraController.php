@@ -67,13 +67,16 @@ class EnfermeraController extends Controller
             $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_PACIENTE");
+            /*$valida = $this->get( 'doctrine_mongodb' )->getManager()
+                ->getRepository( 'AppBundle:Paciente\Paciente' )
+                ->findOneBy(array('email'=> $usuario->getPaciente()->getEmail()));
+            */
             $usuario->setUsername($usuario->getPaciente()->getNombre() . " " . $usuario->getPaciente()->getApellidos());
             $dm->persist($usuario);
-            $dm->flush();
-
-
-            return $this->redirect($this->generateUrl('registrar_paciente_enfermera'));
-
+            //if($valida == null){
+                $dm->flush();
+            //}
+            //return $this->redirect($this->generateUrl('registrar_paciente_enfermera'));
         }
         $request->getSession()->getFlashBag()->add(
             'error',

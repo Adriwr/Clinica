@@ -83,7 +83,7 @@ class GerenteController extends Controller
         $ventas = $this->get('doctrine_mongodb')->getManager()
             ->getRepository('AppBundle:Pago\Pago')->findAll();
 
-        return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventas, 'mensaje'=>"el dia de hoy"));
+        return $this->render(':Gerente/actividad:consultarArticulosVendidosHoy.html.twig', array('articulos'=>$ventas, 'mensaje'=>"el dia de hoy"));
     }
 
     public function getArticulosVendidosMesAction(Request $request)
@@ -91,7 +91,7 @@ class GerenteController extends Controller
         $ventas = $this->get('doctrine_mongodb')->getManager()
             ->getRepository('AppBundle:Pago\Pago')->findAll();
 
-        return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventas, 'mensaje'=>"en el mes"));
+        return $this->render(':Gerente/actividad:consultarArticulosVendidosMes.html.twig', array('articulos'=>$ventas, 'mensaje'=>"en el mes"));
     }
     
     public function getPacientesAction(Request $request)

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Medico;
 
+use AppBundle\Document\Consulta\Consulta;
 use AppBundle\Document\Medico\Medico;
 use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Medico\MedicoRegistrationType;
@@ -72,16 +73,30 @@ class MedicoController extends Controller
             ':Medico:consultarCitas.html.twig', array('pacientes'=>$pacientes, 'medico'=>$medico->getNombre()." ".$medico->getApellidos())
         );
     }
+
+    /**
+     * 
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function darConsultaAction(Request $request)
     {
-        echo $request->get('fecha');
-        $this->getUser()->getMedico();
+        $medico = $this->getUser()->getMedico();
         $consultas = $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:Consulta\Consulta' )
             ->findAll();
+
+        $consultaRegreso = new Consulta();
+        foreach ($consultas as $consulta){
+            if($medico["nombre"] == $consulta["medico"]){
+                if((string)$consulta["fecha"]->format("Y-m-d-H-i") == $request->get('fecha')){
+                    $consultaRegreso = $consulta;
+                }
+            }
+        }
         return $this->render(
             ':Medico:pasoPrincipalConsulta.html.twig',
-            array('consultas' => $consultas)
+            array('consulta' => $consultaRegreso, 'paciente'=> $request->get('idPaciente'))
         );
     }
 }

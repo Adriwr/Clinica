@@ -9,7 +9,25 @@
 {% endblock %}
 
 {% block content %}
-    {{ dump(consultas) }}
+    {{ dump(consulta) }}
+    <center>
+        <a href="">
+            <button class="btn btn-success">
+                Consultar expediente
+            </button>
+        </a>
+        <a href="">
+            <button class="btn btn-success">
+                Agregar expediente
+            </button>
+        </a>
+        <a href="">
+            <button class="btn btn-success">
+                Dar tratamiento
+            </button>
+        </a>
+    </center>
+
 {% endblock %}
 
 {% block javascript %}

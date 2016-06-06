@@ -99,7 +99,7 @@ medico_consultar_citas:
   defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
 
 medico_dar_consulta:
-  path: /medico/dar-consulta/{fecha}
+  path: /medico/dar-consulta/{idPaciente}/{fecha}
   defaults: {_controller: AppBundle:Medico/Medico:darConsulta}
 
 consultar_citas_enfermera:

@@ -43,21 +43,24 @@
 
                            {% if paciente.citas %}
                                {% for cita in paciente.citas %}
-                                    <td>
-                                        <a href="{{ path('medico_dar_consulta', {'fecha': cita.fecha|date('Y-m-d-H:i')}) }}">
+
                                             {% if medico == cita.medico %}
                                                 {% if ("now"|date('Y'))|number_format == (cita.fecha|date('Y'))|number_format %}
                                                     {% if ("now"|date('m'))|number_format == (cita.fecha|date('m'))|number_format %}
                                                         {% if ("now"|date('d'))|number_format <= (cita.fecha|date('d'))|number_format %}
                                                             {% if ("now"|date('H'))|number_format <= (cita.fecha|date('H'))|number_format %}
-                                                                {{ cita.fecha|date('H:i') }}
+                                                                <td>
+                                                                    <a href="{{ path('medico_dar_consulta', {'fecha': cita.fecha|date('Y-m-d-H:i'), 'idPaciente':paciente.id}) }}">
+                                                                        {{ cita.fecha|date('H:i') }}
+                                                                    </a>
+                                                                </td>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             {% endif %}
-                                        </a>
-                                    </td>
+
+
                                {% endfor %}
                            {% elseif not pacientes.citas %}
                                no hay citas de este paciente
