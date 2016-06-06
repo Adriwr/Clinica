@@ -6,12 +6,18 @@ app.
      */
         factory('BuscarFactory', function($resource){
         var url = Routing.generate('api_get_medicamentos');
-
+        var url2 = Routing.generate('api_post_medicamento');
         return $resource(url, null, {
             getMedicamentos  : {
                 method  : 'GET',
                 isArray : true,
                 url     : url
+            },
+            saveMedicamento:{
+                method: 'POST',
+                isArray: false,
+                url : url2,
+                data: {}
             }
         });
     })
@@ -21,7 +27,7 @@ app.
         return $resource(url, null, {
             saveMedicamento  : {
                 method  : 'POST',
-                isArray : true,
+                isArray : false,
                 url     : url,
                 data    : {}
             }

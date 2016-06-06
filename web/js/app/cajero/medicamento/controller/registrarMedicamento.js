@@ -23,6 +23,9 @@ controller('RegistrarMedicamentoCtrl', function($scope, $modal, $filter, $rootSc
         $scope.saveMedicamento = function(){
             MedicamentoFactory.saveMedicamento({ medicamento : $scope.medicamento },function(respuesta){
                 alert(respuesta.mensaje);
+                $scope.medicamento = {
+                    activos : []
+                };
             });
 
         }
