@@ -107,15 +107,16 @@ class EnfermeraController extends Controller
     {
         $cita = new PacienteCitas();
 
-
         $form = $this->createForm(new CitaType(), $cita);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $dm = $this->get( 'doctrine_mongodb' )->getManager();
-            $paciente = $dm->getRepository('AppBundle:Paciente\Paciente')->findOneById($request->get('id'));
+            $paciente = $dm->getRepository('AppBundle:User\User')->findOneBy(
+                array("paciente.id" => $request->get('id'))
+            );
             // aqui va vincular a usuario
-            $paciente->addCita($cita);
+            $paciente->getPaciente()->addCita($cita);
             $dm->persist($cita);
             $dm->flush();
 

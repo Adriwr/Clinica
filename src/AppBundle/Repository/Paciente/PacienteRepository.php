@@ -20,12 +20,13 @@ class PacienteRepository extends DocumentRepository
         $appoints = array();
         $appointGross = $this->createQueryBuilder()
             ->field('citas')->exists(true)
-            ->select('citas')
             ->getQuery()
             ->execute();
 
         foreach($appointGross as $appoint) {
-            $appoints[] = $appoint->getFecha();
+            foreach($appoint->getCitas() as $cita){
+                $appoints[] = $cita->getFecha();
+            }
         }
 
         return $appoints;

@@ -11,7 +11,7 @@ app.
             postExpediente :  {
                 method:'POST',
                 data: {},
-                isArray: false,
+                isArray: true,
                 url : url
             }
         });

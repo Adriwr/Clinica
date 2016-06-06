@@ -13,23 +13,19 @@ class CitaController extends Controller
 {
     /**
      * Acción para mostrar la vista UI2 Agendar cita
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function agendarAction(Request $request)
     {
         $cita = new PacienteCitas();
-
 
         $form = $this->createForm(new CitaType(), $cita);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $dm = $this->get( 'doctrine_mongodb' )->getManager();
-            $paciente = $this->getUser()->getPaciente();
+            $paciente = $dm->getRepository('AppBundle:Paciente\Paciente')->findOneById($request->get('id'));
             $paciente->addCita($cita);
             $dm->persist($cita);
             $dm->flush();
@@ -39,7 +35,7 @@ class CitaController extends Controller
                 'Cita guardada'
             );
 
-            return $this->redirect($this->generateUrl('agendar_cita_paciente'));
+            return $this->redirect($this->generateUrl('consultar_citas_paciente'));
 
         }
         $request->getSession()->getFlashBag()->add(

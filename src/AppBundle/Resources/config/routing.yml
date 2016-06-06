@@ -20,7 +20,7 @@ consultar_datos:
     defaults: { _controller: AppBundle:Paciente/Paciente:getDatos}
 
 agendar_cita_paciente:
-    path:     /agendar-cita/paciente
+    path:     /paciente/agendar-cita/{id}
     defaults: { _controller: AppBundle:Paciente/Cita:agendar}
 
 registrar_paciente:
@@ -58,7 +58,6 @@ mostrar_paceintes_enfermera:
 enfermera_agendar_cita:
   path: /enfermera/agendar-cita/{id}
   defaults: {_controller:AppBundle:Enfermera/Enfermera:agendarCitaPaciente}
-
 
 consultar_actividad_diaria:
   path: /gerente/actividad-diaria/
