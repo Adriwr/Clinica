@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Enfermera;
 
 
+use AppBundle\Document\Paciente\Paciente;
 use AppBundle\Document\Paciente\PacienteCitas;
 use AppBundle\Document\Enfermera\Enfermera;
 use AppBundle\Document\User\User;
@@ -62,21 +63,28 @@ class EnfermeraController extends Controller
         $formUsuario = $this->createForm(new PacienteRegistrationType(), $usuario);
 
         $formUsuario->handleRequest($request);
-
+        $valida_int = 0;
         if($formUsuario->isValid()){
             $dm = $this->get('doctrine_mongodb')->getManager();
             $usuario->setEnabled(true);
             $usuario->addRole("ROLE_PACIENTE");
+
             $valida = $this->get( 'doctrine_mongodb' )->getManager()
-                ->getRepository( 'AppBundle:Paciente\Paciente' )
-                ->findBy(array('email'=> $usuario->getPaciente()->getEmail()));
+                ->getRepository('AppBundle:User\User')
+                ->getAllUsers('paciente');
 
             $usuario->setUsername($usuario->getPaciente()->getNombre() . " " . $usuario->getPaciente()->getApellidos());
             $dm->persist($usuario);
-            if($valida == null){
+            $data= $formUsuario->getData();
+            foreach ($valida as $usuarioV){
+                if($usuarioV["email"] == $data->getEmail()){
+                    $valida_int = 1;
+                }
+            }
+            if($valida_int == 0){
                 $dm->flush();
             }
-            return $this->redirect($this->generateUrl('registrar_paciente_enfermera'));
+            return $this->redirect($this->generateUrl('registrar_paciente_enfermera', array('valida'=>$valida)));
         }
         $request->getSession()->getFlashBag()->add(
             'error',
@@ -86,8 +94,7 @@ class EnfermeraController extends Controller
         return $this->render(
             ':Enfermera/registrar:registrarPaciente.html.twig',
             array(
-                'formUsuario' => $formUsuario->createView()
-            )
+                'formUsuario' => $formUsuario->createView())
         );
     }
     public function mostrarPacientesAction(Request $request)
