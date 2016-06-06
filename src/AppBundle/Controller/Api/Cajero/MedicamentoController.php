@@ -14,6 +14,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Util\Codes;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class MedicamentoController extends FOSRestController implements ClassResourceInterface{
@@ -93,10 +94,13 @@ class MedicamentoController extends FOSRestController implements ClassResourceIn
                 ->getRepository( 'AppBundle:Medicamento\Medicamento' )
                 ->findOneBy(array('nombreComercial'=>$medicamento['nombreComercial']));
             $pago->addMedicamento($med);
+
             $med->setExistencias($med->getExistencias()-$medicamento['cantidad']);
             $dm->persist($med);
             $dm->flush();
         }
+        $c = new \DateTime();
+        $pago->setFecha($c->format('d-m-Y H:i:s'));
         $pago->setMonto($monto);
         $dm->persist($pago);
         $dm->flush();
