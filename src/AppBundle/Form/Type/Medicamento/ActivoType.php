@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form\Type\Activo;
+namespace AppBundle\Form\Type\Medicamento;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

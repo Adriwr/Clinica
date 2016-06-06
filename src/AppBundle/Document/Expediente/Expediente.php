@@ -24,7 +24,7 @@ class Expediente {
     /**
      * @ODM\EmbedMany(targetDocument="AntecedenteFamiliar")
      */
-    protected $antedecentesFamiliares;
+    protected $antecedentesFamiliares;
     /**
      * @ODM\EmbedMany(targetDocument="Cirugia")
      */
@@ -38,7 +38,7 @@ class Expediente {
      */
     protected $embarazos;
     /**
-     * @ODM\EmbedMany(targetDocument="AntecedentePersonal")
+     * @ODM\EmbedOne(targetDocument="AntecedentePersonal")
      */
     protected $antecedentesPersonales;
     /**
@@ -62,11 +62,11 @@ class Expediente {
     public function __construct()
     {
         $this->enfermedadesCronicas = new ArrayCollection();
-        $this->antedecentesFamiliares = new ArrayCollection();
+        $this->antecedentesFamiliares = new ArrayCollection();
         $this->cirugias = new ArrayCollection();
         $this->alergias = new ArrayCollection();
         $this->embarazos = new ArrayCollection();
-        $this->antecedentesPersonales = new ArrayCollection();
+        //$this->antecedentesPersonales = new ArrayCollection();
         $this->anticonceptivos = new ArrayCollection();
         $this->mastografias = new ArrayCollection();
         $this->papanicolaous = new ArrayCollection();
@@ -114,33 +114,33 @@ class Expediente {
     }
 
     /**
-     * Add antedecentesFamiliare
+     * Add antecedentesFamiliares
      *
-     * @param AppBundle\Document\Expediente\AntecedenteFamiliar $antedecentesFamiliare
+     * @param AppBundle\Document\Expediente\AntecedenteFamiliar $antecedentesFamiliares
      */
-    public function addAntedecentesFamiliare(\AppBundle\Document\Expediente\AntecedenteFamiliar $antedecentesFamiliare)
+    public function addAntecedentesFamiliares(\AppBundle\Document\Expediente\AntecedenteFamiliar $antecedentesFamiliares)
     {
-        $this->antedecentesFamiliares[] = $antedecentesFamiliare;
+        $this->antecedentesFamiliares[] = $antecedentesFamiliares;
     }
 
     /**
-     * Remove antedecentesFamiliare
+     * Remove antecedentesFamiliares
      *
-     * @param AppBundle\Document\Expediente\AntecedenteFamiliar $antedecentesFamiliare
+     * @param AppBundle\Document\Expediente\AntecedenteFamiliar $antecedentesFamiliares
      */
-    public function removeAntedecentesFamiliare(\AppBundle\Document\Expediente\AntecedenteFamiliar $antedecentesFamiliare)
+    public function removeAntecedentesFamiliares(\AppBundle\Document\Expediente\AntecedenteFamiliar $antecedentesFamiliares)
     {
-        $this->antedecentesFamiliares->removeElement($antedecentesFamiliare);
+        $this->antecedentesFamiliares->removeElement($antecedentesFamiliares);
     }
 
     /**
-     * Get antedecentesFamiliares
+     * Get antecedentesFamiliares
      *
-     * @return \Doctrine\Common\Collections\Collection $antedecentesFamiliares
+     * @return \Doctrine\Common\Collections\Collection $antecedentesFamiliares
      */
-    public function getAntedecentesFamiliares()
+    public function getAntecedentesFamiliares()
     {
-        return $this->antedecentesFamiliares;
+        return $this->antecedentesFamiliares;
     }
 
     /**
@@ -232,36 +232,7 @@ class Expediente {
     {
         return $this->embarazos;
     }
-
-    /**
-     * Add antecedentesPersonale
-     *
-     * @param AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonale
-     */
-    public function addAntecedentesPersonale(\AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonale)
-    {
-        $this->antecedentesPersonales[] = $antecedentesPersonale;
-    }
-
-    /**
-     * Remove antecedentesPersonale
-     *
-     * @param AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonale
-     */
-    public function removeAntecedentesPersonale(\AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonale)
-    {
-        $this->antecedentesPersonales->removeElement($antecedentesPersonale);
-    }
-
-    /**
-     * Get antecedentesPersonales
-     *
-     * @return \Doctrine\Common\Collections\Collection $antecedentesPersonales
-     */
-    public function getAntecedentesPersonales()
-    {
-        return $this->antecedentesPersonales;
-    }
+    
 
     /**
      * Add anticonceptivo
@@ -382,4 +353,27 @@ class Expediente {
     {
         return $this->consultas;
     }
+
+    /**
+     * Set antecedentesPersonales
+     *
+     * @param AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonales
+     * @return self
+     */
+    public function setAntecedentesPersonales(\AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonales)
+    {
+        $this->antecedentesPersonales = $antecedentesPersonales;
+        return $this;
+    }
+
+    /**
+     * Get antecedentesPersonales
+     *
+     * @return AppBundle\Document\Expediente\AntecedentePersonal $antecedentesPersonales
+     */
+    public function getAntecedentesPersonales()
+    {
+        return $this->antecedentesPersonales;
+    }
+
 }

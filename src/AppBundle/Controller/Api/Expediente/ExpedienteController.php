@@ -20,6 +20,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Util\Codes;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class ExpedienteController extends FOSRestController implements ClassResourceInterface{
@@ -36,17 +37,27 @@ class ExpedienteController extends FOSRestController implements ClassResourceInt
         $expediente = $request->request->get('expediente');
         $id =  $expediente['id'];
         $paciente = $dm->getRepository('AppBundle:User\User')->findOneBy(
-            array("paciente.id" => $id)
+            array("id" => $id)
         );
+        //return $paciente->getPaciente();
 
         $expedienteDoc = new Expediente();
+        $paciente->getPaciente()->setExpediente($expedienteDoc);
+
+        //$expedienteDoc = $paciente->getPaciente()->getExpediente();
+
+        //$dm->flush();
+
+
+        //$dm->persist($expedienteDoc);
+
+        //return array("fin" => "fin");
         foreach($expediente['alergias'] as $elemento){
             $alergiaDoc = new Alergia();
             $alergiaDoc->setControlada($elemento['controlada']);
             $alergiaDoc->setFechaDiagnostico($elemento['fechaDiagnostico']);
             $alergiaDoc->setSustancia($elemento['sustancia']);
             $expedienteDoc->addAlergia($alergiaDoc);
-            $dm->persist($alergiaDoc);
         }
 
         foreach($expediente['antecedentesFam'] as $elemento){
@@ -69,14 +80,13 @@ class ExpedienteController extends FOSRestController implements ClassResourceInt
                     $anteFamDoc->addEnfermedadesCronica($enfermedad);
                 }
             }
-
-            $expedienteDoc->addAntedecentesFamiliare($anteFamDoc);
-            $dm->persist($anteFamDoc);
+            $expedienteDoc->addAntecedentesFamiliares($anteFamDoc);
         }
-
+        /*
         if(array_key_exists('antecedentesPer', $expediente)){
             $antePersoDoc = new AntecedentePersonal();
             $antePersoDoc->setFrecuenciaBano($expediente['antecedentesPer']['frecuenciaBano']);
+            //return $expediente['antecedentesPer']['frecuenciaBano'];
             $antePersoDoc->setCambiosRopa($expediente['antecedentesPer']['cambiosRopa']);
             $antePersoDoc->setPersonasCasa($expediente['antecedentesPer']['personasCasa']);
             $antePersoDoc->setAlimentacion($expediente['antecedentesPer']['alimentacion']);
@@ -84,9 +94,9 @@ class ExpedienteController extends FOSRestController implements ClassResourceInt
             $antePersoDoc->setFuma($expediente['antecedentesPer']['fuma']);
             $antePersoDoc->setAlcohol($expediente['antecedentesPer']['alcohol']);
             $antePersoDoc->setDrogas($expediente['antecedentesPer']['drogas']);
-            $expedienteDoc->addAntecedentesPersonale($antePersoDoc);
-            $dm->persist($antePersoDoc);
-        }
+            $expedienteDoc->setAntecedentesPersonales($antePersoDoc);
+        }*/
+
 
         foreach($expediente['anticonceptivos'] as $elemento){
             $anticonceptivo = new Anticonceptivo();
@@ -134,12 +144,12 @@ class ExpedienteController extends FOSRestController implements ClassResourceInt
             $expedienteDoc->addPapanicolaous($papanico);
         }
 
-        $paciente->getPaciente()->setExpediente($expedienteDoc);
+        //$paciente->getPaciente()->setExpediente($expedienteDoc);
         $dm->persist($expedienteDoc);
         $dm->flush();
 
         return array(
-            "mensaje" => "exito"
+            "expediente" => $expedienteDoc
         );
     }
 

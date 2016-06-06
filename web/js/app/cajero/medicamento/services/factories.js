@@ -15,4 +15,16 @@ app.
             }
         });
     })
+    .factory('MedicamentoFactory', function($resource){
+        var url = Routing.generate('api_');
+
+        return $resource(url, null, {
+            saveMedicamento  : {
+                method  : 'POST',
+                isArray : true,
+                url     : url,
+                data    : {}
+            }
+        });
+    })
 ;

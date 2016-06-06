@@ -2,12 +2,10 @@
 
 {% block dashboard %}
     <h1 class="page-header">Registrar Medicamento</h1>
-
-
 {% endblock %}
 
 {% block content %}
-    <div ng-controller="MedicamentosCtrl">
+    <div ng-controller="RegistrarMedicamentoCtrl">
                 <div class="panel panel-yellow">
                     <div class="panel-heading">
                         Registrar medicamento
@@ -45,8 +43,8 @@
     {# Directivas del modulo #}
     <script type="text/javascript" src="{{ asset('js/directives/datatables.js') }}"></script>
     {# Servicios de AngularJS #}
-    <script type="text/javascript" src="{{ asset('js/app/productos/services/factories.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/cajero/medicamento/controller/medicamento.js') }}"></script>
     {# Controles primarios de AngularJS #}
-    <script type="text/javascript" src="{{ asset('js/app/productos/controllers/productos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/cajero/medicamento/services/factories.js') }}"></script>
     {# Controles secundarios de AngularJS #}
 {% endblock %}

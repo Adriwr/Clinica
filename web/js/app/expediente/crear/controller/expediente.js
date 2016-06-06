@@ -141,7 +141,7 @@ app.
         };
 
         $scope.enviarDatos = function(){
-            alert("fin papu");
+            //alert("fin papu");
             ExpedienteFactory.postExpediente({ expediente : $scope.expediente }, function(result){
                 console.log(result);
             });
