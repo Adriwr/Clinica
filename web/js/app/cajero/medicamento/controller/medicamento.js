@@ -191,7 +191,6 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
 
     $scope.realizarCompra = function(){
         var monto = $scope.Prueba;
-        alert(monto);
         BuscarFactory.saveMedicamento({ medicamentos: $scope.datosProductosTabla, monto: parseFloat(monto)}, function(response){
             alert(response.mensaje);
             location.reload();
