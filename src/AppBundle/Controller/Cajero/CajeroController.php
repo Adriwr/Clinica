@@ -71,7 +71,7 @@ class CajeroController extends Controller
         if($formPagoCita->isValid()){
             date_default_timezone_set ('America/Mexico_City');
             $date = $cita->getFecha()->format('Y-m-d');
-            $h = $cita->getFecha()->format('h') * 60 * 60;
+            $h = $cita->getFecha()->format('H') * 60 * 60;
             $m = $cita->getFecha()->format('i') * 60;
             if(strtotime($date)+$h+$m<time()){
                 $this->addFlash(
