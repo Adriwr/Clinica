@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+
+{%  endblock %}
+
+{% block dashboard %}
+    <h3 class="page-header"></h3>
+{% endblock %}
+
+{% block content %}
+    <div ng-controller="TratamientoCtrl">
+   <div class="row">
+       <div class="col-md-offset-1 col-md-4 ">
+           <div class="panel panel-primary">
+               <div class="panel-heading">
+                   Medicamento
+               </div>
+               <div class="panel-body">
+                   <form>
+
+                               <label for="exampleInputName2">Nombre</label>
+                               <input type="text" class="form-control" id="exampleInputName2" ng-model="medicamento.nombre">
+
+                               <label for="exampleInputName2">Cantidad</label>
+                               <input type="number" class="form-control" id="exampleInputName2" ng-model="medicamento.cantidad">
+
+                               <label for="exampleInputName2">Frecuencia</label>
+                               <input type="text" class="form-control" id="exampleInputName2" ng-model="medicamento.frecuencia">
+
+
+                               <label for="exampleInputName2">Duración</label>
+
+                               <input type="text" class="form-control" id="exampleInputName2" ng-model="medicamento.duracion">
+
+
+                               <button class="btn btn-primary" ng-click = "agregarMedicamento()">Agregar</button>
+                   </form>
+               </div>
+           </div>
+
+       </div>
+       <div class="col-md-3 col-md-offset-2">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                   Lista de medicamentos
+                </div>
+                <div class="panel-body">
+                    <ul ng-repeat="medicamento in medicamentos">
+                        <li>
+                            {[{ medicamento.Nombre}]}
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+           </div>
+        </div>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-4 " style="border-radius: 5px; background: white;">
+            <div class="panel-primary panel">
+                <div class="panel-heading">
+                    Recomendación
+                </div>
+                <div class="panel-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="exampleInputName2">Descripción</label>
+                            </div>
+                            <div class="col-md-6">
+                        <textarea ng-model="recomendacion.descripcion" style="height: 100px; width: 180px;">
+
+                        </textarea>
+                            </div>
+                        </div>
+
+                                <label for="exampleInputName2">Duración</label>
+                                <input type="text" class="form-control" id="exampleInputName2" ng-model="recomendacion.duracion">
+
+                                <button class="btn btn-primary" ng-click = "agregarRecomendacion()">Agregar</button>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-3 col-md-offset-2">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Lista de recomendaciones
+                    </div>
+                    <div class="panel-body">
+                        <ul ng-repeat="recomendacion in recomendaciones">
+                            <li>
+                                {[{ recomendacion.Descripcion }]}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-offset-8">
+            <button class="btn btn-primary" ng-click = "agregarTratamiento()">Agregar tratamiento</button>
+        </div>
+        <br>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block angular %}
+    <script type="text/javascript" src="{{ asset('js/app/medico/registrar/controllers/tratamiento.js') }}"></script>
+{% endblock %}

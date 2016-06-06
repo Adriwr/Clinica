@@ -113,4 +113,8 @@ gerente_consultar_ventas_mes:
   path: /gerente/consultar-ventas-mes/
   defaults: {_controller: AppBundle:Gerente/Gerente:getArticulosVendidosMes}
 
+medico_crear_tratamiento:
+  path: medico/crear-tratamiento/{idUsuario}/{idConsulta}
+  defaults: {_controller: AppBundle:Medico/Medico:mostrarUITratamiento}
+
 

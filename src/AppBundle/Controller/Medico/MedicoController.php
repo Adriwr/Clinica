@@ -86,6 +86,10 @@ class MedicoController extends Controller
             ->getRepository( 'AppBundle:Consulta\Consulta' )
             ->findAll();
 
+        $paciente = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->findOneBy(array('id'=>$request->get('idPaciente')));
+        
         $consultaRegreso = new Consulta();
         foreach ($consultas as $consulta){
             if($medico["nombre"] == $consulta["medico"]){
@@ -94,9 +98,15 @@ class MedicoController extends Controller
                 }
             }
         }
+        $expediente = $paciente->getExpediente();
         return $this->render(
             ':Medico:pasoPrincipalConsulta.html.twig',
-            array('consulta' => $consultaRegreso, 'paciente'=> $request->get('idPaciente'))
+            array('consulta' => $consultaRegreso, 'pacienteID'=> $request->get('idPaciente'),'paciente'=>$paciente,'expediente'=>$expediente)
         );
+    }
+    
+    public function mostrarUITratamientoAction(Request $request){
+        $idConsulta = $request->get('idConsulta');
+        return $this->render(':Medico:crearTratamiento.html.twig', array('idConsulta'=> $idConsulta));
     }
 }
