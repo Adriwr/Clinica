@@ -93,7 +93,7 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                         precio=precio.substring(1);
                         currentTotal += $scope.datosProductosTabla[i]['cantidad'] * parseFloat(precio);
                     }
-                    $scope.Prueba = currentTotal.toString();
+                    $scope.Prueba = currentTotal.toFixed(2);;
                     $scope.datosProductosTabla.push(
                         element
                     );
@@ -118,7 +118,7 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                 var precio =$scope.datosProductosTabla[i]['precio'];
                 precio=precio.substring(1);
                 currentTotal  = currentTotal - precio * $scope.datosProductosTabla[i]['cantidad'];
-                $scope.Prueba = currentTotal.toString();
+                $scope.Prueba = currentTotal.toFixed(2);;
                 $scope.datosProductosTabla.splice(index,1);
             }
         },
@@ -148,7 +148,7 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                     var precio =newRow.precio;
                     precio=precio.substring(1);
                     currentTotal  = currentTotal + parseFloat(precio);
-                    $scope.Prueba = currentTotal.toString();
+                    $scope.Prueba = currentTotal.toFixed(2);;
                     $scope.datosProductosTabla.splice(index,1,newRow);
                  }else{
                     alert("Ha llegado a la máxima cantidad de medicamentos disponibles en almacén...");
@@ -181,7 +181,7 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                     var precio =newRow.precio;
                     precio=precio.substring(1);
                     currentTotal  = currentTotal - parseFloat(precio);
-                    $scope.Prueba = currentTotal.toString();
+                    $scope.Prueba = currentTotal.toFixed(2);
                     $scope.datosProductosTabla.splice(index,1,newRow);
 
                 }
