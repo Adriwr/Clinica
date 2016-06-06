@@ -65,8 +65,8 @@ class MedicoController extends Controller
     public function consultarCitasAction(Request $request)
     {
         $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Paciente\Paciente' )
-            ->getAll();
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllUsersCitas('paciente');
         $medico = $this->getUser()->getMedico();
         
         return $this->render(

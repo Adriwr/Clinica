@@ -149,8 +149,8 @@ class EnfermeraController extends Controller
     public function consultarCitasEnfermeraAction(Request $request)
     {
         $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Paciente\Paciente' )
-            ->getAll();
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllUsersCitas('paciente');
 
         return $this->render(
             ':Enfermera/citas:consultarCitas.html.twig', array('pacientes'=>$pacientes)
