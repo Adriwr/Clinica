@@ -33,18 +33,31 @@
                     <tbody>
                    {% for paciente in pacientes %}
 
-                       <tr>
+                       {% if paciente.citas %}
 
-                           {% if paciente.citas %}
-                               <tr>
-                                   <td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
-                                   <td>{{ paciente.email }}</td>
-                                   <td>
+                                   {% for cita in paciente.citas %}
+                                       {% if medico == cita.medico %}
+                                           {% if ("now"|date('Y'))|number_format == (cita.fecha|date('Y'))|number_format %}
+                                               {% if ("now"|date('m'))|number_format == (cita.fecha|date('m'))|number_format %}
+                                                   {% if ("now"|date('d'))|number_format == (cita.fecha|date('d'))|number_format %}
+                                                       {% if ("now"|date('H'))|number_format <= (cita.fecha|date('H'))|number_format %}
+                                                           <tr>
+                                                           <td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
+                                                           <td>{{ paciente.email }}</td>
+                                                       {% endif %}
+                                                   {% endif %}
+                                               {% endif %}
+                                           {% endif %}
+                                       {% endif %}
+
+                                   {% endfor %}
+
+                               <td>
                                {% for cita in paciente.citas %}
                                             {% if medico == cita.medico %}
                                                 {% if ("now"|date('Y'))|number_format == (cita.fecha|date('Y'))|number_format %}
                                                     {% if ("now"|date('m'))|number_format == (cita.fecha|date('m'))|number_format %}
-                                                        {% if ("now"|date('d'))|number_format <= (cita.fecha|date('d'))|number_format %}
+                                                        {% if ("now"|date('d'))|number_format == (cita.fecha|date('d'))|number_format %}
                                                             {% if ("now"|date('H'))|number_format <= (cita.fecha|date('H'))|number_format %}
                                                                     <a href="{{ path('medico_dar_consulta', {'fecha': cita.fecha|date('Y-m-d-H:i'), 'idPaciente':paciente.id}) }}">
                                                                         <button class="btn btn-success">
@@ -58,10 +71,9 @@
                                             {% endif %}
 
                                {% endfor %}
-                                   </td>
+                               </td>
                                </tr>
-                           {% endif %}
-                       </tr>
+                       {% endif %}
 
                     {% endfor %}
                     </tbody>

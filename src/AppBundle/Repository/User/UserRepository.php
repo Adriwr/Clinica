@@ -94,7 +94,7 @@ class UserRepository extends DocumentRepository
                 array_push($citas,$cita);
             }
             $gerentes[] = array(
-                'id'            => $gerente->getPaciente()->getId(),
+                'id'            => $gerente->getId(),
                 'nombre'        => $gerente->getPaciente()->getNombre(),
                 'apellidos'     => $gerente->getPaciente()->getApellidos(),
                 'email'         => $gerente->getEmail(),

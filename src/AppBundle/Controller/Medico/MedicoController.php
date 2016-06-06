@@ -87,8 +87,13 @@ class MedicoController extends Controller
             ->findAll();
 
         $paciente = $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->getRepository( 'AppBundle:User\User' )
             ->findOneBy(array('id'=>$request->get('idPaciente')));
+
+
+        $pacienteCopia = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->findOneBy(array('id'=>$paciente->getPaciente()->getId()));
         
         $consultaRegreso = new Consulta();
         foreach ($consultas as $consulta){
@@ -98,7 +103,7 @@ class MedicoController extends Controller
                 }
             }
         }
-        $expediente = $paciente->getExpediente();
+        $expediente = $pacienteCopia;
         return $this->render(
             ':Medico:pasoPrincipalConsulta.html.twig',
             array('consulta' => $consultaRegreso, 'pacienteID'=> $request->get('idPaciente'),'paciente'=>$paciente,'expediente'=>$expediente)
