@@ -32,6 +32,23 @@ class PacienteRepository extends DocumentRepository
         return $appoints;
     }
 
+    public function getInfoAppointments()
+    {
+        $appoints = array();
+        $appointGross = $this->createQueryBuilder()
+            ->field('citas')->exists(true)
+            ->getQuery()
+            ->execute();
+
+        foreach($appointGross as $appoint) {
+            foreach($appoint->getCitas() as $cita) {
+                $appoints[] = $cita;
+            }
+        }
+
+        return $appoints;
+    }
+
     /**
      * @return array
      */

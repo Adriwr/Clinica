@@ -10,7 +10,6 @@
 
 {% block content %}
     <div class="row" ng-controller="EnfermeraCtrl">
-            {{ dump(pacientes) }}
         <div class="col-xs-12">
             <div class="panel panel-green">
                 <div class="panel-heading">
@@ -22,11 +21,14 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascript %}
     {# Plugins requeridos por el modulo #}
+
+{% endblock %}
+
+{% block angular %}
     {# Servicios de AngularJS #}
     <script type="text/javascript" src="{{ asset('js/app/enfermera/citas/controller/enfermera.js') }}"></script>
     {# Controles primarios de AngularJS #}
