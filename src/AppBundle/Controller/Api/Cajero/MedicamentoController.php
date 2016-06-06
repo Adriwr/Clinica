@@ -3,6 +3,8 @@
 
 namespace AppBundle\Controller\Api\Cajero;
 
+use AppBundle\Document\Medicamento\Activo;
+use AppBundle\Document\Medicamento\Medicamento;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -42,6 +44,36 @@ class MedicamentoController extends FOSRestController implements ClassResourceIn
             $counter++;
         }
         return $array;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function postNuevoAction(Request $request){
+
+        $dm = $this->get( 'doctrine_mongodb' )->getManager();
+        $medicamento = $request->request->get('medicamento');
+        $medicamentoDco = new Medicamento();
+        $medicamentoDco->setCantidad($medicamento['cantidad']);
+        $medicamentoDco->setExistencias($medicamento['existencias']);
+        $medicamentoDco->setLaboratorio($medicamento['laboratorio']);
+        $medicamentoDco->setNombreComercial($medicamento['nombreComercial']);
+        $medicamentoDco->setPrecio($medicamento['precio']);
+        $medicamentoDco->setPresentacion($medicamento['presentacion']);
+        foreach($medicamento['activos'] as $activos){
+            $activo = new Activo();
+            $activo->setCantidad($activos['cantidad']);
+            $activo->setNombre($activos['nombre']);
+            $medicamentoDco->addActivo($activo);
+        }
+
+        $dm->persist($medicamentoDco);
+        $dm->flush();
+
+        return array(
+            "mensaje" => "Medicamento registrado exitosamente"
+        );
     }
 }
 

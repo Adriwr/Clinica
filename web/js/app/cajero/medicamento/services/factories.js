@@ -16,7 +16,7 @@ app.
         });
     })
     .factory('MedicamentoFactory', function($resource){
-        var url = Routing.generate('api_');
+        var url = Routing.generate('api_post_medicamento_nuevo');
 
         return $resource(url, null, {
             saveMedicamento  : {

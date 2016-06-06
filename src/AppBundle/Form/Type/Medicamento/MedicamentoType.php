@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form\Type\Medicamento;
 
-use AppBundle\Form\Type\Activo\ActivoType;
+use AppBundle\Form\Type\Medicamento\ActivoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,15 +61,11 @@ class MedicamentoType extends AbstractType{
                     'ng-model'=> 'medicamento.existencias' ),
                 'label' => 'Existencias',
                 'required' => true ) )
-            ->add( 'Agregar ingrediente activo', 'button', array(
-                'attr' => array(
-                    'class' => 'btn btn-success',
-                    'onClick'=> 'addActivo();')) )
-            ->add('activo', new ActivoType())
-            ->add( 'Guardar', 'submit', array(
+
+            ->add( 'Guardar', 'button', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',
-                    'ng-click'=> 'crear()')) )
+                    'ng-click'=> 'saveMedicamento()')) )
 
         ;
     }
