@@ -69,37 +69,56 @@ class CajeroController extends Controller
         $formPagoCita->handleRequest($request);
 
         if($formPagoCita->isValid()){
-            $dm = $this->get('doctrine_mongodb')->getManager();
-            $pacientes = $dm->getRepository('AppBundle:Paciente\Paciente')
-                ->findAll();
-            foreach ($pacientes as $paciente){
-                foreach ($pacientes->getCitas() as $cita1){
-                    if($cita1->getFecha()==$cita->getFecha()&&$cita1->getConsultorio()==$cita->getConsultorio()){
-                        $this->addFlash(
-                            'notice',
-                            'Pago registrado correctamente'
-                        );
-                        $consulta = new Consulta();
-                        $consulta->setEstatus(1);
-                        $consulta->setMedico($cita->getMedico());
-                        $consulta->setFecha($cita->getFecha());
-                        $exp = $paciente->getExpediente();
-                        $exp->addConsulta($consulta);
-                        $paciente->setExpediente($exp);
-                        $dm->persist($paciente);
-                        $dm->flush();
-                        return $this->redirect($this->generateUrl('home'));
-
-                    }
-
-                }
+            $date = $cita->getFecha()->format('Y-m-d');
+            $h = $cita->getFecha()->format('h') * 60 * 60;
+            $m = $cita->getFecha()->format('i') * 60;
+            if(strtotime($date)+$h+$m<time()){
+                $this->addFlash(
+                    'notice',
+                    'La cita expiró'
+                );
             }
-            $this->addFlash(
-                'notice',
-                'No existe la cita especificada'
-            );
+            else {
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $usuarios = $dm->getRepository('AppBundle:User\User')
+                    ->findAll();
+                foreach ($usuarios as $usuario) {
+                    if (($paciente = $usuario->getPaciente())!=null) {
+                        foreach ($paciente->getCitas() as $cita1) {
+                            if ($cita1->getFecha() == $cita->getFecha() && $cita1->getConsultorio() == $cita->getConsultorio()) {
+                                $consulta = new Consulta();
+                                $consulta->setEstatus(1);
+                                echo $cita1->getMedico();
+                                $medico = $dm->getRepository('AppBundle:User\User')
+                                    ->findOneBy(array('username'=>$cita1->getMedico()));
+                                $consulta->setMedico($medico->getMedico());
+                                $consulta->setFecha($cita->getFecha());
+                                if ($paciente->getExpediente() == null) {
+                                    $exp = new Expediente();
+                                    $paciente->setExpediente($exp);
+                                }
+                                $exp = $paciente->getExpediente();
+                                $exp->addConsulta($consulta);
+                                $paciente->setExpediente($exp);
+                                $usuario->setPaciente($paciente);
+                                $dm->persist($usuario);
+                                $dm->flush();
+                                $this->addFlash(
+                                    'notice',
+                                    'Pago registrado correctamente\nFecha y hora de cita: ' . $cita->getFecha()->format('Y/m/d H:i:s') . '\nConsultorio: ' . $cita->getConsultorio()
+                                );
+                                return $this->redirect($this->generateUrl('home'));
 
+                            }
 
+                        }
+                    }
+                }
+                $this->addFlash(
+                    'notice',
+                    'Cita no existe'
+                );
+            }
         }
 
         return $this->render(
