@@ -26,5 +26,11 @@ class EnfermeraController extends FOSRestController implements ClassResourceInte
             ->getAllUsers('enfermera');
     }
 
+    public function cgetCitasAction()
+    {
+        return $this->get('doctrine_mongodb')->getManager()
+            ->getRepository('AppBundle:Paciente/Paciente')
+            ->getAllAppointments();
+    }
 }
 

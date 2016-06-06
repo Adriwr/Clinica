@@ -9,72 +9,27 @@
 {% endblock %}
 
 {% block content %}
-    {% if pacientes %}
+    <div class="row" ng-controller="EnfermeraCtrl">
 
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                Pacientes
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <table class="table table-striped table-responsive"
-                       datatables="datatables"
-                       content="datosTabla"
-                       columns="aoCols"
-                       events="events"
-                >
-                    <thead>
-                    <tr>
-                        <th>Nombre Completo</th>
-                        <th>Sexo</th>
-                        <th>Tel. Particular</th>
-                        <th>Tel. Para emergencias</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for paciente in pacientes %}
-                        <tr>
-                            <td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
-                            <td>{{ paciente.sexo }}</td>
-                            <td>{{ paciente.telefonoParticular }}</td>
-                            <td>{{ paciente.telefonoEmergencia }}</td>
-                        </tr>
-                        <tr>
-
-                            {% if paciente.citas %}
-                                {% for cita in paciente.citas %}
-                                    <td>
-                                        <a href="">
-                                                {% if ("now"|date('Y'))|number_format == (cita.fecha|date('Y'))|number_format %}
-                                                    {% if ("now"|date('m'))|number_format == (cita.fecha|date('m'))|number_format %}
-                                                        {% if ("now"|date('d'))|number_format <= (cita.fecha|date('d'))|number_format %}
-                                                            {% if ("now"|date('H'))|number_format <= (cita.fecha|date('H'))|number_format %}
-                                                                {{ cita.fecha|date('H:i') }}
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endif %}
-                                        </a>
-                                    </td>
-                                {% endfor %}
-                            {% elseif not pacientes.citas %}
-                                no hay citas de este paciente
-                            {% endif %}
-                        </tr>
-
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <div class="col-xs-12">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    Citas
+                </div>
+                <div class="panel-body">
+                    {{ include(':Enfermera/citas/parts:buscar_citas.html.twig') }}
+                </div>
             </div>
         </div>
-
-    {% else %}
-        <p class='text-danger'> No hay pacientes registrados </p>
-    {% endif %}
+    </div>
 
 {% endblock %}
 
 {% block javascript %}
     {# Plugins requeridos por el modulo #}
-
+    {# Servicios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/enfermera/citas/controller/enfermera.js') }}"></script>
+    {# Controles primarios de AngularJS #}
+    <script type="text/javascript" src="{{ asset('js/app/enfermera/citas/services/factories.js') }}"></script>
+    {# Controles secundarios de AngularJS #}
 {% endblock %}

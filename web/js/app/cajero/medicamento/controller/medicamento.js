@@ -8,33 +8,22 @@ app.
  * @param CajeroFactory     - Factory de para obtener los cajeros
  */
 controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, BuscarFactory) {
-
-
-      
     $scope.datosTabla = BuscarFactory.getMedicamentos();
-
-
     $scope.datosProductosTabla = [];
-
-
 
     // Arreglo con los datos de las columnas que espera datatables
     $scope.aoColsProductos =[
         {
             "mData"     : "posicion",
             "bVisible"  : false
-
         },
         {
             "mData"     : "nombre"
         },
-
-
         {
             "mData": "cantidad"
         },
         {
-
             "mData": function(data, typeCall, dataCall){
                 return '<span class="text-success"><i class="fa fa-check-circle-o" ng-click="inc('+data.posicion+')"></i></span>' +
                     ' <span class="text-error"><i class="fa fa-check-circle-o" ng-click="dec('+data.posicion+')"></i></span>';
@@ -42,9 +31,6 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             "sClass"    : "table-icon-button",
             "bSortable" : false
         },
-
-
-
         {
             "mData"     : function(data, typeCall, dataCall){
                 return '<span class="text-success"><i class="fa fa-check-circle-o" ng-click="eliminar('+data.posicion+')"></i></span>';
@@ -52,9 +38,7 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             "sClass"    : "table-icon-button",
             "bSortable" : false
         }
-
     ];
-
 
     $scope.aoCols =[
         {
@@ -67,14 +51,6 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             "sClass"    : "table-icon-button",
             "bSortable" : false
         }
-        /*{
-         "mData"     : function(data, typeCall, dataCall){
-         return '<span class="text-success"><i class="fa fa-check-circle-o" ng-click="eliminar('+data.posicion+')"></i></span>';
-         },
-         "sClass"    : "table-icon-button",
-         "bSortable" : false
-         }*/
-
     ];
 
     $scope.events = [
@@ -89,7 +65,6 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                         exists = true;
                     }
                 }
-
                 if(!exists){
                     var element = {
                         nombre: rowToAdd['nombre'],
@@ -133,6 +108,10 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                 var rowToReplace = $scope.datosProductosTabla[index];
                 var newRow = $scope.datosProductosTabla[index];
                 //checar la cantidad maxima del producto
+                /*
+                * if(newRow["cantidad"] < Stock){
+                *
+                * */
                 newRow["cantidad"]++;
                 var newRow = {
                     "nombre":rowToReplace['nombre'],
@@ -140,6 +119,9 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                     "cantidad":rowToReplace['cantidad'],
                 }
                 $scope.datosProductosTabla.splice(index,1,newRow);
+                /*
+                * }
+                * */
             }
         },
         {
@@ -153,11 +135,8 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
                     }
                     index++;
                 }
-
                 var rowToReplace = $scope.datosProductosTabla[index];
                 var newRow = $scope.datosProductosTabla[index];
-                //checar la cantidad maxima del producto
-
                 if (newRow["cantidad"] > 1) {
                     newRow["cantidad"]--;
                     var newRow = {
@@ -170,11 +149,4 @@ controller('MedicamentoCtrl', function($scope, $modal, $filter, $rootScope, Busc
             }
         }
     ];
-
-
-
-
-
-
-})
-;
+});
