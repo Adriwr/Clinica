@@ -10,14 +10,15 @@
 
 {% block content %}
     {% if articulos %}
+        <table class="table table-striped">
         {% for articulo in articulos %}
             <tr>
                 {% if ("now"|date('Y'))|number_format == (articulo.fecha|date('Y'))|number_format %}
                     {% if ("now"|date('m'))|number_format == (articulo.fecha|date('m'))|number_format %}
-                                <td>
+                                <td class="success">
                                     {{ articulo.nombre }}
                                 </td>
-                                <td>
+                                <td class="warning">
                                     {{ articulo.numero }}
                                 </td>
                     {% endif %}
@@ -26,6 +27,7 @@
             </tr>
 
         {% endfor %}
+        </table>
     {% else %}
         <div class="warning">
             <p class='text-danger'> No hay ventas para mostrar </p>
