@@ -55,7 +55,7 @@ class PacienteController extends Controller
     {
         $citas = $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:User\User' )
-            ->getAppointments('paciente');
+            ->getAppointmentsPaciente($this->getUser()->getPaciente()->getId());
         return $this->render(':Paciente/consulta:consultarCitasPaciente.html.twig', array('citas' => $citas));
     }
 
