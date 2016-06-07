@@ -29,3 +29,5 @@ web/js/fos_js_routes.js
 *.aux
 *.*~
 *.DS_Store
+/app/Resources/views/Medico/pasoPrincipalConsulta.html.twig
+vendor/

@@ -9,9 +9,6 @@
 {% endblock %}
 
 {% block content %}
-    {{ dump(consulta) }}
-    {{ dump(expediente) }}
-    {{ dump(paciente) }}
 
     <center>
         {% if expediente %}
@@ -29,13 +26,17 @@
             </button>
         </a>
         {% endif %}
+        {{ dump(consulta) }}
+
         {% if expediente %}
-        <a href="{{ path('medico_crear_tratamiento',{'idUsuario':paciente.id, 'idConsulta':paciente.id})}}">
+        <a href="{{ path('medico_crear_tratamiento',{'idUsuario':paciente.id, 'idConsulta':consulta.id})}}">
             <button class="btn btn-success">
                 Dar tratamiento
             </button>
         </a>
         {% endif %}
+
+
     </center>
 
 {% endblock %}
