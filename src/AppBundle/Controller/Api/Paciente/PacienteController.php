@@ -40,8 +40,7 @@ class PacienteController extends FOSRestController implements ClassResourceInter
     }
 
     /**
-     * Acción para generar los datos de las citas
-     * El arreglo generado sirve para deshabilitar las citas que ya esten ocupadas
+     * Acción para eliminar una cita
      *
      * @return array
      * @Rest\View()

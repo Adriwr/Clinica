@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class ExpedienteController extends FOSRestController implements ClassResourceInterface{
     /**
-     * Acción para generar los datos de los pacientes
-     * El arreglo generado alimenta la tabla "Pacientes"
+     * Acción para generar los generar un expediente
      *
      * @param Request $request
      * @return array

@@ -54,7 +54,7 @@ class CitaType extends AbstractType
                 'label' => 'Fecha',
                 'read_only' => true,
                 'required' => true ) )
-            ->add( 'Guardar', 'submit', array(
+            ->add( 'Agendar cita', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary pull-right',
                     'ng-disabled' => '!cita.fecha || !cita.consultorio || !cita.medico',

@@ -21,7 +21,7 @@ consultar_datos:
 
 agendar_cita_paciente:
     path:     /paciente/agendar-cita/{id}
-    defaults: { _controller: AppBundle:Paciente/Cita:agendar}
+    defaults: { _controller: AppBundle:Paciente/Cita:schedule}
 
 registrar_paciente:
   path: /registrar-paciente/

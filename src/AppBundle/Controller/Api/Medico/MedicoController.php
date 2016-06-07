@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 class MedicoController extends FOSRestController implements ClassResourceInterface{
 
     /**
-     * Acción para generar los datos de productos
-     * El arreglo generado alimenta la tabla "Productos"
+     * Acción para generar los datos del obtener medico
+     * El arreglo generado alimenta la tabla "Medicos"
      *
      * @return array
      * @Rest\View()

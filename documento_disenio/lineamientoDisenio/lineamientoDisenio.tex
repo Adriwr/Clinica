@@ -45,14 +45,14 @@
 
 				\begin{figure}[htbp!]
 		\centering
-			\includegraphics[width=1\textwidth]{images/ejemploCodigo1}
+			\includegraphics[width=.8\textwidth]{images/ejemploCodigo1}
 		\caption{Ejemplo de código 1}
 	\end{figure}
 				
 
 				\begin{figure}[htbp!]
 		\centering
-			\includegraphics[width=1\textwidth]{images/ejemploCodigo2}
+			\includegraphics[width=.8\textwidth]{images/ejemploCodigo2}
 		\caption{Ejemplo de código 2}
 	\end{figure}
 				
@@ -61,28 +61,28 @@
 \begin{itemize}
 \item Definidos en src/AppBundle/Controller
 
-\item Se deben crear por actor dentro de una carpeta Actor/ y el nombre del archivo debe tener la terminación Controller
+\item Se deben crear por actor dentro de una carpeta Actor/ y/o Modulo/ y el nombre del archivo debe tener la terminación Controller
 
 \end{itemize}
 \subsection{Documentos}
 \begin{itemize}
 \item Definidos en src/AppBundle/Document
 
-\item Se deben crear por actor dentro de una carpeta Actor/ 
+\item Se deben crear por actor y/o módulo dentro de una carpeta Actor/ o  Modulo/
 
 \end{itemize}
 \subsection{Repositorios}
 \begin{itemize}
 \item Definidos en src/AppBundle/Repository
 
-\item Se deben crear por actor dentro de una carpeta Actor/ y el nombre del archivo debe tener la terminación Repository
+\item Se deben crear por actor dentro de una carpeta Actor/ y/o Modulo/ y el nombre del archivo debe tener la terminación Repository
 
 \end{itemize}
 \subsection{Formularios}
 \begin{itemize}
 \item Definidos en src/AppBundle/Form/Type/
 
-\item Se deben crear por actor dentro de una carpeta Actor/ y el nombre del archivo debe tener la terminación Type
+\item Se deben crear por actor y/o módulo dentro de una carpeta Actor/ ó Modulo/ y el nombre del archivo debe tener la terminación Type
 
 \end{itemize}
 
@@ -108,13 +108,13 @@ La estructura de las carpetas para almacenar el código angular por módulo debe
 
 	\item Por la estructura de la carpeta, no es necesario que los nombres de los archivos tengan terminaciones Controller, Filter, Directive o Factory.
 
-	\item El nombre de los factories debe de declararse en inglés, ser lo más corto posible y usar UperCamelCase.
+	\item El nombre de los factories debe ser lo más corto posible y usar UperCamelCase.
 
 	\item Bajo ninguna circunstancia se usarán selectores de jQuery dentro de controles o providers.
 
 	\item Si se requieren utilizar funciones de jQuery se deberá crear un directiva.
 
-	\item Los nombres de las directivas deben de declararse en inglés, ser lo más corto posible y usar lowerCamelCase.
+	\item Los nombres de las directivas deben ser lo más corto posible y usar lowerCamelCase.
 
 	\item Cada control, directiva, servicio y filtro, así como las funciones se deben de comentar, indicando el uso de la función y los parámetros que necesita, en caso de ser necesarios.
 
@@ -125,9 +125,9 @@ La estructura de las carpetas para almacenar el código angular por módulo debe
 \begin{itemize}
 \item Toda variable debe de ser declarada y de ser necesario inicializada, seguir la convención para javascript var myVar; y var myVar=1;
 
-\item Los nombres de las variables deben de declararse en inglés, ser lo más corto posible, ser lo más descriptivas posibles y usar lowerCamelCase.
+\item Los nombres de las variables deben ser lo más corto posible, ser lo más descriptivas posibles y usar lowerCamelCase.
 
-\item Todo el código javascript debe estar separado en un archivo dentro de la carpeta web/js
+\item Todo el código javascript debe estar separado en un archivo por modulo dentro de la carpeta web/js
 
 \end{itemize}
 

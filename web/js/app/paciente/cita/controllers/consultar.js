@@ -9,9 +9,9 @@ app.
      */
     controller('ConsultarCitaCtrl', function($scope,$log, $http, $modal, $filter, $rootScope, ConsultarCitaFactory) {
 
-        $scope.cancelDate = function( cita ){
+        $scope.cancelDate = function( idCita ){
             //alert(cita);
-            ConsultarCitaFactory.cancelDate({ id: cita }, function(result){
+            ConsultarCitaFactory.cancelDate({ id: idCita }, function(result){
                 alert(result.mensaje);
                 location.reload();
             });
