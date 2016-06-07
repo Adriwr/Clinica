@@ -115,7 +115,7 @@ class GerenteController extends Controller
 
         }
 
-        return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventasRegreso, 'mensaje'=>"el dia de hoy"));
+        return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventasRegreso, 'mensaje'=>"el dia"));
     }
 
     public function getArticulosVendidosMesAction(Request $request)

@@ -41,8 +41,8 @@
     }
     \UCitem{Origen}{
         \begin{itemize}
-            \item Desde actor paciente: Variable de sesión.
-            \item Desde actor Médico: Repositorio de datos.
+            \item Teclado: Email, Nombre, Calle, Número, Colonia, Teléfono particular, Teléfono de emergencia, Contraseña
+            \item Select(tipo de input html) :Sexo,País, Estado.
         \end{itemize}
     }
     \UCitem{Salidas}{Mensaje:``Paciente registrado correctamente''}
@@ -78,16 +78,16 @@
 \end{UseCase}
 
 \begin{UCtrayectoria}{Enfermera}
-		\UCpaso[\UCactor] selecciona "Registrar nuevo paciente" dando click en dicho apartado.
-		\UCpaso solicita al actor los datos del paciente mostrando un formulari
+		\UCpaso[\UCactor] selecciona "Registrar  paciente" dando click en dicho apartado.
+		\UCpaso solicita al actor los datos del paciente mostrando un formulario mostrando la UI ``UIRegPaciente" monstrada en el apartado 7.0.7
         \UCpaso [\UCactor] Proporciona los datos al sistema ingresandolos en el formulario.
-         \UCpaso [\UCactor] Confirma la operación haciendo click en el botón ``Registrar paciente"
-         \UCpaso Verifica que el nombre sea una cadena de caracteres con longitud mayor o igual a 10 caracteres[TAValida]
+         \UCpaso [\UCactor] Confirma la operación haciendo click en el botón ``Guardar"
+         \UCpaso Verifica que el nombre sea una cadena de caracteres [TAValida]
          \UCpaso Verifica que la fecha de nacimiento sea una fecha válida [TAValida]
          \UCpaso Verifica que el teléfono sea numérico y de longitud de 8 o más caracteres [TAValida]
          \UCpaso El sistema verifica que el correo electrónico sea válido [TAValida]
          \UCpaso Verifica que el correo electrónico no pertenezca a un paciente ya registrado [TACorreo].
-		\UCpaso Verifica que la contraseña tenga longitud de 8 o más caracteres [TAValida]
+		\UCpaso Verifica que la contraseña coincida con el otro campo de contraseña [TAValida]
         \UCpaso Muestra mensaje.
         
 
@@ -113,7 +113,7 @@
 
 
 \begin{UCtrayectoriaA}{TACorreo}{Ya existe un paciente registrado con el correo electrónico ingresado.}
-\UCpaso Notifica el campo de correo electrónico mostrando un mensaje en pantalla.
+\UCpaso Notifica el campo de correo electrónico mostrando el mensaje "Paciente ya registrado" en pantalla.
 \UCpaso Solicita ingresar un correo electrónico diferente en el formulario.
 
 \UCpaso [\UCactor] El actor ingresa otro correo electrónico en el campo “Correo electrónico” del formulario.
