@@ -15,7 +15,7 @@
     \UCitem{Propósito}{Conocer el número de productos vendidos en el mes o en el día.}
     \UCitem{Entradas}{
         \begin{itemize}
-            \item Fecha: Formato dd/mm/aaaa 
+            \item Fecha: Formato aaaa-mm-dd
         \end{itemize} 
     }
     \UCitem{Origen}{
@@ -27,9 +27,9 @@
         \begin{itemize}
             \item Lista de productos vendidos
         \begin{itemize}
-            \item *Nombre: Constituido por nombre del producto
-            \item Precio del producto: tipo de dato con decimales.
-            \item Número de productos vendidos: Número entero
+            \item *Fecha: Constituido por la fecha de en que fue realizada la venta.
+            \item monto: tipo de dato con númerico.
+            \item nombre de los productos que fueron vendidos: Constituido por el nombre comercial.
            
         \end{itemize}
         \end{itemize}
@@ -45,7 +45,6 @@
     \UCitem{Postcondiciones}{Ninguna}
     \UCitem{Observaciones}{
     	\begin{itemize}
-    		\item Si no ha habido ventas del producto el sistema debe poner un '0'.
     		\item El sistema requerirá partes de la fecha dependiendo si es por día o por mes; por mes ocupará el mes y el año. Por día ocupará el día,mes,año.
     	\end{itemize}
  
@@ -57,7 +56,7 @@
     \UCitem{Prioridad}{Mediana}
     \UCitem{Volatilidad}{Baja}
     \UCitem{Madurez}{Baja}
-    \UCitem{Estado}{En edición}
+    \UCitem{Estado}{Terminado}
     \UCitem{Autor}{Rubén Murga Dionicio}
     \UCitem{Revisor}{David Pacheco Soto}
     
@@ -66,7 +65,7 @@
 \begin{UCtrayectoria}{Gerente  [ventas diarias]}
         \UCpaso[\UCactor] selecciona "Ventas de hoy" dando click en dicho apartado.
         
-        \UCpaso Muestra una lista de los productos vendidos en el día con los datos de salida especificados en dicho apartado [TA1]
+        \UCpaso Muestra una lista de las venta  en el día con los datos de salida especificados en dicho apartado [TA1]
 
 \end{UCtrayectoria}
 
@@ -74,12 +73,12 @@
 \begin{UCtrayectoria}{Gerente  [ventas mensuales]}
         \UCpaso[\UCactor] selecciona "Ventas mensuales" dando click en dicho apartado.
         
-        \UCpaso informa al actor un listado  de los productos vendidos en el mes mostrando la lista con los datos de salida especificados en dicho apartado [TA1]
+        \UCpaso informa al actor un listado  de las ventas en el mes mostrando la lista con los datos de salida especificados en dicho apartado [TA1]
 
 \end{UCtrayectoria}
 
-\begin{UCtrayectoriaA}{TA1}{Producto sin ventas}
-    \UCpaso El sistema muestra los datos que no tienen ventas con valor de '0' en el campo de número de ventas
+\begin{UCtrayectoriaA}{TA1}{Sin ventas}
+    \UCpaso El sistema muestra el siguiente mensaje: "No ha habido ventas."
     \end{UCtrayectoriaA}
     
 %-------------------------------------- TERMINA descripción del caso de uso.
