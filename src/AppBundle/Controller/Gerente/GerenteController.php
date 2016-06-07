@@ -82,16 +82,44 @@ class GerenteController extends Controller
     {
         $ventas = $this->get('doctrine_mongodb')->getManager()
             ->getRepository('AppBundle:Pago\Pago')->findAll();
+        $ventasRegreso = array();
+        foreach ($ventas as $venta){
 
-        return $this->render(':Gerente/actividad:consultarArticulosVendidosHoy.html.twig', array('articulos'=>$ventas, 'mensaje'=>"el dia de hoy"));
+            $producosArray = array();
+            foreach ($venta->getMedicamentos() as $medicamento){
+                $producto = $this->get('doctrine_mongodb')->getManager()
+                    ->getRepository('AppBundle:Medicamento\Medicamento')->findOneById($medicamento->getId());
+                echo $producto->getNombreComercial();
+                array_push($producosArray, array('Producto'=>$producto->getNombreComercial()));
+            }
+            array_push($ventasRegreso, array('monto'=>$venta->getMonto(),'fecha'=>$venta->getFecha(),'Productos'=>$producosArray));
+
+        }
+
+        return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventasRegreso, 'mensaje'=>"el dia de hoy"));
     }
 
     public function getArticulosVendidosMesAction(Request $request)
     {
         $ventas = $this->get('doctrine_mongodb')->getManager()
             ->getRepository('AppBundle:Pago\Pago')->findAll();
+        $ventasRegreso = array();
+        foreach ($ventas as $venta){
 
-        return $this->render(':Gerente/actividad:consultarArticulosVendidosMes.html.twig', array('articulos'=>$ventas, 'mensaje'=>"en el mes"));
+            $producosArray = array();
+            foreach ($venta->getMedicamentos() as $medicamento){
+                $producto = $this->get('doctrine_mongodb')->getManager()
+                    ->getRepository('AppBundle:Medicamento\Medicamento')->findOneById($medicamento->getId());
+                echo $producto->getNombreComercial();
+                array_push($producosArray, array('nombre'=>$producto->getNombreComercial()));
+            }
+            array_push($ventasRegreso, array('monto'=>$venta->getMonto(),'fecha'=>$venta->getFecha(),'productos'=>$producosArray));
+
+
+        }
+
+
+        return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventasRegreso, 'mensaje'=>" el mes"));
     }
     
     public function getPacientesAction(Request $request)
