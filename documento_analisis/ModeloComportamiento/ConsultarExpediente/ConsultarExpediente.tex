@@ -12,16 +12,11 @@
 \begin{UseCase}{Cu10}{Consultar expediente médico}{El actor desea consultar el expediente médico.}
     \UCitem{Versión}{0.1}
     \UCitem{Actor}{Médico,Paciente}
-    \UCitem{Propósito}{Conocer los antecedentes médicos del segundo actor.}
+    \UCitem{Propósito}{Conocer los antecedentes médicos del actor paciente.}
     \UCitem{Entradas}{
         \begin{itemize}
-            \item Email del paciente: cadena de texto compuesta de 4 partes:  
-            \begin{itemize}
-                \item cadena de texto.
-                \item carácter ‘@’
-                \item cadena que identifica al servidor que brinda el servicio de correo electrónico
-                \item carácter ‘.’ y dominio
-            \end{itemize}
+            \item ID del paciente: Identificador único que identifica al paciente en el repositorio de datos  
+          
         \end{itemize} 
     }
     \UCitem{Origen}{
@@ -177,6 +172,7 @@
     	\begin{itemize}
     	\item Si el paciente no cuenta con un expediente el médico debe crearle uno.
     	\item Los elementos marcados con un '*' son obligatorios de mostrar.
+    	\item Existen elementos que son mínimo uno, para esos elementos se hará una lista para mostrarlos todos.
     	\end{itemize}
 
        
@@ -199,14 +195,9 @@
         \UCpaso[\UCactor] selecciona "Próximas citas" dando click en dicho apartado.
         
         \UCpaso Muestra un listado de todas las citas próximas que tiene agendadas. 
-        \UCpaso[\UCactor] Da click en el nombre del paciente que es uno de los elementos en la lista.[RN13][RN8]
-        \UCpaso Muestra todos los datos de salida especificados en el apartado de salias.[TA1]
+        \UCpaso[\UCactor] Da click en el botón``Dar consulta" que se encuentra alado del paciente.[RN13][RN8]
+        \UCpaso Muestra la  UI10ConsultExp con todos los datos de salida especificados en el apartado de salidas.
 \end{UCtrayectoria}
-
-\begin{UCtrayectoriaA}{TA1}{Datos sin valor}
-    \UCpaso El sistema muestra los datos que no tienen valor como ``Sin valor''
-    
-\end{UCtrayectoriaA}
 
 \begin{UCtrayectoria}{Paciente}
         \UCpaso[\UCactor] Selecciona ``Mi expediente'' dando click en dicho apartado.[TA2][RN8]
