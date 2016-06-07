@@ -14,5 +14,17 @@ app.
                 url     : url
             }
         });
+    }).
+    factory('TratamientoFactory', function($resource){
+        var url = Routing.generate('api_post_medico_tratamiento');
+
+        return $resource(url, null, {
+            saveTratamiento  : {
+                method  : 'POST',
+                isArray : false,
+                url     : url,
+                data    : {}
+            }
+        });
     })
 ;

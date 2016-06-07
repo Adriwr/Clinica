@@ -96,9 +96,13 @@ class MedicoController extends Controller
             ->findOneBy(array('id'=>$paciente->getPaciente()->getId()));
         
         $consultaRegreso = new Consulta();
+        $idMedic = $medico->getId();
         foreach ($consultas as $consulta){
-            if($medico["nombre"] == $consulta["medico"]){
-                if((string)$consulta["fecha"]->format("Y-m-d-H-i") == $request->get('fecha')){
+            if($idMedic == $consulta->getMedico()->getId()){
+                echo $consulta->getFecha()->format("Y-m-d-H-i");
+                echo "peneeee ";
+                echo $request->get("fecha");
+                if((string)$consulta->getFecha()->format("Y-m-d-H:i") == $request->get('fecha')){
                     $consultaRegreso = $consulta;
                 }
             }
@@ -106,7 +110,7 @@ class MedicoController extends Controller
         $expediente = $pacienteCopia;
         return $this->render(
             ':Medico:pasoPrincipalConsulta.html.twig',
-            array('consulta' => $consultaRegreso, 'pacienteID'=> $request->get('idPaciente'),'paciente'=>$paciente,'expediente'=>$expediente)
+            array('consulta' =>$consultaRegreso, 'pacienteID'=> $request->get('idPaciente'),'paciente'=>$paciente,'expediente'=>$expediente)
         );
     }
     
