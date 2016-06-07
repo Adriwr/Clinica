@@ -39,5 +39,34 @@ class PacienteController extends FOSRestController implements ClassResourceInter
             ->getAllAppointments();
     }
 
+    /**
+     * Acción para generar los datos de las citas
+     * El arreglo generado sirve para deshabilitar las citas que ya esten ocupadas
+     *
+     * @return array
+     * @Rest\View()
+     */
+    public function deleteCitaAction($id){
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $paciente = $this->getUser()->getPaciente();
+        foreach($paciente->getCitas() as $cita){
+            if($cita->getId() == $id){
+                $citaEliminar = $cita;
+            }
+        }
+
+        if($citaEliminar){
+            $paciente->removeCita($citaEliminar);
+            $dm->flush();
+
+            return array("mensaje" => "La cita se ha eliminado");
+
+        }
+
+
+        return array("mensaje" => "Ocurrio algo inesperado");
+
+    }
+
 }
 
