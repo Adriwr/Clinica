@@ -78,6 +78,7 @@ class EnfermeraController extends Controller
             $data= $formUsuario->getData();
             foreach ($valida as $usuarioV){
                 if($usuarioV["email"] == $data->getEmail()){
+                    echo "<script>alert('Paciente ya registrado');</script>";
                     $valida_int = 1;
                 }
             }

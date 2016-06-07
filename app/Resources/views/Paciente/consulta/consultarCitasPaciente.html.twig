@@ -9,25 +9,20 @@
 {% endblock %}
 
 {% block content %}
-    {{ dump(citas) }}
 	{% if citas %}
-		<div class="panel panel-green">
+		<div class="panel panel-green" ng-controller="ConsultarCitaCtrl">
 			<div class="panel-heading">
                 Citas agendadas
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-            	<table class="table table-striped table-responsive"
-       					datatables="datatables"
-       					content="datosTabla"
-       					columns="aoCols"
-       					events="events"
-        				>
+            	<table class="table table-striped table-responsive">
     			<thead>
     				<tr>
 	        			<th>Consultorio</th>
     	    			<th>Fecha y Hora</th>
     	    			<th>Doctor</th>
+                        <th align="center">Cancelar</th>
     				</tr>
     			</thead>
     			<tbody>
@@ -36,6 +31,7 @@
                             <td>{{ cita.consultorio }}</td>
                             <td>{{ cita.fecha }}</td>
                             <td>{{ cita.medico   }}</td>
+                            <td align="center"><span class="text-success"><i class="fa fa-times" ng-click="cancelDate('{{ cita.id }}')" style="font-size: 25px;cursor: pointer;"></i></span></td>
                         </tr>
 	    			{% endfor %}
     			</tbody>
@@ -49,7 +45,8 @@
 	
 {% endblock %}
 
-{% block javascript %}
-    {# Plugins requeridos por el modulo #}
+{% block angular %}
+    <script type="text/javascript" src="{{ asset('js/app/paciente/cita/controllers/consultar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/paciente/cita/services/factories.js') }}"></script>
 
 {% endblock %}
