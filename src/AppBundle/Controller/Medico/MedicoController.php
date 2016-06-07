@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Medico;
 
+use AppBundle\Document\Consulta\Consulta;
 use AppBundle\Document\Medico\Medico;
 use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Medico\MedicoRegistrationType;
@@ -64,24 +65,53 @@ class MedicoController extends Controller
     public function consultarCitasAction(Request $request)
     {
         $pacientes = $this->get( 'doctrine_mongodb' )->getManager()
-            ->getRepository( 'AppBundle:Paciente\Paciente' )
-            ->getAll();
+            ->getRepository( 'AppBundle:User\User' )
+            ->getAllUsersCitas('paciente');
         $medico = $this->getUser()->getMedico();
         
         return $this->render(
             ':Medico:consultarCitas.html.twig', array('pacientes'=>$pacientes, 'medico'=>$medico->getNombre()." ".$medico->getApellidos())
         );
     }
+
+    /**
+     * 
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function darConsultaAction(Request $request)
     {
-        echo $request->get('fecha');
-        $this->getUser()->getMedico();
+        $medico = $this->getUser()->getMedico();
         $consultas = $this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:Consulta\Consulta' )
             ->findAll();
+
+        $paciente = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:User\User' )
+            ->findOneBy(array('id'=>$request->get('idPaciente')));
+
+
+        $pacienteCopia = $this->get( 'doctrine_mongodb' )->getManager()
+            ->getRepository( 'AppBundle:Paciente\Paciente' )
+            ->findOneBy(array('id'=>$paciente->getPaciente()->getId()));
+        
+        $consultaRegreso = new Consulta();
+        foreach ($consultas as $consulta){
+            if($medico["nombre"] == $consulta["medico"]){
+                if((string)$consulta["fecha"]->format("Y-m-d-H-i") == $request->get('fecha')){
+                    $consultaRegreso = $consulta;
+                }
+            }
+        }
+        $expediente = $pacienteCopia;
         return $this->render(
             ':Medico:pasoPrincipalConsulta.html.twig',
-            array('consultas' => $consultas)
+            array('consulta' => $consultaRegreso, 'pacienteID'=> $request->get('idPaciente'),'paciente'=>$paciente,'expediente'=>$expediente)
         );
+    }
+    
+    public function mostrarUITratamientoAction(Request $request){
+        $idConsulta = $request->get('idConsulta');
+        return $this->render(':Medico:crearTratamiento.html.twig', array('idConsulta'=> $idConsulta));
     }
 }

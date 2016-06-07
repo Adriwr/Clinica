@@ -83,4 +83,28 @@ class UserRepository extends DocumentRepository
 
         return $appoints;
     }
+    public function getAllUsersCitas($userType)
+    {
+        $gerentes = array();
+        $gerentesGross = $this->createQueryBuilder()
+            ->field($userType)->exists(true)
+            ->getQuery()
+            ->execute();
+        foreach($gerentesGross as $gerente) {
+            $citas = array();
+            foreach ($gerente->getPaciente()->getCitas() as $cita){
+                array_push($citas,$cita);
+            }
+            $gerentes[] = array(
+                'id'            => $gerente->getId(),
+                'nombre'        => $gerente->getPaciente()->getNombre(),
+                'apellidos'     => $gerente->getPaciente()->getApellidos(),
+                'email'         => $gerente->getEmail(),
+                'citas'         => $citas
+            );
+
+        }
+
+        return $gerentes;
+    }
 }

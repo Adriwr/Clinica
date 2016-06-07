@@ -1,19 +1,35 @@
 {# Vista parcial para mostrar la tabla para la busqueda de comunidades caducas al coordinador admin. #}
 <table class="table table-striped table-responsive"
-       datatables="datatables"
+       datatables="datatables2"
        content="datosProductosTabla"
-       columns="aoCols2"
+       columns="aoColsProductos"
        events="events2"
         >
     <thead>
     <tr>
         <th>
+            <!--Header para el ID oculto-->
+        </th>
+        <th>
             Nombre
         </th>
-        <!--th>
+        <th>
+            Cantidad
+        </th>
+        <th>
             Precio
         </th>
         <th>
+            Existencias
+        </th>
+        <th>
+            Agregar-quitar
+        </th>
+        <th>
+            Eliminar
+        </th>
+
+        <!--th>
             Stock
         </th-->
     </tr>
@@ -22,3 +38,9 @@
 
     </tbody>
 </table>
+<div>
+    <input type="button" value="Realizar compra" ng-click="realizarCompra()" />
+</div>
+<div>
+    <span> <h3>Total: $<input ng-model="Prueba" disabled /></h3></span>
+</div>

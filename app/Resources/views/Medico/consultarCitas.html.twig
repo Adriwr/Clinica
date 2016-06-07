@@ -27,42 +27,53 @@
                     <tr>
                         <th>Nombre Completo</th>
                         <th>Sexo</th>
-                        <th>Tel. Particular</th>
-                        <th>Tel. Para emergencias</th>
+                        <th>Citas</th>
                     </tr>
                     </thead>
                     <tbody>
                    {% for paciente in pacientes %}
-                        <tr>
-                            <td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
-                            <td>{{ paciente.sexo }}</td>
-                            <td>{{ paciente.telefonoParticular }}</td>
-                            <td>{{ paciente.telefonoEmergencia }}</td>
-                        </tr>
-                       <tr>
 
-                           {% if paciente.citas %}
+                       {% if paciente.citas %}
+
+                                   {% for cita in paciente.citas %}
+                                       {% if medico == cita.medico %}
+                                           {% if ("now"|date('Y'))|number_format == (cita.fecha|date('Y'))|number_format %}
+                                               {% if ("now"|date('m'))|number_format == (cita.fecha|date('m'))|number_format %}
+                                                   {% if ("now"|date('d'))|number_format == (cita.fecha|date('d'))|number_format %}
+                                                       {% if ("now"|date('H'))|number_format <= (cita.fecha|date('H'))|number_format %}
+                                                           <tr>
+                                                           <td>{{ paciente.nombre }} {{ paciente.apellidos}}</td>
+                                                           <td>{{ paciente.email }}</td>
+                                                       {% endif %}
+                                                   {% endif %}
+                                               {% endif %}
+                                           {% endif %}
+                                       {% endif %}
+
+                                   {% endfor %}
+
+                               <td>
                                {% for cita in paciente.citas %}
-                                    <td>
-                                        <a href="{{ path('medico_dar_consulta', {'fecha': cita.fecha|date('Y-m-d-H:i')}) }}">
                                             {% if medico == cita.medico %}
                                                 {% if ("now"|date('Y'))|number_format == (cita.fecha|date('Y'))|number_format %}
                                                     {% if ("now"|date('m'))|number_format == (cita.fecha|date('m'))|number_format %}
-                                                        {% if ("now"|date('d'))|number_format <= (cita.fecha|date('d'))|number_format %}
+                                                        {% if ("now"|date('d'))|number_format == (cita.fecha|date('d'))|number_format %}
                                                             {% if ("now"|date('H'))|number_format <= (cita.fecha|date('H'))|number_format %}
-                                                                {{ cita.fecha|date('H:i') }}
+                                                                    <a href="{{ path('medico_dar_consulta', {'fecha': cita.fecha|date('Y-m-d-H:i'), 'idPaciente':paciente.id}) }}">
+                                                                        <button class="btn btn-success">
+                                                                            Dar cita {{ cita.fecha|date('H:i') }}
+                                                                        </button>
+                                                                    </a>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             {% endif %}
-                                        </a>
-                                    </td>
+
                                {% endfor %}
-                           {% elseif not pacientes.citas %}
-                               no hay citas de este paciente
-                           {% endif %}
-                       </tr>
+                               </td>
+                               </tr>
+                       {% endif %}
 
                     {% endfor %}
                     </tbody>

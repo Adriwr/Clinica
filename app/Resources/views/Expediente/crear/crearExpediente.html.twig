@@ -1,176 +1,299 @@
 {% extends 'base.html.twig' %}
 
 {% block css %}
-
+    <link href="{{ asset('css/vendor/plugins/wizard/angular-wizard.css') }}" rel="stylesheet">
 {%  endblock %}
 
 {% block dashboard %}
     <h3 class="page-header">Crear Expediente</h3>
 {% endblock %}
 
-
 {% block content %}
-    <script>
-        function addEnfermedad( ){
 
-            /*
-             * Get all form values
-             */
-            var values = {};
-            var $form = $('form[name=alergia]');
-            $.each( $form.serializeArray(), function(i, field) {
-                values[field.name] = field.value;
-            });
+    <div class="row" ng-controller="ExpedienteCtrl">
+        <div class="col-xs-12">
+            <wizard on-finish="enviarDatos()">
+                <wz-step wz-title="Enfermedades">
+                    <div class="row col-xs-12" style="margin-top:50px;">
+                        <div class="col-xs-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Enfermedades padecidas
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    {{ form_start(form_enfermedades) }}
+                                    {{ form_widget(form_enfermedades) }}
+                                    {{ form_end(form_enfermedades) }}
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Enfermedades padecidas
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    {{ include(':Expediente/crear/parts:enfermedadesTabla.html.twig') }}
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <div class="row col-xs-12" style="margin:50px 0px;">
+                            <input type="submit" class="btn btn-success pull-right" wz-next value="Antecedentes Personales" />
+                        </div>
+                    </div>
 
-            /*
-             * Throw the form values to the server!
-             */
-            $.ajax({
-                type        : $form.attr( 'method' ),
-                url         : $form.attr( 'action' ),
-                data        : values,
-                success     : function(data) {
-                    alert( data );
-                }
-            });
-
-        }
-    </script>
-    <div class="row" ng-controller="MedicoCtrl">
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Enfermedades padecidas
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_enfermedades) }}
-                    {{ form_widget(form_enfermedades) }}
-                    {{ form_end(form_enfermedades) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Antecedentes familiares
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_a_f) }}
-                    {{ form_widget(form_a_f) }}
-                    {{ form_end(form_a_f) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Antecedentes personales
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_a_p) }}
-                    {{ form_widget(form_a_p) }}
-                    {{ form_end(form_a_p) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Cirugías
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_cirugias) }}
-                    {{ form_widget(form_cirugias) }}
-                    {{ form_end(form_cirugias) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Alergias
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_alergias) }}
-                    {{ form_widget(form_alergias) }}
-                    {{ form_end(form_alergias) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Embarazos
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_embarazos) }}
-                    {{ form_widget(form_embarazos) }}
-                    {{ form_end(form_embarazos) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Anticonceptivos
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_antic) }}
-                    {{ form_widget(form_antic) }}
-                    {{ form_end(form_antic) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Mastografías
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_mastografias) }}
-                    {{ form_widget(form_mastografias) }}
-                    {{ form_end(form_mastografias) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <div class="col-xs-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Papanicolaous
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    {{ form_start(form_papa) }}
-                    {{ form_widget(form_papa) }}
-                    {{ form_end(form_papa   ) }}
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+                </wz-step>
+                <wz-step wz-title="Antecedentes personales">
+                    <div class="row col-xs-12" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Antecedentes personales
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_a_p) }}
+                                {{ form_widget(form_a_p) }}
+                                {{ form_end(form_a_p) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Antecedentes Familiares" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Antedecentes familiares">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Antecedentes familiares
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_a_f) }}
+                                {{ form_widget(form_a_f) }}
+                                {{ form_end(form_a_f) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6"  style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Antecedentes familiares
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:antecedentesFamTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Cirugías" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Cirugías">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Cirugías
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_cirugias) }}
+                                {{ form_widget(form_cirugias) }}
+                                {{ form_end(form_cirugias) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6"  style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Cirugias
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:cirugiasTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Alergias" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Alergias">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Alergias
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_alergias) }}
+                                {{ form_widget(form_alergias) }}
+                                {{ form_end(form_alergias) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6"  style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Alergias
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:alergiasTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Embarazos" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Embarazos">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Embarazos
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_embarazos) }}
+                                {{ form_widget(form_embarazos) }}
+                                {{ form_end(form_embarazos) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6"  style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Embarazos
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:embarazosTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Anticonceptivos" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Anticonceptivos">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Anticonceptivos
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_antic) }}
+                                {{ form_widget(form_antic) }}
+                                {{ form_end(form_antic) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6"  style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Anticonceptivos
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:anticonceptivosTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Mastografías" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Mastografías">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Mastografías
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_mastografias) }}
+                                {{ form_widget(form_mastografias) }}
+                                {{ form_end(form_mastografias) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6" style="margin-top:50px;" >
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Mastografías
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:mastografiasTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Papanicolaous" />
+                    </div>
+                </wz-step>
+                <wz-step wz-title="Papanicolaous">
+                     <div class="col-xs-6" style="margin-top:50px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Papanicolaous
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ form_start(form_papa) }}
+                                {{ form_widget(form_papa) }}
+                                {{ form_end(form_papa   ) }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <div class="row col-xs-6" style="margin-top:50px;" >
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Papanicolaous
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                {{ include(':Expediente/crear/parts:papanicolaousTabla.html.twig') }}
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="row col-xs-12" style="margin:50px 0px;">
+                        <input type="submit" class="btn btn-success pull-right" wz-next value="Terminar" />
+                    </div>
+                </wz-step>
+            </wizard>
         </div>
     </div>
 {% endblock %}
@@ -182,8 +305,9 @@
 
 {% block angular %}
     {# Servicios de AngularJS #}
-    <script type="text/javascript" src="{{ asset('js/app/medico/registrar/services/factories.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/expediente/crear/controller/expediente.js') }}"></script>
     {# Controles primarios de AngularJS #}
-    <script type="text/javascript" src="{{ asset('js/app/medico/registrar/controllers/medico.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/expediente/crear/services/factories.js') }}"></script>
+
     {# Controles secundarios de AngularJS #}
 {% endblock %}

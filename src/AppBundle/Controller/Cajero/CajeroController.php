@@ -3,11 +3,13 @@
 namespace AppBundle\Controller\Cajero;
 use AppBundle\Document\Cajero\Cajero;
 use AppBundle\Document\Consulta\Consulta;
+use AppBundle\Document\Expediente\Expediente;
 use AppBundle\Document\User\User;
 use AppBundle\Form\Type\Cajero\CajeroPagoCitaType;
 use AppBundle\Form\Type\Cajero\CajeroRegistrationType;
 use AppBundle\Form\Type\Cajero\CajeroType;
 use AppBundle\Form\Type\User\RegistrationType;
+use MongoDBODMProxies\__CG__\AppBundle\Document\Paciente\Paciente;
 use MongoDBODMProxies\__CG__\AppBundle\Document\Paciente\PacienteCitas;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -67,33 +69,57 @@ class CajeroController extends Controller
         $formPagoCita->handleRequest($request);
 
         if($formPagoCita->isValid()){
-            echo 'lel';
-            print_r($cita);
-            echo 'lel';
-            $dm = $this->get('doctrine_mongodb')->getManager();
-            $cita = $dm->getRepository('AppBundle:Paciente\PacienteCitas')
-                ->findOneBy(array(
-                    'fecha'=>$cita->getFecha(),
-                    'consultorio'=>$cita->getConsultorio()
-                ));
-            if(!isset($cita)){
+            date_default_timezone_set ('America/Mexico_City');
+            $date = $cita->getFecha()->format('Y-m-d');
+            $h = $cita->getFecha()->format('H') * 60 * 60;
+            $m = $cita->getFecha()->format('i') * 60;
+            if(strtotime($date)+$h+$m<time()){
                 $this->addFlash(
                     'notice',
-                    'No existe la cita especificada'
+                    'La cita expiró'
                 );
             }
             else {
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $usuarios = $dm->getRepository('AppBundle:User\User')
+                    ->findAll();
+                foreach ($usuarios as $usuario) {
+                    if (($paciente = $usuario->getPaciente())!=null) {
+                        foreach ($paciente->getCitas() as $cita1) {
+                            if ($cita1->getFecha() == $cita->getFecha() && $cita1->getConsultorio() == $cita->getConsultorio()) {
+                                $consulta = new Consulta();
+                                $consulta->setEstatus(1);
+                                echo $cita1->getMedico();
+                                $medico = $dm->getRepository('AppBundle:User\User')
+                                    ->findOneBy(array('username'=>$cita1->getMedico()));
+                                $consulta->setMedico($medico->getMedico());
+                                $consulta->setFecha($cita->getFecha());
+                                if ($paciente->getExpediente() == null) {
+                                    $exp = new Expediente();
+                                    $paciente->setExpediente($exp);
+                                }
+                                $exp = $paciente->getExpediente();
+                                $exp->addConsulta($consulta);
+                                $paciente->setExpediente($exp);
+                                $usuario->setPaciente($paciente);
+                                $dm->persist($usuario);
+                                $dm->flush();
+                                $this->addFlash(
+                                    'notice',
+                                    'Pago registrado correctamente\nFecha y hora de cita: ' . $cita->getFecha()->format('Y/m/d H:i:s') . '\nConsultorio: ' . $cita->getConsultorio()
+                                );
+                                return $this->redirect($this->generateUrl('home'));
+
+                            }
+
+                        }
+                    }
+                }
                 $this->addFlash(
                     'notice',
-                    'Pago registrado correctamente'
+                    'Cita no existe'
                 );
-                $cita->setEstatus(1);
-                $dm->persist($cita);
-                $dm->flush();
-                return $this->redirect($this->generateUrl('home'));
             }
-
-
         }
 
         return $this->render(

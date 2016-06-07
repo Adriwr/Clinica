@@ -9,10 +9,19 @@
 {% endblock %}
 
 {% block content %}
+    <table class="table table-striped">
+        <th>Nombre del médico</th>
+        <td>Número de consultas</td>
     {% for medico in medicos %}
-        {{ medico.nombre }}
-        {{ medico.consultas }}
+        <tr>
+            <td class="success" >{{ medico.nombre }}</td>
+            <td class="warning">{{ medico.consultas }}</td>
+
+        </tr>
+
     {% endfor %}
+    </table>
+
 {% endblock %}
 
 {% block javascript %}

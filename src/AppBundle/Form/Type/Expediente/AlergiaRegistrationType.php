@@ -28,7 +28,14 @@ class AlergiaRegistrationType extends AbstractType
                     'ng-model'=> 'alergia.controlada' ),
                 'label' => 'Controlada',
                 'required' => false ))
-            ->add('save', 'submit', array('label' => 'Añadir alergia'));
+            ->add('save', 'button', array(
+                    'label' => 'Añadir alergia',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addAlergia()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

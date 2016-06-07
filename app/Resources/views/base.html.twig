@@ -45,6 +45,12 @@
                     <div class="col-lg-12">
                         {% block dashboard %}
                             <h1 class="page-header">Dashboard</h1>
+
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <script>
+                                    alert('{{ flashMessage }}');
+                                </script>
+                            {% endfor %}
                         {%  endblock %}
                     </div>
                 </div>
@@ -106,6 +112,7 @@
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/fullcalendar/angular/calendar.js')}}"></script>
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/datetime/datetimepicker.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/vendor/plugins/datetime/datetimepicker.templates.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vendor/plugins/wizard/angular-wizard.min.js') }}"></script>
 
         {# JS del archivo principal para usar angular #}
         <script type="text/javascript" src="{{ asset('js/app/clinica.js') }}"></script>

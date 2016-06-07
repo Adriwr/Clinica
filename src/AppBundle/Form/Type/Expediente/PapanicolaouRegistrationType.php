@@ -25,7 +25,13 @@ class PapanicolaouRegistrationType extends AbstractType
                 ),
                 'label' => 'Notas',
                 'required' => true))
-            ->add('save', 'submit', array('label' => 'Añadir papanicolaou'));
+            ->add('save', 'button', array(
+                    'label' => 'Añadir papanicolaou',
+                'attr' => array(
+                    'style'     =>'margin:5px',
+                    'class'     => 'btn btn-primary pull-right',
+                    'ng-click'  => 'addPapani()'))
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

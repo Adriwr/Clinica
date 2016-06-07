@@ -13,13 +13,20 @@ class EnfermedadRegistrationType extends AbstractType
         $builder->add('codigoCie', 'text', array(
             'attr' => array(
                 'class' => 'form-control',
-                'ng-model'=> 'enfermedad.'
+                'ng-model'=> 'enfermedad.codigo'
             ),
-            'label' => 'Enfermedad',
-            'required' => true ))
+            'label' => 'Codigo CIE de la enfermedad',
+            'required' => false ))
+            ->add('nombre', 'text', array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'ng-model'=> 'enfermedad.nombre'
+                ),
+                'label' => 'Nombre',
+                'required' => true ))
             ->add('fecha', 'date', array(
                 'attr' => array(
-                    'ng-model'=> 'enfermedad.fecha'
+                        'ng-model'=> 'enfermedad.fecha'
                 ),
                 'label' => 'Fecha diagnosticada',
                 'required' => true ))
@@ -35,8 +42,15 @@ class EnfermedadRegistrationType extends AbstractType
                     'ng-model'=> 'enfermedad.observaciones'
                 ),
                 'label' => 'Observaciones',
-                'required' => false ))
-            ->add('save', 'submit', array('label' => 'Añadir enfermedad'));
+                'required' => true ))
+            ->add('save', 'button', array(
+                    'label' => 'Añadir enfermedad',
+                    'attr' => array(
+                        'style'     =>'margin:5px',
+                        'class'     => 'btn btn-primary pull-right',
+                        'ng-click'  => 'addEnfermedad()')
+                )
+            );
     }
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

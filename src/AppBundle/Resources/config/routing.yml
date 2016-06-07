@@ -20,7 +20,7 @@ consultar_datos:
     defaults: { _controller: AppBundle:Paciente/Paciente:getDatos}
 
 agendar_cita_paciente:
-    path:     /agendar-cita/paciente
+    path:     /paciente/agendar-cita/{id}
     defaults: { _controller: AppBundle:Paciente/Cita:agendar}
 
 registrar_paciente:
@@ -59,7 +59,6 @@ enfermera_agendar_cita:
   path: /enfermera/agendar-cita/{id}
   defaults: {_controller:AppBundle:Enfermera/Enfermera:agendarCitaPaciente}
 
-
 consultar_actividad_diaria:
   path: /gerente/actividad-diaria/
   defaults: {_controller:AppBundle:Gerente/Gerente:getConsultasDia}
@@ -87,8 +86,9 @@ consultar_citas_paciente:
   defaults: { _controller: AppBundle:Paciente/Paciente:getCitas }
 
 registrar_pago_cita:
-    path:     /pagar-cita
+    path:     /pagar-cita/
     defaults: { _controller: AppBundle:Cajero/Cajero:registrarPagoCita }
+
 consultar_cita_medico:
     path:     /medico/consultar-citas
     defaults: { _controller: AppBundle:Medico/Medico:consultarCitas }
@@ -98,7 +98,7 @@ medico_consultar_citas:
   defaults: {_controller: AppBundle:Medico/Medico:consultarCitas}
 
 medico_dar_consulta:
-  path: /medico/dar-consulta/{fecha}
+  path: /medico/dar-consulta/{idPaciente}/{fecha}
   defaults: {_controller: AppBundle:Medico/Medico:darConsulta}
 
 consultar_citas_enfermera:
@@ -112,5 +112,9 @@ gerente_consultar_ventas_diarias:
 gerente_consultar_ventas_mes:
   path: /gerente/consultar-ventas-mes/
   defaults: {_controller: AppBundle:Gerente/Gerente:getArticulosVendidosMes}
+
+medico_crear_tratamiento:
+  path: medico/crear-tratamiento/{idUsuario}/{idConsulta}
+  defaults: {_controller: AppBundle:Medico/Medico:mostrarUITratamiento}
 
 

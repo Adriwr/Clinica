@@ -23,6 +23,8 @@
 			\includegraphics[width=1\textwidth]{images/logico34}
 		\caption{Estructura angular app}
 	\end{figure}
+	
+	
 	\newpage
 	\section{web::js::app}
 	\subsection{cajero}
@@ -37,6 +39,17 @@
 			\begin{itemize}
 				\item factories.js
 			\end{itemize}
+		\end{itemize}
+		\item buscarMedicamento
+		\begin{itemize}
+		\item controllers
+		\begin{itemize}
+		\item buscarMedicamento.js
+		\end{itemize}
+		\item services
+		\begin{itemize}
+		\item factories.js
+		\end{itemize}
 		\end{itemize}
 	\end{itemize}
 	\subsection{enfermera}
@@ -87,11 +100,12 @@
 		\begin{itemize}
 			\item controllers
 			\begin{itemize}
-				\item
+				\item medico.js
+				\item tratamiento.js
 			\end{itemize}
 			\item services
 			\begin{itemize}
-				\item
+				\item factories.js
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
@@ -120,15 +134,14 @@
 				\end{itemize}
 				\item registrarCajero.html.twig
 			\end{itemize}
-			\item Inventario
+			\item actividad
 			\begin{itemize}
-				\item modificarInventario.html.twig
+				\item consultarMedicamentos.html.twig
 				\item consultarInventario.html.twig
 			\end{itemize}
-			\item Pagos
+			\item pago
 			\begin{itemize}
-				\item pagoFarmacia.html.twig
-				\item pagoCita.html.twig
+				\item registrarPagoCita.html.twig
 			\end{itemize}
 		\end{itemize}
 		
@@ -147,10 +160,11 @@
 		\item citas 
 			\begin{itemize}
 				\item agendarCita.html.twig
-				\item consultarCita.html.twig
-				\item cancerlarCita.html.twig
+				\item agendarCalendario.html.twig
+				\item consultarCitas.html.twig
 			\end{itemize}
 		\end{itemize}
+		
 		\subsection{Gerente}
 		\begin{itemize}
 			\item registrar
@@ -169,10 +183,13 @@
 			\end{itemize}
 			\item actividad
 			\begin{itemize}
+				\item consultarArticulosVendidosHoy.html.twig
+				\item consultarArticulosVendidosMes.html.twig
 				\item consultarCitasRealizadas.html.twig
-				\item consultarVentasRealizadas.html.twig
+				\item mostrarPacientes.html.twig
 			\end{itemize}
 		\end{itemize}
+		
 		\subsection{Medico}
 		\begin{itemize}
 			\item registrar
@@ -183,32 +200,30 @@
 				\item medicoTabla.html.twig
 			\end{itemize}
 			\end{itemize}
-			\item Expediente 
-			\begin{itemize}
-				\item crearExpediente.html.twig
-				\item consultarExpediente.html.twig
-			\end{itemize}
-			\item citas
-			\begin{itemize}
-				\item consultarCitas.html.twig
-				\item cancelarCitas.html.twig
-			\end{itemize}
-			\item consulta
-			\begin{itemize}
-				\item crearTratamiento.html.twig				
-			\end{itemize}
+			\item consultarCitas.html.twig
+			\item pasoPrincipalConsulta.html.twig 
+			\item crearTratamiento.html.twig
+			
 		\end{itemize}
 		\subsection{Paciente}
 		\begin{itemize}
 			\item cita
 			\begin{itemize}
-				\item agendarCita.html.twig
-				\item cancelarCita.html.twig
+				\item agendar.html.twig
+				\item agendarCalendario.html.twig
 			\end{itemize}
-			\item expediente
+
+			\item consulta
 			\begin{itemize}
-				\item consultarExpediente.html.twig
+				\item consultarCitasPaciente.html.twig
 			\end{itemize}
+			
+			
+			\item datos
+			\begin{itemize}
+			\item datosPaciente.html.twig
+			\end{itemize}
+			
 			\item registrar
 			\begin{itemize}
 			\item registrarPaciente.html.twig
@@ -219,9 +234,12 @@
 			\begin{itemize}
 			\item parts
 			\begin{itemize}
-				\item productosTabla.html.twig
+				\item buscar\_ productos\_ tabla.html.twig
+				\item productos\_ agregados.html.twig
+				\item productos\_ tabla.html.twig
 			\end{itemize}
-			\item registrarProducto.html.twig
+			\item buscarProducto.html.twig
+			\item index.html.twig
 			\end{itemize}
 
 		\subsection{default}
@@ -237,6 +255,10 @@
 			\item menuLeft.html.twig
 			\item menuTop.html.twig
 		\end{itemize}
+		
+		
+		
+		
 	\section{src::AppBundle::Controller}
 	\subsection{Gerente}
 	\begin{itemize}
@@ -249,6 +271,7 @@
 	\subsection{Paciente}
 	\begin{itemize}
 		\item PacienteController.php
+		\item CitaController.php
 	\end{itemize}
 	\subsection{Medico}
 	\begin{itemize}
@@ -270,10 +293,13 @@
 	\begin{itemize}
 		\item ProductoController.php
 	\end{itemize}
+	
+	
 	\section{src::AppBundle::Controller::Api}
 		\subsection{Cajero}
 		\begin{itemize}
 		\item CajeroController.php
+		\item MedicamentoController.pho
 		\end{itemize}
 		\subsection{Enfermera}
 		\begin{itemize}
@@ -295,27 +321,35 @@
 		\begin{itemize}
 		\item PacienteController.php
 		\end{itemize}
+		
+		
+		
 	\section{src::AppBundle::Form::Type}
+	
 		\subsection{Paciente}
 		\begin{itemize}
 		\item CitaType.php
 		\item PacienteType.php
+		\item PacienteRegistrationType.php
+		
 		\end{itemize}
-		\subsection{Index}
 		\subsection{Cajero}
 		\begin{itemize}
 		\item CajeroRegistrationType.php
 		\item CajeroType.php
+		\item CajeroBuscarProductoType.php
+		\item CajeroPagoCitaType.php
 		\end{itemize}
 		\subsection{Producto}
 		\begin{itemize}
 		\item ProductoType.php
 		\end{itemize}
-		\subsection{Login}
+		
 		\subsection{Medico}
 		\begin{itemize}
 		\item MedicoRegistrationType.php
 		\item MedicoType.php
+		\item HorarioType.php
 		\end{itemize}
 		
 		\subsection{Gerente}
@@ -331,9 +365,23 @@
 		\end{itemize}
 		
 		\subsection{Expediente}
-		\subsection{Consulta}
+		\begin{itemize}
+			\item AlergiaRegistrationType.php
+			\item AntecedenteFamiliarRegistrationType.php
+			\item AntecedentePersonalRegistrationType.php
+			\item AnticonceptivoRegistrationType.php
+			\item CirugiaRegistrationType.php
+			\item EmbarazoRegistrationType.php
+			\item EnfermedadRegistrationType.php
+			\item ExpedienteRegistrationType.php
+			\item MastografiaRegistrationType.php
+			\item PapanicolaouRegistrationType.php
+		\end{itemize}
 		\subsection{Medicamento}
-		\subsection{Pago}
+		\begin{itemize}
+			\item ActivoType.php
+			\item MedicamentoType.php
+		\end{itemize}
 		\subsection{User}
 		\begin{itemize}
 		\item RegistrationType.php

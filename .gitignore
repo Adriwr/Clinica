@@ -27,3 +27,5 @@ web/js/fos_js_routes.js
 *.gz
 *.toc
 *.aux
+*.*~
+*.DS_Store

@@ -40,6 +40,10 @@ class MedicamentoRepository extends DocumentRepository
 
     public function getMedicamentoByName($nombre)
     {
-        $result = $this->createQueryBuilder()->field('nombre')->equals($nombre)->getQuery()->execute();
+        $result = $this->createQueryBuilder()
+            ->field('nombre')->equals($nombre)
+            ->getQuery()
+            ->execute();
+        return $result;
     }
 }

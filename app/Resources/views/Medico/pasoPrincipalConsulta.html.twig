@@ -9,7 +9,35 @@
 {% endblock %}
 
 {% block content %}
-    {{ dump(consultas) }}
+    {{ dump(consulta) }}
+    {{ dump(expediente) }}
+    {{ dump(paciente) }}
+
+    <center>
+        {% if expediente %}
+        <a href="">
+            <button class="btn btn-success">
+                Consultar expediente
+            </button>
+        </a>
+        {% endif %}
+        {% if not expediente %}
+            <p class="text-danger"> El paciente no tiene expediente, crea uno para poder dar consulta.</p>
+        <a href="{{ path('crear_expediente',{'id':paciente.id}) }}">
+            <button class="btn btn-success">
+                Agregar expediente
+            </button>
+        </a>
+        {% endif %}
+        {% if expediente %}
+        <a href="{{ path('medico_crear_tratamiento',{'idUsuario':paciente.id, 'idConsulta':paciente.id})}}">
+            <button class="btn btn-success">
+                Dar tratamiento
+            </button>
+        </a>
+        {% endif %}
+    </center>
+
 {% endblock %}
 
 {% block javascript %}
