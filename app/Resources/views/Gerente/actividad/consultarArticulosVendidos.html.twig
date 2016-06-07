@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content %}
-    {{ dump(articulos) }}
 
     {% if articulos %}
         <table class="table">
@@ -19,13 +18,16 @@
                 <th>Lista de articulos en la venta</th>
             </tr>
     {% for articulo in articulos %}
-        <td> {{ articulo.fecha }}</td>
+        <td> {{ articulo.fecha|date('Y-m-d') }}</td>
         <td> ${{ articulo.monto }}</td>
         <td>
         <ul>
-        {% for producto in articulo.productos %}
-             <li>{{ producto.nombre }}</li>
-        {% endfor %}
+            {% if articulo.productos %}
+                {% for producto in articulo.productos %}
+                    <li>{{ producto.nombre }}</li>
+                {% endfor %}
+            {% endif %}
+
         </ul>
         </td>
     {% endfor %}

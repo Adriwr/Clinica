@@ -47,35 +47,53 @@ class GerenteController extends Controller
     }
 
     public function getConsultasDiaAction(Request $request){
-          $medicos =$this->get( 'doctrine_mongodb' )->getManager()
+        $medicos =$this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:User\User' )
             ->getAllUsers('medico');
-
-            $regreso = array();
+        $date = date('Y-m-d', time());
+        $regreso = array();
+        $consultas = $this->get('doctrine_mongodb')->getManager()
+            ->getRepository('AppBundle:Consulta\Consulta')->findAll();
         foreach ($medicos as $medico ) {
-            $numConsultas = $this->get( 'doctrine_mongodb' )->getManager()
-                ->getRepository( 'AppBundle:Pago\Pago' )
-                ->getAllConsultasMedicoD($medico["id"]);
+            $numConsultas = 0;
+            foreach ($consultas as $consulta){
+                if($medico->getiD() == $consulta->getMedico()){
+                    if((string)$date == $consulta->getFecha()->format('Y-m-d')){
+                        $numConsultas = $numConsultas+1;
+                    }
+                }
+
+            }
 
             array_push($regreso,array('nombre' => $medico['nombre'], 'consultas' => $numConsultas));
         }
-        return $this->render(':Gerente/actividad:consultarCitasRealizadas.html.twig', array('medicos' => $regreso, 'mensaje'=>"el dia de hoy"));
+        return $this->render(':Gerente/actividad:consultarCitasRealizadas.html.twig', array('medicos' => $regreso,'consultas'=> $consultas, 'mensaje'=>"en el día"));
+
+
     }
     
     public function getConsultasMesAction(Request $request){
         $medicos =$this->get( 'doctrine_mongodb' )->getManager()
             ->getRepository( 'AppBundle:User\User' )
             ->getAllUsers('medico');
-
+        $date = date('Y-m', time());
         $regreso = array();
+        $consultas = $this->get('doctrine_mongodb')->getManager()
+            ->getRepository('AppBundle:Consulta\Consulta')->findAll();
         foreach ($medicos as $medico ) {
-            $numConsultas = $this->get( 'doctrine_mongodb' )->getManager()
-                ->getRepository( 'AppBundle:Pago\Pago' )
-                ->getAllConsultasMedicoM($medico["id"]);
+            $numConsultas = 0;
+            foreach ($consultas as $consulta){
+                if($medico->getiD() == $consulta->getMedico()){
+                    if((string)$date == $consulta->getFecha()->format('Y-m')){
+                        $numConsultas = $numConsultas+1;
+                    }
+                }
+
+            }
 
             array_push($regreso,array('nombre' => $medico['nombre'], 'consultas' => $numConsultas));
         }
-        return $this->render(':Gerente/actividad:consultarCitasRealizadas.html.twig', array('medicos' => $regreso, 'mensaje'=>"en el mes"));
+        return $this->render(':Gerente/actividad:consultarCitasRealizadas.html.twig', array('medicos' => $regreso,'consultas'=> $consultas, 'mensaje'=>"en el mes"));
     }
     
     public function getArticulosVendidosDiaAction(Request $request)
@@ -83,16 +101,17 @@ class GerenteController extends Controller
         $ventas = $this->get('doctrine_mongodb')->getManager()
             ->getRepository('AppBundle:Pago\Pago')->findAll();
         $ventasRegreso = array();
+        $date = date('Y-m-d', time());
         foreach ($ventas as $venta){
-
-            $producosArray = array();
-            foreach ($venta->getMedicamentos() as $medicamento){
-                $producto = $this->get('doctrine_mongodb')->getManager()
-                    ->getRepository('AppBundle:Medicamento\Medicamento')->findOneById($medicamento->getId());
-                echo $producto->getNombreComercial();
-                array_push($producosArray, array('Producto'=>$producto->getNombreComercial()));
+            if((string)$date == $venta->getFecha()->format('Y-m-d')) {
+                $producosArray = array();
+                foreach ($venta->getMedicamentos() as $medicamento){
+                    $producto = $this->get('doctrine_mongodb')->getManager()
+                        ->getRepository('AppBundle:Medicamento\Medicamento')->findOneById($medicamento->getId());
+                    array_push($producosArray, array('nombre'=>$producto->getNombreComercial()));
+                }
+                array_push($ventasRegreso, array('monto'=>$venta->getMonto(),'fecha'=>$venta->getFecha(),'productos'=>$producosArray));
             }
-            array_push($ventasRegreso, array('monto'=>$venta->getMonto(),'fecha'=>$venta->getFecha(),'Productos'=>$producosArray));
 
         }
 
@@ -104,21 +123,18 @@ class GerenteController extends Controller
         $ventas = $this->get('doctrine_mongodb')->getManager()
             ->getRepository('AppBundle:Pago\Pago')->findAll();
         $ventasRegreso = array();
+        $date = date('Y-m', time());
         foreach ($ventas as $venta){
-
-            $producosArray = array();
-            foreach ($venta->getMedicamentos() as $medicamento){
-                $producto = $this->get('doctrine_mongodb')->getManager()
-                    ->getRepository('AppBundle:Medicamento\Medicamento')->findOneById($medicamento->getId());
-                echo $producto->getNombreComercial();
-                array_push($producosArray, array('nombre'=>$producto->getNombreComercial()));
+            if((string)$date == $venta->getFecha()->format('Y-m')) {
+                $producosArray = array();
+                foreach ($venta->getMedicamentos() as $medicamento){
+                    $producto = $this->get('doctrine_mongodb')->getManager()
+                        ->getRepository('AppBundle:Medicamento\Medicamento')->findOneById($medicamento->getId());
+                    array_push($producosArray, array('nombre'=>$producto->getNombreComercial()));
+                }
+                array_push($ventasRegreso, array('monto'=>$venta->getMonto(),'fecha'=>$venta->getFecha(),'productos'=>$producosArray));
             }
-            array_push($ventasRegreso, array('monto'=>$venta->getMonto(),'fecha'=>$venta->getFecha(),'productos'=>$producosArray));
-
-
         }
-
-
         return $this->render(':Gerente/actividad:consultarArticulosVendidos.html.twig', array('articulos'=>$ventasRegreso, 'mensaje'=>" el mes"));
     }
     
