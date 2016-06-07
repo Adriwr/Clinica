@@ -59,23 +59,25 @@ class UserRepository extends DocumentRepository
     /**
      * @return array
      */
-    public function getAppointments($userType)
+    public function getAppointmentsPaciente($idPac)
     {
         $appoints = array();
         $appointGross = $this->createQueryBuilder()
             //->select('paciente')
-            ->field($userType)->exists(true)
+            ->field('paciente')->exists(true)
             //->field('paciente.citas')->exists(true)
             ->getQuery()
             ->execute();
 
         foreach($appointGross as $appoint) {
-            foreach($appoint->getPaciente()->getCitas() as $cita){
-                $appoints[] = array(
-                    'consultorio'   => $cita->getConsultorio(),
-                    'fecha'         => $cita->getFecha()->format('d-m-Y h:i'),
-                    'medico'        => $cita->getMedico()
+            if($appoint->getPaciente()->getId() == $idPac){
+                foreach($appoint->getPaciente()->getCitas() as $cita){
+                    $appoints[] = array(
+                        'consultorio'   => $cita->getConsultorio(),
+                        'fecha'         => $cita->getFecha()->format('d-m-Y H:i'),
+                        'medico'        => $cita->getMedico()
                     );
+                }
             }
         }
 

@@ -16,6 +16,9 @@ controller('EnfermeraCtrl', function($scope, $modal, $filter, $rootScope, Buscar
             "mData"     : "id"
         },
         {
+            "mData"     : "nombre"
+        },
+        {
             "mData"     : "consultorio"
         },
         {
