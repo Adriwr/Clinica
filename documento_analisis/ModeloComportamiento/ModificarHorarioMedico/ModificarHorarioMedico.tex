@@ -1,20 +1,20 @@
-|\begin{UseCase}{CU5}{Modificar horario médico}{Cuando un paciente tenga la necesidad de ser atendido por uno de los médicos de la clínica y necesite agendar una consulta médica, se realizará una cita. El sistema guardará los datos de la cita.}
+|\begin{UseCase}{CU5}{Modificar horario médico}{El sistema modificará las horas disponibles para consulta de un médico determinado cuando este necesite cambiar de horario. El sistema registrará el nuevo horario y lo mostrará al agendar una cita.}
 	\UCitem{Version}{0.2}
   \UCitem{Actor}{Gerente}
   \UCitem{Proposito}{    
-    El médico pueda ser esté disponible para ser seleccionado para la asignación de citas en un horario distinto al que tenía anteriormente.   
+    El médico esté disponible para ser seleccionado para la asignación de citas en un horario distinto al que tenía anteriormente.   
   }
   \UCitem{Entradas}{
     \begin{itemize}
-      \item ID del paciente: entero positivo.              
+      \item ID del médico: Cadena de caracteres.              
       \item Rango de horas de trabajo: Rango con una hora de inicio de trabajo y de fin con formato hh:mm:ss am/pm.      
       \item Hora de comida (opcional): Hora en la que el médico no está presente en el consultorio para ir a comer. En caso de ser seleccionado ésta debe encontrarse dentro del rango de trabajo del médico.      
     \end{itemize}
   }
   \UCitem{Origen}{
     \begin{itemize}
-      \item ID del paciente: de la sesión.      
-      \item Hora de comida: Seleccionable en la pantalla.      
+      \item ID del médico: de la sesión.      
+      \item Rango de horas de trabajo, hora de comida: Pantalla.      
       \end{itemize}
   }
   \UCitem{Salidas}{
@@ -29,8 +29,7 @@
   }
   \UCitem{Precondiciones}{
     \begin{itemize}        
-        \item Que el médico esté registrado y habilitado para trabajar dentro de la clínica. 
-        \item Que el médico tenga días de trabajo registrados.                                          
+        \item Que el médico esté registrado y habilitado para trabajar dentro de la clínica.                                        
     \end{itemize}    
   }
   \UCitem{Postcondiciones}{
@@ -43,16 +42,16 @@
   }
   \UCitem{Errores}{
     \begin{itemize}
-        \item \textbf{ERR1} Si el actor selecciona una hora de comida para el médico que se encuentra fuera de su rango de trabajo seleccionado, muestra mensaje {\bf MSG5b-} de la UI... y continúa con el paso 9. 
+        \item \textbf{ERR1} Si el actor selecciona una hora de comida para el médico que se encuentra fuera de su rango de trabajo seleccionado, muestra mensaje {\bf MSG5b-} de la UI Modificar Horario Medico y continúa con el paso 9. 
     \end{itemize}  	
 	}
   \UCitem{Tipo de ejecución}{Secundaria, viene de CU1 Iniciar Sesión}
 	\UCitem{Volatilidad}{Baja}
 	\UCitem{Madurez}{Media}
 	\UCitem{Prioridad}{Alta}
-  \UCitem{Estado}{En edición}
+  \UCitem{Estado}{Terminado}
 	\UCitem{Autor}{Saúl Uriel Trujillo García}
-	\UCitem{Revisor}{Gómez Moncada Demis}
+	\UCitem{Revisor}{Demis Gómez Moncada}
 \end{UseCase}
 
 \begin{UCtrayectoria}{Principal}  
@@ -61,7 +60,7 @@
   \UCpaso muestra en pantalla un listado con los nombres de los médicos que obtuvo del repositorio de datos en la 
   \UCpaso[\UCactor] selecciona del listado al médico del que le desea modificar su horario de disponibilidad para las citas.
   \UCpaso obtiene los días de la semana y horario para cada día en los que el médico seleccionado está disponible para dar citas.
-  \UCpaso muestra los días de la semana y horario para cada día en la pantalla.....  
+  \UCpaso muestra los días de la semana y horario para cada día en la pantalla. 
   \UCpaso[\UCactor] se dirige al apartado del día que desea modificar el horario.
   \UCpaso[\UCactor] modifica el rango del horario de trabajo para ese día.\Trayref{TA1}\Trayref{TA2}
   \UCpaso muestra el rango de horario para el día de la semana seleccionado.
