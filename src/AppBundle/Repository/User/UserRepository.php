@@ -73,6 +73,7 @@ class UserRepository extends DocumentRepository
             if($appoint->getPaciente()->getId() == $idPac){
                 foreach($appoint->getPaciente()->getCitas() as $cita){
                     $appoints[] = array(
+                        'id'            => $cita->getId(),
                         'consultorio'   => $cita->getConsultorio(),
                         'fecha'         => $cita->getFecha()->format('d-m-Y H:i'),
                         'medico'        => $cita->getMedico()

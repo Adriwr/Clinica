@@ -1,52 +1,41 @@
 %-------------------------------------- COMIENZA descripción del caso de uso.
 
-\begin{UseCase}{CU23}{Consultar Inventario}{El cajero consultará la lista completa de medicamentos registrados en el sistema. El sistema mostrará la lista de mediamentos.}
-	\UCitem{Versión}{0.1}
+\begin{UseCase}{CU23}{Consultar Inventario}{El cajero consultará la lista completa de productos registrados en el sistema. El sistema mostrará la lista de productos.}
+	\UCitem{Versión}{0.2}
     \UCitem{Actor}{Cajero}
-    \UCitem{Propósito}{Mostrar los medicamentos registrados. Poder modificar el inventario}
-    \UCitem{Entradas}{
-        Ninguna.
-    }
+    \UCitem{Propósito}{Mostrar los productos registrados. Poder modificar el inventario}
+    \UCitem{Entradas}{Ninguna.}
     \UCitem{Origen}{}
     \UCitem{Salidas}{
         \begin{itemize}
-	        \item Lista de medicamentos: Arreglo de Estructuras de datos que contienen:
+	        \item Lista de productos: Arreglo de Estructuras de datos que contienen:
 	        \begin{itemize}
-	        	\item ID del medicamento: Cadena de dígitos.
-	        	\item Nombre comercial: Cadena de caracteres.
+	        	\item ID del producto: cadena de caracteres alfanuméricos.
+	        	\item Nombre: Cadena de caracteres.
 	        	\item Precio: Número flotante positivo con dos decimales.
-	        	\item Laboratorio: Cadena de caracteres.
-	        	\item Presentación: Cadena de caracteres.
-	        	\item Cantidad de presentación: Número positivo.
 	        	\item Existencias: Número entero positivo.
-	        	\item Ingredientes activos: Arreglo de estructuras de datos que contienen:
-	        	\begin{itemize}
-		        	\item ID: Cadena de dígitos.
-		        	\item Nombre: Cadena de caracteres.
-		        	\item Cantidad: Número entero positivo.
-		        	\item Unidades: Cadena de dos caracteres. Solo puede tener los valores ``ml'' o ``mg''.
-	        	\end{itemize}
 	        \end{itemize}
 		\end{itemize}
 	}
     \UCitem{Destino}{
 		\begin{itemize}
-			\item Lista de medicamentos: IU23 Consultar Inventario.
+			\item Nombre, Precio, Existencias: Pantalla IU23 Consultar Inventario.
+			\item ID del producto: oculto.
 		\end{itemize}
 	}
 	
    	\UCitem{Precondiciones}{
    	    \begin{itemize}
-			\item Existen medicamentos registrados en el sistema.
+			\item Existen productos registrados en el sistema.
    	    \end{itemize}
    	}
     \UCitem{Postcondiciones}{Ninguna}
     \UCitem{Observaciones}{Ninguna}
     \UCitem{Errores}{
     	\begin{itemize}
-    	\item ERR1 - No hay medicamentos registrados en el repositorio de datos:
+    	\item ERR1 - No hay productos registrados en el repositorio de datos:
 	    	\begin{itemize}
-	    		\item Muestra el mensaje MSG23a ``No existen medicamentos registrados''.
+	    		\item Muestra el mensaje MSG23a ``No existen productos registrados''.
 	    		\item Fin del caso de uso.
 	    	\end{itemize}
 		\end{itemize}
@@ -55,15 +44,15 @@
 	\UCitem{Prioridad}{Alta}
 	\UCitem{Volatilidad}{Baja}
 	\UCitem{Madurez}{Alta}
-	\UCitem{Estado}{En revisión}
+	\UCitem{Estado}{Terminado}
 	\UCitem{Autor}{Demis Gómez Moncada}
-	\UCitem{Revisor}{}
+	\UCitem{Revisor}{Adrián Eduardo Galindo García}
 	
 \end{UseCase}
 
 \begin{UCtrayectoria}{}
 		\UCpaso[\UCactor] selecciona consultar el inventario dando click en el botón ``Consultar Inventario''.
-		\UCpaso solicita los datos de los medicamentos registrados al repositorio de datos. [ERR1].
-		\UCpaso muestra la pantalla IU23 Consultar inventario. registra la nueva cantidad en el repositorio de datos.
+		\UCpaso solicita los datos de los productos registrados al repositorio de datos. [ERR1].
+		\UCpaso muestra la pantalla IU23 Consultar inventario.
 \end{UCtrayectoria}
 %-------------------------------------- TERMINA descripción del caso de uso.

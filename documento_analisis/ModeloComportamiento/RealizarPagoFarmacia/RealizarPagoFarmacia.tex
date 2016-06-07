@@ -2,15 +2,17 @@
 	\begin{UseCase}{Cu10}{Realizar pago de farmacia}{El actor registra el pago de un medicamento en la farmacia.}
 	\UCitem{Versión}{0.1}
     \UCitem{Actor}{Cajero}
-    \UCitem{Propósito}{Que el medicamento que se sale del inventario sea actualizado tanto en la cantidad del inventario como el ingreso que representa la salida de éste para la clínica.}
+    \UCitem{Propósito}{Que el medicamento que se sale del inventario sea actualizado tanto en la cantidad del inventario como el ingreso que representa la salida de éste para la clínica, además de generar un comprobante de compra para el paciente que adquirió la(s) medicina(s).}
     \UCitem{Entradas}{
         \begin{itemize}        	
-        	\item Nombre de medicamento: Cadena de texto con el nombre del medicamento que será utilizado para la búsqueda en el repositorio de datos. [Requerido]        	
+        	\item Nombre de medicamento: Cadena de texto con el nombre del medicamento que será utilizado para la búsqueda en el repositorio de datos. [Requerido]. 
+           \item Cantidad de producto a registrar: Número entero positivo mayor a 0.[Requerido].
         \end{itemize} 
     }
     \UCitem{Origen}{
         \begin{itemize}
-            \item Desde teclado: Nombre del medicamento            
+            \item Desde teclado: Nombre del medicamento.
+            \item Seleccinable: Cantidad del producto a registrar.
         \end{itemize}
     }
     \UCitem{Salidas}{
@@ -45,30 +47,34 @@
    	}
     \UCitem{Postcondiciones}{
 	    	\begin{itemize}
-	    		\item El producto se actualiza en el repositorio de datos tanto en su cantidad como en el valor de ingreso de dicho medicamento para la clínica. 
+	    		\item Los datos que se tienen sobre el o los productos se actualiza en el repositorio de datos tanto en su cantidad como en el valor de ingreso de dicho medicamento para la clínica. 
 	    	\end{itemize}
     }
     \UCitem{Observaciones}{El actor podrá realizar la búsqueda de la cantidad de medicamentos que se necesiten.}
     \UCitem{Errores}{
     	\begin{itemize}
-    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ``Complete todos los campos'' y se continúa desde el paso 2
-    		\item ERR2: Si los datos requeridos no tienen el formato correcto, se informa al actor mostrando el mensaje ``Formato de campos inválido'' y se continúa desde el paso 2 
+    		\item ERR1: Si no se completaron todos los datos requeridos, se informa al actor mostrando el mensaje ''Ingrese todos los datos requeridos para la compra'' y se continúa desde el paso 2
+    		\item ERR2: Si el medicamento que se desea buscar no se encuentra en los registros del repositorio de datos, se informa al actor mostrando el mensaje ''No se encuentraron coincidencias...'' y se continúa desde el paso 2 
     	\end{itemize}
 	}
 	\UCitem{Tipo de ejecución}{Primaria}
 	\UCitem{Prioridad}{Alta}
 	\UCitem{Volatilidad}{Baja}
 	\UCitem{Madurez}{Baja}
-	\UCitem{Estado}{Terminado}
-	\UCitem{Autor}{David Alberto Pacheco Soto}
-	\UCitem{Revisor}{Saúl Uriel Trujillo García}
+	\UCitem{Estado}{En edición}
+	\UCitem{Autor}{Saúl Uriel Trujillo García}
+	\UCitem{Revisor}{Demis Gómez Moncada}
 	
 \end{UseCase} 
 
 \begin{UCtrayectoria}{Cajero}
-		\UCpaso[\UCactor] Solicita realizar pago de cita haciendo click sobre el botón \IUbutton{Realizar pago de cita}
-		\UCpaso Solicita el ID de la cita mostrando \IUref{1}{Realizar pago de cita}
-		\UCpaso[\UCactor] Proporciona el ID de la cita ingresándolo en el campo de texto correspondiente.[RN13][RN8]
+		\UCpaso[\UCactor] Solicita realizar pago de medicamento haciendo click sobre el botón \IUbutton{Realizar pago de medicamento} de la \IUref{Dashboard}
+    \UCpaso Verifica si existe alguna compra pendiente en la sesión realizada por el actor anteriormente. [TA1]
+    
+    \UCpaso Muestra el formulario para la búsqueda del medicamento que se encuentra en la \IUref{1}{Formulario de busqueda de medicamento}
+		\UCpaso[\UCactor] Ingresa el dato de entrada ''Nombre del medicamento''.
+    \UCpaso[\UCactor] Enviar los datos requeridos para la búsqueda de medicamento haciendo click sobre el botón \IUbutton{Buscar} de la \IUref{1}{Formulario de búsqeuda de medicamento}
+		\UCpaso Obtiene los datos enviados por el actor y verifica que el dato 
 		\UCpaso[\UCactor] Confirma operación haciendo click sobre el botón \IUbutton{Registrar pago}
 		\UCpaso Verifica que se hayan completado datos requeridos
 		\UCpaso Verifica que los datos completados tengan el formato correcto
@@ -80,7 +86,9 @@
 		\UCpaso Confirma operación mostrando mensaje de confirmación, datos de cita y enviándo archivo PDF del comprobante  al correo electrónico del paciente
 \end{UCtrayectoria}
 
-\begin{UCtrayectoriaA}{TA1}{Cita no existe}
+\begin{UCtrayectoriaA}{TA1}{Existen medicamentos pendientes de compra}
+  \UCpaso Obtiene los medicamentos que se tienen pendientes en la sesión.
+%--  \UCpaso Muestra sobre la \UIref 
 	\UCpaso Informa al acto mostrando el mensaje ``Cita no existe''
 	\UCpaso Continúa trayectoria desde paso 2
 	
