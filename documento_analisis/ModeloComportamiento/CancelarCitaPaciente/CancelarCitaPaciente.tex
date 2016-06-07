@@ -1,0 +1,61 @@
+\begin{UseCase}{CU12}{Cancelar cita}{Cuando un paciente quiera cancelar una de sus citas previamente agendadas, el sistema actualizará las citas del paciente. }
+	\UCitem{Version}{0.3}
+  \UCitem{Actor}{Paciente}
+  \UCitem{Proposito}{
+    Que el actor pueda cancelar una de sus citas agendadas si ya no podrá asistir o simplemente se haya equivocado en la fecha.
+  }
+  \UCitem{Entradas}{
+    \begin{itemize}
+    		\item Id de la cita: cadena aleatoria de caracteres formada por MongoDB
+    \end{itemize}
+  }
+  \UCitem{Origen}{
+    \begin{itemize}
+      \item Id de la cita: Variable oculta en la UI3 Consultar citas.
+      \end{itemize}
+  }
+  \UCitem{Salidas}{
+    \begin{itemize}
+      \item {\bf MSG12a-} Mensaje de notificación ``La cita se ha eliminado".
+      \item {\bf MSG12b-} Mensaje de notificación ``No se encontró la cita".
+    \end{itemize}
+  }
+  \UCitem{Destino}{
+    \begin{itemize}
+      \item Mensajes de notifiación: Pantalla.
+    \end{itemize}
+  }
+  \UCitem{Precondiciones}{
+    Que el paciente haya agendado al menos una cita.
+  }
+  \UCitem{Postcondiciones}{
+    \begin{itemize}
+      \item Se elimina la cita del actor en el sistema.
+    \end{itemize}
+  }
+  \UCitem{Observaciones}{
+    Ninguna
+  }
+  \UCitem{Errores}{
+  	ERR1 - No se encuentra la cita del paciente a ser eliminada, muestra el mensaje {\bf MSG12b-} “No se encontró la cita".
+	}
+  \UCitem{Tipo de ejecución}{Secundaria, viene de CU3 Consultar Citas}
+	\UCitem{Volatilidad}{Media}
+	\UCitem{Madurez}{Media}
+	\UCitem{Prioridad}{Alta}
+  \UCitem{Estado}{En revisión}
+	\UCitem{Autor}{Adrián Eduardo Galindo García}
+	\UCitem{Revisor}{Rubén Murga Dionicio}
+\end{UseCase}
+
+\begin{UCtrayectoria}{Principal}
+  \UCpaso[\UCactor] solicita consultar sus citas haciendo clic en la opción del menú “Consultar citas”.
+  \UCpaso obtiene el registro de las citas que ha agendado el paciente
+  \UCpaso muestra las citas agendadas del paciente en la UI3 Consultar citas paciente.
+  \UCpaso[\UCactor] da click sobre el botón \IUbutton{ x Cancelar cita} de la cita que desea cancelar 
+  \UCpaso verifica la existencia de la cita mediante el id.[ERR1]
+  \UCpaso elimina la cita del sistema.
+  \UCpaso notifica el resultado de la operación mostrando el mensaje {\bf MSG12a-} “La cita se ha eliminado”.
+\end{UCtrayectoria}
+
+%-------------------------------------- TERMINA descripción del caso de uso.

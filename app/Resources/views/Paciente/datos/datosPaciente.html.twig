@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label for="nombre" class="col-sm-2 form-control-label">Nombre</label>
                         <div class="col-sm-10">
-                            <input type="text" value="'{{ paciente.nombre }}'" class="form-control" id="nombre" >
+                            <input type="text" value="{{ paciente.nombre }}" class="form-control" id="nombre" >
                         </div>
                     </div>
                     <div class="form-group row">
@@ -75,13 +75,13 @@
                     <div class="form-group row">
                         <label for="fecha" class="col-sm-2 form-control-label">Fecha de nacimiento</label>
                         <div class="col-sm-10">
-                            <input type="date" value="{{ paciente.fechaNacimiento|date('Y-M-d') }}" class="form-control" id="fecha" ng-model="paciente.fecha">
+                            <input type="date" value="{{ paciente.fechaNacimiento|date('Y-m-d') }}" class="form-control" id="fecha" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="calle" class="col-sm-2 form-control-label">Calle</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{ paciente.calle }}" class="form-control" id="calle" ng-model="paciente.calle">
+                            <input type="text" value="{{ paciente.calle }}" class="form-control" id="calle" >
                         </div>
                     </div>
                     <div class="form-group row">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </form>
-                <button class="btn btn-primary" ng-click="changeView()" ng-hide="vistaCambiar">Actualizar datos</button>
+                <button class="btn btn-primary" ng-click="changeView('{{ paciente.nombre}}')" ng-hide="vistaCambiar">Actualizar datos</button>
                 <button class="btn btn-warning" ng-click="cancel()" ng-show="vistaCambiar" >Cancelar</button>
                 <button class="btn btn-success" ng-click="changeView()" ng-show="vistaCambiar">Guardar</button>
 

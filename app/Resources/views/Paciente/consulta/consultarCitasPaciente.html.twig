@@ -31,7 +31,7 @@
                             <td>{{ cita.consultorio }}</td>
                             <td>{{ cita.fecha }}</td>
                             <td>{{ cita.medico   }}</td>
-                            <td align="center"><span class="text-success"><i class="fa fa-times" ng-click="cancelDate('{{ cita.id }}')" style="font-size: 25px;cursor: pointer;"></i></span></td>
+                            <td align="center"><button class="btn btn-warning" ng-click="cancelDate('{{ cita.id }}')"><span class="text-success"><i class="fa fa-times"  style="font-size: 15px;cursor: pointer;"></i></span>Cancelar cita</button></td>
                         </tr>
 	    			{% endfor %}
     			</tbody>

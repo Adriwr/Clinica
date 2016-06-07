@@ -1,0 +1,109 @@
+\begin{UseCase}{CU16}{Modificar Datos}{Cuando un paciente desee o tenga que actualizar su información personal, el sistema guardará los nuevos datos del paciente.}
+	\UCitem{Version}{0.3}
+  \UCitem{Actor}{Paciente}
+  \UCitem{Proposito}{
+    Que el paciente pueda modificar sus datos para contar con la información de contacto más actualizada.
+  }
+  \UCitem{Entradas}{
+    \begin{itemize}
+    		\item Id del paciente: cadema aleatoria de caracteres formada por MongoDB
+            \item Nombre completo del paciente:  cadena(s) de caracteres (Nombre(s)).
+            \item Apellidos del paciente:  cadena(s) de caracteres ( apellido paterno, apellido materno).
+			\item Fecha de nacimiento del paciente: Fecha DD/MM/AAAA
+            \item* Sexo del paciente: 1 carácter . ‘H’ para hombre, ‘M’ para mujer.
+            \item Dirección
+            \begin{itemize}
+                \item Calle: Cádena de caracteres.
+                \item Número: Cádena de caracteres.
+                \item Colonia: Cádena de caracteres.
+                \item Estado: Cádena de caracteres.
+                \item Teléfono particular: Cádena de 8 a 10 caracteres.
+                \item Teléfono de emergencia: Cádena de 8 a 10 caracteres.
+            \end{itemize}    
+        \end{itemize} 
+  }
+  \UCitem{Origen}{
+    \begin{itemize}
+      \item De la sesión de la aplicación 
+      \begin{itemize}
+                \item Id del paciente
+      \end{itemize}    
+      \item Del teclado 
+      \begin{itemize}
+            \item Nombre completo del paciente.
+            \item Apellidos del paciente.
+            \item Dirección
+            \begin{itemize}
+                \item Calle
+                \item Número.
+                \item Colonia.
+                \item Estado.
+                \item Teléfono particular.
+                \item Teléfono de emergencia.
+            \end{itemize}
+      \end{itemize}
+      \item De un calendario
+      \begin{itemize}
+                \item Fecha de nacimiento del paciente.
+      \end{itemize}    
+      \item De una lista de opciones
+      \begin{itemize}
+                \item Sexo del paciente.
+      \end{itemize}          
+      \end{itemize}
+  }
+  \UCitem{Salidas}{
+    \begin{itemize}
+      \item Mensaje de notificación ``Sus datos han sido actualizados".
+      \item Mensaje de notificación ``No se encontraron los datos del paciente".
+      \item Mensaje de notificación  ``Debe proporcionar todos los datos solicitados".
+    \end{itemize}
+  }
+  \UCitem{Destino}{
+    \begin{itemize}
+      \item Mensajes de notificación: Pantalla.
+    \end{itemize}
+  }
+  \UCitem{Precondiciones}{
+   Que el paciente tenga datos registrados en el sistema
+  }
+  \UCitem{Postcondiciones}{
+    \begin{itemize}
+      \item Se actualizan los datos del paciente.
+    \end{itemize}
+  }
+  \UCitem{Observaciones}{
+    Ninguna
+  }
+  \UCitem{Errores}{
+  	No se encontró el registro del paciente en el sistema, muestra el mensaje {\bf MSG2-} “No se encontraron los datos del paciente".
+	}
+  \UCitem{Tipo de ejecución}{Secundaria, viene de CU15 Consultar datos}
+	\UCitem{Volatilidad}{Alta}
+	\UCitem{Madurez}{Alta}
+	\UCitem{Prioridad}{Baja}
+  \UCitem{Estado}{En revisión}
+	\UCitem{Autor}{Adrián Eduardo Galindo García}
+	\UCitem{Revisor}{Rubén Adolfo Murga Dionicio}
+\end{UseCase}
+
+\begin{UCtrayectoria}{Principal}
+  \UCpaso[\UCactor] solicita ver sus datos haciendo click en la opción del menú “Mis datos”.
+  \UCpaso obtiene los datos personales del paciente.
+  \UCpaso muestra los datos del paciente en la UI15A Consultar datos.
+  \UCpaso[\UCactor] indica que quiere actualizar sus datos hacienndo click en el botón \IUbutton{Actualizar datos}.
+  \UCpaso cambia la vista y muestra los datos del paciente en la UI15B Consultar datos.
+  \UCpaso[\UCactor] ingresa los nuevos datos solicitados en el formulario.
+  \UCpaso[\UCactor] da click en el botón \IUbutton{Guardar}.
+  \UCpaso comprueba los datos solicitados esten completos. [Trayectoria A].
+  \UCpaso verifica que exista el registro del paciente, obteniendo sus datos mediante la sesión.
+  \UCpaso actualiza los datos dal paciente.
+  \UCpaso notifica el resultado de la operación, muestra el mensaje {\bf MSG1-} “Sus datos han sido actualizados”. 
+\end{UCtrayectoria}
+
+\begin{UCtrayectoriaA}{A}{Datos completos}
+  \UCpaso notifica mostrando el mensaje {\bf MSG3-} “Debe proporcionar todos los datos solicitados”.
+  \UCpaso continúa transacción desde el paso 6.
+\end{UCtrayectoriaA}
+
+%-------------------------------------- TERMINA descripción del caso de uso.

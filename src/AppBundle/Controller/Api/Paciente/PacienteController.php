@@ -64,7 +64,7 @@ class PacienteController extends FOSRestController implements ClassResourceInter
         }
 
 
-        return array("mensaje" => "Ocurrio algo inesperado");
+        return array("mensaje" => "No se encontró la cita");
 
     }
 

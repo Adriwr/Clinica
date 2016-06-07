@@ -9,7 +9,10 @@ app.
      */
     controller('DatosPacienteCtrl', function($scope,$log, $http, $modal, $filter, $rootScope, DatosPacienteFactory) {
         $scope.vistaCambiar = false;
-
+        $scope.paciente = {
+            numero : "0",
+            colonia: "0"
+        };
         $scope.changeView = function(datos){
             $scope.vistaCambiar = true;
 
